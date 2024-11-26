@@ -1,28 +1,38 @@
 {
   "project_info": {
     "project_number": "",
-    "project_id": ""
+    "firebase_url": "",
+    "project_id": "",
+    "storage_bucket": ""
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123456789012:android:1234567890123456",
+        "mobilesdk_app_id": "1:1052755869243:android:60c1ea631c37341cb4e61e",
         "android_client_info": {
-          "package_name": "dev.atick.compose"
+          "package_name": "dev.atick.dhakarani"
         }
       },
       "oauth_client": [
         {
           "client_id": "",
-          "client_type": 3
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.atick.dhakarani",
+            "certificate_hash": ""
+          }
         },
         {
           "client_id": "",
           "client_type": 1,
           "android_info": {
-            "package_name": "dev.atick.compose",
+            "package_name": "dev.atick.dhakarani",
             "certificate_hash": ""
           }
+        },
+        {
+          "client_id": "",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -31,18 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": ""
-          }
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
+          "other_platform_oauth_client": [
+            {
+              "client_id": "",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
