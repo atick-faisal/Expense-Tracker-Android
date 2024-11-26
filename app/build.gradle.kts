@@ -47,7 +47,7 @@ android {
     defaultConfig {
         versionCode = mVersionCode
         versionName = mVersionName
-        applicationId = "dev.atick.compose"
+        applicationId = "dev.atick.dhakarani"
     }
 
     signingConfigs {
