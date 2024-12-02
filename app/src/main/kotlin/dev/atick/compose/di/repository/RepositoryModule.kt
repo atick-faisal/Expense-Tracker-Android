@@ -20,6 +20,16 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.atick.compose.repository.analysis.AnalysisRepository
+import dev.atick.compose.repository.analysis.AnalysisRepositoryImpl
+import dev.atick.compose.repository.budgets.BudgetsRepository
+import dev.atick.compose.repository.budgets.BudgetsRepositoryImpl
+import dev.atick.compose.repository.categories.CategoriesRepository
+import dev.atick.compose.repository.categories.CategoriesRepositoryImpl
+import dev.atick.compose.repository.chat.ChatRepository
+import dev.atick.compose.repository.chat.ChatRepositoryImpl
+import dev.atick.compose.repository.expenses.ExpensesRepository
+import dev.atick.compose.repository.expenses.ExpensesRepositoryImpl
 import dev.atick.compose.repository.home.PostsRepository
 import dev.atick.compose.repository.home.PostsRepositoryImpl
 import dev.atick.compose.repository.profile.ProfileDataRepository
@@ -72,4 +82,34 @@ abstract class RepositoryModule {
     abstract fun bindProfileDataRepository(
         profileDataRepositoryImpl: ProfileDataRepositoryImpl,
     ): ProfileDataRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAnalysisRepository(
+        analysisRepositoryImpl: AnalysisRepositoryImpl,
+    ): AnalysisRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBudgetsRepository(
+        budgetsRepositoryImpl: BudgetsRepositoryImpl,
+    ): BudgetsRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCategoriesRepository(
+        categoriesRepositoryImpl: CategoriesRepositoryImpl,
+    ): CategoriesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindChatRepository(
+        chatRepositoryImpl: ChatRepositoryImpl,
+    ): ChatRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindExpensesRepository(
+        expensesRepositoryImpl: ExpensesRepositoryImpl,
+    ): ExpensesRepository
 }

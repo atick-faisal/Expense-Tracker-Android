@@ -18,14 +18,23 @@ package dev.atick.compose.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Calculate
+import androidx.compose.material.icons.filled.PieChart
+import androidx.compose.material.icons.filled.Receipt
+import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.Calculate
+import androidx.compose.material.icons.outlined.PieChart
+import androidx.compose.material.icons.outlined.Receipt
+import androidx.compose.material.icons.outlined.Tag
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.atick.compose.R
-import dev.atick.compose.navigation.home.Home
-import dev.atick.compose.navigation.profile.Profile
+import dev.atick.compose.navigation.analysis.Analysis
+import dev.atick.compose.navigation.budgets.Budgets
+import dev.atick.compose.navigation.categories.Categories
+import dev.atick.compose.navigation.chat.Chat
+import dev.atick.compose.navigation.expenses.Expenses
 import kotlin.reflect.KClass
 
 /**
@@ -44,18 +53,39 @@ enum class TopLevelDestination(
     @StringRes val titleTextId: Int,
     val route: KClass<*>,
 ) {
-    HOME(
-        selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home,
-        iconTextId = R.string.home,
-        titleTextId = R.string.home,
-        route = Home::class,
+    EXPENSES(
+        selectedIcon = Icons.Filled.Receipt,
+        unselectedIcon = Icons.Outlined.Receipt,
+        iconTextId = R.string.expenses,
+        titleTextId = R.string.expenses,
+        route = Expenses::class,
     ),
-    PROFILE(
-        selectedIcon = Icons.Filled.Person,
-        unselectedIcon = Icons.Outlined.Person,
-        iconTextId = R.string.profile,
-        titleTextId = R.string.profile,
-        route = Profile::class,
+    ANALYSIS(
+        selectedIcon = Icons.Filled.PieChart,
+        unselectedIcon = Icons.Outlined.PieChart,
+        iconTextId = R.string.analysis,
+        titleTextId = R.string.analysis,
+        route = Analysis::class,
     ),
+    BUDGETS(
+        selectedIcon = Icons.Filled.Calculate,
+        unselectedIcon = Icons.Outlined.Calculate,
+        iconTextId = R.string.budgets,
+        titleTextId = R.string.budgets,
+        route = Budgets::class,
+    ),
+    CATEGORIES(
+        selectedIcon = Icons.Filled.Tag,
+        unselectedIcon = Icons.Outlined.Tag,
+        iconTextId = R.string.categories,
+        titleTextId = R.string.categories,
+        route = Categories::class,
+    ),
+    CHAT(
+        selectedIcon = Icons.Filled.AutoAwesome,
+        unselectedIcon = Icons.Outlined.AutoAwesome,
+        iconTextId = R.string.chat,
+        titleTextId = R.string.chat,
+        route = Chat::class,
+    )
 }
