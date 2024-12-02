@@ -86,7 +86,7 @@ fun JetpackApp(
     ),
 ) {
     val shouldShowGradientBackground =
-        appState.currentTopLevelDestination == TopLevelDestination.HOME
+        appState.currentTopLevelDestination == TopLevelDestination.EXPENSES
     var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
 
     AppBackground {
@@ -128,7 +128,7 @@ fun JetpackApp(
                     if (appState.shouldShowBottomBar) {
                         JetpackBottomBar(
                             destinations = appState.topLevelDestinations,
-                            destinationsWithUnreadResources = setOf(TopLevelDestination.PROFILE),
+                            destinationsWithUnreadResources = emptySet(),
                             onNavigateToDestination = appState::navigateToTopLevelDestination,
                             currentDestination = appState.currentDestination,
                         )

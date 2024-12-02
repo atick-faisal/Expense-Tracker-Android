@@ -48,4 +48,9 @@
     <string name="profile_picture">Profile Picture</string>
     <string name="done">Done</string>
     <string name="purchase_premium">Purchase Jetpack Premium</string>
+    <string name="expenses">Expenses</string>
+    <string name="analysis">Analysis</string>
+    <string name="budgets">Budgets</string>
+    <string name="categories">Categories</string>
+    <string name="chat">Chat</string>
 </resources>

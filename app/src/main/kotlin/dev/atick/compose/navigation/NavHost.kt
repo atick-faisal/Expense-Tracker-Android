@@ -19,20 +19,17 @@ package dev.atick.compose.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import dev.atick.auth.navigation.AuthNavGraph
 import dev.atick.auth.navigation.authNavGraph
 import dev.atick.auth.navigation.navigateToSignInRoute
 import dev.atick.auth.navigation.navigateToSignUpRoute
 import dev.atick.auth.navigation.signInScreen
 import dev.atick.auth.navigation.signUpScreen
-import dev.atick.billing.navigation.billingScreen
-import dev.atick.billing.navigation.navigateToBilling
-import dev.atick.compose.navigation.details.detailsScreen
-import dev.atick.compose.navigation.details.navigateToDetailsScreen
-import dev.atick.compose.navigation.home.HomeNavGraph
-import dev.atick.compose.navigation.home.homeNavGraph
-import dev.atick.compose.navigation.home.homeScreen
-import dev.atick.compose.navigation.profile.profileScreen
+import dev.atick.compose.navigation.analysis.analysisScreen
+import dev.atick.compose.navigation.budgets.budgetsScreen
+import dev.atick.compose.navigation.categories.categoriesScreen
+import dev.atick.compose.navigation.chat.chatScreen
+import dev.atick.compose.navigation.expenses.Expenses
+import dev.atick.compose.navigation.expenses.expensesScreen
 import dev.atick.compose.ui.JetpackAppState
 
 @Composable
@@ -42,8 +39,8 @@ fun JetpackNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    val startDestination =
-        if (appState.isUserLoggedIn) HomeNavGraph::class else AuthNavGraph::class
+    val startDestination = Expenses::class
+    // if (appState.isUserLoggedIn) HomeNavGraph::class else AuthNavGraph::class
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -61,6 +58,7 @@ fun JetpackNavHost(
                 )
             },
         )
+        /*
         homeNavGraph(
             nestedNavGraphs = {
                 homeScreen(
@@ -79,6 +77,22 @@ fun JetpackNavHost(
         )
         billingScreen(
             onBackClick = navController::popBackStack,
+            onShowSnackbar = onShowSnackbar,
+        )
+        */
+        expensesScreen(
+            onShowSnackbar = onShowSnackbar,
+        )
+        analysisScreen(
+            onShowSnackbar = onShowSnackbar,
+        )
+        budgetsScreen(
+            onShowSnackbar = onShowSnackbar,
+        )
+        categoriesScreen(
+            onShowSnackbar = onShowSnackbar,
+        )
+        chatScreen(
             onShowSnackbar = onShowSnackbar,
         )
     }

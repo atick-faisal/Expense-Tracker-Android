@@ -31,8 +31,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import dev.atick.compose.navigation.TopLevelDestination
-import dev.atick.compose.navigation.home.navigateToHomeNavGraph
-import dev.atick.compose.navigation.profile.navigateProfile
+import dev.atick.compose.navigation.analysis.navigateToAnalysis
+import dev.atick.compose.navigation.budgets.navigateToBudgets
+import dev.atick.compose.navigation.categories.navigateToCategories
+import dev.atick.compose.navigation.chat.navigateToChat
+import dev.atick.compose.navigation.expenses.navigateToExpenses
 import dev.atick.core.extensions.stateInDelayed
 import dev.atick.network.utils.NetworkState
 import dev.atick.network.utils.NetworkUtils
@@ -93,11 +96,11 @@ class JetpackAppState(
 
     val shouldShowBottomBar: Boolean
         @Composable get() = (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact) &&
-            (currentTopLevelDestination != null)
+                (currentTopLevelDestination != null)
 
     val shouldShowNavRail: Boolean
         @Composable get() = (windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact) &&
-            (currentTopLevelDestination != null)
+                (currentTopLevelDestination != null)
 
     val isOffline = networkUtils.currentState
         .map { it != NetworkState.CONNECTED }
@@ -119,8 +122,11 @@ class JetpackAppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.HOME -> navController.navigateToHomeNavGraph(topLevelNavOptions)
-            TopLevelDestination.PROFILE -> navController.navigateProfile(topLevelNavOptions)
+            TopLevelDestination.EXPENSES -> navController.navigateToExpenses(topLevelNavOptions)
+            TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
+            TopLevelDestination.BUDGETS -> navController.navigateToBudgets(topLevelNavOptions)
+            TopLevelDestination.CATEGORIES -> navController.navigateToCategories(topLevelNavOptions)
+            TopLevelDestination.CHAT -> navController.navigateToChat(topLevelNavOptions)
         }
     }
 }
