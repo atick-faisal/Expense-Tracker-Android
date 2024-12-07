@@ -18,6 +18,7 @@ package dev.atick.storage.room.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import dev.atick.storage.room.models.ChatEntity
 import dev.atick.storage.room.models.PostEntity
 
 /**
@@ -37,4 +38,20 @@ abstract class JetpackDatabase : RoomDatabase() {
      * @return The data access object for [PostEntity] entity.
      */
     abstract fun getJetpackDao(): JetpackDao
+}
+
+@Database(
+    version = 1,
+    exportSchema = false,
+    entities = [
+        ChatEntity::class,
+    ],
+)
+abstract class ChatDatabase : RoomDatabase() {
+    /**
+     * Get the data access object for [ChatEntity] entity.
+     *
+     * @return The data access object for [ChatEntity] entity.
+     */
+    abstract fun getChatDao(): ChatDao
 }

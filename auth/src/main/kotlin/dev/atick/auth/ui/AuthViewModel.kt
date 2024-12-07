@@ -25,7 +25,7 @@ import dev.atick.auth.repository.AuthRepository
 import dev.atick.core.extensions.isEmailValid
 import dev.atick.core.extensions.isPasswordValid
 import dev.atick.core.extensions.isValidFullName
-import dev.atick.core.ui.utils.TextFiledData
+import dev.atick.core.ui.utils.TextFieldData
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
 import dev.atick.core.ui.utils.updateWith
@@ -44,7 +44,7 @@ class AuthViewModel @Inject constructor(
     fun updateName(name: String) {
         _authUiState.updateState {
             copy(
-                name = TextFiledData(
+                name = TextFieldData(
                     value = name,
                     errorMessage = if (name.isValidFullName()) null else "Name Not Valid",
                 ),
@@ -55,7 +55,7 @@ class AuthViewModel @Inject constructor(
     fun updateEmail(email: String) {
         _authUiState.updateState {
             copy(
-                email = TextFiledData(
+                email = TextFieldData(
                     value = email,
                     errorMessage = if (email.isEmailValid()) null else "Email Not Valid",
                 ),
@@ -66,7 +66,7 @@ class AuthViewModel @Inject constructor(
     fun updatePassword(password: String) {
         _authUiState.updateState {
             copy(
-                password = TextFiledData(
+                password = TextFieldData(
                     value = password,
                     errorMessage = if (password.isPasswordValid()) null else "Password Not Valid",
                 ),

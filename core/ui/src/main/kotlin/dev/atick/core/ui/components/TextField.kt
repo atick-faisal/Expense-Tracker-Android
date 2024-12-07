@@ -41,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import dev.atick.core.ui.R
 
 /**
@@ -189,4 +190,58 @@ private fun JetpackTextFieldWithError(
             }
         }
     }
+}
+
+/**
+ * A Jetpack Compose internal component for rendering a multiline text field with optional error message display.
+ *
+ * @param value The current text value of the text field.
+ * @param onValueChange The callback invoked when the text value changes.
+ * @param label A composable function that represents the label of the text field.
+ * @param leadingIcon A composable function that represents the leading icon of the text field.
+ * @param modifier The modifier for this text field.
+ * @param trailingIcon A composable function that represents the trailing icon of the text field.
+ * @param errorMessage The error message to display below the text field, if any.
+ * @param keyboardOptions The keyboard options for the text field.
+ * @param visualTransformation The visual transformation to apply to the text.
+ * @param shape The shape of the text field.
+ * @param minLines The minimum number of lines to display.
+ * @param maxLines The maximum number of lines to display before scrolling.
+ */
+@Composable
+fun MultilineJetpackTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: @Composable () -> Unit,
+    leadingIcon: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    trailingIcon: @Composable () -> Unit = {},
+    errorMessage: String? = null,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    shape: Shape = RoundedCornerShape(16.dp),
+    minLines: Int = 1,
+    maxLines: Int = 5,
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = label,
+        keyboardOptions = keyboardOptions,
+        leadingIcon = { leadingIcon() },
+        trailingIcon = { trailingIcon() },
+        visualTransformation = visualTransformation,
+        shape = shape,
+        colors = if (errorMessage == null) {
+            OutlinedTextFieldDefaults.colors()
+        } else {
+            OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = MaterialTheme.colorScheme.error,
+                unfocusedBorderColor = MaterialTheme.colorScheme.error,
+            )
+        },
+        modifier = modifier,
+        minLines = minLines,
+        maxLines = maxLines,
+    )
 }

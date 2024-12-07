@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.repository.budgets
+package dev.atick.storage.room.models
 
-import javax.inject.Inject
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-class BudgetsRepositoryImpl @Inject constructor() : BudgetsRepository
+@Entity(tableName = "messages")
+data class ChatEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val text: String,
+    val isFromUser: Boolean = true,
+    val timestamp: Long = System.currentTimeMillis(),
+)

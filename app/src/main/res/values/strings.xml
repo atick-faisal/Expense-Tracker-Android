@@ -53,4 +53,7 @@
     <string name="budgets">Budgets</string>
     <string name="categories">Categories</string>
     <string name="chat">Chat</string>
+    <string name="type_message">Type a Message</string>
+    <string name="send_message">Send</string>
+    <string name="message">Chat with AI</string>
 </resources>

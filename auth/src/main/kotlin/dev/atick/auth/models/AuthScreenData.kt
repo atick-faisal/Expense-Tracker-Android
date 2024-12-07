@@ -16,7 +16,7 @@
 
 package dev.atick.auth.models
 
-import dev.atick.core.ui.utils.TextFiledData
+import dev.atick.core.ui.utils.TextFieldData
 
 /**
  * Data class representing the input data for an authentication screen.
@@ -26,7 +26,7 @@ import dev.atick.core.ui.utils.TextFiledData
  * @param password The data for the user's password input field.
  */
 data class AuthScreenData(
-    val name: TextFiledData = TextFiledData(String()),
-    val email: TextFiledData = TextFiledData(String()),
-    val password: TextFiledData = TextFiledData(String()),
+    val name: TextFieldData = TextFieldData(String()),
+    val email: TextFieldData = TextFieldData(String()),
+    val password: TextFieldData = TextFieldData(String()),
 )
