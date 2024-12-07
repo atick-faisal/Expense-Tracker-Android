@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.repository.budgets
+package dev.atick.storage.room.data
 
-import javax.inject.Inject
+import dev.atick.storage.room.models.ChatEntity
+import kotlinx.coroutines.flow.Flow
 
-class BudgetsRepositoryImpl @Inject constructor() : BudgetsRepository
+interface ChatDataSource {
+    fun getAllMessages(): Flow<List<ChatEntity>>
+    suspend fun getRecentMessages(limit: Int): List<ChatEntity>
+    suspend fun insertMessage(chatEntity: ChatEntity)
+    suspend fun deleteMessage(chatEntity: ChatEntity)
+    suspend fun deleteAllMessages()
+}

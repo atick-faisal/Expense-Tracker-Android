@@ -28,6 +28,7 @@ plugins {
     alias(libs.plugins.jetpack.application)
     alias(libs.plugins.jetpack.dagger.hilt)
     alias(libs.plugins.jetpack.firebase)
+    alias(libs.plugins.secrets)
 }
 
 android {
@@ -104,6 +105,10 @@ android {
     namespace = "dev.atick.compose"
 }
 
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
+}
+
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":network"))
@@ -121,4 +126,7 @@ dependencies {
 
     // ... Billing
     implementation(libs.play.billing.ktx)
+
+    // ... Gemini
+    implementation(libs.generativeai)
 }

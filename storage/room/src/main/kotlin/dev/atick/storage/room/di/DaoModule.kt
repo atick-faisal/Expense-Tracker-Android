@@ -20,6 +20,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.atick.storage.room.data.ChatDatabase
 import dev.atick.storage.room.data.JetpackDatabase
 import javax.inject.Singleton
 
@@ -43,4 +44,14 @@ object DaoModule {
     @Singleton
     @Provides
     fun provideJetpackDao(jetpackDatabase: JetpackDatabase) = jetpackDatabase.getJetpackDao()
+
+    /**
+     * Get the chat data access.
+     *
+     * @param chatDatabase The database for chat messages.
+     * @return The chat data access object.
+     */
+    @Singleton
+    @Provides
+    fun provideChatDao(chatDatabase: ChatDatabase) = chatDatabase.getChatDao()
 }

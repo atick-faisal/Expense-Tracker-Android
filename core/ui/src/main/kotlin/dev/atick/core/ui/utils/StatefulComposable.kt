@@ -53,6 +53,7 @@ fun <T : Any> StatefulComposable(
 
     state.error.getContentIfNotHandled()?.let { error ->
         LaunchedEffect(onShowSnackbar) {
+            error.printStackTrace()
             val report = onShowSnackbar(error.message.toString(), "REPORT")
             if (report) Firebase.crashlytics.recordException(error)
         }

@@ -23,6 +23,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dev.atick.storage.room.data.ChatDatabase
 import dev.atick.storage.room.data.JetpackDatabase
 import javax.inject.Singleton
 
@@ -33,7 +34,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    private const val ROOM_DATABASE_NAME = "dev.atick.jetpack.room"
+    private const val JETPACK_DATABASE_NAME = "dev.atick.jetpack.room"
+    private const val CHAT_DATABASE_NAME = "dev.atick.chat.room"
 
     /**
      * Get the database for Jetpack.
@@ -49,7 +51,25 @@ object DatabaseModule {
         return Room.databaseBuilder(
             appContext,
             JetpackDatabase::class.java,
-            ROOM_DATABASE_NAME,
+            JETPACK_DATABASE_NAME,
+        ).fallbackToDestructiveMigration().build()
+    }
+
+    /**
+     * Get the database for Chat.
+     *
+     * @param appContext The application context.
+     * @return The database for Chat.
+     */
+    @Singleton
+    @Provides
+    fun provideChatDatabase(
+        @ApplicationContext appContext: Context,
+    ): ChatDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            ChatDatabase::class.java,
+            CHAT_DATABASE_NAME,
         ).fallbackToDestructiveMigration().build()
     }
 }

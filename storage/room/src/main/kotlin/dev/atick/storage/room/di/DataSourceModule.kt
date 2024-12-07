@@ -20,6 +20,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.atick.storage.room.data.ChatDataSource
+import dev.atick.storage.room.data.ChatDataSourceImpl
 import dev.atick.storage.room.data.LocalDataSource
 import dev.atick.storage.room.data.LocalDataSourceImpl
 import javax.inject.Singleton
@@ -42,4 +44,18 @@ abstract class DataSourceModule {
     abstract fun bindLocalDataSource(
         localDataSourceImpl: LocalDataSourceImpl,
     ): LocalDataSource
+
+    // provide chat data source
+
+    /**
+     * Binds the [ChatDataSourceImpl] implementation to the [ChatDataSource] interface.
+     *
+     * @param chatLocalDataSourceImpl The concrete implementation of [ChatDataSourceImpl].
+     * @return An instance of [ChatDataSource] representing the chat local data source.
+     */
+    @Binds
+    @Singleton
+    abstract fun bindChatLocalDataSource(
+        chatLocalDataSourceImpl: ChatDataSourceImpl,
+    ): ChatDataSource
 }

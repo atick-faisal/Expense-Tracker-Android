@@ -87,5 +87,5 @@ enum class TopLevelDestination(
         iconTextId = R.string.chat,
         titleTextId = R.string.chat,
         route = Chat::class,
-    )
+    ),
 }
