@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocalHospital
+import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material.icons.filled.Weekend
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -45,10 +46,12 @@ data class UiCategory(
         UiCategoryType.DEBT -> Icons.Default.CreditCard
         UiCategoryType.EDUCATION -> Icons.Default.School
         UiCategoryType.CUSTOM -> Icons.Default.Create
+        UiCategoryType.FOOD -> Icons.Default.Restaurant
     },
 )
 
 enum class UiCategoryType {
+    FOOD,
     ESSENTIAL,
     LIFESTYLE,
     TRANSPORTATION,
