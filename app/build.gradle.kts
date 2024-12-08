@@ -118,6 +118,7 @@ dependencies {
     implementation(project(":auth"))
     implementation(project(":billing"))
     implementation(project(":gemini"))
+    implementation(project(":sms"))
 
     // ... Splash Screen
     implementation(libs.androidx.core.splashscreen)

@@ -131,6 +131,8 @@ class MainActivity : ComponentActivity() {
             permissions.add(Manifest.permission.BLUETOOTH_CONNECT)
         }
 
+        permissions.add(Manifest.permission.READ_SMS)
+
         // Check for permissions and launch Bluetooth enable request
         checkForPermissions(permissions) {
             btLauncher.launch(
