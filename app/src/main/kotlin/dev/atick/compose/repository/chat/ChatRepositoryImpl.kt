@@ -16,12 +16,12 @@
 
 package dev.atick.compose.repository.chat
 
-import com.google.ai.client.generativeai.Chat
-import com.google.ai.client.generativeai.GenerativeModel
 import dev.atick.compose.data.chat.UiMessage
-import dev.atick.compose.data.chat.asContents
 import dev.atick.compose.data.chat.asUiMessages
 import dev.atick.core.utils.suspendRunCatching
+import dev.atick.gemini.data.GeminiDataSource
+import dev.atick.gemini.models.AiChatMessage
+import dev.atick.gemini.models.AiChatSender
 import dev.atick.storage.room.data.ChatDataSource
 import dev.atick.storage.room.models.ChatEntity
 import kotlinx.coroutines.flow.Flow
@@ -30,10 +30,8 @@ import javax.inject.Inject
 
 class ChatRepositoryImpl @Inject constructor(
     private val chatDataSource: ChatDataSource,
-    private val generativeModel: GenerativeModel,
+    private val geminiDataSource: GeminiDataSource,
 ) : ChatRepository {
-
-    private lateinit var chat: Chat
 
     override fun getAllMessages(): Flow<List<UiMessage>> {
         return chatDataSource.getAllMessages().map(List<ChatEntity>::asUiMessages)
@@ -42,11 +40,13 @@ class ChatRepositoryImpl @Inject constructor(
     override suspend fun initializeChat(historyDepth: Int): Result<Unit> {
         return suspendRunCatching {
             val chatHistory = chatDataSource.getRecentMessages(historyDepth)
-            chat = generativeModel.startChat(chatHistory.asContents())
-            chat.sendMessage(
-                "For the rest of the conversation, keep the response concise" +
-                    " and reply in plain text. Do not format the output.",
-            )
+            val aiChatHistory = chatHistory.map { chat ->
+                AiChatMessage(
+                    text = chat.text,
+                    sender = if (chat.isFromUser) AiChatSender.USER else AiChatSender.MODEL,
+                )
+            }
+            geminiDataSource.initializeChat(aiChatHistory)
         }
     }
 
@@ -58,8 +58,7 @@ class ChatRepositoryImpl @Inject constructor(
                     isFromUser = true,
                 ),
             )
-            val response = chat.sendMessage(message).text?.trim()
-                ?: throw IllegalStateException("Sorry, I didn't understand that.")
+            val response = geminiDataSource.sendChatMessage(message)
             chatDataSource.insertMessage(ChatEntity(text = response, isFromUser = false))
         }
     }

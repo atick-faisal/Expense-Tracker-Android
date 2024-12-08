@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.data.chat
+package dev.atick.gemini.di
 
-import dev.atick.core.ui.utils.TextFieldData
-import dev.atick.storage.room.models.ChatEntity
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dev.atick.gemini.data.GeminiDataSource
+import dev.atick.gemini.data.GeminiDataSourceImpl
+import javax.inject.Singleton
 
-data class ChatScreenData(
-    val newMessage: TextFieldData = TextFieldData(""),
-    val messages: List<UiMessage> = emptyList(),
-)
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataSourceModule {
 
-data class UiMessage(
-    val text: String,
-    val isFromUser: Boolean = true,
-)
-
-fun ChatEntity.asUiMessage(): UiMessage {
-    return UiMessage(
-        text = text,
-        isFromUser = isFromUser,
-    )
-}
-
-fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
-    return map(ChatEntity::asUiMessage)
+    @Binds
+    @Singleton
+    abstract fun bindGeminiDataSource(dataSource: GeminiDataSourceImpl): GeminiDataSource
 }

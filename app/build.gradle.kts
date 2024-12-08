@@ -117,6 +117,7 @@ dependencies {
     implementation(project(":bluetooth:classic"))
     implementation(project(":auth"))
     implementation(project(":billing"))
+    implementation(project(":gemini"))
 
     // ... Splash Screen
     implementation(libs.androidx.core.splashscreen)
@@ -126,7 +127,4 @@ dependencies {
 
     // ... Billing
     implementation(libs.play.billing.ktx)
-
-    // ... Gemini
-    implementation(libs.generativeai)
 }

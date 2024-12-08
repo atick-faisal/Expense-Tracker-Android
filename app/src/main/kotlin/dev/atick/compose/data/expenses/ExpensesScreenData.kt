@@ -16,7 +16,7 @@
 
 package dev.atick.compose.data.expenses
 
-import dev.atick.compose.data.categories.UiCategory
+import dev.atick.compose.data.categories.UiCategoryType
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
@@ -24,7 +24,7 @@ data class ExpensesScreenData(
 
 data class UiExpense(
     val amount: Double,
-    val category: UiCategory,
+    val category: UiCategoryType,
     val paymentStatus: UiPaymentStatus = UiPaymentStatus.PENDING,
     val recurringType: UiRecurringType = UiRecurringType.NONE,
     val paymentDate: String? = null,

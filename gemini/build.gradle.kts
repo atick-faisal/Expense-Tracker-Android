@@ -13,29 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package dev.atick.compose.data.chat
-
-import dev.atick.core.ui.utils.TextFieldData
-import dev.atick.storage.room.models.ChatEntity
-
-data class ChatScreenData(
-    val newMessage: TextFieldData = TextFieldData(""),
-    val messages: List<UiMessage> = emptyList(),
-)
-
-data class UiMessage(
-    val text: String,
-    val isFromUser: Boolean = true,
-)
-
-fun ChatEntity.asUiMessage(): UiMessage {
-    return UiMessage(
-        text = text,
-        isFromUser = isFromUser,
-    )
+plugins {
+    alias(libs.plugins.jetpack.library)
+    alias(libs.plugins.jetpack.dagger.hilt)
+    alias(libs.plugins.secrets)
 }
 
-fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
-    return map(ChatEntity::asUiMessage)
+android {
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        consumerProguardFiles("consumer-rules.pro")
+    }
+    namespace = "dev.atick.gemini"
+}
+
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
+}
+
+dependencies {
+    // ... Gemini
+    implementation(libs.generativeai)
 }
