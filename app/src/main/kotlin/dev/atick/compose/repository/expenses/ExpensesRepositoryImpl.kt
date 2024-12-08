@@ -16,6 +16,41 @@
 
 package dev.atick.compose.repository.expenses
 
+import dev.atick.core.utils.suspendRunCatching
+import dev.atick.gemini.data.GeminiDataSource
+import dev.atick.gemini.models.AiSMS
+import dev.atick.sms.data.SMSDataSource
+import timber.log.Timber
 import javax.inject.Inject
 
-class ExpensesRepositoryImpl @Inject constructor() : ExpensesRepository
+class ExpensesRepositoryImpl @Inject constructor(
+    private val geminiDataSource: GeminiDataSource,
+    private val smsDataSource: SMSDataSource,
+) : ExpensesRepository {
+    override suspend fun syncExpensesFromSms(): Result<Unit> {
+        return suspendRunCatching {
+            val smsList = smsDataSource.querySMS(
+                senderName = "QNB",
+                keywords = listOf("purchase"),
+            )
+
+            Timber.d("Found ${smsList.size} SMSes")
+
+            for ((i, sms) in smsList.withIndex()) {
+                Timber.d("SMS $i$: $sms")
+
+                val expense = geminiDataSource.getExpenseFromSMS(
+                    AiSMS(
+                        address = sms.address,
+                        body = sms.body,
+                        date = sms.date,
+                    ),
+                )
+
+                if (i > 10) break
+
+                Timber.d("Expense $i$: $expense")
+            }
+        }
+    }
+}

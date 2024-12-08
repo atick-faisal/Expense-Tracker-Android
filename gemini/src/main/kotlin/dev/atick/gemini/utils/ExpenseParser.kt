@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package dev.atick.gemini.models
+package dev.atick.gemini.utils
 
-import kotlinx.serialization.Serializable
+import dev.atick.gemini.models.AiExpense
+import kotlinx.serialization.json.Json
 
-@Serializable
-enum class AiCurrencyType {
-    QAR,
-    USD,
-    EUR,
-    BDT,
+object ExpenseParser {
+    private val json = Json {
+        ignoreUnknownKeys = true // Ignore JSON fields that don't match our data class
+        coerceInputValues = true // Try to coerce values to the correct type when possible
+        encodeDefaults = true // Include default values in JSON output
+    }
+
+    fun parseExpense(jsonString: String): AiExpense {
+        return json.decodeFromString<AiExpense>(jsonString)
+    }
 }

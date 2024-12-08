@@ -16,12 +16,20 @@
 
 package dev.atick.gemini.models
 
-import kotlinx.serialization.Serializable
+import android.icu.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-@Serializable
-enum class AiCurrencyType {
-    QAR,
-    USD,
-    EUR,
-    BDT,
+data class AiSMS(
+    val address: String,
+    val body: String,
+    val date: Long,
+) {
+    fun getTextSMS(): String {
+        val dateObject = Date(date)
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val formattedDate = dateFormat.format(dateObject)
+
+        return "Sender: $address\nBody: $body\nDate: $formattedDate"
+    }
 }

@@ -16,4 +16,6 @@
 
 package dev.atick.compose.repository.expenses
 
-interface ExpensesRepository
+interface ExpensesRepository {
+    suspend fun syncExpensesFromSms(): Result<Unit>
+}

@@ -28,6 +28,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.atick.gemini.BuildConfig
+import dev.atick.gemini.models.AiCurrencyType
 import dev.atick.gemini.models.AiExpenseCategory
 import dev.atick.gemini.models.AiPaymentStatus
 import dev.atick.gemini.models.AiRecurringType
@@ -68,6 +69,11 @@ object GeminiModule {
                             name = "amount",
                             description = "The expense amount in the original currency",
                         ),
+                        "currency" to Schema.enum(
+                            name = "currency",
+                            description = "The currency of the expense",
+                            values = AiCurrencyType.entries.map { it.name },
+                        ),
                         "category" to Schema.enum(
                             name = "category",
                             description = "The category of the expense",
@@ -92,7 +98,7 @@ object GeminiModule {
                             description = "Description or merchant name of the expense",
                         ),
                     ),
-                    required = listOf("amount", "category", "paymentStatus", "recurringType"),
+                    required = listOf("amount", "currency", "category", "paymentStatus", "recurringType"),
                 )
             },
             safetySettings = listOf(
