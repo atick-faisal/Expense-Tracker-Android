@@ -16,6 +16,9 @@
 
 package dev.atick.gemini.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class AiExpenseCategory {
     FOOD,
     ESSENTIAL,

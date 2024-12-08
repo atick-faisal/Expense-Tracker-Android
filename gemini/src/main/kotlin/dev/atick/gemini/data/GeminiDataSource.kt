@@ -17,8 +17,11 @@
 package dev.atick.gemini.data
 
 import dev.atick.gemini.models.AiChatMessage
+import dev.atick.gemini.models.AiExpense
+import dev.atick.gemini.models.AiSMS
 
 interface GeminiDataSource {
     suspend fun initializeChat(messages: List<AiChatMessage>)
     suspend fun sendChatMessage(message: String): String
+    suspend fun getExpenseFromSMS(aiSMS: AiSMS): AiExpense
 }

@@ -16,6 +16,7 @@
 plugins {
     alias(libs.plugins.jetpack.library)
     alias(libs.plugins.jetpack.dagger.hilt)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.secrets)
 }
 
@@ -34,6 +35,8 @@ secrets {
 }
 
 dependencies {
+    implementation(project(":core:android"))
+
     // ... Gemini
     implementation(libs.generativeai)
 }
