@@ -128,4 +128,9 @@ dependencies {
 
     // ... Billing
     implementation(libs.play.billing.ktx)
+
+    // ... Work Manager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
 }

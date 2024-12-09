@@ -20,6 +20,7 @@ import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
 import dev.atick.gemini.models.AiSMS
 import dev.atick.sms.data.SMSDataSource
+import kotlinx.coroutines.delay
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -46,6 +47,8 @@ class ExpensesRepositoryImpl @Inject constructor(
                         date = sms.date,
                     ),
                 )
+
+                delay(4000)
 
                 if (i > 10) break
 
