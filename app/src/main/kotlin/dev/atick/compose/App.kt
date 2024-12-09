@@ -18,6 +18,7 @@ package dev.atick.compose
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import dev.atick.compose.sync.Sync
 import timber.log.Timber
 
 /**
@@ -33,6 +34,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 //        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        Sync.initialize(this)
         Timber.plant(Timber.DebugTree())
     }
 }
