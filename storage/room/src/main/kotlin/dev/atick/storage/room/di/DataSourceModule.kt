@@ -20,8 +20,14 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.atick.storage.room.data.BudgetDataSource
+import dev.atick.storage.room.data.BudgetDataSourceImpl
+import dev.atick.storage.room.data.CategoryDataSource
+import dev.atick.storage.room.data.CategoryDataSourceImpl
 import dev.atick.storage.room.data.ChatDataSource
 import dev.atick.storage.room.data.ChatDataSourceImpl
+import dev.atick.storage.room.data.ExpenseDataSource
+import dev.atick.storage.room.data.ExpenseDataSourceImpl
 import dev.atick.storage.room.data.LocalDataSource
 import dev.atick.storage.room.data.LocalDataSourceImpl
 import javax.inject.Singleton
@@ -45,17 +51,51 @@ abstract class DataSourceModule {
         localDataSourceImpl: LocalDataSourceImpl,
     ): LocalDataSource
 
-    // provide chat data source
-
     /**
      * Binds the [ChatDataSourceImpl] implementation to the [ChatDataSource] interface.
      *
-     * @param chatLocalDataSourceImpl The concrete implementation of [ChatDataSourceImpl].
+     * @param chatDataSourceImpl The concrete implementation of [ChatDataSourceImpl].
      * @return An instance of [ChatDataSource] representing the chat local data source.
      */
     @Binds
     @Singleton
-    abstract fun bindChatLocalDataSource(
-        chatLocalDataSourceImpl: ChatDataSourceImpl,
+    abstract fun bindChatDataSource(
+        chatDataSourceImpl: ChatDataSourceImpl,
     ): ChatDataSource
+
+    /**
+     * Binds the [ExpenseDataSourceImpl] implementation to the [ExpenseDataSource] interface.
+     *
+     * @param expenseDataSourceImpl The concrete implementation of [ExpenseDataSourceImpl].
+     * @return An instance of [ExpenseDataSource] representing the expense data source.
+     */
+    @Binds
+    @Singleton
+    abstract fun bindExpenseDataSource(
+        expenseDataSourceImpl: ExpenseDataSourceImpl,
+    ): ExpenseDataSource
+
+    /**
+     * Binds the [CategoryDataSourceImpl] implementation to the [CategoryDataSource] interface.
+     *
+     * @param categoryDataSourceImpl The concrete implementation of [CategoryDataSourceImpl].
+     * @return An instance of [CategoryDataSource] representing the category data source.
+     */
+    @Binds
+    @Singleton
+    abstract fun bindCategoryDataSource(
+        categoryDataSourceImpl: CategoryDataSourceImpl,
+    ): CategoryDataSource
+
+    /**
+     * Binds the [BudgetDataSourceImpl] implementation to the [BudgetDataSource] interface.
+     *
+     * @param budgetDataSourceImpl The concrete implementation of [BudgetDataSourceImpl].
+     * @return An instance of [BudgetDataSource] representing the budget data source.
+     */
+    @Binds
+    @Singleton
+    abstract fun bindBudgetDataSource(
+        budgetDataSourceImpl: BudgetDataSourceImpl,
+    ): BudgetDataSource
 }
