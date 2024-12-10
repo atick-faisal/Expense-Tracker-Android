@@ -16,6 +16,7 @@
 
 package dev.atick.storage.room.data
 
+import dev.atick.storage.room.dao.ChatDao
 import dev.atick.storage.room.models.ChatEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

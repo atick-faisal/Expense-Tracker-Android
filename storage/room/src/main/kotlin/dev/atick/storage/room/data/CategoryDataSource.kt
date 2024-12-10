@@ -16,27 +16,13 @@
 
 package dev.atick.storage.room.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import dev.atick.storage.room.models.ChatEntity
+import dev.atick.storage.room.models.CategoryEntity
 import kotlinx.coroutines.flow.Flow
 
-@Dao
-interface ChatDao {
-    @Query("SELECT * FROM messages ORDER BY timestamp ASC")
-    fun getAllMessages(): Flow<List<ChatEntity>>
-
-    @Query("SELECT * FROM messages ORDER BY timestamp DESC LIMIT :limit")
-    suspend fun getRecentMessages(limit: Int): List<ChatEntity>
-
-    @Insert
-    suspend fun insertMessage(chatEntity: ChatEntity)
-
-    @Delete
-    suspend fun deleteMessage(chatEntity: ChatEntity)
-
-    @Query("DELETE FROM messages")
-    suspend fun deleteAllMessages()
+interface CategoryDataSource {
+    fun getAllCategories(): Flow<List<CategoryEntity>>
+    fun getCategoryByType(type: String): Flow<CategoryEntity?>
+    suspend fun insertCategory(category: CategoryEntity)
+    suspend fun deleteCategory(category: CategoryEntity)
+    suspend fun insertDefaultCategories()
 }
