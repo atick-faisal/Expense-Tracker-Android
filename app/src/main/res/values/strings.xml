@@ -59,4 +59,12 @@
     <string name="sync_work_notification_title">Dhakarani</string>
     <string name="sync_work_notification_channel_name">Sync</string>
     <string name="sync_work_notification_channel_description">Expense Synchronizer</string>
+    <string name="amount">Amount</string>
+    <string name="expense_category">Expense Category</string>
+    <string name="payment_status">Payment Status</string>
+    <string name="recurring_type">Recurring Type</string>
+    <string name="description">Description</string>
+    <string name="to_be_cancelled">To Be Cancelled</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

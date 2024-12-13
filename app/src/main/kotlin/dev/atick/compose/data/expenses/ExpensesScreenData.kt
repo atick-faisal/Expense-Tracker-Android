@@ -17,20 +17,21 @@
 package dev.atick.compose.data.expenses
 
 import dev.atick.compose.data.categories.UiCategoryType
-import java.util.Date
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
 )
 
 data class UiExpense(
-    val amount: Double,
-    val category: UiCategoryType,
+    val id: Long = 0,
+    val amount: Double = 0.0,
+    val category: UiCategoryType = UiCategoryType.ESSENTIAL,
     val paymentStatus: UiPaymentStatus = UiPaymentStatus.PENDING,
     val recurringType: UiRecurringType = UiRecurringType.NONE,
-    val paymentDate: String = Date().toString(),
-    val dueDate: String? = null,
+    val paymentDate: Long = System.currentTimeMillis(),
+    val dueDate: Long? = null,
     val description: String? = null,
+    val toBeCancelled: Boolean = false,
 )
 
 enum class UiPaymentStatus {

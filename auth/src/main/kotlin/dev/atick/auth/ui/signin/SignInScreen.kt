@@ -56,7 +56,7 @@ import dev.atick.core.ui.components.JetpackButton
 import dev.atick.core.ui.components.JetpackOutlinedButton
 import dev.atick.core.ui.components.JetpackPasswordFiled
 import dev.atick.core.ui.components.JetpackTextButton
-import dev.atick.core.ui.components.JetpackTextFiled
+import dev.atick.core.ui.components.JetpackTextField
 import dev.atick.core.ui.utils.DevicePreviews
 import dev.atick.core.ui.utils.StatefulComposable
 
@@ -122,7 +122,7 @@ private fun SignInScreen(
                 .height(56.dp),
         )
         Text(text = "or", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-        JetpackTextFiled(
+        JetpackTextField(
             value = authScreenData.email.value,
             errorMessage = authScreenData.email.errorMessage,
             onValueChange = onEmailChange,

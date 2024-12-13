@@ -57,7 +57,7 @@ import dev.atick.core.ui.R
  * @param errorMessage The error message to display below the text field, if any.
  */
 @Composable
-fun JetpackTextFiled(
+fun JetpackTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable () -> Unit,
@@ -66,6 +66,7 @@ fun JetpackTextFiled(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     trailingIcon: @Composable () -> Unit = {},
     errorMessage: String? = null,
+    readOnly: Boolean = false,
 ) {
     JetpackTextFieldWithError(
         value = value,
@@ -75,6 +76,7 @@ fun JetpackTextFiled(
         errorMessage = errorMessage,
         trailingIcon = trailingIcon,
         keyboardOptions = keyboardOptions,
+        readOnly = readOnly,
         modifier = modifier,
     )
 }
@@ -157,6 +159,7 @@ private fun JetpackTextFieldWithError(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     shape: Shape = RoundedCornerShape(percent = 50),
+    readOnly: Boolean = false,
 ) {
     Column(
         modifier = modifier,
@@ -178,6 +181,7 @@ private fun JetpackTextFieldWithError(
                     unfocusedBorderColor = MaterialTheme.colorScheme.error,
                 )
             },
+            readOnly = readOnly,
             modifier = Modifier.fillMaxWidth(),
         )
         AnimatedVisibility(visible = errorMessage != null) {
@@ -209,7 +213,7 @@ private fun JetpackTextFieldWithError(
  * @param maxLines The maximum number of lines to display before scrolling.
  */
 @Composable
-fun MultilineJetpackTextField(
+fun JetpackMultilineTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable () -> Unit,

@@ -35,7 +35,7 @@ import dev.atick.compose.navigation.analysis.navigateToAnalysis
 import dev.atick.compose.navigation.budgets.navigateToBudgets
 import dev.atick.compose.navigation.categories.navigateToCategories
 import dev.atick.compose.navigation.chat.navigateToChat
-import dev.atick.compose.navigation.expenses.navigateToExpenses
+import dev.atick.compose.navigation.expenses.navigateToExpensesNavGraph
 import dev.atick.core.extensions.stateInDelayed
 import dev.atick.network.utils.NetworkState
 import dev.atick.network.utils.NetworkUtils
@@ -122,7 +122,7 @@ class JetpackAppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.EXPENSES -> navController.navigateToExpenses(topLevelNavOptions)
+            TopLevelDestination.EXPENSES -> navController.navigateToExpensesNavGraph(topLevelNavOptions)
             TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
             TopLevelDestination.BUDGETS -> navController.navigateToBudgets(topLevelNavOptions)
             TopLevelDestination.CATEGORIES -> navController.navigateToCategories(topLevelNavOptions)

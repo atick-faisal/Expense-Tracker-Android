@@ -28,8 +28,11 @@ import dev.atick.compose.navigation.analysis.analysisScreen
 import dev.atick.compose.navigation.budgets.budgetsScreen
 import dev.atick.compose.navigation.categories.categoriesScreen
 import dev.atick.compose.navigation.chat.chatScreen
-import dev.atick.compose.navigation.expenses.Expenses
+import dev.atick.compose.navigation.expenses.ExpensesNavGraph
+import dev.atick.compose.navigation.expenses.editExpenseScreen
+import dev.atick.compose.navigation.expenses.expensesNavGraph
 import dev.atick.compose.navigation.expenses.expensesScreen
+import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
 import dev.atick.compose.ui.JetpackAppState
 
 @Composable
@@ -39,7 +42,7 @@ fun JetpackNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    val startDestination = Expenses::class
+    val startDestination = ExpensesNavGraph::class
     // if (appState.isUserLoggedIn) HomeNavGraph::class else AuthNavGraph::class
     NavHost(
         navController = navController,
@@ -80,9 +83,16 @@ fun JetpackNavHost(
             onShowSnackbar = onShowSnackbar,
         )
         */
-        expensesScreen(
-            onShowSnackbar = onShowSnackbar,
-        )
+        expensesNavGraph {
+            expensesScreen(
+                onExpenseClick = navController::navigateToEditExpenseScreen,
+                onShowSnackbar = onShowSnackbar,
+            )
+            editExpenseScreen(
+                onBackClick = navController::popBackStack,
+                onShowSnackbar = onShowSnackbar,
+            )
+        }
         analysisScreen(
             onShowSnackbar = onShowSnackbar,
         )

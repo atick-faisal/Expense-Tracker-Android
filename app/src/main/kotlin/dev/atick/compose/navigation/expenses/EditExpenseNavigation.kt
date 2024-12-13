@@ -18,38 +18,25 @@ package dev.atick.compose.navigation.expenses
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import dev.atick.compose.ui.expenses.ExpensesRoute
+import dev.atick.compose.ui.expenses.EditExpenseRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object Expenses
+data class EditExpense(val expenseId: Long)
 
-@Serializable
-data object ExpensesNavGraph
-
-fun NavController.navigateToExpensesNavGraph(navOptions: NavOptions? = null) {
-    navigate(ExpensesNavGraph, navOptions)
+fun NavController.navigateToEditExpenseScreen(expenseId: Long) {
+    navigate(EditExpense(expenseId)) { launchSingleTop = true }
 }
 
-fun NavGraphBuilder.expensesScreen(
-    onExpenseClick: (Long) -> Unit,
+fun NavGraphBuilder.editExpenseScreen(
+    onBackClick: () -> Unit,
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
-    composable<Expenses> {
-        ExpensesRoute(
-            onExpenseClick = onExpenseClick,
+    composable<EditExpense> {
+        EditExpenseRoute(
+            onBackClick = onBackClick,
             onShowSnackbar = onShowSnackbar,
         )
-    }
-}
-
-fun NavGraphBuilder.expensesNavGraph(
-    nestedNavGraphs: NavGraphBuilder.() -> Unit,
-) {
-    navigation<ExpensesNavGraph>(startDestination = Expenses) {
-        nestedNavGraphs()
     }
 }
