@@ -30,8 +30,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -56,6 +58,7 @@ import java.util.Locale
 
 @Composable
 internal fun ExpensesRoute(
+    onExpenseClick: (Long) -> Unit,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     expensesViewModel: ExpensesViewModel = hiltViewModel(),
 ) {
@@ -65,7 +68,7 @@ internal fun ExpensesRoute(
         state = expensesState,
         onShowSnackbar = onShowSnackbar,
     ) { expensesScreenData ->
-        ExpensesScreen()
+        ExpensesScreen(onExpenseClick = onExpenseClick)
     }
 }
 
@@ -80,8 +83,9 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PAID,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Apartment Rent",
-                paymentDate = "2024-12-01",
-                dueDate = "2024-12-01",
+                paymentDate = System.currentTimeMillis(),
+                dueDate = System.currentTimeMillis(),
+                toBeCancelled = true,
             ),
             UiExpense(
                 amount = 89.99,
@@ -89,7 +93,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PENDING,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Internet Bill",
-                dueDate = "2024-12-15",
+                dueDate = System.currentTimeMillis(),
             ),
             UiExpense(
                 amount = 65.50,
@@ -97,7 +101,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.OVERDUE,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Electricity Bill",
-                dueDate = "2024-12-01",
+                dueDate = System.currentTimeMillis(),
             ),
             UiExpense(
                 amount = 499.99,
@@ -105,7 +109,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PAID,
                 recurringType = UiRecurringType.NONE,
                 description = "New Smartphone",
-                paymentDate = "2024-12-03",
+                paymentDate = System.currentTimeMillis() - 86400000,
             ),
             UiExpense(
                 amount = 12.99,
@@ -113,7 +117,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.CANCELLED,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Streaming Service Subscription",
-                dueDate = "2024-12-10",
+                dueDate = System.currentTimeMillis() - 86400000,
             ),
             UiExpense(
                 amount = 45.00,
@@ -121,7 +125,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PAID,
                 recurringType = UiRecurringType.NONE,
                 description = "Grocery Shopping",
-                paymentDate = "2024-12-05",
+                paymentDate = System.currentTimeMillis(),
             ),
             UiExpense(
                 amount = 29.99,
@@ -129,7 +133,7 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PENDING,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Gym Membership",
-                dueDate = "2024-12-20",
+                dueDate = System.currentTimeMillis(),
             ),
             UiExpense(
                 amount = 150.00,
@@ -137,10 +141,11 @@ private fun ExpensesScreen(
                 paymentStatus = UiPaymentStatus.PENDING,
                 recurringType = UiRecurringType.MONTHLY,
                 description = "Public Transport Pass",
-                dueDate = "2024-12-25",
+                dueDate = System.currentTimeMillis() - 86400000,
             ),
         ),
     ),
+    onExpenseClick: (Long) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -148,14 +153,125 @@ private fun ExpensesScreen(
         contentPadding = PaddingValues(16.dp),
     ) {
         items(expensesScreenData.expenses) { expense ->
-            ExpenseCard(expense = expense)
+            ExpenseCard(expense = expense, onExpenseClick = onExpenseClick)
         }
     }
 }
 
+// @Composable
+// fun ExpenseCard(
+//    expense: UiExpense,
+//    modifier: Modifier = Modifier,
+// ) {
+//    val currencyFormatter = remember {
+//        NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
+//            minimumFractionDigits = 2
+//            maximumFractionDigits = 2
+//        }
+//    }
+//
+//    ElevatedCard(
+//        modifier = modifier.fillMaxWidth(),
+// //        colors = CardDefaults.elevatedCardColors(
+// //            containerColor = MaterialTheme.colorScheme.surface,
+// //        ),
+//    ) {
+//        Column(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(16.dp),
+//        ) {
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//                verticalAlignment = Alignment.CenterVertically,
+//            ) {
+//                Text(
+//                    text = currencyFormatter.format(expense.amount),
+//                    style = MaterialTheme.typography.titleLarge,
+//                    fontWeight = FontWeight.Bold,
+//                )
+//                PaymentStatusChip(status = expense.paymentStatus)
+//            }
+//
+//            Spacer(modifier = Modifier.height(8.dp))
+//
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.spacedBy(4.dp),
+//                verticalAlignment = Alignment.CenterVertically,
+//            ) {
+//                CategoryTypeChip(categoryType = expense.category)
+//
+//                expense.description?.let {
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    Text(
+//                        text = it,
+//                        style = MaterialTheme.typography.bodyLarge,
+//                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                    )
+//                }
+//            }
+//
+//            Spacer(modifier = Modifier.height(8.dp))
+//
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.spacedBy(8.dp),
+//            ) {
+//                if (expense.recurringType != UiRecurringType.NONE) {
+//                    AssistChip(
+//                        onClick = { },
+//                        label = {
+//                            Text(
+//                                expense.recurringType.name.lowercase().replaceFirstChar {
+//                                    if (it.isLowerCase()) {
+//                                        it.titlecase(
+//                                            Locale.getDefault(),
+//                                        )
+//                                    } else {
+//                                        it.toString()
+//                                    }
+//                                },
+//                            )
+//                        },
+//                        leadingIcon = {
+//                            Icon(
+//                                imageVector = Icons.Filled.Repeat,
+//                                contentDescription = null,
+//                                modifier = Modifier.size(18.dp),
+//                            )
+//                        },
+//                    )
+//                }
+//            }
+//
+//            Spacer(modifier = Modifier.height(8.dp))
+//            Row(
+//                modifier = Modifier.fillMaxWidth(),
+//                horizontalArrangement = Arrangement.SpaceBetween,
+//            ) {
+//                expense.dueDate?.let {
+//                    Text(
+//                        text = "Due: $it",
+//                        style = MaterialTheme.typography.bodyMedium,
+//                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                    )
+//                }
+//                Text(
+//                    text = "Paid: ${expense.paymentDate}",
+//                    style = MaterialTheme.typography.bodyMedium,
+//                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+//                )
+//            }
+//        }
+//    }
+// }
+
 @Composable
 fun ExpenseCard(
     expense: UiExpense,
+    onExpenseClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val currencyFormatter = remember {
@@ -167,9 +283,7 @@ fun ExpenseCard(
 
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
-//        colors = CardDefaults.elevatedCardColors(
-//            containerColor = MaterialTheme.colorScheme.surface,
-//        ),
+        onClick = { onExpenseClick(expense.id) },
     ) {
         Column(
             modifier = Modifier
@@ -237,6 +351,25 @@ fun ExpenseCard(
                                 modifier = Modifier.size(18.dp),
                             )
                         },
+                    )
+                }
+
+                if (expense.toBeCancelled) {
+                    AssistChip(
+                        onClick = { },
+                        label = { Text("To Be Cancelled") },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Cancel,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp),
+                                tint = MaterialTheme.colorScheme.error,
+                            )
+                        },
+                        colors = AssistChipDefaults.assistChipColors(
+                            labelColor = MaterialTheme.colorScheme.error,
+                            leadingIconContentColor = MaterialTheme.colorScheme.error,
+                        ),
                     )
                 }
             }

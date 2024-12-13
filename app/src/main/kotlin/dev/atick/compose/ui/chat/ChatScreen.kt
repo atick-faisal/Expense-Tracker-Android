@@ -54,7 +54,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
 import dev.atick.compose.data.chat.ChatScreenData
 import dev.atick.compose.data.chat.UiMessage
-import dev.atick.core.ui.components.MultilineJetpackTextField
+import dev.atick.core.ui.components.JetpackMultilineTextField
 import dev.atick.core.ui.utils.StatefulComposable
 
 @Composable
@@ -104,7 +104,7 @@ private fun ChatScreen(
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
-        MultilineJetpackTextField(
+        JetpackMultilineTextField(
             value = chatScreenData.newMessage.value,
             onValueChange = onNewMessageUpdate,
             modifier = Modifier
