@@ -53,6 +53,7 @@ import dev.atick.compose.data.expenses.ExpensesScreenData
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.compose.data.expenses.asFormattedDate
 import dev.atick.core.ui.utils.StatefulComposable
 import java.util.Locale
 
@@ -68,7 +69,10 @@ internal fun ExpensesRoute(
         state = expensesState,
         onShowSnackbar = onShowSnackbar,
     ) { expensesScreenData ->
-        ExpensesScreen(onExpenseClick = onExpenseClick)
+        ExpensesScreen(
+            expensesScreenData = expensesScreenData,
+            onExpenseClick = onExpenseClick,
+        )
     }
 }
 
@@ -157,116 +161,6 @@ private fun ExpensesScreen(
         }
     }
 }
-
-// @Composable
-// fun ExpenseCard(
-//    expense: UiExpense,
-//    modifier: Modifier = Modifier,
-// ) {
-//    val currencyFormatter = remember {
-//        NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-//            minimumFractionDigits = 2
-//            maximumFractionDigits = 2
-//        }
-//    }
-//
-//    ElevatedCard(
-//        modifier = modifier.fillMaxWidth(),
-// //        colors = CardDefaults.elevatedCardColors(
-// //            containerColor = MaterialTheme.colorScheme.surface,
-// //        ),
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(16.dp),
-//        ) {
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.SpaceBetween,
-//                verticalAlignment = Alignment.CenterVertically,
-//            ) {
-//                Text(
-//                    text = currencyFormatter.format(expense.amount),
-//                    style = MaterialTheme.typography.titleLarge,
-//                    fontWeight = FontWeight.Bold,
-//                )
-//                PaymentStatusChip(status = expense.paymentStatus)
-//            }
-//
-//            Spacer(modifier = Modifier.height(8.dp))
-//
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.spacedBy(4.dp),
-//                verticalAlignment = Alignment.CenterVertically,
-//            ) {
-//                CategoryTypeChip(categoryType = expense.category)
-//
-//                expense.description?.let {
-//                    Spacer(modifier = Modifier.height(8.dp))
-//                    Text(
-//                        text = it,
-//                        style = MaterialTheme.typography.bodyLarge,
-//                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                    )
-//                }
-//            }
-//
-//            Spacer(modifier = Modifier.height(8.dp))
-//
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.spacedBy(8.dp),
-//            ) {
-//                if (expense.recurringType != UiRecurringType.NONE) {
-//                    AssistChip(
-//                        onClick = { },
-//                        label = {
-//                            Text(
-//                                expense.recurringType.name.lowercase().replaceFirstChar {
-//                                    if (it.isLowerCase()) {
-//                                        it.titlecase(
-//                                            Locale.getDefault(),
-//                                        )
-//                                    } else {
-//                                        it.toString()
-//                                    }
-//                                },
-//                            )
-//                        },
-//                        leadingIcon = {
-//                            Icon(
-//                                imageVector = Icons.Filled.Repeat,
-//                                contentDescription = null,
-//                                modifier = Modifier.size(18.dp),
-//                            )
-//                        },
-//                    )
-//                }
-//            }
-//
-//            Spacer(modifier = Modifier.height(8.dp))
-//            Row(
-//                modifier = Modifier.fillMaxWidth(),
-//                horizontalArrangement = Arrangement.SpaceBetween,
-//            ) {
-//                expense.dueDate?.let {
-//                    Text(
-//                        text = "Due: $it",
-//                        style = MaterialTheme.typography.bodyMedium,
-//                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                    )
-//                }
-//                Text(
-//                    text = "Paid: ${expense.paymentDate}",
-//                    style = MaterialTheme.typography.bodyMedium,
-//                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-//                )
-//            }
-//        }
-//    }
-// }
 
 @Composable
 fun ExpenseCard(
@@ -387,7 +281,7 @@ fun ExpenseCard(
                     )
                 }
                 Text(
-                    text = "Paid: ${expense.paymentDate}",
+                    text = "Paid: ${expense.paymentDate.asFormattedDate()}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

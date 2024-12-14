@@ -91,7 +91,7 @@ object GeminiModule {
                         ),
                         "paymentDate" to Schema.str(
                             name = "paymentDate",
-                            description = "The date when the payment was made (ISO format)",
+                            description = "The date when the payment was made (ISO format: yyyy-MM-dd')",
                         ),
                         "description" to Schema.str(
                             name = "description",

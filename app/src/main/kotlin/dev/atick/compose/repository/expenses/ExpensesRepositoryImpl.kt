@@ -16,18 +16,51 @@
 
 package dev.atick.compose.repository.expenses
 
+import dev.atick.compose.data.categories.UiCategoryType
+import dev.atick.compose.data.expenses.UiExpense
+import dev.atick.compose.data.expenses.UiPaymentStatus
+import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
 import dev.atick.gemini.models.AiSMS
 import dev.atick.sms.data.SMSDataSource
+import dev.atick.storage.room.data.ExpenseDataSource
+import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.format.DateTimeComponents
+import kotlinx.datetime.format.DateTimeFormat
 import timber.log.Timber
 import javax.inject.Inject
 
 class ExpensesRepositoryImpl @Inject constructor(
     private val geminiDataSource: GeminiDataSource,
     private val smsDataSource: SMSDataSource,
+    private val expenseDataSource: ExpenseDataSource,
 ) : ExpensesRepository {
+    override val expenses: Flow<List<UiExpense>>
+        get() = expenseDataSource.getAllExpenses()
+            .map { expenses ->
+                expenses.map { expense ->
+                    UiExpense(
+                        id = expense.id,
+                        amount = expense.amount,
+                        category = UiCategoryType.valueOf(expense.categoryType),
+                        paymentStatus = UiPaymentStatus.valueOf(expense.paymentStatus),
+                        recurringType = UiRecurringType.valueOf(expense.recurringType),
+                        paymentDate = expense.paymentDate,
+                        dueDate = expense.dueDate,
+                        description = expense.description,
+                        toBeCancelled = expense.toBeCancelled,
+                    )
+                }
+            }
+
     override suspend fun syncExpensesFromSms(): Result<Unit> {
         return suspendRunCatching {
             val smsList = smsDataSource.querySMS(
@@ -45,6 +78,23 @@ class ExpensesRepositoryImpl @Inject constructor(
                         address = sms.address,
                         body = sms.body,
                         date = sms.date,
+                    ),
+                )
+
+                val paymentDate = expense.paymentDate?.run {
+                    LocalDate.parse(this)
+                        .atStartOfDayIn(TimeZone.currentSystemDefault())
+                        .toEpochMilliseconds()
+                } ?: System.currentTimeMillis()
+
+                expenseDataSource.insertExpense(
+                    ExpenseEntity(
+                        amount = expense.amount,
+                        paymentDate = paymentDate,
+                        description = expense.description,
+                        categoryType = expense.category.name,
+                        paymentStatus = expense.paymentStatus.name,
+                        recurringType = expense.recurringType.name,
                     ),
                 )
 
