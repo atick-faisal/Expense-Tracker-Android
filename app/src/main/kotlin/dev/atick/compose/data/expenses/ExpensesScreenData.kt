@@ -17,6 +17,9 @@
 package dev.atick.compose.data.expenses
 
 import dev.atick.compose.data.categories.UiCategoryType
+import kotlinx.datetime.Instant
+import kotlinx.datetime.format
+import kotlinx.datetime.format.DateTimeComponents
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
@@ -47,4 +50,9 @@ enum class UiRecurringType {
     WEEKLY,
     MONTHLY,
     YEARLY,
+}
+
+fun Long.asFormattedDate(): String {
+    return Instant.fromEpochMilliseconds(this)
+        .format(DateTimeComponents.Formats.RFC_1123)
 }

@@ -16,6 +16,10 @@
 
 package dev.atick.compose.repository.expenses
 
+import dev.atick.compose.data.expenses.UiExpense
+import kotlinx.coroutines.flow.Flow
+
 interface ExpensesRepository {
+    val expenses: Flow<List<UiExpense>>
     suspend fun syncExpensesFromSms(): Result<Unit>
 }

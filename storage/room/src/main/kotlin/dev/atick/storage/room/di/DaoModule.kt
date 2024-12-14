@@ -54,6 +54,8 @@ object DaoModule {
      * @param expenseDatabase The database for expenses.
      * @return The expense data access object.
      */
+    @Singleton
+    @Provides
     fun provideExpenseDao(expenseDatabase: ExpenseDatabase) = expenseDatabase.getExpenseDao()
 
     /**
@@ -62,6 +64,8 @@ object DaoModule {
      * @param budgetDatabase The database for budgets.
      * @return The budget data access object.
      */
+    @Singleton
+    @Provides
     fun provideBudgetDao(budgetDatabase: BudgetDatabase) = budgetDatabase.getBudgetDao()
 
     /**
@@ -70,6 +74,8 @@ object DaoModule {
      * @param categoryDatabase The database for categories.
      * @return The category data access object.
      */
+    @Singleton
+    @Provides
     fun provideCategoryDao(categoryDatabase: CategoryDatabase) = categoryDatabase.getCategoryDao()
 
     /**

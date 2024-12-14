@@ -99,9 +99,9 @@ private fun ChatScreen(
                 },
             reverseLayout = true,
         ) {
-            items(chatScreenData.messages.reversed()) { message ->
-                ChatMessageItem(message)
-                Spacer(modifier = Modifier.height(8.dp))
+            items(chatScreenData.messages.reversed(), key = { it.id }) { message ->
+                ChatMessageItem(message, modifier = Modifier.padding(vertical = 8.dp).animateItem())
+                //Spacer(modifier = Modifier.height(8.dp))
             }
         }
         JetpackMultilineTextField(
@@ -134,9 +134,9 @@ private fun ChatScreen(
 }
 
 @Composable
-fun ChatMessageItem(message: UiMessage) {
+fun ChatMessageItem(message: UiMessage, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = if (message.isFromUser) Arrangement.End else Arrangement.Start,
     ) {
         if (!message.isFromUser) {

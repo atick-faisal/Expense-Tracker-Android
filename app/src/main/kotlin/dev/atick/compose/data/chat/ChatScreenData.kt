@@ -25,12 +25,14 @@ data class ChatScreenData(
 )
 
 data class UiMessage(
+    val id: Long,
     val text: String,
     val isFromUser: Boolean = true,
 )
 
 fun ChatEntity.asUiMessage(): UiMessage {
     return UiMessage(
+        id = id,
         text = text,
         isFromUser = isFromUser,
     )

@@ -34,7 +34,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 //        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-        Sync.initialize(this)
+//        Sync.initialize(this)
         Timber.plant(Timber.DebugTree())
     }
 }
