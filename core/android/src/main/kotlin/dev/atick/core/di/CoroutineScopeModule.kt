@@ -21,14 +21,23 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import javax.inject.Qualifier
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class ApplicationScope
 
 /**
  * Dagger module that provides a coroutine scope for the application.
  */
-@Module
+@Module(
+    includes = [
+        DispatcherModule::class,
+    ],
+)
 @InstallIn(SingletonComponent::class)
 object CoroutineScopeModule {
 
@@ -39,6 +48,9 @@ object CoroutineScopeModule {
      */
     @Provides
     @Singleton
-    fun provideCoroutineScope(): CoroutineScope =
-        CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    @ApplicationScope
+    fun provideCoroutineScope(
+        @IoDispatcher dispatcher: CoroutineDispatcher,
+    ): CoroutineScope =
+        CoroutineScope(SupervisorJob() + dispatcher)
 }
