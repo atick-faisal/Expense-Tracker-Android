@@ -17,6 +17,7 @@
 package dev.atick.compose.sync
 
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
@@ -26,10 +27,13 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import dev.atick.compose.R
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 @HiltWorker
 class SyncWorker @AssistedInject constructor(
@@ -40,13 +44,30 @@ class SyncWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
-        return context.syncForegroundInfo()
+        Timber.d("SyncWorker: getForegroundInfo")
+        return context.syncForegroundInfo(R.string.sync_work_notification_title, 0, 0)
+    }
+
+    private fun getForegroundInfo(@StringRes title: Int, total: Int, current: Int): ForegroundInfo {
+        return context.syncForegroundInfo(title, total, current)
     }
 
     override suspend fun doWork(): Result {
         return withContext(ioDispatcher) {
             try {
+                setForeground(getForegroundInfo())
                 expensesRepository.syncExpensesFromSms()
+                    .flowOn(ioDispatcher)
+                    .collect { progress ->
+                        Timber.d("SyncWorker: Progress: $progress")
+                        setForeground(
+                            foregroundInfo = getForegroundInfo(
+                                title = R.string.sync_work_notification_title,
+                                total = progress.total,
+                                current = progress.current,
+                            ),
+                        )
+                    }
                 Result.success()
             } catch (e: Exception) {
                 e.printStackTrace()

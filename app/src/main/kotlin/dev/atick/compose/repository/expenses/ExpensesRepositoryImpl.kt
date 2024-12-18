@@ -20,7 +20,7 @@ import dev.atick.compose.data.categories.UiCategoryType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
-import dev.atick.core.utils.suspendRunCatching
+import dev.atick.compose.sync.SyncProgress
 import dev.atick.gemini.data.GeminiDataSource
 import dev.atick.gemini.models.AiSMS
 import dev.atick.sms.data.SMSDataSource
@@ -28,13 +28,11 @@ import dev.atick.storage.room.data.ExpenseDataSource
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
-import kotlinx.datetime.format.DateTimeComponents
-import kotlinx.datetime.format.DateTimeFormat
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -61,49 +59,57 @@ class ExpensesRepositoryImpl @Inject constructor(
                 }
             }
 
-    override suspend fun syncExpensesFromSms(): Result<Unit> {
-        return suspendRunCatching {
-            val smsList = smsDataSource.querySMS(
-                senderName = "QNB",
-                keywords = listOf("purchase"),
+    override fun syncExpensesFromSms() = flow<SyncProgress> {
+        val smsList = smsDataSource.querySMS(
+            senderName = "QNB",
+            keywords = listOf("purchase"),
+        )
+
+        val totalSms = 10
+
+        Timber.d("Found $totalSms SMSes")
+
+        for ((i, sms) in smsList.withIndex()) {
+            Timber.d("SMS $i$: $sms")
+
+            val expense = geminiDataSource.getExpenseFromSMS(
+                AiSMS(
+                    address = sms.address,
+                    body = sms.body,
+                    date = sms.date,
+                ),
             )
 
-            Timber.d("Found ${smsList.size} SMSes")
+            val paymentDate = expense.paymentDate?.run {
+                LocalDate.parse(this)
+                    .atStartOfDayIn(TimeZone.currentSystemDefault())
+                    .toEpochMilliseconds()
+            } ?: System.currentTimeMillis()
 
-            for ((i, sms) in smsList.withIndex()) {
-                Timber.d("SMS $i$: $sms")
+            expenseDataSource.insertExpense(
+                ExpenseEntity(
+                    amount = expense.amount,
+                    paymentDate = paymentDate,
+                    description = expense.description,
+                    categoryType = expense.category.name,
+                    paymentStatus = expense.paymentStatus.name,
+                    recurringType = expense.recurringType.name,
+                ),
+            )
 
-                val expense = geminiDataSource.getExpenseFromSMS(
-                    AiSMS(
-                        address = sms.address,
-                        body = sms.body,
-                        date = sms.date,
-                    ),
-                )
+            delay(4000)
 
-                val paymentDate = expense.paymentDate?.run {
-                    LocalDate.parse(this)
-                        .atStartOfDayIn(TimeZone.currentSystemDefault())
-                        .toEpochMilliseconds()
-                } ?: System.currentTimeMillis()
+            if (i >= 10) break
 
-                expenseDataSource.insertExpense(
-                    ExpenseEntity(
-                        amount = expense.amount,
-                        paymentDate = paymentDate,
-                        description = expense.description,
-                        categoryType = expense.category.name,
-                        paymentStatus = expense.paymentStatus.name,
-                        recurringType = expense.recurringType.name,
-                    ),
-                )
+            emit(
+                SyncProgress(
+                    total = totalSms,
+                    current = i + 1,
+                    message = "Syncing expenses... $i / $totalSms",
+                ),
+            )
 
-                delay(4000)
-
-                if (i > 10) break
-
-                Timber.d("Expense $i$: $expense")
-            }
+            Timber.d("Expense $i$: $expense")
         }
     }
 }
