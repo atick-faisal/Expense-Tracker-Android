@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.repository.expenses
+package dev.atick.compose.sync
 
-import dev.atick.compose.data.expenses.UiExpense
-import dev.atick.compose.sync.SyncProgress
-import kotlinx.coroutines.flow.Flow
-
-interface ExpensesRepository {
-    val expenses: Flow<List<UiExpense>>
-    fun syncExpensesFromSms(): Flow<SyncProgress>
-}
+data class SyncProgress(
+    val total: Int = 0,
+    val current: Int = 0,
+    val message: String? = null,
+)

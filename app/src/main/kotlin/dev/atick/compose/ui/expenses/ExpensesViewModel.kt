@@ -23,7 +23,6 @@ import dev.atick.compose.data.expenses.ExpensesScreenData
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
-import dev.atick.core.ui.utils.updateWith
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -31,7 +30,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,8 +53,8 @@ class ExpensesViewModel @Inject constructor(
             .catch { e -> _expensesUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
 
-        _expensesUiState.updateWith(viewModelScope) {
-            expensesRepository.syncExpensesFromSms()
-        }
+//        _expensesUiState.updateWith(viewModelScope) {
+//            expensesRepository.syncExpensesFromSms()
+//        }
     }
 }
