@@ -39,6 +39,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.math.max
 
 class ExpensesRepositoryImpl @Inject constructor(
     private val geminiDataSource: GeminiDataSource,
@@ -66,10 +67,16 @@ class ExpensesRepositoryImpl @Inject constructor(
             }
 
     override fun syncExpensesFromSms() = flow<SyncProgress> {
+        val lastExpenseTime = expenseDataSource.getLastExpenseTime()
+        val startDate = max(
+            lastExpenseTime,
+            System.currentTimeMillis() - ExpensesRepository.SYNC_SMS_DURATION,
+        )
+
         val smsList = smsDataSource.querySMS(
             senderName = "QNB",
             keywords = listOf("purchase"),
-            startDate = System.currentTimeMillis() - ExpensesRepository.SYNC_SMS_DURATION,
+            startDate = startDate,
             endDate = System.currentTimeMillis(),
         )
 
@@ -81,8 +88,6 @@ class ExpensesRepositoryImpl @Inject constructor(
             Timber.d("SMS $i$: $sms")
 
             processSms(sms)
-
-            if (i >= 20) break
 
             emit(
                 SyncProgress(

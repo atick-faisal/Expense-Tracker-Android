@@ -77,4 +77,7 @@ interface ExpenseDao {
     """,
     )
     fun getCategorySpending(categoryType: String, startDate: Long, endDate: Long): Flow<Double?>
+
+    @Query("SELECT MAX(paymentDate) FROM expenses")
+    suspend fun getLastExpenseTime(): Long?
 }
