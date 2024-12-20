@@ -28,6 +28,7 @@ data class ExpensesScreenData(
 data class UiExpense(
     val id: Long = 0,
     val amount: Double = 0.0,
+    val currency: UiCurrencyType = UiCurrencyType.QAR,
     val category: UiCategoryType = UiCategoryType.ESSENTIAL,
     val paymentStatus: UiPaymentStatus = UiPaymentStatus.PENDING,
     val recurringType: UiRecurringType = UiRecurringType.NONE,
@@ -36,6 +37,14 @@ data class UiExpense(
     val description: String? = null,
     val toBeCancelled: Boolean = false,
 )
+
+enum class UiCurrencyType {
+    QAR,
+    USD,
+    EUR,
+    GBP,
+    BDT,
+}
 
 enum class UiPaymentStatus {
     PENDING,

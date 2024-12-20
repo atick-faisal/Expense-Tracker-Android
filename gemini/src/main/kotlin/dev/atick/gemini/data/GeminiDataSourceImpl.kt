@@ -18,6 +18,7 @@ package dev.atick.gemini.data
 
 import com.google.ai.client.generativeai.Chat
 import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.GoogleGenerativeAIException
 import dev.atick.core.di.IoDispatcher
 import dev.atick.gemini.di.ChatModel
 import dev.atick.gemini.di.ExpensesModel
@@ -58,8 +59,11 @@ class GeminiDataSourceImpl @Inject constructor(
 
     override suspend fun getExpenseFromSMS(aiSMS: AiSMS): AiExpense {
         return withContext(ioDispatcher) {
-            val response = expensesModel.generateContent(aiSMS.getTextSMS()).text?.trim()
-                ?: throw IllegalStateException("Something went wrong with the expenses AI.")
+            val response = try {
+                expensesModel.generateContent(aiSMS.getTextSMS()).text?.trim()
+            } catch (e: GoogleGenerativeAIException) {
+                throw e.toGeminiException()
+            } ?: throw IllegalStateException("Something went wrong with the expenses AI.")
             ExpenseParser.parseExpense(response)
         }
     }
