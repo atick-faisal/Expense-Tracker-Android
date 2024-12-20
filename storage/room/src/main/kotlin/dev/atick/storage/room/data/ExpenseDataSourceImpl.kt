@@ -83,4 +83,10 @@ class ExpenseDataSourceImpl @Inject constructor(
             endDate = endDate,
         ).map { it ?: 0.0 }.flowOn(ioDispatcher)
     }
+
+    override suspend fun getLastExpenseTime(): Long {
+        return withContext(ioDispatcher) {
+            expenseDao.getLastExpenseTime() ?: 0
+        }
+    }
 }

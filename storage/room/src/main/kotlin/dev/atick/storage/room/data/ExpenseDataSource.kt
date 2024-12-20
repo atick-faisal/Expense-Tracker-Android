@@ -34,4 +34,5 @@ interface ExpenseDataSource {
         startDate: Long,
         endDate: Long,
     ): Flow<Double>
+    suspend fun getLastExpenseTime(): Long
 }
