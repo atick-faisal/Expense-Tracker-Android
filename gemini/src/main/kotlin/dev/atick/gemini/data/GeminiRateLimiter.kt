@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-package dev.atick.storage.room.models
+package dev.atick.gemini.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+interface GeminiRateLimiter {
+    companion object {
+        const val MAX_REQUESTS: Int = 15
+        const val WINDOW_MS: Long = 60000 // 1 minute
+        const val BASE_DELAY_BETWEEN_REQUESTS: Long = 2500
+        const val MAX_RETRIES: Int = 3
+    }
 
-@Entity(tableName = "expenses")
-data class ExpenseEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val amount: Double,
-    val currency: String,
-    val categoryType: String,
-    val paymentStatus: String,
-    val recurringType: String,
-    val paymentDate: Long,
-    val dueDate: Long? = null,
-    val description: String? = null,
-    val toBeCancelled: Boolean = false,
-    val nextRecurringDate: Long? = null,
-    val createdAt: Long = System.currentTimeMillis(),
-)
+    suspend fun checkAndDelay()
+}

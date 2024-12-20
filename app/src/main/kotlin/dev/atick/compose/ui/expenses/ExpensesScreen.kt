@@ -50,6 +50,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.data.categories.UiCategoryType
 import dev.atick.compose.data.expenses.ExpensesScreenData
+import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
@@ -78,77 +79,7 @@ internal fun ExpensesRoute(
 
 @Composable
 private fun ExpensesScreen(
-    expensesScreenData: ExpensesScreenData = ExpensesScreenData(
-        // Create dummy expenses data
-        listOf(
-            UiExpense(
-                amount = 1200.00,
-                category = UiCategoryType.ESSENTIAL,
-                paymentStatus = UiPaymentStatus.PAID,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Apartment Rent",
-                paymentDate = System.currentTimeMillis(),
-                dueDate = System.currentTimeMillis(),
-                toBeCancelled = true,
-            ),
-            UiExpense(
-                amount = 89.99,
-                category = UiCategoryType.TRANSPORTATION,
-                paymentStatus = UiPaymentStatus.PENDING,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Internet Bill",
-                dueDate = System.currentTimeMillis(),
-            ),
-            UiExpense(
-                amount = 65.50,
-                category = UiCategoryType.HEALTHCARE,
-                paymentStatus = UiPaymentStatus.OVERDUE,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Electricity Bill",
-                dueDate = System.currentTimeMillis(),
-            ),
-            UiExpense(
-                amount = 499.99,
-                category = UiCategoryType.LIFESTYLE,
-                paymentStatus = UiPaymentStatus.PAID,
-                recurringType = UiRecurringType.NONE,
-                description = "New Smartphone",
-                paymentDate = System.currentTimeMillis() - 86400000,
-            ),
-            UiExpense(
-                amount = 12.99,
-                category = UiCategoryType.SAVINGS,
-                paymentStatus = UiPaymentStatus.CANCELLED,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Streaming Service Subscription",
-                dueDate = System.currentTimeMillis() - 86400000,
-            ),
-            UiExpense(
-                amount = 45.00,
-                category = UiCategoryType.DEBT,
-                paymentStatus = UiPaymentStatus.PAID,
-                recurringType = UiRecurringType.NONE,
-                description = "Grocery Shopping",
-                paymentDate = System.currentTimeMillis(),
-            ),
-            UiExpense(
-                amount = 29.99,
-                category = UiCategoryType.EDUCATION,
-                paymentStatus = UiPaymentStatus.PENDING,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Gym Membership",
-                dueDate = System.currentTimeMillis(),
-            ),
-            UiExpense(
-                amount = 150.00,
-                category = UiCategoryType.CUSTOM,
-                paymentStatus = UiPaymentStatus.PENDING,
-                recurringType = UiRecurringType.MONTHLY,
-                description = "Public Transport Pass",
-                dueDate = System.currentTimeMillis() - 86400000,
-            ),
-        ),
-    ),
+    expensesScreenData: ExpensesScreenData,
     onExpenseClick: (Long) -> Unit,
 ) {
     LazyColumn(
@@ -168,12 +99,7 @@ fun ExpenseCard(
     onExpenseClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val currencyFormatter = remember {
-        NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-            minimumFractionDigits = 2
-            maximumFractionDigits = 2
-        }
-    }
+    val currencyFormatter = rememberCurrencyFormatter(expense.currency)
 
     ElevatedCard(
         modifier = modifier.fillMaxWidth(),
@@ -395,5 +321,21 @@ fun PaymentStatusChip(
             color = chipColors.second,
             style = MaterialTheme.typography.labelMedium,
         )
+    }
+}
+
+@Composable
+fun rememberCurrencyFormatter(currencyType: UiCurrencyType): NumberFormat {
+    return remember(currencyType) {
+        when (currencyType) {
+            UiCurrencyType.QAR -> NumberFormat.getCurrencyInstance(Locale("en", "QA"))
+            UiCurrencyType.USD -> NumberFormat.getCurrencyInstance(Locale.US)
+            UiCurrencyType.EUR -> NumberFormat.getCurrencyInstance(Locale.GERMANY)
+            UiCurrencyType.GBP -> NumberFormat.getCurrencyInstance(Locale.UK)
+            UiCurrencyType.BDT -> NumberFormat.getCurrencyInstance(Locale("en", "BD"))
+        }.apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        }
     }
 }

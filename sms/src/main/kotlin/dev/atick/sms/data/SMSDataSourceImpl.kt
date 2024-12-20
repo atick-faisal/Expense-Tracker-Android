@@ -87,7 +87,7 @@ class SMSDataSourceImpl @Inject constructor(
             projection,
             selection,
             selectionArgs,
-            "${Telephony.Sms.DATE} DESC",
+            "${Telephony.Sms.DATE} ASC", // get the oldest messages first
         )?.use { cursor ->
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow(Telephony.Sms._ID))

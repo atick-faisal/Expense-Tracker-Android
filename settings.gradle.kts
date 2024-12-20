@@ -49,7 +49,7 @@ develocity {
     }
 }
 
-rootProject.name = "Jetpack"
+rootProject.name = "Dhakarani"
 include(":app")
 include(":auth")
 include(":billing")

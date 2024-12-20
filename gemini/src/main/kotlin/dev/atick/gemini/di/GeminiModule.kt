@@ -28,6 +28,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.atick.gemini.BuildConfig
+import dev.atick.gemini.data.GeminiRateLimiter
+import dev.atick.gemini.data.GeminiRateLimiterImpl
 import dev.atick.gemini.models.AiCurrencyType
 import dev.atick.gemini.models.AiExpenseCategory
 import dev.atick.gemini.models.AiPaymentStatus
@@ -130,5 +132,11 @@ object GeminiModule {
                 SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.MEDIUM_AND_ABOVE),
             ),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideGeminiRateLimiter(): GeminiRateLimiter {
+        return GeminiRateLimiterImpl()
     }
 }

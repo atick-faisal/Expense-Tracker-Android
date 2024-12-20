@@ -23,5 +23,6 @@ enum class AiCurrencyType {
     QAR,
     USD,
     EUR,
+    GBP,
     BDT,
 }
