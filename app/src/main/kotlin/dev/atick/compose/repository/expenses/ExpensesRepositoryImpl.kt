@@ -35,8 +35,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
+import kotlinx.datetime.toInstant
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
@@ -47,31 +49,32 @@ class ExpensesRepositoryImpl @Inject constructor(
     private val smsDataSource: SMSDataSource,
     private val expenseDataSource: ExpenseDataSource,
 ) : ExpensesRepository {
-    override val expenses: Flow<List<UiExpense>>
-        get() = expenseDataSource.getAllExpenses()
+    override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>> {
+        return expenseDataSource.getAllExpenses(startDate, endDate)
             .map { expenses ->
                 expenses.map { expense ->
                     UiExpense(
                         id = expense.id,
                         amount = expense.amount,
                         currency = UiCurrencyType.valueOf(expense.currency),
-                        category = UiCategoryType.valueOf(expense.categoryType),
+                        merchant = expense.merchant,
+                        category = UiCategoryType.valueOf(expense.category),
                         paymentStatus = UiPaymentStatus.valueOf(expense.paymentStatus),
                         recurringType = UiRecurringType.valueOf(expense.recurringType),
                         paymentDate = expense.paymentDate,
                         dueDate = expense.dueDate,
-                        description = expense.description,
                         toBeCancelled = expense.toBeCancelled,
                     )
                 }
             }
+    }
 
     override fun syncExpensesFromSms() = flow<SyncProgress> {
         val lastExpenseTime = expenseDataSource.getLastExpenseTime()
         val startDate = max(
             lastExpenseTime,
             System.currentTimeMillis() - ExpensesRepository.SYNC_SMS_DURATION,
-        )
+        ) + 1000L // Add 1 second to avoid duplicate SMSes
 
         val smsList = smsDataSource.querySMS(
             senderName = "QNB",
@@ -118,19 +121,19 @@ class ExpensesRepositoryImpl @Inject constructor(
 
                 Timber.d("Expense: $expense")
 
-                val paymentDate = expense.paymentDate?.run {
-                    LocalDate.parse(this)
-                        .atStartOfDayIn(TimeZone.currentSystemDefault())
-                        .toEpochMilliseconds()
-                } ?: System.currentTimeMillis()
+//                val paymentDate = expense.paymentDate?.run {
+//                    LocalDateTime.parse(this)
+//                        .toInstant(TimeZone.currentSystemDefault())
+//                        .toEpochMilliseconds()
+//                } ?: System.currentTimeMillis()
 
                 expenseDataSource.insertExpense(
                     ExpenseEntity(
                         amount = expense.amount,
                         currency = expense.currency.name,
-                        paymentDate = paymentDate,
-                        description = expense.description,
-                        categoryType = expense.category.name,
+                        paymentDate = sms.date, // Use original SMS date
+                        merchant = expense.merchant,
+                        category = expense.category.name,
                         paymentStatus = expense.paymentStatus.name,
                         recurringType = expense.recurringType.name,
                     ),
@@ -145,13 +148,13 @@ class ExpensesRepositoryImpl @Inject constructor(
                     is GeminiException.Server,
                     is GeminiException.RequestTimeout,
                     is GeminiException.ResponseStopped,
-                    -> {
+                        -> {
                         val backoffDelay =
                             GeminiRateLimiter.BASE_DELAY_BETWEEN_REQUESTS *
-                                (1 shl retryAttempts)
+                                    (1 shl retryAttempts)
                         Timber.w(
                             "Retryable error (${e::class.simpleName}), attempt " +
-                                "$retryAttempts after ${backoffDelay}ms: ${e.message}",
+                                    "$retryAttempts after ${backoffDelay}ms: ${e.message}",
                         )
                         delay(backoffDelay)
                         retryAttempts++
@@ -165,7 +168,7 @@ class ExpensesRepositoryImpl @Inject constructor(
                     is GeminiException.InvalidState,
                     is GeminiException.Serialization,
                     is GeminiException.Unknown,
-                    -> throw e
+                        -> throw e
                 }
             }
         }

@@ -30,7 +30,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.NavigateBefore
+import androidx.compose.material.icons.automirrored.outlined.NavigateNext
 import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.NavigateNext
 import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
@@ -55,6 +58,9 @@ import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.data.expenses.asFormattedDate
+import dev.atick.core.ui.components.JetpackButton
+import dev.atick.core.ui.components.JetpackOutlinedButton
+import dev.atick.core.ui.components.JetpackTextButton
 import dev.atick.core.ui.utils.StatefulComposable
 import java.util.Locale
 
@@ -72,6 +78,8 @@ internal fun ExpensesRoute(
     ) { expensesScreenData ->
         ExpensesScreen(
             expensesScreenData = expensesScreenData,
+            onNextMonthClick = expensesViewModel::incrementMonth,
+            onPreviousMonthClick = expensesViewModel::decrementMonth,
             onExpenseClick = onExpenseClick,
         )
     }
@@ -80,17 +88,45 @@ internal fun ExpensesRoute(
 @Composable
 private fun ExpensesScreen(
     expensesScreenData: ExpensesScreenData,
+    onNextMonthClick: () -> Unit,
+    onPreviousMonthClick: () -> Unit,
     onExpenseClick: (Long) -> Unit,
 ) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(16.dp),
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        items(expensesScreenData.expenses) { expense ->
-            ExpenseCard(expense = expense, onExpenseClick = onExpenseClick)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround,
+        ) {
+            JetpackTextButton(
+                onClick = onPreviousMonthClick,
+                text = { Icon(Icons.AutoMirrored.Outlined.NavigateBefore, contentDescription = "Next") },
+            )
+            Text(expensesScreenData.displayMonthYear)
+            JetpackTextButton(
+                onClick = onNextMonthClick,
+                text = { Icon(Icons.AutoMirrored.Outlined.NavigateNext, contentDescription = "Before") },
+            )
+        }
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(16.dp)
+        ) {
+            items(expensesScreenData.expenses, key = { it.id }) { expense ->
+                ExpenseCard(
+                    expense = expense,
+                    onExpenseClick = onExpenseClick,
+                    // modifier = Modifier.animateItem(),
+                )
+            }
         }
     }
+
 }
 
 @Composable
@@ -132,7 +168,7 @@ fun ExpenseCard(
             ) {
                 CategoryTypeChip(categoryType = expense.category)
 
-                expense.description?.let {
+                expense.merchant?.let {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = it,

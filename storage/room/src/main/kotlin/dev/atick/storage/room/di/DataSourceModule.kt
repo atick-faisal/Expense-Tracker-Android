@@ -22,8 +22,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.atick.storage.room.data.BudgetDataSource
 import dev.atick.storage.room.data.BudgetDataSourceImpl
-import dev.atick.storage.room.data.CategoryDataSource
-import dev.atick.storage.room.data.CategoryDataSourceImpl
 import dev.atick.storage.room.data.ChatDataSource
 import dev.atick.storage.room.data.ChatDataSourceImpl
 import dev.atick.storage.room.data.ExpenseDataSource
@@ -75,17 +73,17 @@ abstract class DataSourceModule {
         expenseDataSourceImpl: ExpenseDataSourceImpl,
     ): ExpenseDataSource
 
-    /**
-     * Binds the [CategoryDataSourceImpl] implementation to the [CategoryDataSource] interface.
-     *
-     * @param categoryDataSourceImpl The concrete implementation of [CategoryDataSourceImpl].
-     * @return An instance of [CategoryDataSource] representing the category data source.
-     */
-    @Binds
-    @Singleton
-    abstract fun bindCategoryDataSource(
-        categoryDataSourceImpl: CategoryDataSourceImpl,
-    ): CategoryDataSource
+//    /**
+//     * Binds the [CategoryDataSourceImpl] implementation to the [CategoryDataSource] interface.
+//     *
+//     * @param categoryDataSourceImpl The concrete implementation of [CategoryDataSourceImpl].
+//     * @return An instance of [CategoryDataSource] representing the category data source.
+//     */
+//    @Binds
+//    @Singleton
+//    abstract fun bindCategoryDataSource(
+//        categoryDataSourceImpl: CategoryDataSourceImpl,
+//    ): CategoryDataSource
 
     /**
      * Binds the [BudgetDataSourceImpl] implementation to the [BudgetDataSource] interface.

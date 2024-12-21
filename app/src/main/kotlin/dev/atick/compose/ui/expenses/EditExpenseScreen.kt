@@ -238,7 +238,7 @@ fun EditExpenseScreen(
 
         // Description
         JetpackMultilineTextField(
-            value = expense.description ?: "",
+            value = expense.merchant ?: "",
             onValueChange = onDescriptionChange,
             label = { Text(stringResource(R.string.description)) },
             leadingIcon = {

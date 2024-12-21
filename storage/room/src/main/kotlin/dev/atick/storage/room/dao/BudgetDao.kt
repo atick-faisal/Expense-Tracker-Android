@@ -27,14 +27,68 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BudgetDao {
-    @Query("SELECT * FROM budgets")
-    fun getAllBudgets(): Flow<List<BudgetEntity>>
+    @Query("SELECT * FROM budgets WHERE createdAt BETWEEN :startDate AND :endDate")
+    fun getAllBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
 
-    @Query("SELECT * FROM budgets WHERE categoryType = :categoryType")
-    fun getBudgetForCategory(categoryType: String): Flow<BudgetEntity?>
+    @Query(
+        """
+        SELECT * FROM budgets 
+        WHERE isMerchant = 0 
+        AND createdAt BETWEEN :startDate AND :endDate
+        """,
+    )
+    fun getCategoryBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
+
+    @Query(
+        """
+        SELECT * FROM budgets 
+        WHERE isMerchant = 1 
+        AND createdAt BETWEEN :startDate AND :endDate
+        """,
+    )
+    fun getMerchantBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
+
+    @Query(
+        """
+        SELECT * FROM budgets 
+        WHERE categoryOrMerchantName = :categoryOrMerchantName 
+        AND isMerchant = :isMerchant
+        AND createdAt BETWEEN :startDate AND :endDate
+    """,
+    )
+    fun getBudgetFor(
+        categoryOrMerchantName: String,
+        isMerchant: Boolean,
+        startDate: Long,
+        endDate: Long,
+    ): Flow<BudgetEntity?>
+
+    @Query("SELECT SUM(amount) FROM budgets WHERE createdAt BETWEEN :startDate AND :endDate")
+    fun getTotalBudget(startDate: Long, endDate: Long): Flow<Double?>
+
+    @Query(
+        """
+        SELECT SUM(amount) FROM budgets 
+        WHERE isMerchant = 0 
+        AND createdAt BETWEEN :startDate AND :endDate
+        """,
+    )
+    fun getTotalCategoryBudget(startDate: Long, endDate: Long): Flow<Double?>
+
+    @Query(
+        """
+        SELECT SUM(amount) FROM budgets 
+        WHERE isMerchant = 1 
+        AND createdAt BETWEEN :startDate AND :endDate
+        """,
+    )
+    fun getTotalMerchantBudget(startDate: Long, endDate: Long): Flow<Double?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBudget(budget: BudgetEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllBudgets(budgets: List<BudgetEntity>)
 
     @Update
     suspend fun updateBudget(budget: BudgetEntity)

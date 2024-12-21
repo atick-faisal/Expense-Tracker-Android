@@ -19,11 +19,9 @@ package dev.atick.storage.room.data
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import dev.atick.storage.room.dao.BudgetDao
-import dev.atick.storage.room.dao.CategoryDao
 import dev.atick.storage.room.dao.ChatDao
 import dev.atick.storage.room.dao.ExpenseDao
 import dev.atick.storage.room.models.BudgetEntity
-import dev.atick.storage.room.models.CategoryEntity
 import dev.atick.storage.room.models.ChatEntity
 import dev.atick.storage.room.models.ExpenseEntity
 import dev.atick.storage.room.models.PostEntity
@@ -66,24 +64,24 @@ abstract class ExpenseDatabase : RoomDatabase() {
     abstract fun getExpenseDao(): ExpenseDao
 }
 
-/**
- * Room database for Category.
- */
-@Database(
-    version = 1,
-    exportSchema = false,
-    entities = [
-        CategoryEntity::class,
-    ],
-)
-abstract class CategoryDatabase : RoomDatabase() {
-    /**
-     * Get the data access object for [CategoryEntity] entity.
-     *
-     * @return The data access object for [CategoryEntity] entity.
-     */
-    abstract fun getCategoryDao(): CategoryDao
-}
+///**
+// * Room database for Category.
+// */
+//@Database(
+//    version = 1,
+//    exportSchema = false,
+//    entities = [
+//        CategoryEntity::class,
+//    ],
+//)
+//abstract class CategoryDatabase : RoomDatabase() {
+//    /**
+//     * Get the data access object for [CategoryEntity] entity.
+//     *
+//     * @return The data access object for [CategoryEntity] entity.
+//     */
+//    abstract fun getCategoryDao(): CategoryDao
+//}
 
 /**
  * Room database for Budget.

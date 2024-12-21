@@ -22,13 +22,20 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import dev.atick.storage.room.models.ExpenseAnalysis
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExpenseDao {
-    @Query("SELECT * FROM expenses ORDER BY createdAt DESC")
-    fun getAllExpenses(): Flow<List<ExpenseEntity>>
+    @Query(
+        """
+        SELECT * FROM expenses 
+        WHERE paymentDate BETWEEN :startDate AND :endDate 
+        ORDER BY paymentDate DESC
+    """,
+    )
+    fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<ExpenseEntity>>
 
     @Query("SELECT * FROM expenses WHERE id = :id")
     fun getExpenseById(id: Long): Flow<ExpenseEntity?>
@@ -56,8 +63,8 @@ interface ExpenseDao {
     )
     fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>>
 
-    @Query("SELECT * FROM expenses WHERE categoryType = :categoryType")
-    fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>>
+//    @Query("SELECT * FROM expenses WHERE categoryType = :categoryType")
+//    fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExpense(expense: ExpenseEntity): Long
@@ -71,12 +78,74 @@ interface ExpenseDao {
     @Query(
         """
         SELECT SUM(amount) FROM expenses 
-        WHERE categoryType = :categoryType 
-        AND paymentStatus = 'PAID' 
+        WHERE category = :category 
         AND paymentDate BETWEEN :startDate AND :endDate
     """,
     )
-    fun getCategorySpending(categoryType: String, startDate: Long, endDate: Long): Flow<Double?>
+    fun getCategorySpending(category: String, startDate: Long, endDate: Long): Flow<Double?>
+
+    @Query(
+        """
+        SELECT SUM(amount) FROM expenses 
+        WHERE merchant = :merchant
+        AND paymentDate BETWEEN :startDate AND :endDate
+    """,
+    )
+    fun getMerchantSpending(merchant: String, startDate: Long, endDate: Long): Flow<Double?>
+
+    @Query(
+        """
+        SELECT SUM(amount) FROM expenses 
+        WHERE paymentDate BETWEEN :startDate AND :endDate
+    """,
+    )
+    suspend fun getTotalSpending(startDate: Long, endDate: Long): Double?
+
+    // TODO: Implement better currency handling
+    @Query(
+        """
+        SELECT 
+            category as categoryOrMerchant,
+            SUM(amount) as spending,
+            CASE 
+                WHEN MIN(currency) = MAX(currency) THEN MIN(currency)
+                ELSE 'QAR'
+            END as currency
+        FROM expenses 
+        WHERE paymentDate BETWEEN :startDate AND :endDate
+        GROUP BY category 
+        ORDER BY spending DESC 
+        LIMIT :n
+    """,
+    )
+    fun getTopExpensesByCategory(
+        startDate: Long,
+        endDate: Long,
+        n: Int = 5,
+    ): Flow<List<ExpenseAnalysis>>
+
+    // TODO: Implement better currency handling
+    @Query(
+        """
+        SELECT 
+            merchant as categoryOrMerchant,
+            SUM(amount) as spending,
+            CASE 
+                WHEN MIN(currency) = MAX(currency) THEN MIN(currency)
+                ELSE 'QAR'
+            END as currency
+        FROM expenses 
+        WHERE paymentDate BETWEEN :startDate AND :endDate
+        GROUP BY merchant 
+        ORDER BY spending DESC 
+        LIMIT :n
+    """,
+    )
+    fun getTopExpensesByMerchant(
+        startDate: Long,
+        endDate: Long,
+        n: Int = 5,
+    ): Flow<List<ExpenseAnalysis>>
 
     @Query("SELECT MAX(paymentDate) FROM expenses")
     suspend fun getLastExpenseTime(): Long?

@@ -17,24 +17,26 @@
 package dev.atick.compose.data.expenses
 
 import dev.atick.compose.data.categories.UiCategoryType
+import dev.atick.core.utils.getMonthYearFromTimestamp
 import kotlinx.datetime.Instant
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DateTimeComponents
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
+    val displayMonthYear: String = getMonthYearFromTimestamp(System.currentTimeMillis()),
 )
 
 data class UiExpense(
     val id: Long = 0,
     val amount: Double = 0.0,
     val currency: UiCurrencyType = UiCurrencyType.QAR,
+    val merchant: String = "Unknown",
     val category: UiCategoryType = UiCategoryType.ESSENTIAL,
     val paymentStatus: UiPaymentStatus = UiPaymentStatus.PENDING,
     val recurringType: UiRecurringType = UiRecurringType.NONE,
     val paymentDate: Long = System.currentTimeMillis(),
     val dueDate: Long? = null,
-    val description: String? = null,
     val toBeCancelled: Boolean = false,
 )
 

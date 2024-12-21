@@ -24,8 +24,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.atick.storage.room.data.BudgetDatabase
-import dev.atick.storage.room.data.CategoryDatabase
-import dev.atick.storage.room.data.CategoryDatabaseCallback
 import dev.atick.storage.room.data.ChatDatabase
 import dev.atick.storage.room.data.ExpenseDatabase
 import dev.atick.storage.room.data.JetpackDatabase
@@ -80,25 +78,25 @@ object DatabaseModule {
         ).fallbackToDestructiveMigration().build()
     }
 
-    /**
-     * Get the database for Category.
-     *
-     * @param appContext The application context.
-     * @param callback The callback for Category database.
-     * @return The database for Category.
-     */
-    @Singleton
-    @Provides
-    fun provideCategoryDatabase(
-        @ApplicationContext appContext: Context,
-        callback: CategoryDatabaseCallback,
-    ): CategoryDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            CategoryDatabase::class.java,
-            CATEGORY_DATABASE_NAME,
-        ).addCallback(callback).fallbackToDestructiveMigration().build()
-    }
+//    /**
+//     * Get the database for Category.
+//     *
+//     * @param appContext The application context.
+//     * @param callback The callback for Category database.
+//     * @return The database for Category.
+//     */
+//    @Singleton
+//    @Provides
+//    fun provideCategoryDatabase(
+//        @ApplicationContext appContext: Context,
+//        callback: CategoryDatabaseCallback,
+//    ): CategoryDatabase {
+//        return Room.databaseBuilder(
+//            appContext,
+//            CategoryDatabase::class.java,
+//            CATEGORY_DATABASE_NAME,
+//        ).addCallback(callback).fallbackToDestructiveMigration().build()
+//    }
 
     /**
      * Get the database for Budget.
