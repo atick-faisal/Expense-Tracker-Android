@@ -16,4 +16,11 @@
 
 package dev.atick.compose.repository.analysis
 
-interface AnalysisRepository
+import dev.atick.compose.data.analysis.UiAnalysis
+import kotlinx.coroutines.flow.Flow
+
+interface AnalysisRepository {
+    fun getCategoryAnalyses(startDate: Long, endDate: Long, topN: Int): Flow<List<UiAnalysis>>
+    fun getMerchantAnalyses(startDate: Long, endDate: Long, topN: Int): Flow<List<UiAnalysis>>
+    fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double>
+}

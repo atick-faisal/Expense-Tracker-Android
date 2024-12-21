@@ -31,4 +31,7 @@ class AnalysisViewModel @Inject constructor(
 ) : ViewModel() {
     private val _analysisUiState = MutableStateFlow(UiState(AnalysisScreenData()))
     val analysisUiState = _analysisUiState.asStateFlow()
+
+    fun refreshAnalysis() {
+    }
 }

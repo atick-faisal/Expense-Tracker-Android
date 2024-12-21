@@ -20,6 +20,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.atick.storage.room.data.AnalysisDataSource
+import dev.atick.storage.room.data.AnalysisDataSourceImpl
 import dev.atick.storage.room.data.BudgetDataSource
 import dev.atick.storage.room.data.BudgetDataSourceImpl
 import dev.atick.storage.room.data.ChatDataSource
@@ -72,6 +74,18 @@ abstract class DataSourceModule {
     abstract fun bindExpenseDataSource(
         expenseDataSourceImpl: ExpenseDataSourceImpl,
     ): ExpenseDataSource
+
+    /**
+     * Binds the [AnalysisDataSourceImpl] implementation to the [AnalysisDataSource] interface.
+     *
+     * @param analysisDataSourceImpl The concrete implementation of [AnalysisDataSourceImpl].
+     * @return An instance of [AnalysisDataSource] representing the analysis data source.
+     */
+    @Binds
+    @Singleton
+    abstract fun bindAnalysesDataSource(
+        analysisDataSourceImpl: AnalysisDataSourceImpl,
+    ): AnalysisDataSource
 
 //    /**
 //     * Binds the [CategoryDataSourceImpl] implementation to the [CategoryDataSource] interface.

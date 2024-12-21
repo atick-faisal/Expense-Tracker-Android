@@ -99,7 +99,7 @@ interface ExpenseDao {
         WHERE paymentDate BETWEEN :startDate AND :endDate
     """,
     )
-    suspend fun getTotalSpending(startDate: Long, endDate: Long): Double?
+    fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double?>
 
     // TODO: Implement better currency handling
     @Query(

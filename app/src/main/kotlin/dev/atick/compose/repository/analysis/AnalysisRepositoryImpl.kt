@@ -16,6 +16,56 @@
 
 package dev.atick.compose.repository.analysis
 
+import dev.atick.compose.data.analysis.UiAnalysis
+import dev.atick.storage.room.data.AnalysisDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import kotlin.collections.map
 
-class AnalysisRepositoryImpl @Inject constructor() : AnalysisRepository
+class AnalysisRepositoryImpl @Inject constructor(
+    private val analysisDataSource: AnalysisDataSource,
+) : AnalysisRepository {
+    override fun getCategoryAnalyses(
+        startDate: Long,
+        endDate: Long,
+        topN: Int,
+    ): Flow<List<UiAnalysis>> {
+        return analysisDataSource.getCategoryAnalyses(startDate, endDate, topN)
+            .map { analyses ->
+                analyses.map {
+                    UiAnalysis(
+                        categoryOrMerchant = it.categoryOrMerchant,
+                        spending = it.spending,
+                        currency = it.currency,
+                        percentage = it.percentage ?: 0.0,
+                    )
+                }
+            }
+    }
+
+    override fun getMerchantAnalyses(
+        startDate: Long,
+        endDate: Long,
+        topN: Int,
+    ): Flow<List<UiAnalysis>> {
+        return analysisDataSource.getMerchantAnalyses(startDate, endDate, topN)
+            .map { analyses ->
+                analyses.map {
+                    UiAnalysis(
+                        categoryOrMerchant = it.categoryOrMerchant,
+                        spending = it.spending,
+                        currency = it.currency,
+                        percentage = it.percentage ?: 0.0,
+                    )
+                }
+            }
+    }
+
+    override fun getTotalSpending(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<Double> {
+        return analysisDataSource.getTotalSpending(startDate, endDate)
+    }
+}
