@@ -22,37 +22,42 @@ import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class ExpenseDataSourceImpl @Inject constructor(
     private val expenseDao: ExpenseDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ExpenseDataSource {
-    override fun getAllExpenses(): Flow<List<ExpenseEntity>> {
-        return expenseDao.getAllExpenses().flowOn(ioDispatcher)
+    override fun getAllExpenses(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<ExpenseEntity>> {
+        return expenseDao.getAllExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
-    override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
-        return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
-    }
 
-    override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
-        return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
-    }
+//    override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
+//        return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
+//    }
+//
+//    override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
+//        return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
+//    }
+//
+//    override fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>> {
+//        return expenseDao.getUpcomingRecurringExpenses(date).flowOn(ioDispatcher)
+//    }
+//
+//    override fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>> {
+//        return expenseDao.getExpensesToBeCancelled(date).flowOn(ioDispatcher)
+//    }
 
-    override fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>> {
-        return expenseDao.getUpcomingRecurringExpenses(date).flowOn(ioDispatcher)
-    }
-
-    override fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>> {
-        return expenseDao.getExpensesToBeCancelled(date).flowOn(ioDispatcher)
-    }
-
-    override fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>> {
-        return expenseDao.getExpensesByCategory(categoryType).flowOn(ioDispatcher)
-    }
+//    override fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>> {
+//        return expenseDao.getExpensesByCategory(categoryType).flowOn(ioDispatcher)
+//    }
 
     override suspend fun insertExpense(expense: ExpenseEntity): Long {
         return withContext(ioDispatcher) {
@@ -72,17 +77,34 @@ class ExpenseDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getCategorySpending(
-        categoryType: String,
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double> {
-        return expenseDao.getCategorySpending(
-            categoryType = categoryType,
-            startDate = startDate,
-            endDate = endDate,
-        ).map { it ?: 0.0 }.flowOn(ioDispatcher)
-    }
+//    override fun getCategorySpending(
+//        categoryType: String,
+//        startDate: Long,
+//        endDate: Long,
+//    ): Flow<Double> {
+//        return expenseDao.getCategorySpending(
+//            categoryType = categoryType,
+//            startDate = startDate,
+//            endDate = endDate,
+//        ).map { it ?: 0.0 }.flowOn(ioDispatcher)
+//    }
+//
+//    override suspend fun getTotalAmount(
+//        startDate: Long,
+//        endDate: Long,
+//    ): Double {
+//        return withContext(ioDispatcher) {
+//            expenseDao.getTotalAmount(startDate, endDate) ?: 0.0
+//        }
+//    }
+//
+//    override fun getTopExpensesByDescription(
+//        startDate: Long,
+//        endDate: Long,
+//        n: Int,
+//    ): Flow<List<ExpenseGroup>> {
+//        return expenseDao.getTopExpensesByDescription(startDate, endDate, n).flowOn(ioDispatcher)
+//    }
 
     override suspend fun getLastExpenseTime(): Long {
         return withContext(ioDispatcher) {

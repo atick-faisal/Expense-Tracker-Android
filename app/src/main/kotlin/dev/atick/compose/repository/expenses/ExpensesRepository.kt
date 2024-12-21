@@ -24,6 +24,6 @@ interface ExpensesRepository {
     companion object {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
     }
-    val expenses: Flow<List<UiExpense>>
+    fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>>
     fun syncExpensesFromSms(): Flow<SyncProgress>
 }

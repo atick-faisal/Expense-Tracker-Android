@@ -76,6 +76,10 @@ object GeminiModule {
                             description = "The currency of the expense",
                             values = AiCurrencyType.entries.map { it.name },
                         ),
+                        "merchant" to Schema.str(
+                            name = "merchant",
+                            description = "Name of merchant of the expense",
+                        ),
                         "category" to Schema.enum(
                             name = "category",
                             description = "The category of the expense",
@@ -93,11 +97,7 @@ object GeminiModule {
                         ),
                         "paymentDate" to Schema.str(
                             name = "paymentDate",
-                            description = "The date when the payment was made (ISO format: yyyy-MM-dd')",
-                        ),
-                        "description" to Schema.str(
-                            name = "description",
-                            description = "Description or merchant name of the expense",
+                            description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
                         ),
                     ),
                     required = listOf("amount", "currency", "category", "paymentStatus", "recurringType"),

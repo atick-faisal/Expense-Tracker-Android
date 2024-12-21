@@ -20,19 +20,29 @@ import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
 
 interface ExpenseDataSource {
-    fun getAllExpenses(): Flow<List<ExpenseEntity>>
-    fun getExpenseById(id: Long): Flow<ExpenseEntity?>
-    fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
-    fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>>
-    fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>>
-    fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>>
+    fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<ExpenseEntity>>
+
+
+//    fun getExpenseById(id: Long): Flow<ExpenseEntity?>
+//    fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
+//    fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>>
+//    fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>>
+//    fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>>
+
     suspend fun insertExpense(expense: ExpenseEntity): Long
     suspend fun updateExpense(expense: ExpenseEntity)
     suspend fun deleteExpense(expense: ExpenseEntity)
-    fun getCategorySpending(
-        categoryType: String,
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double>
+
+//    fun getCategorySpending(
+//        categoryType: String,
+//        startDate: Long,
+//        endDate: Long,
+//    ): Flow<Double>
+//    suspend fun getTotalAmount(startDate: Long, endDate: Long): Double
+//    fun getTopExpensesByDescription(
+//        startDate: Long,
+//        endDate: Long,
+//        n: Int = 10,
+//    ): Flow<List<ExpenseGroup>>
     suspend fun getLastExpenseTime(): Long
 }

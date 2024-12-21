@@ -59,7 +59,7 @@ class EditExpenseViewModel @Inject constructor() : ViewModel() {
     }
 
     fun setDescription(description: String) {
-        _expenseUiState.updateState { copy(description = description) }
+        _expenseUiState.updateState { copy(merchant = description) }
     }
 
     fun setToBeCancelled(toBeCancelled: Boolean) {

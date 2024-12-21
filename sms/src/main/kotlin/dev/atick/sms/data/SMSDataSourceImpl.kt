@@ -22,6 +22,7 @@ import dev.atick.core.di.IoDispatcher
 import dev.atick.sms.models.SMSMessage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class SMSDataSourceImpl @Inject constructor(
@@ -62,6 +63,8 @@ class SMSDataSourceImpl @Inject constructor(
             selectionArgs.add(endDate.toString())
         }
 
+        Timber.d("START DATE: $startDate, END DATE: $endDate")
+
         return querySMS(
             selection.joinToString(" AND "),
             selectionArgs.toTypedArray(),
@@ -95,6 +98,8 @@ class SMSDataSourceImpl @Inject constructor(
                 val body = cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.BODY))
                 val date = cursor.getLong(cursor.getColumnIndexOrThrow(Telephony.Sms.DATE))
                 val type = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Sms.TYPE))
+
+                Timber.d("SMS DATE: $date")
 
                 smsList.add(SMSMessage(id, address, body, date, type))
             }

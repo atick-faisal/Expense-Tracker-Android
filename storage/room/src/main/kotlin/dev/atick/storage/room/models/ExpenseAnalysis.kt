@@ -17,8 +17,7 @@
 package dev.atick.storage.room.models
 
 data class ExpenseAnalysis(
+    val categoryOrMerchant: String,
     val spending: Double,
-    val budget: Double,
-    val category: CategoryEntity,
-    val description: String? = null,
+    val currency: String,
 )
