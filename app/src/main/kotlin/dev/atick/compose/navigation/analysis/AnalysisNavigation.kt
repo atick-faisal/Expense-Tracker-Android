@@ -21,6 +21,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import dev.atick.compose.ui.analysis.AnalysisRoute
+import dev.atick.core.utils.MonthInfo
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -31,10 +32,12 @@ fun NavController.navigateToAnalysis(navOptions: NavOptions?) {
 }
 
 fun NavGraphBuilder.analysisScreen(
+    monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
     composable<Analysis> {
         AnalysisRoute(
+            monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
     }

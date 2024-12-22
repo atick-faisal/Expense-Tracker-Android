@@ -22,6 +22,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import dev.atick.compose.ui.expenses.ExpensesRoute
+import dev.atick.core.utils.MonthInfo
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -35,11 +36,13 @@ fun NavController.navigateToExpensesNavGraph(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.expensesScreen(
+    monthInfo: MonthInfo,
     onExpenseClick: (Long) -> Unit,
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
     composable<Expenses> {
         ExpensesRoute(
+            monthInfo = monthInfo,
             onExpenseClick = onExpenseClick,
             onShowSnackbar = onShowSnackbar,
         )

@@ -24,17 +24,14 @@ import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
-import dev.atick.core.utils.getMonthTimestamps
-import dev.atick.core.utils.getMonthYearFromTimestamp
+import dev.atick.core.utils.MonthInfo
+import dev.atick.core.utils.getMonthInfoAt
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,32 +41,12 @@ class ExpensesViewModel @Inject constructor(
     private val _expensesUiState = MutableStateFlow(UiState(ExpensesScreenData()))
     val expensesUiState = _expensesUiState.asStateFlow()
 
-    private var monthOffset: Int = 0
-
     init {
-        refreshExpenses()
+        refreshExpenses(getMonthInfoAt(0))
     }
 
-    fun incrementMonth() {
-        monthOffset++
-        refreshExpenses()
-    }
-
-    fun decrementMonth() {
-        monthOffset--
-        refreshExpenses()
-    }
-
-    fun refreshExpenses() {
-        val (startDate, endDate) = getMonthTimestamps(monthOffset)
-        _expensesUiState.updateState {
-            copy(displayMonthYear = getMonthYearFromTimestamp(startDate))
-        }
-
-        Timber.d("startDate: $startDate, endDate: $endDate")
-
-        expensesRepository.getAllExpenses(startDate, endDate)
-//            .onStart { _expensesUiState.update { it.copy(loading = true) } }
+    fun refreshExpenses(monthInfo: MonthInfo) {
+        expensesRepository.getAllExpenses(monthInfo.startDate, monthInfo.endDate)
             .onEach { expenses ->
                 _expensesUiState.updateState { copy(expenses = expenses) }
             }

@@ -20,5 +20,7 @@ data class ExpenseAnalysis(
     val categoryOrMerchant: String,
     val spending: Double,
     val currency: String,
+    val maxAmount: Double,
+    val minAmount: Double,
     val percentage: Double? = null,
 )

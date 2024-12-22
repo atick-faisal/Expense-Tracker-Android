@@ -38,6 +38,8 @@ class AnalysisRepositoryImpl @Inject constructor(
                         categoryOrMerchant = it.categoryOrMerchant,
                         spending = it.spending,
                         currency = it.currency,
+                        maxAmount = it.maxAmount,
+                        minAmount = it.minAmount,
                         percentage = it.percentage ?: 0.0,
                     )
                 }
@@ -56,6 +58,8 @@ class AnalysisRepositoryImpl @Inject constructor(
                         categoryOrMerchant = it.categoryOrMerchant,
                         spending = it.spending,
                         currency = it.currency,
+                        maxAmount = it.maxAmount,
+                        minAmount = it.minAmount,
                         percentage = it.percentage ?: 0.0,
                     )
                 }

@@ -107,6 +107,8 @@ interface ExpenseDao {
         SELECT 
             category as categoryOrMerchant,
             SUM(amount) as spending,
+            MAX(amount) as maxAmount,
+            MIN(amount) as minAmount,
             CASE 
                 WHEN MIN(currency) = MAX(currency) THEN MIN(currency)
                 ELSE 'QAR'
@@ -130,6 +132,8 @@ interface ExpenseDao {
         SELECT 
             merchant as categoryOrMerchant,
             SUM(amount) as spending,
+            MAX(amount) as maxAmount,
+            MIN(amount) as minAmount,
             CASE 
                 WHEN MIN(currency) = MAX(currency) THEN MIN(currency)
                 ELSE 'QAR'

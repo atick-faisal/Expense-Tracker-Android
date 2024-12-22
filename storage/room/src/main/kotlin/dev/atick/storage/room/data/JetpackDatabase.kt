@@ -64,24 +64,24 @@ abstract class ExpenseDatabase : RoomDatabase() {
     abstract fun getExpenseDao(): ExpenseDao
 }
 
-///**
+// /**
 // * Room database for Category.
 // */
-//@Database(
+// @Database(
 //    version = 1,
 //    exportSchema = false,
 //    entities = [
 //        CategoryEntity::class,
 //    ],
-//)
-//abstract class CategoryDatabase : RoomDatabase() {
+// )
+// abstract class CategoryDatabase : RoomDatabase() {
 //    /**
 //     * Get the data access object for [CategoryEntity] entity.
 //     *
 //     * @return The data access object for [CategoryEntity] entity.
 //     */
 //    abstract fun getCategoryDao(): CategoryDao
-//}
+// }
 
 /**
  * Room database for Budget.

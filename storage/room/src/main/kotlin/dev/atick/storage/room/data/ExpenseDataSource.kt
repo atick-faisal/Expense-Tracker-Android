@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.Flow
 interface ExpenseDataSource {
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<ExpenseEntity>>
 
-
 //    fun getExpenseById(id: Long): Flow<ExpenseEntity?>
 //    fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
 //    fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>>

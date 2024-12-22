@@ -17,14 +17,13 @@
 package dev.atick.compose.data.expenses
 
 import dev.atick.compose.data.categories.UiCategoryType
-import dev.atick.core.utils.getMonthYearFromTimestamp
 import kotlinx.datetime.Instant
 import kotlinx.datetime.format
 import kotlinx.datetime.format.DateTimeComponents
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
-    val displayMonthYear: String = getMonthYearFromTimestamp(System.currentTimeMillis()),
+    val displayMonthYear: String = "",
 )
 
 data class UiExpense(

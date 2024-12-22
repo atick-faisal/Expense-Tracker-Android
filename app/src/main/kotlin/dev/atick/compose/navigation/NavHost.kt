@@ -34,10 +34,12 @@ import dev.atick.compose.navigation.expenses.expensesNavGraph
 import dev.atick.compose.navigation.expenses.expensesScreen
 import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
 import dev.atick.compose.ui.JetpackAppState
+import dev.atick.core.utils.MonthInfo
 
 @Composable
 fun JetpackNavHost(
     appState: JetpackAppState,
+    monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -85,6 +87,7 @@ fun JetpackNavHost(
         */
         expensesNavGraph {
             expensesScreen(
+                monthInfo = monthInfo,
                 onExpenseClick = navController::navigateToEditExpenseScreen,
                 onShowSnackbar = onShowSnackbar,
             )
@@ -94,15 +97,19 @@ fun JetpackNavHost(
             )
         }
         analysisScreen(
+            monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
         budgetsScreen(
+            // monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
         categoriesScreen(
+            // monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
         chatScreen(
+            // monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
     }

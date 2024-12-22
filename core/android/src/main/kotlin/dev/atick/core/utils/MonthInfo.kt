@@ -18,7 +18,6 @@ package dev.atick.core.utils
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
@@ -26,18 +25,14 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
-fun getMonthYearFromTimestamp(timestampMillis: Long): String {
-    val dateTime = Instant
-        .fromEpochMilliseconds(timestampMillis)
-        .toLocalDateTime(TimeZone.currentSystemDefault())
+data class MonthInfo(
+    val monthName: String,
+    val year: Int,
+    val startDate: Long,
+    val endDate: Long,
+)
 
-    val month = dateTime.month.name
-    val year = dateTime.year
-
-    return "$month, $year"
-}
-
-fun getMonthTimestamps(monthOffset: Int = 0): Pair<Long, Long> {
+fun getMonthInfoAt(monthOffset: Int = 0): MonthInfo {
     val offsetDate = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault())
         .date.plus(monthOffset, DateTimeUnit.MONTH)
@@ -61,5 +56,10 @@ fun getMonthTimestamps(monthOffset: Int = 0): Pair<Long, Long> {
         .atStartOfDayIn(TimeZone.currentSystemDefault())
         .toEpochMilliseconds()
 
-    return Pair(startOfMonthMillis, endOfMonthMillis)
+    return MonthInfo(
+        monthName = startOfMonth.month.name,
+        year = startOfMonth.year,
+        startDate = startOfMonthMillis,
+        endDate = endOfMonthMillis,
+    )
 }
