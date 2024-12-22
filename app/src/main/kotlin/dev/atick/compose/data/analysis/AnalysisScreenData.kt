@@ -17,13 +17,15 @@
 package dev.atick.compose.data.analysis
 
 data class AnalysisScreenData(
-    val categoryAnalysis: List<UiAnalysis> = emptyList(),
-    val merchantAnalysis: List<UiAnalysis> = emptyList(),
+    val categoryAnalyses: List<UiAnalysis> = emptyList(),
+    val merchantAnalyses: List<UiAnalysis> = emptyList(),
 )
 
 data class UiAnalysis(
     val categoryOrMerchant: String,
     val spending: Double,
     val currency: String,
+    val maxAmount: Double,
+    val minAmount: Double,
     val percentage: Double,
 )

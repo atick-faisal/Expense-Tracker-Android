@@ -34,11 +34,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.atStartOfDayIn
-import kotlinx.datetime.toInstant
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
@@ -148,13 +143,13 @@ class ExpensesRepositoryImpl @Inject constructor(
                     is GeminiException.Server,
                     is GeminiException.RequestTimeout,
                     is GeminiException.ResponseStopped,
-                        -> {
+                    -> {
                         val backoffDelay =
                             GeminiRateLimiter.BASE_DELAY_BETWEEN_REQUESTS *
-                                    (1 shl retryAttempts)
+                                (1 shl retryAttempts)
                         Timber.w(
                             "Retryable error (${e::class.simpleName}), attempt " +
-                                    "$retryAttempts after ${backoffDelay}ms: ${e.message}",
+                                "$retryAttempts after ${backoffDelay}ms: ${e.message}",
                         )
                         delay(backoffDelay)
                         retryAttempts++
@@ -168,7 +163,7 @@ class ExpensesRepositoryImpl @Inject constructor(
                     is GeminiException.InvalidState,
                     is GeminiException.Serialization,
                     is GeminiException.Unknown,
-                        -> throw e
+                    -> throw e
                 }
             }
         }

@@ -67,4 +67,7 @@
     <string name="to_be_cancelled">To Be Cancelled</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="top_categories">Top Categories</string>
+    <string name="top_merchants">Top Merchants</string>
+    <string name="merchants">Merchants</string>
 </resources>

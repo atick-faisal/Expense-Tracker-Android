@@ -16,10 +16,12 @@
 
 package dev.atick.storage.room.data
 
+import dev.atick.core.di.ApplicationScope
 import dev.atick.core.di.IoDispatcher
 import dev.atick.storage.room.dao.ExpenseDao
 import dev.atick.storage.room.models.ExpenseAnalysis
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
@@ -29,6 +31,7 @@ import javax.inject.Inject
 class AnalysisDataSourceImpl @Inject constructor(
     private val expenseDao: ExpenseDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    @ApplicationScope private val coroutineScope: CoroutineScope,
 ) : AnalysisDataSource {
     override fun getCategoryAnalyses(
         startDate: Long,
@@ -43,6 +46,8 @@ class AnalysisDataSourceImpl @Inject constructor(
                     categoryOrMerchant = it.categoryOrMerchant,
                     spending = it.spending,
                     currency = it.currency,
+                    maxAmount = it.maxAmount,
+                    minAmount = it.minAmount,
                     percentage = if (total == 0.0) 0.0 else it.spending / total * 100,
                 )
             }
@@ -62,6 +67,8 @@ class AnalysisDataSourceImpl @Inject constructor(
                     categoryOrMerchant = it.categoryOrMerchant,
                     spending = it.spending,
                     currency = it.currency,
+                    maxAmount = it.maxAmount,
+                    minAmount = it.minAmount,
                     percentage = if (total == 0.0) 0.0 else it.spending / total * 100,
                 )
             }

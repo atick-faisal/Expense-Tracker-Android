@@ -16,6 +16,7 @@
 
 package dev.atick.compose.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -30,6 +32,8 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.NavigateBefore
+import androidx.compose.material.icons.automirrored.outlined.NavigateNext
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
@@ -45,10 +49,12 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
@@ -69,9 +75,11 @@ import dev.atick.core.ui.components.JetpackNavigationBar
 import dev.atick.core.ui.components.JetpackNavigationBarItem
 import dev.atick.core.ui.components.JetpackNavigationRail
 import dev.atick.core.ui.components.JetpackNavigationRailItem
+import dev.atick.core.ui.components.JetpackTextButton
 import dev.atick.core.ui.components.JetpackTopAppBar
 import dev.atick.core.ui.theme.GradientColors
 import dev.atick.core.ui.theme.LocalGradientColors
+import dev.atick.core.utils.getMonthInfoAt
 import dev.atick.network.utils.NetworkUtils
 
 @Composable
@@ -88,6 +96,11 @@ fun JetpackApp(
     val shouldShowGradientBackground =
         appState.currentTopLevelDestination == TopLevelDestination.EXPENSES
     var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
+
+    var monthOffset by rememberSaveable { mutableIntStateOf(0) }
+    val monthInfo by remember(monthOffset) {
+        mutableStateOf(getMonthInfoAt(monthOffset))
+    }
 
     AppBackground {
         AppGradientBackground(
@@ -172,9 +185,15 @@ fun JetpackApp(
                                 onActionClick = { showSettingsDialog = true },
                                 onNavigationClick = { },
                             )
+                            MonthSelector(
+                                displayMonthYear = "${monthInfo.monthName} ${monthInfo.year}",
+                                onNextMonthClick = { monthOffset++ },
+                                onPreviousMonthClick = { monthOffset-- },
+                            )
                         }
                         JetpackNavHost(
                             appState = appState,
+                            monthInfo = monthInfo,
                             onShowSnackbar = { message, action ->
                                 snackbarHostState.showSnackbar(
                                     message = message,
@@ -258,6 +277,41 @@ fun JetpackBottomBar(
                 modifier = if (hasUnread) Modifier.notificationDot() else Modifier,
             )
         }
+    }
+}
+
+@Composable
+fun MonthSelector(
+    displayMonthYear: String,
+    onNextMonthClick: () -> Unit,
+    onPreviousMonthClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+    ) {
+        JetpackTextButton(
+            onClick = onPreviousMonthClick,
+            text = {
+                Icon(
+                    Icons.AutoMirrored.Outlined.NavigateBefore,
+                    contentDescription = "Next",
+                )
+            },
+        )
+        Text(displayMonthYear)
+        JetpackTextButton(
+            onClick = onNextMonthClick,
+            text = {
+                Icon(
+                    Icons.AutoMirrored.Outlined.NavigateNext,
+                    contentDescription = "Before",
+                )
+            },
+        )
     }
 }
 
