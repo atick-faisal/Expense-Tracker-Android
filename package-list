@@ -278,28 +278,6 @@ $dokka.location:dev.atick.compose.data.budgets/UiCumulativeExpense///PointingToD
 $dokka.location:dev.atick.compose.data.budgets/UiCumulativeExpense/UiCumulativeExpense/#kotlin.Double#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.data.budgets/-ui-cumulative-expense/-ui-cumulative-expense.md
 $dokka.location:dev.atick.compose.data.budgets/UiCumulativeExpense/amount/#/PointingToDeclaration/app/app/dev.atick.compose.data.budgets/-ui-cumulative-expense/amount.md
 $dokka.location:dev.atick.compose.data.budgets/UiCumulativeExpense/atTime/#/PointingToDeclaration/app/app/dev.atick.compose.data.budgets/-ui-cumulative-expense/at-time.md
-$dokka.location:dev.atick.compose.data.categories////PointingToDeclaration/app/app/dev.atick.compose.data.categories/index.md
-$dokka.location:dev.atick.compose.data.categories/CategoriesScreenData///PointingToDeclaration/app/app/dev.atick.compose.data.categories/-categories-screen-data/index.md
-$dokka.location:dev.atick.compose.data.categories/CategoriesScreenData/CategoriesScreenData/#kotlin.collections.List[dev.atick.compose.data.categories.UiCategory]/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-categories-screen-data/-categories-screen-data.md
-$dokka.location:dev.atick.compose.data.categories/CategoriesScreenData/categories/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-categories-screen-data/categories.md
-$dokka.location:dev.atick.compose.data.categories/UiCategory///PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategory/UiCategory/#dev.atick.compose.data.categories.UiCategoryType#kotlin.String#androidx.compose.ui.graphics.vector.ImageVector/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category/-ui-category.md
-$dokka.location:dev.atick.compose.data.categories/UiCategory/icon/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category/icon.md
-$dokka.location:dev.atick.compose.data.categories/UiCategory/name/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category/name.md
-$dokka.location:dev.atick.compose.data.categories/UiCategory/type/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category/type.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.CUSTOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-c-u-s-t-o-m/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.DEBT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-d-e-b-t/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.EDUCATION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-e-d-u-c-a-t-i-o-n/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.ESSENTIAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-e-s-s-e-n-t-i-a-l/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.FOOD///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-f-o-o-d/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.HEALTHCARE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-h-e-a-l-t-h-c-a-r-e/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.LIFESTYLE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-l-i-f-e-s-t-y-l-e/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.SAVINGS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-s-a-v-i-n-g-s/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType.TRANSPORTATION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.categories/-ui-category-type/-t-r-a-n-s-p-o-r-t-a-t-i-o-n/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType///PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category-type/index.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType/entries/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category-type/entries.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType/valueOf/#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category-type/value-of.md
-$dokka.location:dev.atick.compose.data.categories/UiCategoryType/values/#/PointingToDeclaration/app/app/dev.atick.compose.data.categories/-ui-category-type/values.md
 $dokka.location:dev.atick.compose.data.chat////PointingToDeclaration/app/app/dev.atick.compose.data.chat/index.md
 $dokka.location:dev.atick.compose.data.chat//asUiMessage/dev.atick.storage.room.models.ChatEntity#/PointingToDeclaration/app/app/dev.atick.compose.data.chat/as-ui-message.md
 $dokka.location:dev.atick.compose.data.chat//asUiMessages/kotlin.collections.List[dev.atick.storage.room.models.ChatEntity]#/PointingToDeclaration/app/app/dev.atick.compose.data.chat/as-ui-messages.md
@@ -318,6 +296,19 @@ $dokka.location:dev.atick.compose.data.expenses/ExpensesScreenData///PointingToD
 $dokka.location:dev.atick.compose.data.expenses/ExpensesScreenData/ExpensesScreenData/#kotlin.collections.List[dev.atick.compose.data.expenses.UiExpense]#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-expenses-screen-data/-expenses-screen-data.md
 $dokka.location:dev.atick.compose.data.expenses/ExpensesScreenData/displayMonthYear/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-expenses-screen-data/display-month-year.md
 $dokka.location:dev.atick.compose.data.expenses/ExpensesScreenData/expenses/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-expenses-screen-data/expenses.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.CUSTOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-c-u-s-t-o-m/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.DEBT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-d-e-b-t/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.EDUCATION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-e-d-u-c-a-t-i-o-n/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.ESSENTIAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-e-s-s-e-n-t-i-a-l/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.FOOD///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-f-o-o-d/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.HEALTHCARE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-h-e-a-l-t-h-c-a-r-e/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.LIFESTYLE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-l-i-f-e-s-t-y-l-e/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.SAVINGS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-s-a-v-i-n-g-s/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType.TRANSPORTATION///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-category-type/-t-r-a-n-s-p-o-r-t-a-t-i-o-n/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType///PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-category-type/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType/entries/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-category-type/entries.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType/valueOf/#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-category-type/value-of.md
+$dokka.location:dev.atick.compose.data.expenses/UiCategoryType/values/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-category-type/values.md
 $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType.BDT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-currency-type/-b-d-t/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType.EUR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-currency-type/-e-u-r/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType.GBP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-currency-type/-g-b-p/index.md
@@ -328,11 +319,12 @@ $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType/entries/#/Pointin
 $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType/valueOf/#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-currency-type/value-of.md
 $dokka.location:dev.atick.compose.data.expenses/UiCurrencyType/values/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-currency-type/values.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense///PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/index.md
-$dokka.location:dev.atick.compose.data.expenses/UiExpense/UiExpense/#kotlin.Long#kotlin.Double#dev.atick.compose.data.expenses.UiCurrencyType#kotlin.String#dev.atick.compose.data.categories.UiCategoryType#dev.atick.compose.data.expenses.UiPaymentStatus#dev.atick.compose.data.expenses.UiRecurringType#kotlin.Long#kotlin.Long?#kotlin.Boolean/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/-ui-expense.md
+$dokka.location:dev.atick.compose.data.expenses/UiExpense/UiExpense/#kotlin.Long#kotlin.Double#dev.atick.compose.data.expenses.UiCurrencyType#kotlin.String#dev.atick.compose.data.expenses.UiCategoryType#dev.atick.compose.data.expenses.UiPaymentStatus#dev.atick.compose.data.expenses.UiRecurringType#kotlin.Long#kotlin.Long?#kotlin.Boolean#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/-ui-expense.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/amount/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/amount.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/category/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/category.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/currency/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/currency.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/dueDate/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/due-date.md
+$dokka.location:dev.atick.compose.data.expenses/UiExpense/formattedDate/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/formatted-date.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/id/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/id.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/merchant/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/merchant.md
 $dokka.location:dev.atick.compose.data.expenses/UiExpense/paymentDate/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-expense/payment-date.md
@@ -349,7 +341,7 @@ $dokka.location:dev.atick.compose.data.expenses/UiPaymentStatus/valueOf/#kotlin.
 $dokka.location:dev.atick.compose.data.expenses/UiPaymentStatus/values/#/PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-payment-status/values.md
 $dokka.location:dev.atick.compose.data.expenses/UiRecurringType.DAILY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-d-a-i-l-y/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiRecurringType.MONTHLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-m-o-n-t-h-l-y/index.md
-$dokka.location:dev.atick.compose.data.expenses/UiRecurringType.NONE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-n-o-n-e/index.md
+$dokka.location:dev.atick.compose.data.expenses/UiRecurringType.ONETIME///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-o-n-e-t-i-m-e/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiRecurringType.WEEKLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-w-e-e-k-l-y/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiRecurringType.YEARLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.data.expenses/-ui-recurring-type/-y-e-a-r-l-y/index.md
 $dokka.location:dev.atick.compose.data.expenses/UiRecurringType///PointingToDeclaration/app/app/dev.atick.compose.data.expenses/-ui-recurring-type/index.md
@@ -383,6 +375,10 @@ $dokka.location:dev.atick.compose.data.settings/UserEditableSettings/UserEditabl
 $dokka.location:dev.atick.compose.data.settings/UserEditableSettings/brand/#/PointingToDeclaration/app/app/dev.atick.compose.data.settings/-user-editable-settings/brand.md
 $dokka.location:dev.atick.compose.data.settings/UserEditableSettings/darkThemeConfig/#/PointingToDeclaration/app/app/dev.atick.compose.data.settings/-user-editable-settings/dark-theme-config.md
 $dokka.location:dev.atick.compose.data.settings/UserEditableSettings/useDynamicColor/#/PointingToDeclaration/app/app/dev.atick.compose.data.settings/-user-editable-settings/use-dynamic-color.md
+$dokka.location:dev.atick.compose.data.subscriptions////PointingToDeclaration/app/app/dev.atick.compose.data.subscriptions/index.md
+$dokka.location:dev.atick.compose.data.subscriptions/SubscriptionsScreenData///PointingToDeclaration/app/app/dev.atick.compose.data.subscriptions/-subscriptions-screen-data/index.md
+$dokka.location:dev.atick.compose.data.subscriptions/SubscriptionsScreenData/SubscriptionsScreenData/#kotlin.collections.List[dev.atick.compose.data.expenses.UiExpense]/PointingToDeclaration/app/app/dev.atick.compose.data.subscriptions/-subscriptions-screen-data/-subscriptions-screen-data.md
+$dokka.location:dev.atick.compose.data.subscriptions/SubscriptionsScreenData/subscriptions/#/PointingToDeclaration/app/app/dev.atick.compose.data.subscriptions/-subscriptions-screen-data/subscriptions.md
 $dokka.location:dev.atick.compose.di.notification////PointingToDeclaration/app/app/dev.atick.compose.di.notification/index.md
 $dokka.location:dev.atick.compose.di.notification/NotificationModule///PointingToDeclaration/app/app/dev.atick.compose.di.notification/-notification-module/index.md
 $dokka.location:dev.atick.compose.di.notification/NotificationModule/provideNotificationManager/#android.content.Context/PointingToDeclaration/app/app/dev.atick.compose.di.notification/-notification-module/provide-notification-manager.md
@@ -391,7 +387,7 @@ $dokka.location:dev.atick.compose.di.repository/RepositoryModule///PointingToDec
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/RepositoryModule/#/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/-repository-module.md
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindAnalysisRepository/#dev.atick.compose.repository.analysis.AnalysisRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-analysis-repository.md
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindBudgetsRepository/#dev.atick.compose.repository.budgets.BudgetsRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-budgets-repository.md
-$dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindCategoriesRepository/#dev.atick.compose.repository.categories.CategoriesRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-categories-repository.md
+$dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindCategoriesRepository/#dev.atick.compose.repository.subscriptions.SubscriptionsRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-categories-repository.md
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindChatRepository/#dev.atick.compose.repository.chat.ChatRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-chat-repository.md
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindExpensesRepository/#dev.atick.compose.repository.expenses.ExpensesRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-expenses-repository.md
 $dokka.location:dev.atick.compose.di.repository/RepositoryModule/bindPostsRepository/#dev.atick.compose.repository.home.PostsRepositoryImpl/PointingToDeclaration/app/app/dev.atick.compose.di.repository/-repository-module/bind-posts-repository.md
@@ -405,10 +401,6 @@ $dokka.location:dev.atick.compose.navigation.budgets////PointingToDeclaration/a
 $dokka.location:dev.atick.compose.navigation.budgets//budgetsScreen/androidx.navigation.NavGraphBuilder#dev.atick.core.utils.MonthInfo#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]/PointingToDeclaration/app/app/dev.atick.compose.navigation.budgets/budgets-screen.md
 $dokka.location:dev.atick.compose.navigation.budgets//navigateToBudgets/androidx.navigation.NavController#androidx.navigation.NavOptions?/PointingToDeclaration/app/app/dev.atick.compose.navigation.budgets/navigate-to-budgets.md
 $dokka.location:dev.atick.compose.navigation.budgets/Budgets///PointingToDeclaration/app/app/dev.atick.compose.navigation.budgets/-budgets/index.md
-$dokka.location:dev.atick.compose.navigation.categories////PointingToDeclaration/app/app/dev.atick.compose.navigation.categories/index.md
-$dokka.location:dev.atick.compose.navigation.categories//categoriesScreen/androidx.navigation.NavGraphBuilder#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]/PointingToDeclaration/app/app/dev.atick.compose.navigation.categories/categories-screen.md
-$dokka.location:dev.atick.compose.navigation.categories//navigateToCategories/androidx.navigation.NavController#androidx.navigation.NavOptions?/PointingToDeclaration/app/app/dev.atick.compose.navigation.categories/navigate-to-categories.md
-$dokka.location:dev.atick.compose.navigation.categories/Categories///PointingToDeclaration/app/app/dev.atick.compose.navigation.categories/-categories/index.md
 $dokka.location:dev.atick.compose.navigation.chat////PointingToDeclaration/app/app/dev.atick.compose.navigation.chat/index.md
 $dokka.location:dev.atick.compose.navigation.chat//chatScreen/androidx.navigation.NavGraphBuilder#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]/PointingToDeclaration/app/app/dev.atick.compose.navigation.chat/chat-screen.md
 $dokka.location:dev.atick.compose.navigation.chat//navigateToChat/androidx.navigation.NavController#androidx.navigation.NavOptions?/PointingToDeclaration/app/app/dev.atick.compose.navigation.chat/navigate-to-chat.md
@@ -440,13 +432,17 @@ $dokka.location:dev.atick.compose.navigation.profile////PointingToDeclaration/a
 $dokka.location:dev.atick.compose.navigation.profile//navigateProfile/androidx.navigation.NavController#androidx.navigation.NavOptions?/PointingToDeclaration/app/app/dev.atick.compose.navigation.profile/navigate-profile.md
 $dokka.location:dev.atick.compose.navigation.profile//profileScreen/androidx.navigation.NavGraphBuilder#kotlin.Function0[kotlin.Unit]#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]/PointingToDeclaration/app/app/dev.atick.compose.navigation.profile/profile-screen.md
 $dokka.location:dev.atick.compose.navigation.profile/Profile///PointingToDeclaration/app/app/dev.atick.compose.navigation.profile/-profile/index.md
+$dokka.location:dev.atick.compose.navigation.subscriptions////PointingToDeclaration/app/app/dev.atick.compose.navigation.subscriptions/index.md
+$dokka.location:dev.atick.compose.navigation.subscriptions//navigateToSubscriptions/androidx.navigation.NavController#androidx.navigation.NavOptions?/PointingToDeclaration/app/app/dev.atick.compose.navigation.subscriptions/navigate-to-subscriptions.md
+$dokka.location:dev.atick.compose.navigation.subscriptions//subscriptionsScreen/androidx.navigation.NavGraphBuilder#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]/PointingToDeclaration/app/app/dev.atick.compose.navigation.subscriptions/subscriptions-screen.md
+$dokka.location:dev.atick.compose.navigation.subscriptions/Subscriptions///PointingToDeclaration/app/app/dev.atick.compose.navigation.subscriptions/-subscriptions/index.md
 $dokka.location:dev.atick.compose.navigation////PointingToDeclaration/app/app/dev.atick.compose.navigation/index.md
 $dokka.location:dev.atick.compose.navigation//JetpackNavHost/#dev.atick.compose.ui.JetpackAppState#dev.atick.core.utils.MonthInfo#kotlin.coroutines.SuspendFunction2[kotlin.String,kotlin.String?,kotlin.Boolean]#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.navigation/-jetpack-nav-host.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination.ANALYSIS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-a-n-a-l-y-s-i-s/index.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination.BUDGETS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-b-u-d-g-e-t-s/index.md
-$dokka.location:dev.atick.compose.navigation/TopLevelDestination.CATEGORIES///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-c-a-t-e-g-o-r-i-e-s/index.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination.CHAT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-c-h-a-t/index.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination.EXPENSES///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-e-x-p-e-n-s-e-s/index.md
+$dokka.location:dev.atick.compose.navigation/TopLevelDestination.SUBSCRIPTIONS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}app/app/dev.atick.compose.navigation/-top-level-destination/-s-u-b-s-c-r-i-p-t-i-o-n-s/index.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination///PointingToDeclaration/app/app/dev.atick.compose.navigation/-top-level-destination/index.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination/entries/#/PointingToDeclaration/app/app/dev.atick.compose.navigation/-top-level-destination/entries.md
 $dokka.location:dev.atick.compose.navigation/TopLevelDestination/iconTextId/#/PointingToDeclaration/app/app/dev.atick.compose.navigation/-top-level-destination/icon-text-id.md
@@ -472,10 +468,6 @@ $dokka.location:dev.atick.compose.repository.budgets/BudgetsRepository/getCumula
 $dokka.location:dev.atick.compose.repository.budgets/BudgetsRepositoryImpl///PointingToDeclaration/app/app/dev.atick.compose.repository.budgets/-budgets-repository-impl/index.md
 $dokka.location:dev.atick.compose.repository.budgets/BudgetsRepositoryImpl/BudgetsRepositoryImpl/#dev.atick.storage.room.data.ExpenseDataSource/PointingToDeclaration/app/app/dev.atick.compose.repository.budgets/-budgets-repository-impl/-budgets-repository-impl.md
 $dokka.location:dev.atick.compose.repository.budgets/BudgetsRepositoryImpl/getCumulativeExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.repository.budgets/-budgets-repository-impl/get-cumulative-expenses.md
-$dokka.location:dev.atick.compose.repository.categories////PointingToDeclaration/app/app/dev.atick.compose.repository.categories/index.md
-$dokka.location:dev.atick.compose.repository.categories/CategoriesRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.categories/-categories-repository/index.md
-$dokka.location:dev.atick.compose.repository.categories/CategoriesRepositoryImpl///PointingToDeclaration/app/app/dev.atick.compose.repository.categories/-categories-repository-impl/index.md
-$dokka.location:dev.atick.compose.repository.categories/CategoriesRepositoryImpl/CategoriesRepositoryImpl/#/PointingToDeclaration/app/app/dev.atick.compose.repository.categories/-categories-repository-impl/-categories-repository-impl.md
 $dokka.location:dev.atick.compose.repository.chat////PointingToDeclaration/app/app/dev.atick.compose.repository.chat/index.md
 $dokka.location:dev.atick.compose.repository.chat/ChatRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.chat/-chat-repository/index.md
 $dokka.location:dev.atick.compose.repository.chat/ChatRepository/getAllMessages/#/PointingToDeclaration/app/app/dev.atick.compose.repository.chat/-chat-repository/get-all-messages.md
@@ -491,10 +483,12 @@ $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository.Compani
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository.Companion/SYNC_SMS_DURATION/#/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository/-companion/-s-y-n-c_-s-m-s_-d-u-r-a-t-i-o-n.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository/index.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository/getAllExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository/get-all-expenses.md
+$dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository/setRecurringType/#kotlin.String#dev.atick.compose.data.expenses.UiRecurringType/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository/set-recurring-type.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepository/syncExpensesFromSms/#/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository/sync-expenses-from-sms.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepositoryImpl///PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository-impl/index.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepositoryImpl/ExpensesRepositoryImpl/#dev.atick.gemini.data.GeminiDataSource#dev.atick.gemini.data.GeminiRateLimiter#dev.atick.sms.data.SMSDataSource#dev.atick.storage.room.data.ExpenseDataSource/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository-impl/-expenses-repository-impl.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepositoryImpl/getAllExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository-impl/get-all-expenses.md
+$dokka.location:dev.atick.compose.repository.expenses/ExpensesRepositoryImpl/setRecurringType/#kotlin.String#dev.atick.compose.data.expenses.UiRecurringType/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository-impl/set-recurring-type.md
 $dokka.location:dev.atick.compose.repository.expenses/ExpensesRepositoryImpl/syncExpensesFromSms/#/PointingToDeclaration/app/app/dev.atick.compose.repository.expenses/-expenses-repository-impl/sync-expenses-from-sms.md
 $dokka.location:dev.atick.compose.repository.home////PointingToDeclaration/app/app/dev.atick.compose.repository.home/index.md
 $dokka.location:dev.atick.compose.repository.home/PostsRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.home/-posts-repository/index.md
@@ -514,6 +508,14 @@ $dokka.location:dev.atick.compose.repository.profile/ProfileDataRepositoryImpl//
 $dokka.location:dev.atick.compose.repository.profile/ProfileDataRepositoryImpl/ProfileDataRepositoryImpl/#dev.atick.storage.preferences.data.UserPreferencesDataSource#dev.atick.auth.data.AuthDataSource/PointingToDeclaration/app/app/dev.atick.compose.repository.profile/-profile-data-repository-impl/-profile-data-repository-impl.md
 $dokka.location:dev.atick.compose.repository.profile/ProfileDataRepositoryImpl/profileScreenData/#/PointingToDeclaration/app/app/dev.atick.compose.repository.profile/-profile-data-repository-impl/profile-screen-data.md
 $dokka.location:dev.atick.compose.repository.profile/ProfileDataRepositoryImpl/signOut/#/PointingToDeclaration/app/app/dev.atick.compose.repository.profile/-profile-data-repository-impl/sign-out.md
+$dokka.location:dev.atick.compose.repository.subscriptions////PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/index.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository/index.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepository/getSubscriptions/#/PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository/get-subscriptions.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepository/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository/set-cancellation.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepositoryImpl///PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository-impl/index.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepositoryImpl/SubscriptionsRepositoryImpl/#dev.atick.storage.room.data.ExpenseDataSource/PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository-impl/-subscriptions-repository-impl.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepositoryImpl/getSubscriptions/#/PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository-impl/get-subscriptions.md
+$dokka.location:dev.atick.compose.repository.subscriptions/SubscriptionsRepositoryImpl/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/app/app/dev.atick.compose.repository.subscriptions/-subscriptions-repository-impl/set-cancellation.md
 $dokka.location:dev.atick.compose.repository.user////PointingToDeclaration/app/app/dev.atick.compose.repository.user/index.md
 $dokka.location:dev.atick.compose.repository.user/UserDataRepository///PointingToDeclaration/app/app/dev.atick.compose.repository.user/-user-data-repository/index.md
 $dokka.location:dev.atick.compose.repository.user/UserDataRepository/setDarkThemeConfig/#dev.atick.storage.preferences.models.DarkThemeConfig/PointingToDeclaration/app/app/dev.atick.compose.repository.user/-user-data-repository/set-dark-theme-config.md
@@ -565,10 +567,6 @@ $dokka.location:dev.atick.compose.ui.budgets/BudgetsViewModel///PointingToDeclar
 $dokka.location:dev.atick.compose.ui.budgets/BudgetsViewModel/BudgetsViewModel/#dev.atick.compose.repository.budgets.BudgetsRepository/PointingToDeclaration/app/app/dev.atick.compose.ui.budgets/-budgets-view-model/-budgets-view-model.md
 $dokka.location:dev.atick.compose.ui.budgets/BudgetsViewModel/budgetsUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.budgets/-budgets-view-model/budgets-ui-state.md
 $dokka.location:dev.atick.compose.ui.budgets/BudgetsViewModel/refreshBudgets/#dev.atick.core.utils.MonthInfo/PointingToDeclaration/app/app/dev.atick.compose.ui.budgets/-budgets-view-model/refresh-budgets.md
-$dokka.location:dev.atick.compose.ui.categories////PointingToDeclaration/app/app/dev.atick.compose.ui.categories/index.md
-$dokka.location:dev.atick.compose.ui.categories/CategoriesViewModel///PointingToDeclaration/app/app/dev.atick.compose.ui.categories/-categories-view-model/index.md
-$dokka.location:dev.atick.compose.ui.categories/CategoriesViewModel/CategoriesViewModel/#dev.atick.compose.repository.categories.CategoriesRepository/PointingToDeclaration/app/app/dev.atick.compose.ui.categories/-categories-view-model/-categories-view-model.md
-$dokka.location:dev.atick.compose.ui.categories/CategoriesViewModel/categoriesUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.categories/-categories-view-model/categories-ui-state.md
 $dokka.location:dev.atick.compose.ui.chat////PointingToDeclaration/app/app/dev.atick.compose.ui.chat/index.md
 $dokka.location:dev.atick.compose.ui.chat//ChatMessageItem/#dev.atick.compose.data.chat.UiMessage#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.chat/-chat-message-item.md
 $dokka.location:dev.atick.compose.ui.chat/ChatViewModel///PointingToDeclaration/app/app/dev.atick.compose.ui.chat/-chat-view-model/index.md
@@ -579,6 +577,7 @@ $dokka.location:dev.atick.compose.ui.chat/ChatViewModel/onSendMessage/#/Pointing
 $dokka.location:dev.atick.compose.ui.components////PointingToDeclaration/app/app/dev.atick.compose.ui.components/index.md
 $dokka.location:dev.atick.compose.ui.components//BudgetChart/#dev.atick.compose.data.budgets.BudgetsScreenData#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.components/-budget-chart.md
 $dokka.location:dev.atick.compose.ui.components//BudgetChartPreview/#/PointingToDeclaration/app/app/dev.atick.compose.ui.components/-budget-chart-preview.md
+$dokka.location:dev.atick.compose.ui.components//ExpenseCard/#dev.atick.compose.data.expenses.UiExpense#kotlin.Function1[kotlin.Long,kotlin.Unit]#kotlin.Function2[kotlin.String,dev.atick.compose.data.expenses.UiRecurringType,kotlin.Unit]?#kotlin.Function2[kotlin.String,kotlin.Boolean,kotlin.Unit]?#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.components/-expense-card.md
 $dokka.location:dev.atick.compose.ui.components//ExpenseDistributionChart/#kotlin.collections.List[dev.atick.compose.data.analysis.UiAnalysis]#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.components/-expense-distribution-chart.md
 $dokka.location:dev.atick.compose.ui.components//ExpenseDistributionChartPreview/#/PointingToDeclaration/app/app/dev.atick.compose.ui.components/-expense-distribution-chart-preview.md
 $dokka.location:dev.atick.compose.ui.details////PointingToDeclaration/app/app/dev.atick.compose.ui.details/index.md
@@ -586,17 +585,13 @@ $dokka.location:dev.atick.compose.ui.details/DetailsViewModel///PointingToDeclar
 $dokka.location:dev.atick.compose.ui.details/DetailsViewModel/DetailsViewModel/#dev.atick.compose.repository.home.PostsRepository#androidx.lifecycle.SavedStateHandle/PointingToDeclaration/app/app/dev.atick.compose.ui.details/-details-view-model/-details-view-model.md
 $dokka.location:dev.atick.compose.ui.details/DetailsViewModel/detailsUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.details/-details-view-model/details-ui-state.md
 $dokka.location:dev.atick.compose.ui.expenses////PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/index.md
-$dokka.location:dev.atick.compose.ui.expenses//CategoryTypeChip/#dev.atick.compose.data.categories.UiCategoryType#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-category-type-chip.md
-$dokka.location:dev.atick.compose.ui.expenses//EditExpenseScreen/#dev.atick.compose.data.expenses.UiExpense#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.categories.UiCategoryType,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.expenses.UiPaymentStatus,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.expenses.UiRecurringType,kotlin.Unit]#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[kotlin.Boolean,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-screen.md
-$dokka.location:dev.atick.compose.ui.expenses//ExpenseCard/#dev.atick.compose.data.expenses.UiExpense#kotlin.Function1[kotlin.Long,kotlin.Unit]#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-expense-card.md
-$dokka.location:dev.atick.compose.ui.expenses//PaymentStatusChip/#dev.atick.compose.data.expenses.UiPaymentStatus#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-payment-status-chip.md
-$dokka.location:dev.atick.compose.ui.expenses//rememberCurrencyFormatter/#dev.atick.compose.data.expenses.UiCurrencyType/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/remember-currency-formatter.md
+$dokka.location:dev.atick.compose.ui.expenses//EditExpenseScreen/#dev.atick.compose.data.expenses.UiExpense#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.expenses.UiCategoryType,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.expenses.UiPaymentStatus,kotlin.Unit]#kotlin.Function1[dev.atick.compose.data.expenses.UiRecurringType,kotlin.Unit]#kotlin.Function1[kotlin.String,kotlin.Unit]#kotlin.Function1[kotlin.Boolean,kotlin.Unit]#kotlin.Function0[kotlin.Unit]#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-screen.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel///PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/index.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/EditExpenseViewModel/#/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/-edit-expense-view-model.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/expenseUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/expense-ui-state.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/saveExpense/#/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/save-expense.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setAmount/#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-amount.md
-$dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setCategory/#dev.atick.compose.data.categories.UiCategoryType/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-category.md
+$dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setCategory/#dev.atick.compose.data.expenses.UiCategoryType/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-category.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setDescription/#kotlin.String/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-description.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setDueDate/#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-due-date.md
 $dokka.location:dev.atick.compose.ui.expenses/EditExpenseViewModel/setPaymentDate/#kotlin.Long/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-edit-expense-view-model/set-payment-date.md
@@ -607,6 +602,7 @@ $dokka.location:dev.atick.compose.ui.expenses/ExpensesViewModel///PointingToDecl
 $dokka.location:dev.atick.compose.ui.expenses/ExpensesViewModel/ExpensesViewModel/#dev.atick.compose.repository.expenses.ExpensesRepository/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-expenses-view-model/-expenses-view-model.md
 $dokka.location:dev.atick.compose.ui.expenses/ExpensesViewModel/expensesUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-expenses-view-model/expenses-ui-state.md
 $dokka.location:dev.atick.compose.ui.expenses/ExpensesViewModel/refreshExpenses/#dev.atick.core.utils.MonthInfo/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-expenses-view-model/refresh-expenses.md
+$dokka.location:dev.atick.compose.ui.expenses/ExpensesViewModel/setRecurringType/#kotlin.String#dev.atick.compose.data.expenses.UiRecurringType/PointingToDeclaration/app/app/dev.atick.compose.ui.expenses/-expenses-view-model/set-recurring-type.md
 $dokka.location:dev.atick.compose.ui.home////PointingToDeclaration/app/app/dev.atick.compose.ui.home/index.md
 $dokka.location:dev.atick.compose.ui.home/HomeViewModel///PointingToDeclaration/app/app/dev.atick.compose.ui.home/-home-view-model/index.md
 $dokka.location:dev.atick.compose.ui.home/HomeViewModel/HomeViewModel/#dev.atick.compose.repository.home.PostsRepository/PointingToDeclaration/app/app/dev.atick.compose.ui.home/-home-view-model/-home-view-model.md
@@ -628,6 +624,12 @@ $dokka.location:dev.atick.compose.ui.settings/SettingsViewModel/updateDarkThemeC
 $dokka.location:dev.atick.compose.ui.settings/SettingsViewModel/updateDynamicColorPreference/#kotlin.Boolean/PointingToDeclaration/app/app/dev.atick.compose.ui.settings/-settings-view-model/update-dynamic-color-preference.md
 $dokka.location:dev.atick.compose.ui.settings/SettingsViewModel/updateThemeBrand/#dev.atick.storage.preferences.models.ThemeBrand/PointingToDeclaration/app/app/dev.atick.compose.ui.settings/-settings-view-model/update-theme-brand.md
 $dokka.location:dev.atick.compose.ui.settings/SettingsViewModel/updateUserData/#/PointingToDeclaration/app/app/dev.atick.compose.ui.settings/-settings-view-model/update-user-data.md
+$dokka.location:dev.atick.compose.ui.subscriptions////PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/index.md
+$dokka.location:dev.atick.compose.ui.subscriptions/SubscriptionsViewModel///PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/-subscriptions-view-model/index.md
+$dokka.location:dev.atick.compose.ui.subscriptions/SubscriptionsViewModel/SubscriptionsViewModel/#dev.atick.compose.repository.subscriptions.SubscriptionsRepository/PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/-subscriptions-view-model/-subscriptions-view-model.md
+$dokka.location:dev.atick.compose.ui.subscriptions/SubscriptionsViewModel/refreshSubscriptions/#/PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/-subscriptions-view-model/refresh-subscriptions.md
+$dokka.location:dev.atick.compose.ui.subscriptions/SubscriptionsViewModel/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/-subscriptions-view-model/set-cancellation.md
+$dokka.location:dev.atick.compose.ui.subscriptions/SubscriptionsViewModel/subscriptionsUiState/#/PointingToDeclaration/app/app/dev.atick.compose.ui.subscriptions/-subscriptions-view-model/subscriptions-ui-state.md
 $dokka.location:dev.atick.compose.ui////PointingToDeclaration/app/app/dev.atick.compose.ui/index.md
 $dokka.location:dev.atick.compose.ui//JetpackApp/#kotlin.Boolean#androidx.compose.material3.windowsizeclass.WindowSizeClass#dev.atick.network.utils.NetworkUtils#dev.atick.compose.ui.JetpackAppState/PointingToDeclaration/app/app/dev.atick.compose.ui/-jetpack-app.md
 $dokka.location:dev.atick.compose.ui//JetpackBottomBar/#kotlin.collections.List[dev.atick.compose.navigation.TopLevelDestination]#kotlin.collections.Set[dev.atick.compose.navigation.TopLevelDestination]#kotlin.Function1[dev.atick.compose.navigation.TopLevelDestination,kotlin.Unit]#androidx.navigation.NavDestination?#androidx.compose.ui.Modifier/PointingToDeclaration/app/app/dev.atick.compose.ui/-jetpack-bottom-bar.md
@@ -1068,7 +1070,7 @@ $dokka.location:dev.atick.gemini.models/AiPaymentStatus/valueOf/#kotlin.String/P
 $dokka.location:dev.atick.gemini.models/AiPaymentStatus/values/#/PointingToDeclaration/gemini/gemini/dev.atick.gemini.models/-ai-payment-status/values.md
 $dokka.location:dev.atick.gemini.models/AiRecurringType.DAILY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-d-a-i-l-y/index.md
 $dokka.location:dev.atick.gemini.models/AiRecurringType.MONTHLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-m-o-n-t-h-l-y/index.md
-$dokka.location:dev.atick.gemini.models/AiRecurringType.NONE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-n-o-n-e/index.md
+$dokka.location:dev.atick.gemini.models/AiRecurringType.ONETIME///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-o-n-e-t-i-m-e/index.md
 $dokka.location:dev.atick.gemini.models/AiRecurringType.WEEKLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-w-e-e-k-l-y/index.md
 $dokka.location:dev.atick.gemini.models/AiRecurringType.YEARLY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/-y-e-a-r-l-y/index.md
 $dokka.location:dev.atick.gemini.models/AiRecurringType///PointingToDeclaration/gemini/gemini/dev.atick.gemini.models/-ai-recurring-type/index.md
@@ -1257,6 +1259,8 @@ $dokka.location:dev.atick.storage.room.dao/ExpenseDao/getTopExpensesByMerchant/#
 $dokka.location:dev.atick.storage.room.dao/ExpenseDao/getTotalSpending/#kotlin.Long#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/get-total-spending.md
 $dokka.location:dev.atick.storage.room.dao/ExpenseDao/getUpcomingRecurringExpenses/#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/get-upcoming-recurring-expenses.md
 $dokka.location:dev.atick.storage.room.dao/ExpenseDao/insertExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/insert-expense.md
+$dokka.location:dev.atick.storage.room.dao/ExpenseDao/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/set-cancellation.md
+$dokka.location:dev.atick.storage.room.dao/ExpenseDao/setRecurringType/#kotlin.String#kotlin.String/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/set-recurring-type.md
 $dokka.location:dev.atick.storage.room.dao/ExpenseDao/updateExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.dao/-expense-dao/update-expense.md
 $dokka.location:dev.atick.storage.room.data////PointingToDeclaration/room/room/dev.atick.storage.room.data/index.md
 $dokka.location:dev.atick.storage.room.data/AnalysisDataSource///PointingToDeclaration/room/room/dev.atick.storage.room.data/-analysis-data-source/index.md
@@ -1319,7 +1323,10 @@ $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/deleteExpense/#dev
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/getAllExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/get-all-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/getCumulativeExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/get-cumulative-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/getLastExpenseTime/#/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/get-last-expense-time.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSource/getRecurringExpenses/#/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/get-recurring-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/insertExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/insert-expense.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSource/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/set-cancellation.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSource/setRecurringType/#kotlin.String#kotlin.String/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/set-recurring-type.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSource/updateExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source/update-expense.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl///PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/index.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/ExpenseDataSourceImpl/#dev.atick.storage.room.dao.ExpenseDao#kotlinx.coroutines.CoroutineDispatcher/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/-expense-data-source-impl.md
@@ -1327,7 +1334,10 @@ $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/deleteExpense/
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/getAllExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/get-all-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/getCumulativeExpenses/#kotlin.Long#kotlin.Long/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/get-cumulative-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/getLastExpenseTime/#/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/get-last-expense-time.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/getRecurringExpenses/#/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/get-recurring-expenses.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/insertExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/insert-expense.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/setCancellation/#kotlin.String#kotlin.Boolean/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/set-cancellation.md
+$dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/setRecurringType/#kotlin.String#kotlin.String/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/set-recurring-type.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDataSourceImpl/updateExpense/#dev.atick.storage.room.models.ExpenseEntity/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-data-source-impl/update-expense.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDatabase///PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-database/index.md
 $dokka.location:dev.atick.storage.room.data/ExpenseDatabase/ExpenseDatabase/#/PointingToDeclaration/room/room/dev.atick.storage.room.data/-expense-database/-expense-database.md
@@ -1426,36 +1436,35 @@ module:app
 dev.atick.compose
 dev.atick.compose.data.analysis
 dev.atick.compose.data.budgets
-dev.atick.compose.data.categories
 dev.atick.compose.data.chat
 dev.atick.compose.data.expenses
 dev.atick.compose.data.home
 dev.atick.compose.data.profile
 dev.atick.compose.data.settings
+dev.atick.compose.data.subscriptions
 dev.atick.compose.di.notification
 dev.atick.compose.di.repository
 dev.atick.compose.navigation
 dev.atick.compose.navigation.analysis
 dev.atick.compose.navigation.budgets
-dev.atick.compose.navigation.categories
 dev.atick.compose.navigation.chat
 dev.atick.compose.navigation.details
 dev.atick.compose.navigation.expenses
 dev.atick.compose.navigation.home
 dev.atick.compose.navigation.profile
+dev.atick.compose.navigation.subscriptions
 dev.atick.compose.repository.analysis
 dev.atick.compose.repository.budgets
-dev.atick.compose.repository.categories
 dev.atick.compose.repository.chat
 dev.atick.compose.repository.expenses
 dev.atick.compose.repository.home
 dev.atick.compose.repository.profile
+dev.atick.compose.repository.subscriptions
 dev.atick.compose.repository.user
 dev.atick.compose.sync
 dev.atick.compose.ui
 dev.atick.compose.ui.analysis
 dev.atick.compose.ui.budgets
-dev.atick.compose.ui.categories
 dev.atick.compose.ui.chat
 dev.atick.compose.ui.components
 dev.atick.compose.ui.details
@@ -1463,6 +1472,7 @@ dev.atick.compose.ui.expenses
 dev.atick.compose.ui.home
 dev.atick.compose.ui.profile
 dev.atick.compose.ui.settings
+dev.atick.compose.ui.subscriptions
 module:auth
 dev.atick.auth.config
 dev.atick.auth.data
