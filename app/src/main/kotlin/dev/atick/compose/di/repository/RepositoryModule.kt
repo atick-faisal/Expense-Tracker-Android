@@ -24,8 +24,6 @@ import dev.atick.compose.repository.analysis.AnalysisRepository
 import dev.atick.compose.repository.analysis.AnalysisRepositoryImpl
 import dev.atick.compose.repository.budgets.BudgetsRepository
 import dev.atick.compose.repository.budgets.BudgetsRepositoryImpl
-import dev.atick.compose.repository.categories.CategoriesRepository
-import dev.atick.compose.repository.categories.CategoriesRepositoryImpl
 import dev.atick.compose.repository.chat.ChatRepository
 import dev.atick.compose.repository.chat.ChatRepositoryImpl
 import dev.atick.compose.repository.expenses.ExpensesRepository
@@ -34,6 +32,8 @@ import dev.atick.compose.repository.home.PostsRepository
 import dev.atick.compose.repository.home.PostsRepositoryImpl
 import dev.atick.compose.repository.profile.ProfileDataRepository
 import dev.atick.compose.repository.profile.ProfileDataRepositoryImpl
+import dev.atick.compose.repository.subscriptions.SubscriptionsRepository
+import dev.atick.compose.repository.subscriptions.SubscriptionsRepositoryImpl
 import dev.atick.compose.repository.user.UserDataRepository
 import dev.atick.compose.repository.user.UserDataRepositoryImpl
 import javax.inject.Singleton
@@ -98,8 +98,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindCategoriesRepository(
-        categoriesRepositoryImpl: CategoriesRepositoryImpl,
-    ): CategoriesRepository
+        categoriesRepositoryImpl: SubscriptionsRepositoryImpl,
+    ): SubscriptionsRepository
 
     @Binds
     @Singleton

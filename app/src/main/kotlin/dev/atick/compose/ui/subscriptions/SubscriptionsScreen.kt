@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.ui.expenses
+package dev.atick.compose.ui.subscriptions
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,60 +28,48 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.atick.compose.data.expenses.ExpensesScreenData
-import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.compose.data.subscriptions.SubscriptionsScreenData
 import dev.atick.compose.ui.components.ExpenseCard
 import dev.atick.core.ui.utils.StatefulComposable
-import dev.atick.core.utils.MonthInfo
 
 @Composable
-internal fun ExpensesRoute(
-    monthInfo: MonthInfo,
-    onExpenseClick: (Long) -> Unit,
+internal fun SubscriptionsRoute(
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    expensesViewModel: ExpensesViewModel = hiltViewModel(),
+    subscriptionsViewModel: SubscriptionsViewModel = hiltViewModel(),
 ) {
-    val expensesState by expensesViewModel.expensesUiState.collectAsStateWithLifecycle()
+    val subscriptionsUiState by subscriptionsViewModel.subscriptionsUiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(monthInfo) {
-        expensesViewModel.refreshExpenses(monthInfo)
+    LaunchedEffect(Unit) {
+        subscriptionsViewModel.refreshSubscriptions()
     }
 
     StatefulComposable(
-        state = expensesState,
+        state = subscriptionsUiState,
         onShowSnackbar = onShowSnackbar,
-    ) { expensesScreenData ->
-        ExpensesScreen(
-            expensesScreenData = expensesScreenData,
-            monthInfo = monthInfo,
-//            onNextMonthClick = expensesViewModel::incrementMonth,
-//            onPreviousMonthClick = expensesViewModel::decrementMonth,
-            onExpenseClick = onExpenseClick,
-            onRecurringTypeClick = expensesViewModel::setRecurringType,
+    ) { categoriesScreenData ->
+        SubscriptionsScreen(
+            subscriptionsScreenData = categoriesScreenData,
+            onCancellationClick = subscriptionsViewModel::setCancellation,
         )
     }
 }
 
 @Composable
-private fun ExpensesScreen(
-    expensesScreenData: ExpensesScreenData,
-    monthInfo: MonthInfo,
-//    onNextMonthClick: () -> Unit,
-//    onPreviousMonthClick: () -> Unit,
-    onExpenseClick: (Long) -> Unit,
-    onRecurringTypeClick: (String, UiRecurringType) -> Unit,
+private fun SubscriptionsScreen(
+    subscriptionsScreenData: SubscriptionsScreenData,
+    onCancellationClick: (String, Boolean) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp),
     ) {
-        items(expensesScreenData.expenses, key = { it.id }) { expense ->
+        items(subscriptionsScreenData.subscriptions, key = { it.id }) { subscription ->
             ExpenseCard(
-                expense = expense,
-                onExpenseClick = onExpenseClick,
-                onRecurringTypeClick = onRecurringTypeClick,
-                // modifier = Modifier.animateItem(),
+                expense = subscription,
+                onExpenseClick = {},
+                onRecurringTypeClick = null,
+                onCancellationClick = onCancellationClick,
             )
         }
     }

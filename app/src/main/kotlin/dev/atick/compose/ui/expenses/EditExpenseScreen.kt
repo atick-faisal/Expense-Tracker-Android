@@ -53,7 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
-import dev.atick.compose.data.categories.UiCategoryType
+import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
@@ -238,7 +238,7 @@ fun EditExpenseScreen(
 
         // Description
         JetpackMultilineTextField(
-            value = expense.merchant ?: "",
+            value = expense.merchant,
             onValueChange = onDescriptionChange,
             label = { Text(stringResource(R.string.description)) },
             leadingIcon = {

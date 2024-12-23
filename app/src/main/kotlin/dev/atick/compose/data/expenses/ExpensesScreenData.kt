@@ -16,10 +16,9 @@
 
 package dev.atick.compose.data.expenses
 
-import dev.atick.compose.data.categories.UiCategoryType
 import kotlinx.datetime.Instant
-import kotlinx.datetime.format
-import kotlinx.datetime.format.DateTimeComponents
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
@@ -33,10 +32,11 @@ data class UiExpense(
     val merchant: String = "Unknown",
     val category: UiCategoryType = UiCategoryType.ESSENTIAL,
     val paymentStatus: UiPaymentStatus = UiPaymentStatus.PENDING,
-    val recurringType: UiRecurringType = UiRecurringType.NONE,
+    val recurringType: UiRecurringType = UiRecurringType.ONETIME,
     val paymentDate: Long = System.currentTimeMillis(),
     val dueDate: Long? = null,
     val toBeCancelled: Boolean = false,
+    val formattedDate: String = paymentDate.asFormattedDate(),
 )
 
 enum class UiCurrencyType {
@@ -55,14 +55,31 @@ enum class UiPaymentStatus {
 }
 
 enum class UiRecurringType {
-    NONE,
+    ONETIME,
     DAILY,
     WEEKLY,
     MONTHLY,
     YEARLY,
 }
 
+enum class UiCategoryType {
+    FOOD,
+    ESSENTIAL,
+    LIFESTYLE,
+    TRANSPORTATION,
+    HEALTHCARE,
+    SAVINGS,
+    DEBT,
+    EDUCATION,
+    CUSTOM,
+}
+
 fun Long.asFormattedDate(): String {
-    return Instant.fromEpochMilliseconds(this)
-        .format(DateTimeComponents.Formats.RFC_1123)
+    val dateTime = Instant.fromEpochMilliseconds(this)
+        .toLocalDateTime(TimeZone.currentSystemDefault())
+    return "${
+        dateTime.month.name
+    } ${dateTime.dayOfMonth}, ${dateTime.year} at ${dateTime.hour}:${
+        dateTime.minute.toString().padStart(2, '0')
+    }"
 }

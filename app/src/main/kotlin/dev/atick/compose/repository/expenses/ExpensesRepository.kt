@@ -17,6 +17,7 @@
 package dev.atick.compose.repository.expenses
 
 import dev.atick.compose.data.expenses.UiExpense
+import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.sync.SyncProgress
 import kotlinx.coroutines.flow.Flow
 
@@ -24,6 +25,8 @@ interface ExpensesRepository {
     companion object {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
     }
+
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>>
     fun syncExpensesFromSms(): Flow<SyncProgress>
+    suspend fun setRecurringType(merchant: String, recurringType: UiRecurringType): Result<Unit>
 }

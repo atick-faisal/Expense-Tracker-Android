@@ -33,9 +33,9 @@ import androidx.navigation.navOptions
 import dev.atick.compose.navigation.TopLevelDestination
 import dev.atick.compose.navigation.analysis.navigateToAnalysis
 import dev.atick.compose.navigation.budgets.navigateToBudgets
-import dev.atick.compose.navigation.categories.navigateToCategories
 import dev.atick.compose.navigation.chat.navigateToChat
 import dev.atick.compose.navigation.expenses.navigateToExpensesNavGraph
+import dev.atick.compose.navigation.subscriptions.navigateToSubscriptions
 import dev.atick.core.extensions.stateInDelayed
 import dev.atick.network.utils.NetworkState
 import dev.atick.network.utils.NetworkUtils
@@ -125,7 +125,7 @@ class JetpackAppState(
             TopLevelDestination.EXPENSES -> navController.navigateToExpensesNavGraph(topLevelNavOptions)
             TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
             TopLevelDestination.BUDGETS -> navController.navigateToBudgets(topLevelNavOptions)
-            TopLevelDestination.CATEGORIES -> navController.navigateToCategories(topLevelNavOptions)
+            TopLevelDestination.SUBSCRIPTIONS -> navController.navigateToSubscriptions(topLevelNavOptions)
             TopLevelDestination.CHAT -> navController.navigateToChat(topLevelNavOptions)
         }
     }

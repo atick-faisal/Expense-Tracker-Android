@@ -16,12 +16,13 @@
 
 package dev.atick.compose.repository.expenses
 
-import dev.atick.compose.data.categories.UiCategoryType
+import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.sync.SyncProgress
+import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
 import dev.atick.gemini.data.GeminiException
 import dev.atick.gemini.data.GeminiRateLimiter
@@ -93,6 +94,18 @@ class ExpensesRepositoryImpl @Inject constructor(
                     current = i + 1,
                     message = "Syncing expenses... $i / $totalSms",
                 ),
+            )
+        }
+    }
+
+    override suspend fun setRecurringType(
+        merchant: String,
+        recurringType: UiRecurringType,
+    ): Result<Unit> {
+        return suspendRunCatching {
+            expenseDataSource.setRecurringType(
+                merchant,
+                recurringType.name,
             )
         }
     }

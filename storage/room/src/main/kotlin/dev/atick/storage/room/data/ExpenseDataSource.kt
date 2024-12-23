@@ -23,8 +23,8 @@ import kotlinx.coroutines.flow.Flow
 interface ExpenseDataSource {
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<ExpenseEntity>>
 
-//    fun getExpenseById(id: Long): Flow<ExpenseEntity?>
-//    fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
+    //    fun getExpenseById(id: Long): Flow<ExpenseEntity?>
+    fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
 //    fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>>
 //    fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>>
 //    fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>>
@@ -33,7 +33,7 @@ interface ExpenseDataSource {
     suspend fun updateExpense(expense: ExpenseEntity)
     suspend fun deleteExpense(expense: ExpenseEntity)
 
-//    fun getCategorySpending(
+    //    fun getCategorySpending(
 //        categoryType: String,
 //        startDate: Long,
 //        endDate: Long,
@@ -46,4 +46,6 @@ interface ExpenseDataSource {
 //    ): Flow<List<ExpenseGroup>>
     suspend fun getLastExpenseTime(): Long
     fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<CumulativeExpense>>
+    suspend fun setRecurringType(merchant: String, recurringType: String)
+    suspend fun setCancellation(merchant: String, toBeCancelled: Boolean)
 }

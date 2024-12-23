@@ -41,7 +41,7 @@ interface ExpenseDao {
     @Query("SELECT * FROM expenses WHERE id = :id")
     fun getExpenseById(id: Long): Flow<ExpenseEntity?>
 
-    @Query("SELECT * FROM expenses WHERE recurringType != 'NONE'")
+    @Query("SELECT * FROM expenses WHERE recurringType != 'ONETIME' GROUP BY merchant")
     fun getRecurringExpenses(): Flow<List<ExpenseEntity>>
 
     @Query(
@@ -171,4 +171,22 @@ interface ExpenseDao {
     """,
     )
     fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<CumulativeExpense>>
+
+    @Query(
+        """
+        UPDATE expenses 
+        SET recurringType = :recurringType 
+        WHERE merchant = :merchant
+    """,
+    )
+    suspend fun setRecurringType(merchant: String, recurringType: String)
+
+    @Query(
+        """
+        UPDATE expenses 
+        SET toBeCancelled = :toBeCancelled 
+        WHERE merchant = :merchant
+    """,
+    )
+    suspend fun setCancellation(merchant: String, toBeCancelled: Boolean)
 }

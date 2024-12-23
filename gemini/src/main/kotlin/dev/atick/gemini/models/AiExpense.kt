@@ -36,6 +36,6 @@ data class AiExpense(
     val merchant: String,
     val category: AiExpenseCategory,
     val paymentStatus: AiPaymentStatus = AiPaymentStatus.PENDING,
-    val recurringType: AiRecurringType = AiRecurringType.NONE,
+    val recurringType: AiRecurringType = AiRecurringType.ONETIME,
     val paymentDate: String? = null,
 )

@@ -26,13 +26,13 @@ import dev.atick.auth.navigation.signInScreen
 import dev.atick.auth.navigation.signUpScreen
 import dev.atick.compose.navigation.analysis.analysisScreen
 import dev.atick.compose.navigation.budgets.budgetsScreen
-import dev.atick.compose.navigation.categories.categoriesScreen
 import dev.atick.compose.navigation.chat.chatScreen
 import dev.atick.compose.navigation.expenses.ExpensesNavGraph
 import dev.atick.compose.navigation.expenses.editExpenseScreen
 import dev.atick.compose.navigation.expenses.expensesNavGraph
 import dev.atick.compose.navigation.expenses.expensesScreen
 import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
+import dev.atick.compose.navigation.subscriptions.subscriptionsScreen
 import dev.atick.compose.ui.JetpackAppState
 import dev.atick.core.utils.MonthInfo
 
@@ -104,8 +104,7 @@ fun JetpackNavHost(
             monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
-        categoriesScreen(
-            // monthInfo = monthInfo,
+        subscriptionsScreen(
             onShowSnackbar = onShowSnackbar,
         )
         chatScreen(
