@@ -17,18 +17,26 @@
 package dev.atick.compose.ui.budgets
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.data.budgets.BudgetsScreenData
+import dev.atick.compose.ui.components.BudgetChart
 import dev.atick.core.ui.utils.StatefulComposable
+import dev.atick.core.utils.MonthInfo
 
 @Composable
 internal fun BudgetsRoute(
+    monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     budgetsViewModel: BudgetsViewModel = hiltViewModel(),
 ) {
     val budgetsUiState by budgetsViewModel.budgetsUiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(monthInfo) {
+        budgetsViewModel.refreshBudgets(monthInfo)
+    }
 
     StatefulComposable(
         state = budgetsUiState,
@@ -42,4 +50,5 @@ internal fun BudgetsRoute(
 private fun BudgetsScreen(
     budgetsScreenData: BudgetsScreenData,
 ) {
+    BudgetChart(budgetsScreenData)
 }

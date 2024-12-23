@@ -16,6 +16,27 @@
 
 package dev.atick.compose.repository.budgets
 
+import dev.atick.compose.data.budgets.UiCumulativeExpense
+import dev.atick.storage.room.data.ExpenseDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class BudgetsRepositoryImpl @Inject constructor() : BudgetsRepository
+class BudgetsRepositoryImpl @Inject constructor(
+    private val expenseDataSource: ExpenseDataSource,
+) : BudgetsRepository {
+    override fun getCumulativeExpenses(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<UiCumulativeExpense>> {
+        return expenseDataSource.getCumulativeExpenses(startDate, endDate)
+            .map { cumulativeExpenses ->
+                cumulativeExpenses.map { cumulativeExpense ->
+                    UiCumulativeExpense(
+                        amount = cumulativeExpense.amount,
+                        atTime = cumulativeExpense.atTime,
+                    )
+                }
+            }
+    }
+}

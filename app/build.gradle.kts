@@ -133,4 +133,12 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
     ksp(libs.androidx.hilt.compiler)
+
+    // ... Vico
+//    implementation(libs.vico.core)
+//    implementation(libs.vico.compose)
+//    implementation(libs.vico.compose.m3)
+
+    // ... MPAndroidChart
+    implementation("com.github.AppDevNext:AndroidChart:3.1.0.25")
 }

@@ -101,7 +101,7 @@ fun JetpackNavHost(
             onShowSnackbar = onShowSnackbar,
         )
         budgetsScreen(
-            // monthInfo = monthInfo,
+            monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
         categoriesScreen(

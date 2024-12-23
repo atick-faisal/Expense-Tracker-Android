@@ -65,6 +65,9 @@ generativeai = "0.9.0"
 # ... WORK_MANAGER ...
 workVersion = "2.10.0"
 
+# ... Vico ...
+vico = "1.16.0"
+
 # ... SDK-CONFIG ...
 minSdk = "24"
 compileSdk = "35"
@@ -184,4 +187,10 @@ generativeai = { module = "com.google.ai.client.generativeai:generativeai", vers
 
 # ... WORK_MANAGER ...
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workVersion" }
+
+# ... Vico ...
+vico-core = { group = "com.patrykandpatrick.vico", name = "core", version.ref = "vico" }
+vico-compose = { group = "com.patrykandpatrick.vico", name = "compose", version.ref = "vico" }
+vico-compose-m3 = { group = "com.patrykandpatrick.vico", name = "compose-m3", version.ref = "vico" }
+
 

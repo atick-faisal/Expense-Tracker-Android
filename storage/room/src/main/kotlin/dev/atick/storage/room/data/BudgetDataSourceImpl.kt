@@ -21,6 +21,7 @@ import dev.atick.storage.room.dao.BudgetDao
 import dev.atick.storage.room.models.BudgetEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -28,17 +29,71 @@ class BudgetDataSourceImpl @Inject constructor(
     private val budgetDao: BudgetDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BudgetDataSource {
-    override fun getAllBudgets(): Flow<List<BudgetEntity>> {
-        return TODO()
+    override fun getAllBudgets(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<BudgetEntity>> {
+        return budgetDao.getAllBudgets(startDate, endDate).flowOn(ioDispatcher)
     }
 
-    override fun getBudgetForCategory(categoryType: String): Flow<BudgetEntity?> {
-        return TODO()
+    override fun getBudgetById(id: Long): Flow<BudgetEntity?> {
+        return budgetDao.getBudgetById(id).flowOn(ioDispatcher)
+    }
+
+    override fun getCategoryBudgets(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<BudgetEntity>> {
+        return budgetDao.getCategoryBudgets(startDate, endDate).flowOn(ioDispatcher)
+    }
+
+    override fun getMerchantBudgets(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<BudgetEntity>> {
+        return budgetDao.getMerchantBudgets(startDate, endDate).flowOn(ioDispatcher)
+    }
+
+    override fun getBudgetFor(
+        categoryOrMerchantName: String,
+        isMerchant: Boolean,
+        startDate: Long,
+        endDate: Long,
+    ): Flow<BudgetEntity?> {
+        return budgetDao.getBudgetFor(categoryOrMerchantName, isMerchant, startDate, endDate)
+            .flowOn(ioDispatcher)
+    }
+
+    override fun getTotalBudget(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<Double?> {
+        return budgetDao.getTotalBudget(startDate, endDate).flowOn(ioDispatcher)
+    }
+
+    override fun getTotalCategoryBudget(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<Double?> {
+        return budgetDao.getTotalCategoryBudget(startDate, endDate).flowOn(ioDispatcher)
+    }
+
+    override fun getTotalMerchantBudget(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<Double?> {
+        return budgetDao.getTotalMerchantBudget(startDate, endDate).flowOn(ioDispatcher)
     }
 
     override suspend fun insertBudget(budget: BudgetEntity) {
         withContext(ioDispatcher) {
             budgetDao.insertBudget(budget)
+        }
+    }
+
+    override suspend fun insertAllBudgets(budgets: List<BudgetEntity>) {
+        withContext(ioDispatcher) {
+            budgetDao.insertAllBudgets(budgets)
         }
     }
 
