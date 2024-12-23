@@ -30,6 +30,9 @@ interface BudgetDao {
     @Query("SELECT * FROM budgets WHERE createdAt BETWEEN :startDate AND :endDate")
     fun getAllBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
 
+    @Query("SELECT * FROM budgets WHERE id = :id")
+    fun getBudgetById(id: Long): Flow<BudgetEntity?>
+
     @Query(
         """
         SELECT * FROM budgets 

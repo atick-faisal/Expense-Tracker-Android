@@ -14,24 +14,9 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.data.budgets
+package dev.atick.storage.room.models
 
-data class BudgetsScreenData(
-    val budgets: List<UiBudget> = emptyList(),
-    val cumulativeExpenses: List<UiCumulativeExpense> = emptyList(),
-    val totalBudget: Double = 0.0,
-)
-
-data class UiBudget(
-    val id: Long = 0,
-    val amount: Double,
-    val categoryOrMerchantName: String,
-    val description: String? = null,
-    val createdAt: Long = System.currentTimeMillis(),
-    val isMerchant: Boolean = false,
-)
-
-data class UiCumulativeExpense(
+data class CumulativeExpense(
     val amount: Double,
     val atTime: Long,
 )

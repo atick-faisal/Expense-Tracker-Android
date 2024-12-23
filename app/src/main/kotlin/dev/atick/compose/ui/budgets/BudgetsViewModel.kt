@@ -17,12 +17,20 @@
 package dev.atick.compose.ui.budgets
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.atick.compose.data.budgets.BudgetsScreenData
 import dev.atick.compose.repository.budgets.BudgetsRepository
+import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
+import dev.atick.core.ui.utils.updateState
+import dev.atick.core.utils.MonthInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,4 +39,13 @@ class BudgetsViewModel @Inject constructor(
 ) : ViewModel() {
     private val _budgetsUiState = MutableStateFlow(UiState(BudgetsScreenData()))
     val budgetsUiState = _budgetsUiState.asStateFlow()
+
+    fun refreshBudgets(monthInfo: MonthInfo) {
+        budgetsRepository.getCumulativeExpenses(monthInfo.startDate, monthInfo.endDate)
+            .catch { e -> _budgetsUiState.update { it.copy(error = OneTimeEvent(e)) } }
+            .onEach { cumulativeExpenses ->
+                _budgetsUiState.updateState { copy(cumulativeExpenses = cumulativeExpenses) }
+            }
+            .launchIn(viewModelScope)
+    }
 }

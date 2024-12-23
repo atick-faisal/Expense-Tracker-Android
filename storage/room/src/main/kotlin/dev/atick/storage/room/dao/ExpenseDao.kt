@@ -22,6 +22,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import dev.atick.storage.room.models.CumulativeExpense
 import dev.atick.storage.room.models.ExpenseAnalysis
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
@@ -153,4 +154,21 @@ interface ExpenseDao {
 
     @Query("SELECT MAX(paymentDate) FROM expenses")
     suspend fun getLastExpenseTime(): Long?
+
+    @Query(
+        """
+        SELECT 
+            (SELECT SUM(e2.amount) 
+             FROM expenses e2 
+             WHERE e2.paymentDate <= e1.paymentDate 
+             AND e2.paymentDate BETWEEN :startDate AND :endDate
+            ) as amount,
+            paymentDate as atTime
+        FROM expenses e1
+        WHERE paymentDate BETWEEN :startDate AND :endDate
+        GROUP BY paymentDate
+        ORDER BY paymentDate ASC
+    """,
+    )
+    fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<CumulativeExpense>>
 }

@@ -16,6 +16,7 @@
 
 package dev.atick.storage.room.data
 
+import dev.atick.storage.room.models.CumulativeExpense
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -44,4 +45,5 @@ interface ExpenseDataSource {
 //        n: Int = 10,
 //    ): Flow<List<ExpenseGroup>>
     suspend fun getLastExpenseTime(): Long
+    fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<CumulativeExpense>>
 }

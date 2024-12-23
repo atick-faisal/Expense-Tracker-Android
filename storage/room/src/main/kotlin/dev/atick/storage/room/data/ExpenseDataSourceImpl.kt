@@ -18,6 +18,7 @@ package dev.atick.storage.room.data
 
 import dev.atick.core.di.IoDispatcher
 import dev.atick.storage.room.dao.ExpenseDao
+import dev.atick.storage.room.models.CumulativeExpense
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -107,5 +108,12 @@ class ExpenseDataSourceImpl @Inject constructor(
         return withContext(ioDispatcher) {
             expenseDao.getLastExpenseTime() ?: 0
         }
+    }
+
+    override fun getCumulativeExpenses(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<CumulativeExpense>> {
+        return expenseDao.getCumulativeExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 }

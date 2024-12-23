@@ -20,9 +20,21 @@ import dev.atick.storage.room.models.BudgetEntity
 import kotlinx.coroutines.flow.Flow
 
 interface BudgetDataSource {
-    fun getAllBudgets(): Flow<List<BudgetEntity>>
-    fun getBudgetForCategory(categoryType: String): Flow<BudgetEntity?>
+    fun getAllBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
+    fun getBudgetById(id: Long): Flow<BudgetEntity?>
+    fun getCategoryBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
+    fun getMerchantBudgets(startDate: Long, endDate: Long): Flow<List<BudgetEntity>>
+    fun getBudgetFor(
+        categoryOrMerchantName: String,
+        isMerchant: Boolean,
+        startDate: Long,
+        endDate: Long,
+    ): Flow<BudgetEntity?>
+    fun getTotalBudget(startDate: Long, endDate: Long): Flow<Double?>
+    fun getTotalCategoryBudget(startDate: Long, endDate: Long): Flow<Double?>
+    fun getTotalMerchantBudget(startDate: Long, endDate: Long): Flow<Double?>
     suspend fun insertBudget(budget: BudgetEntity)
+    suspend fun insertAllBudgets(budgets: List<BudgetEntity>)
     suspend fun updateBudget(budget: BudgetEntity)
     suspend fun deleteBudget(budget: BudgetEntity)
 }
