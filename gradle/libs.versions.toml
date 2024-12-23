@@ -6,7 +6,7 @@ kotlin = "2.0.21"
 androidGradlePlugin = "8.7.2"
 gmsPlugin = "4.4.2"
 ksp = "2.0.21-1.0.28"
-dokka = "1.9.20"
+dokka = "2.0.0"
 secrets = "2.0.1"
 
 # ... CORE:ANDROID ...
