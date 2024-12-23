@@ -65,6 +65,44 @@ class ExpensesRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun getExpenseById(id: Long): Flow<UiExpense> {
+        return expenseDataSource.getExpenseById(id)
+            .map { expense ->
+                expense ?: throw IllegalArgumentException("Expense not found")
+                UiExpense(
+                    id = expense.id,
+                    amount = expense.amount,
+                    currency = UiCurrencyType.valueOf(expense.currency),
+                    merchant = expense.merchant,
+                    category = UiCategoryType.valueOf(expense.category),
+                    paymentStatus = UiPaymentStatus.valueOf(expense.paymentStatus),
+                    recurringType = UiRecurringType.valueOf(expense.recurringType),
+                    paymentDate = expense.paymentDate,
+                    dueDate = expense.dueDate,
+                    toBeCancelled = expense.toBeCancelled,
+                )
+            }
+    }
+
+    override suspend fun updateExpense(expense: UiExpense): Result<Unit> {
+        return suspendRunCatching {
+            expenseDataSource.updateExpense(
+                ExpenseEntity(
+                    id = expense.id,
+                    amount = expense.amount,
+                    currency = expense.currency.name,
+                    merchant = expense.merchant,
+                    category = expense.category.name,
+                    paymentStatus = expense.paymentStatus.name,
+                    recurringType = expense.recurringType.name,
+                    paymentDate = expense.paymentDate,
+                    dueDate = expense.dueDate,
+                    toBeCancelled = expense.toBeCancelled,
+                ),
+            )
+        }
+    }
+
     override fun syncExpensesFromSms() = flow<SyncProgress> {
         val lastExpenseTime = expenseDataSource.getLastExpenseTime()
         val startDate = max(

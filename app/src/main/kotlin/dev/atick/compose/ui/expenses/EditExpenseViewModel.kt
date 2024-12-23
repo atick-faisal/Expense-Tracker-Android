@@ -16,22 +16,39 @@
 
 package dev.atick.compose.ui.expenses
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.compose.navigation.expenses.EditExpense
+import dev.atick.compose.repository.expenses.ExpensesRepository
+import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
+import dev.atick.core.ui.utils.updateWith
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class EditExpenseViewModel @Inject constructor() : ViewModel() {
+class EditExpenseViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val expenseRepository: ExpensesRepository,
+) : ViewModel() {
+
     private val _expenseUiState = MutableStateFlow(UiState(UiExpense()))
     val expenseUiState = _expenseUiState.asStateFlow()
+
+    private val expenseId = checkNotNull(savedStateHandle.toRoute<EditExpense>().expenseId)
 
     fun setAmount(amount: String) {
         val amountParsed = amount.toDoubleOrNull() ?: 0.0
@@ -67,6 +84,15 @@ class EditExpenseViewModel @Inject constructor() : ViewModel() {
     }
 
     fun saveExpense() {
-        // Save the expense
+        _expenseUiState.updateWith(viewModelScope) {
+            expenseRepository.updateExpense(expenseUiState.value.data)
+        }
+    }
+
+    fun getExpense() {
+        expenseRepository.getExpenseById(expenseId)
+            .onEach { expense -> _expenseUiState.update { it.copy(data = expense) } }
+            .catch { e -> _expenseUiState.update { it.copy(error = OneTimeEvent(e)) } }
+            .launchIn(viewModelScope)
     }
 }

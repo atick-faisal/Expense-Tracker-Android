@@ -37,6 +37,10 @@ class ExpenseDataSourceImpl @Inject constructor(
         return expenseDao.getAllExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
+    override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
+        return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
+    }
+
     override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
         return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
     }

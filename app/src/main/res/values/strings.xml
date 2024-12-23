@@ -70,6 +70,8 @@
     <string name="top_categories">Top Categories</string>
     <string name="top_merchants">Top Merchants</string>
     <string name="merchants">Merchants</string>
-    <string name="subscriptions">Subs</string>
+    <string name="subscriptions">Subscriptions</string>
     <string name="cont">Continue</string>
+    <string name="ok">OK</string>
+    <string name="due_date">Due Date</string>
 </resources>
