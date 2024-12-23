@@ -34,6 +34,7 @@ import androidx.compose.material.icons.filled.Today
 import androidx.compose.material.icons.filled.ViewWeek
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -52,15 +53,46 @@ import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.core.ui.extensions.rememberToastState
 import java.util.Locale
 
 @Composable
 fun ExpenseCard(
     expense: UiExpense,
-    onExpenseClick: (Long) -> Unit,
+    onExpenseClick: ((Long) -> Unit)? = null,
     onRecurringTypeClick: ((String, UiRecurringType) -> Unit)? = null,
     onCancellationClick: ((String, Boolean) -> Unit)? = null,
     modifier: Modifier = Modifier,
+) {
+    if (onExpenseClick != null) {
+        ElevatedCard(
+            modifier = modifier,
+            onClick = { onExpenseClick(expense.id) },
+        ) {
+            ExpenseCardContent(
+                expense = expense,
+                onRecurringTypeClick = onRecurringTypeClick,
+                onCancellationClick = onCancellationClick,
+            )
+        }
+    } else {
+        Card(
+            modifier = modifier,
+        ) {
+            ExpenseCardContent(
+                expense = expense,
+                onRecurringTypeClick = onRecurringTypeClick,
+                onCancellationClick = onCancellationClick,
+            )
+        }
+    }
+}
+
+@Composable
+internal fun ExpenseCardContent(
+    expense: UiExpense,
+    onRecurringTypeClick: ((String, UiRecurringType) -> Unit)? = null,
+    onCancellationClick: ((String, Boolean) -> Unit)? = null,
 ) {
     val currencyFormatter = rememberCurrencyFormatter(expense.currency)
     val cancelBackgroundColor =
@@ -68,124 +100,118 @@ fun ExpenseCard(
     val cancelForegroundColor =
         if (expense.toBeCancelled) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onPrimaryContainer
 
-    ElevatedCard(
-        modifier = modifier.fillMaxWidth(),
-        onClick = { onExpenseClick(expense.id) },
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+            Text(
+                text = currencyFormatter.format(expense.amount),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+            )
+            PaymentStatusChip(status = expense.paymentStatus)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            CategoryTypeChip(categoryType = expense.category)
+
+            expense.merchant.let {
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = currencyFormatter.format(expense.amount),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
+                    text = it,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                PaymentStatusChip(status = expense.paymentStatus)
             }
+        }
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                CategoryTypeChip(categoryType = expense.category)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            RecurringTypeChip(expense, onRecurringTypeClick)
 
-                expense.merchant.let {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+            if (onCancellationClick != null) {
+                AssistChip(
+                    onClick = {
+                        onCancellationClick(
+                            expense.merchant,
+                            !expense.toBeCancelled,
+                        )
+                    },
+                    label = {
+                        Text(
+                            if (expense.toBeCancelled) {
+                                stringResource(R.string.cancel)
+                            } else {
+                                stringResource(
+                                    R.string.cont,
+                                )
+                            },
+                        )
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = if (expense.toBeCancelled) {
+                                Icons.Filled.Cancel
+                            } else {
+                                Icons.Filled.Check
+                            },
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp),
+                            tint = cancelForegroundColor,
+                        )
+                    },
+                    colors = AssistChipDefaults.assistChipColors(
+                        labelColor = cancelForegroundColor,
+                        leadingIconContentColor = cancelForegroundColor,
+                        containerColor = cancelBackgroundColor,
+                    ),
+                )
             }
+        }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                RecurringTypeChip(expense, expense.recurringType, onRecurringTypeClick)
-
-                if (onCancellationClick != null) {
-                    AssistChip(
-                        onClick = {
-                            onCancellationClick(
-                                expense.merchant,
-                                !expense.toBeCancelled,
-                            )
-                        },
-                        label = {
-                            Text(
-                                if (expense.toBeCancelled) {
-                                    stringResource(R.string.cancel)
-                                } else {
-                                    stringResource(
-                                        R.string.cont,
-                                    )
-                                },
-                            )
-                        },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = if (expense.toBeCancelled) {
-                                    Icons.Filled.Cancel
-                                } else {
-                                    Icons.Filled.Check
-                                },
-                                contentDescription = null,
-                                modifier = Modifier.size(18.dp),
-                                tint = cancelForegroundColor,
-                            )
-                        },
-                        colors = AssistChipDefaults.assistChipColors(
-                            labelColor = cancelForegroundColor,
-                            leadingIconContentColor = cancelForegroundColor,
-                            containerColor = cancelBackgroundColor,
-                        ),
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                expense.dueDate?.let {
-                    Text(
-                        text = "Due: $it",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            expense.dueDate?.let {
                 Text(
-                    text = "Paid: ${expense.formattedDate}",
+                    text = "Due: $it",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            Text(
+                text = "Paid: ${expense.formattedDate}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }
 
 @Composable
-private fun RecurringTypeChip(
+internal fun RecurringTypeChip(
     expense: UiExpense,
-    recurringType: UiRecurringType,
     onRecurringTypeClick: ((String, UiRecurringType) -> Unit)? = null,
 ) {
-    val (icon, color) = when (recurringType) {
+    val (icon, color) = when (expense.recurringType) {
         UiRecurringType.ONETIME -> Icons.Filled.Schedule to MaterialTheme.colorScheme.onSurfaceVariant
         UiRecurringType.DAILY -> Icons.Filled.Today to MaterialTheme.colorScheme.error
         UiRecurringType.WEEKLY -> Icons.Filled.ViewWeek to MaterialTheme.colorScheme.primary
@@ -193,11 +219,16 @@ private fun RecurringTypeChip(
         UiRecurringType.YEARLY -> Icons.Filled.CalendarMonth to MaterialTheme.colorScheme.tertiary
     }
 
+    val showToast = rememberToastState()
+
     AssistChip(
-        onClick = { onRecurringTypeClick?.invoke(expense.merchant, expense.recurringType) },
+        onClick = {
+            onRecurringTypeClick?.invoke(expense.merchant, expense.recurringType)
+                ?: showToast("Recurring type: ${expense.recurringType.name}")
+        },
         label = {
             Text(
-                recurringType.name.lowercase().replaceFirstChar {
+                expense.recurringType.name.lowercase().replaceFirstChar {
                     if (it.isLowerCase()) {
                         it.titlecase(
                             Locale.getDefault(),
@@ -220,12 +251,12 @@ private fun RecurringTypeChip(
             labelColor = color,
             leadingIconContentColor = color,
         ),
-        enabled = onRecurringTypeClick != null,
+        // enabled = onRecurringTypeClick != null,
     )
 }
 
 @Composable
-private fun CategoryTypeChip(
+internal fun CategoryTypeChip(
     categoryType: UiCategoryType,
     modifier: Modifier = Modifier,
 ) {
@@ -292,7 +323,7 @@ private fun CategoryTypeChip(
 }
 
 @Composable
-private fun PaymentStatusChip(
+internal fun PaymentStatusChip(
     status: UiPaymentStatus,
     modifier: Modifier = Modifier,
 ) {
@@ -333,7 +364,7 @@ private fun PaymentStatusChip(
 }
 
 @Composable
-private fun rememberCurrencyFormatter(currencyType: UiCurrencyType): NumberFormat {
+internal fun rememberCurrencyFormatter(currencyType: UiCurrencyType): NumberFormat {
     return remember(currencyType) {
         when (currencyType) {
             UiCurrencyType.QAR -> NumberFormat.getCurrencyInstance(Locale("en", "QA"))

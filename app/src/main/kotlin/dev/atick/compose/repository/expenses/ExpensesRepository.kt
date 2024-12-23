@@ -27,6 +27,8 @@ interface ExpensesRepository {
     }
 
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>>
+    fun getExpenseById(id: Long): Flow<UiExpense>
+    suspend fun updateExpense(expense: UiExpense): Result<Unit>
     fun syncExpensesFromSms(): Flow<SyncProgress>
     suspend fun setRecurringType(merchant: String, recurringType: UiRecurringType): Result<Unit>
 }

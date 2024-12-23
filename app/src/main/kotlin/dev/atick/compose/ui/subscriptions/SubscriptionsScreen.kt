@@ -67,7 +67,7 @@ private fun SubscriptionsScreen(
         items(subscriptionsScreenData.subscriptions, key = { it.id }) { subscription ->
             ExpenseCard(
                 expense = subscription,
-                onExpenseClick = {},
+                onExpenseClick = null,
                 onRecurringTypeClick = null,
                 onCancellationClick = onCancellationClick,
             )
