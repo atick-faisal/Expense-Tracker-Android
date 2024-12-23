@@ -16,6 +16,7 @@
 
 package dev.atick.compose.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -185,11 +186,18 @@ fun JetpackApp(
                                 onActionClick = { showSettingsDialog = true },
                                 onNavigationClick = { },
                             )
-                            MonthSelector(
-                                displayMonthYear = "${monthInfo.monthName} ${monthInfo.year}",
-                                onNextMonthClick = { monthOffset++ },
-                                onPreviousMonthClick = { monthOffset-- },
-                            )
+                            AnimatedVisibility(
+                                !(
+                                    appState.currentTopLevelDestination == TopLevelDestination.SUBSCRIPTIONS ||
+                                        appState.currentTopLevelDestination == TopLevelDestination.CHAT
+                                    ),
+                            ) {
+                                MonthSelector(
+                                    displayMonthYear = "${monthInfo.monthName} ${monthInfo.year}",
+                                    onNextMonthClick = { monthOffset++ },
+                                    onPreviousMonthClick = { monthOffset-- },
+                                )
+                            }
                         }
                         JetpackNavHost(
                             appState = appState,

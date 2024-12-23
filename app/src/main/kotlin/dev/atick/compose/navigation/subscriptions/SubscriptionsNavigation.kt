@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.navigation.categories
+package dev.atick.compose.navigation.subscriptions
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import dev.atick.compose.ui.categories.CategoriesRoute
+import dev.atick.compose.ui.subscriptions.SubscriptionsRoute
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object Categories
+data object Subscriptions
 
-fun NavController.navigateToCategories(navOptions: NavOptions? = null) {
-    navigate(Categories, navOptions)
+fun NavController.navigateToSubscriptions(navOptions: NavOptions? = null) {
+    navigate(Subscriptions, navOptions)
 }
 
-fun NavGraphBuilder.categoriesScreen(
+fun NavGraphBuilder.subscriptionsScreen(
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
-    composable<Categories> {
-        CategoriesRoute(
+    composable<Subscriptions> {
+        SubscriptionsRoute(
             onShowSnackbar = onShowSnackbar,
         )
     }

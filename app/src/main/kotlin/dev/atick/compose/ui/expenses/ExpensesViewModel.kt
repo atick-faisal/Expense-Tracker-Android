@@ -20,10 +20,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.atick.compose.data.expenses.ExpensesScreenData
+import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
+import dev.atick.core.ui.utils.updateWith
 import dev.atick.core.utils.MonthInfo
 import dev.atick.core.utils.getMonthInfoAt
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,5 +54,19 @@ class ExpensesViewModel @Inject constructor(
             }
             .catch { e -> _expensesUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
+    }
+
+    fun setRecurringType(merchant: String, recurringType: UiRecurringType) {
+        val newRecurringType = when (recurringType) {
+            UiRecurringType.ONETIME -> UiRecurringType.DAILY
+            UiRecurringType.DAILY -> UiRecurringType.WEEKLY
+            UiRecurringType.WEEKLY -> UiRecurringType.MONTHLY
+            UiRecurringType.MONTHLY -> UiRecurringType.YEARLY
+            UiRecurringType.YEARLY -> UiRecurringType.ONETIME
+        }
+
+        _expensesUiState.updateWith(viewModelScope) {
+            expensesRepository.setRecurringType(merchant, newRecurringType)
+        }
     }
 }

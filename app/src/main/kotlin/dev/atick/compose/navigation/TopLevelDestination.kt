@@ -22,19 +22,19 @@ import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.material.icons.filled.Receipt
-import androidx.compose.material.icons.filled.Tag
+import androidx.compose.material.icons.filled.Subscriptions
 import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.PieChart
 import androidx.compose.material.icons.outlined.Receipt
-import androidx.compose.material.icons.outlined.Tag
+import androidx.compose.material.icons.outlined.Subscriptions
 import androidx.compose.ui.graphics.vector.ImageVector
 import dev.atick.compose.R
 import dev.atick.compose.navigation.analysis.Analysis
 import dev.atick.compose.navigation.budgets.Budgets
-import dev.atick.compose.navigation.categories.Categories
 import dev.atick.compose.navigation.chat.Chat
 import dev.atick.compose.navigation.expenses.Expenses
+import dev.atick.compose.navigation.subscriptions.Subscriptions
 import kotlin.reflect.KClass
 
 /**
@@ -74,12 +74,12 @@ enum class TopLevelDestination(
         titleTextId = R.string.budgets,
         route = Budgets::class,
     ),
-    CATEGORIES(
-        selectedIcon = Icons.Filled.Tag,
-        unselectedIcon = Icons.Outlined.Tag,
-        iconTextId = R.string.categories,
-        titleTextId = R.string.categories,
-        route = Categories::class,
+    SUBSCRIPTIONS(
+        selectedIcon = Icons.Filled.Subscriptions,
+        unselectedIcon = Icons.Outlined.Subscriptions,
+        iconTextId = R.string.subscriptions,
+        titleTextId = R.string.subscriptions,
+        route = Subscriptions::class,
     ),
     CHAT(
         selectedIcon = Icons.Filled.AutoAwesome,

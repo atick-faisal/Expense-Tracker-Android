@@ -18,7 +18,7 @@ package dev.atick.compose.ui.expenses
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.atick.compose.data.categories.UiCategoryType
+import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType

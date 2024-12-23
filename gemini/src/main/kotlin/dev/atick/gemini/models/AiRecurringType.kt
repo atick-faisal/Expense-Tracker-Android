@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class AiRecurringType {
-    NONE,
+    ONETIME,
     DAILY,
     WEEKLY,
     MONTHLY,

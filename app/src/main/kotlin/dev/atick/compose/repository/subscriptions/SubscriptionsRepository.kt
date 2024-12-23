@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-package dev.atick.compose.repository.categories
+package dev.atick.compose.repository.subscriptions
 
-import javax.inject.Inject
+import dev.atick.compose.data.expenses.UiExpense
+import kotlinx.coroutines.flow.Flow
 
-class CategoriesRepositoryImpl @Inject constructor() : CategoriesRepository
+interface SubscriptionsRepository {
+    fun getSubscriptions(): Flow<List<UiExpense>>
+    suspend fun setCancellation(merchant: String, toBeCancelled: Boolean): Result<Unit>
+}

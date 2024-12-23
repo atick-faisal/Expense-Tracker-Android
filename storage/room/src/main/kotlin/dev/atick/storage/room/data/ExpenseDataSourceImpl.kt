@@ -37,6 +37,10 @@ class ExpenseDataSourceImpl @Inject constructor(
         return expenseDao.getAllExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
+    override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
+        return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
+    }
+
 //    override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
 //        return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
 //    }
@@ -115,5 +119,17 @@ class ExpenseDataSourceImpl @Inject constructor(
         endDate: Long,
     ): Flow<List<CumulativeExpense>> {
         return expenseDao.getCumulativeExpenses(startDate, endDate).flowOn(ioDispatcher)
+    }
+
+    override suspend fun setRecurringType(merchant: String, recurringType: String) {
+        withContext(ioDispatcher) {
+            expenseDao.setRecurringType(merchant, recurringType)
+        }
+    }
+
+    override suspend fun setCancellation(merchant: String, toBeCancelled: Boolean) {
+        withContext(ioDispatcher) {
+            expenseDao.setCancellation(merchant, toBeCancelled)
+        }
     }
 }

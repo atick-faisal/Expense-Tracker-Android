@@ -50,7 +50,7 @@
     <string name="purchase_premium">Purchase Jetpack Premium</string>
     <string name="expenses">Expenses</string>
     <string name="analysis">Analysis</string>
-    <string name="budgets">Budgets</string>
+    <string name="budgets">Budget</string>
     <string name="categories">Categories</string>
     <string name="chat">Chat</string>
     <string name="type_message">Type a Message</string>
@@ -70,4 +70,6 @@
     <string name="top_categories">Top Categories</string>
     <string name="top_merchants">Top Merchants</string>
     <string name="merchants">Merchants</string>
+    <string name="subscriptions">Subs</string>
+    <string name="cont">Continue</string>
 </resources>
