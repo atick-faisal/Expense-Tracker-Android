@@ -192,13 +192,13 @@ internal fun ExpenseCardContent(
         ) {
             expense.dueDate?.let {
                 Text(
-                    text = "Due: $it",
+                    text = stringResource(R.string.due, it),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
             Text(
-                text = "Paid: ${expense.formattedDate}",
+                text = stringResource(R.string.paid, expense.formattedDate),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

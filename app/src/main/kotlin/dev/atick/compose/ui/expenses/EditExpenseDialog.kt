@@ -122,7 +122,7 @@ private fun EditExpenseDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Edit Expense") },
+        title = { Text(stringResource(R.string.edit_expense)) },
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text(stringResource(R.string.save))

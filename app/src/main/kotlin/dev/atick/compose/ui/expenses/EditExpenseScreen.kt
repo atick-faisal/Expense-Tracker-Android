@@ -125,7 +125,7 @@ fun EditExpenseScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = "Edit Expense",
+            text = stringResource(R.string.edit_expense),
             style = MaterialTheme.typography.headlineMedium,
         )
 

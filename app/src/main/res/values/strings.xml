@@ -80,4 +80,23 @@
     <string name="add_budget">Add Budget</string>
     <string name="add">Add</string>
     <string name="budget">Budget</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="budget_on_track">Budget On Track</string>
+    <string name="you_re_managing_your_budget_well">You\'re managing your budget well!</string>
+    <string name="approaching_budget_limit">Approaching Budget Limit</string>
+    <string name="consider_reducing_expenses">Consider reducing expenses</string>
+    <string name="near_budget_limit">Near Budget Limit</string>
+    <string name="critical_threshold_reached">Critical threshold reached</string>
+    <string name="budget_exceeded">Budget Exceeded</string>
+    <string name="immediate_action_required">Immediate action required</string>
+    <string name="total_budget">Total Budget:</string>
+    <string name="current_expenses">Current Expenses:</string>
+    <string name="over_budget_by">Over Budget By:</string>
+    <string name="remaining">Remaining:</string>
+    <string name="of_budget_used">%1$s%% of budget used</string>
+    <string name="edit_budget">Edit Budget</string>
+    <string name="edit_expense">Edit Expense</string>
+    <string name="due">Due: %1$s</string>
+    <string name="paid">Paid: %1$s</string>
 </resources>

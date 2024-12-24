@@ -43,10 +43,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.atick.compose.R
 import dev.atick.compose.data.budgets.BudgetStatus
 import dev.atick.compose.data.budgets.BudgetsScreenData
 import dev.atick.compose.data.expenses.UiCurrencyType
@@ -114,32 +116,32 @@ fun BudgetStatusCard(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
             icon = Icons.Default.CheckCircle,
-            title = "Budget On Track",
-            message = "You're managing your budget well!",
+            title = stringResource(R.string.budget_on_track),
+            message = stringResource(R.string.you_re_managing_your_budget_well),
         )
 
         BudgetStatus.WARNING -> StatusConfig(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
             icon = Icons.Default.Info,
-            title = "Approaching Budget Limit",
-            message = "Consider reducing expenses",
+            title = stringResource(R.string.approaching_budget_limit),
+            message = stringResource(R.string.consider_reducing_expenses),
         )
 
         BudgetStatus.CRITICAL -> StatusConfig(
             containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f),
             contentColor = MaterialTheme.colorScheme.onErrorContainer,
             icon = Icons.Default.Warning,
-            title = "Near Budget Limit",
-            message = "Critical threshold reached",
+            title = stringResource(R.string.near_budget_limit),
+            message = stringResource(R.string.critical_threshold_reached),
         )
 
         BudgetStatus.EXCEEDED -> StatusConfig(
             containerColor = MaterialTheme.colorScheme.errorContainer,
             contentColor = MaterialTheme.colorScheme.onErrorContainer,
             icon = Icons.Default.Error,
-            title = "Budget Exceeded",
-            message = "Immediate action required",
+            title = stringResource(R.string.budget_exceeded),
+            message = stringResource(R.string.immediate_action_required),
         )
     }
 
@@ -190,24 +192,24 @@ fun BudgetStatusCard(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 BudgetInfoRow(
-                    label = "Total Budget:",
+                    label = stringResource(R.string.total_budget),
                     value = currencyFormatter.format(screenData.budget.amount),
                     color = statusConfig.contentColor,
                 )
                 BudgetInfoRow(
-                    label = "Current Expenses:",
+                    label = stringResource(R.string.current_expenses),
                     value = currencyFormatter.format(screenData.currentExpenses),
                     color = statusConfig.contentColor,
                 )
                 if (screenData.budgetStatus == BudgetStatus.EXCEEDED) {
                     BudgetInfoRow(
-                        label = "Over Budget By:",
+                        label = stringResource(R.string.over_budget_by),
                         value = currencyFormatter.format(screenData.overBudgetAmount),
                         color = statusConfig.contentColor,
                     )
                 } else {
                     BudgetInfoRow(
-                        label = "Remaining:",
+                        label = stringResource(R.string.remaining),
                         value = currencyFormatter.format(screenData.remainingBudget),
                         color = statusConfig.contentColor,
                     )
@@ -223,7 +225,7 @@ fun BudgetStatusCard(
             )
 
             Text(
-                text = "${screenData.percentageUsed.format()}% of budget used",
+                text = stringResource(R.string.of_budget_used, screenData.percentageUsed.format()),
                 style = MaterialTheme.typography.labelMedium,
                 color = statusConfig.contentColor.copy(alpha = 0.8f),
                 modifier = Modifier.padding(top = 4.dp),

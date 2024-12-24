@@ -212,7 +212,7 @@ fun ExpenseAnalysisCard(
                         )
                         Column {
                             Text(
-                                text = "Min",
+                                text = stringResource(R.string.min),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -237,7 +237,7 @@ fun ExpenseAnalysisCard(
                         )
                         Column {
                             Text(
-                                text = "Max",
+                                text = stringResource(R.string.max),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
