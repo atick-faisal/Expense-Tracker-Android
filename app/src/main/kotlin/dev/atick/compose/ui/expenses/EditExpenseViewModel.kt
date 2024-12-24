@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.atick.compose.data.expenses.EditExpenseScreenData
 import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
@@ -30,7 +31,7 @@ import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
-import dev.atick.core.ui.utils.updateWith
+import dev.atick.core.ui.utils.updateStateWith
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -45,7 +46,7 @@ class EditExpenseViewModel @Inject constructor(
     private val expenseRepository: ExpensesRepository,
 ) : ViewModel() {
 
-    private val _expenseUiState = MutableStateFlow(UiState(UiExpense()))
+    private val _expenseUiState = MutableStateFlow(UiState(EditExpenseScreenData()))
     val expenseUiState = _expenseUiState.asStateFlow()
 
     private val expenseId = checkNotNull(savedStateHandle.toRoute<EditExpense>().expenseId)
@@ -84,14 +85,43 @@ class EditExpenseViewModel @Inject constructor(
     }
 
     fun saveExpense() {
-        _expenseUiState.updateWith(viewModelScope) {
-            expenseRepository.updateExpense(expenseUiState.value.data)
+        _expenseUiState.updateStateWith(viewModelScope) {
+            expenseRepository.updateExpense(
+                UiExpense(
+                    id = expenseId,
+                    amount = expenseUiState.value.data.amount,
+                    currency = expenseUiState.value.data.currency,
+                    merchant = expenseUiState.value.data.merchant,
+                    category = expenseUiState.value.data.category,
+                    paymentStatus = expenseUiState.value.data.paymentStatus,
+                    recurringType = expenseUiState.value.data.recurringType,
+                    paymentDate = expenseUiState.value.data.paymentDate,
+                    dueDate = expenseUiState.value.data.dueDate,
+                    toBeCancelled = expenseUiState.value.data.toBeCancelled,
+                ),
+            )
+            // TODO: Must be a better way to do this
+            Result.success(expenseUiState.value.data.copy(navigateBack = OneTimeEvent(true)))
         }
     }
 
     fun getExpense() {
         expenseRepository.getExpenseById(expenseId)
-            .onEach { expense -> _expenseUiState.update { it.copy(data = expense) } }
+            .onEach { expense ->
+                _expenseUiState.updateState {
+                    copy(
+                        amount = expense.amount,
+                        currency = expense.currency,
+                        merchant = expense.merchant,
+                        category = expense.category,
+                        paymentStatus = expense.paymentStatus,
+                        recurringType = expense.recurringType,
+                        paymentDate = expense.paymentDate,
+                        dueDate = expense.dueDate,
+                        toBeCancelled = expense.toBeCancelled,
+                    )
+                }
+            }
             .catch { e -> _expenseUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
     }

@@ -156,10 +156,10 @@ internal fun ExpenseCardContent(
                     label = {
                         Text(
                             if (expense.toBeCancelled) {
-                                stringResource(R.string.cancel)
+                                stringResource(R.string.to_be_cancelled)
                             } else {
                                 stringResource(
-                                    R.string.cont,
+                                    R.string.to_be_continued,
                                 )
                             },
                         )

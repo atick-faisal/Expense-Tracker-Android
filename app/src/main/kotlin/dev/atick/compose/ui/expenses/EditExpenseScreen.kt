@@ -27,10 +27,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.Category
-import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Payment
 import androidx.compose.material.icons.filled.Repeat
+import androidx.compose.material.icons.filled.Store
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -54,12 +55,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
+import dev.atick.compose.data.expenses.EditExpenseScreenData
 import dev.atick.compose.data.expenses.UiCategoryType
-import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.core.ui.components.JetpackButton
-import dev.atick.core.ui.components.JetpackMultilineTextField
 import dev.atick.core.ui.components.JetpackOutlinedButton
 import dev.atick.core.ui.components.JetpackTextField
 import dev.atick.core.ui.utils.StatefulComposable
@@ -97,7 +97,7 @@ internal fun EditExpenseRoute(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditExpenseScreen(
-    expense: UiExpense,
+    expense: EditExpenseScreenData,
     onAmountChange: (String) -> Unit,
     onCategoryChange: (UiCategoryType) -> Unit,
     onPaymentStatusChange: (UiPaymentStatus) -> Unit,
@@ -110,6 +110,12 @@ fun EditExpenseScreen(
     var categoriesExpanded by remember { mutableStateOf(false) }
     var paymentStatusExpanded by remember { mutableStateOf(false) }
     var recurringTypeExpanded by remember { mutableStateOf(false) }
+
+    LaunchedEffect(expense.navigateBack) {
+        if (expense.navigateBack.getContentIfNotHandled() == true) {
+            onCancel()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -131,6 +137,20 @@ fun EditExpenseScreen(
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             leadingIcon = { Icon(Icons.Default.AttachMoney, contentDescription = null) },
+        )
+
+        // Description
+        JetpackTextField(
+            value = expense.merchant,
+            onValueChange = onDescriptionChange,
+            label = { Text(stringResource(R.string.merchant)) },
+            leadingIcon = {
+                Icon(
+                    Icons.Default.Store,
+                    contentDescription = stringResource(R.string.merchant),
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
         )
 
         // Category
@@ -241,20 +261,6 @@ fun EditExpenseScreen(
             }
         }
 
-        // Description
-        JetpackMultilineTextField(
-            value = expense.merchant,
-            onValueChange = onDescriptionChange,
-            label = { Text(stringResource(R.string.description)) },
-            leadingIcon = {
-                Icon(
-                    Icons.Default.Description,
-                    contentDescription = stringResource(R.string.description),
-                )
-            },
-            modifier = Modifier.fillMaxWidth(),
-        )
-
         // To Be Cancelled
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -264,6 +270,10 @@ fun EditExpenseScreen(
             Checkbox(
                 checked = expense.toBeCancelled,
                 onCheckedChange = onToBeCancelledChange,
+                colors = CheckboxDefaults.colors(
+                    checkedColor = MaterialTheme.colorScheme.error,
+                    checkmarkColor = MaterialTheme.colorScheme.onError,
+                ),
             )
             Text(stringResource(R.string.to_be_cancelled))
         }
