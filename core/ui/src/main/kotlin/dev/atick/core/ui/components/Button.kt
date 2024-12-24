@@ -54,9 +54,9 @@ fun JetpackButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.onBackground,
-        ),
+//        colors = ButtonDefaults.buttonColors(
+//            containerColor = MaterialTheme.colorScheme.onBackground,
+//        ),
         contentPadding = contentPadding,
         content = content,
     )
