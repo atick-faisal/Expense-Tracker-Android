@@ -37,7 +37,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -122,7 +121,8 @@ class EditExpenseViewModel @Inject constructor(
                     )
                 }
             }
-            .catch { e -> _expenseUiState.update { it.copy(error = OneTimeEvent(e)) } }
+            // .catch { e -> _expenseUiState.update { it.copy(error = OneTimeEvent(e)) } }
+            .catch { } // Ignore for now
             .launchIn(viewModelScope)
     }
 }

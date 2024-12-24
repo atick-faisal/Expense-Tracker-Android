@@ -41,6 +41,7 @@ fun JetpackNavHost(
     appState: JetpackAppState,
     monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
+    onFabClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController

@@ -34,6 +34,7 @@ import dev.atick.compose.navigation.TopLevelDestination
 import dev.atick.compose.navigation.analysis.navigateToAnalysis
 import dev.atick.compose.navigation.budgets.navigateToBudgets
 import dev.atick.compose.navigation.chat.navigateToChat
+import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
 import dev.atick.compose.navigation.expenses.navigateToExpensesNavGraph
 import dev.atick.compose.navigation.subscriptions.navigateToSubscriptions
 import dev.atick.core.extensions.stateInDelayed
@@ -102,6 +103,14 @@ class JetpackAppState(
         @Composable get() = (windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact) &&
             (currentTopLevelDestination != null)
 
+    val shouldShowMonthSelector: Boolean
+        @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
+            currentTopLevelDestination == TopLevelDestination.ANALYSIS
+
+    val shouldShowFab: Boolean
+        @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
+            currentTopLevelDestination == TopLevelDestination.BUDGETS
+
     val isOffline = networkUtils.currentState
         .map { it != NetworkState.CONNECTED }
         .stateInDelayed(false, coroutineScope)
@@ -111,6 +120,10 @@ class JetpackAppState(
     val topLevelDestinationsWithUnreadResources: StateFlow<Set<TopLevelDestination>> =
         // TODO: Requires Implementation
         MutableStateFlow(setOf<TopLevelDestination>()).asStateFlow()
+
+    fun navigateToEditExpenseScreen() {
+        navController.navigateToEditExpenseScreen(0L)
+    }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         val topLevelNavOptions = navOptions {
@@ -122,10 +135,16 @@ class JetpackAppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.EXPENSES -> navController.navigateToExpensesNavGraph(topLevelNavOptions)
+            TopLevelDestination.EXPENSES -> navController.navigateToExpensesNavGraph(
+                topLevelNavOptions,
+            )
+
             TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
             TopLevelDestination.BUDGETS -> navController.navigateToBudgets(topLevelNavOptions)
-            TopLevelDestination.SUBSCRIPTIONS -> navController.navigateToSubscriptions(topLevelNavOptions)
+            TopLevelDestination.SUBSCRIPTIONS -> navController.navigateToSubscriptions(
+                topLevelNavOptions,
+            )
+
             TopLevelDestination.CHAT -> navController.navigateToChat(topLevelNavOptions)
         }
     }
