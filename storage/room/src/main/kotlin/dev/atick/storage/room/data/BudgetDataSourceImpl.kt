@@ -29,77 +29,13 @@ class BudgetDataSourceImpl @Inject constructor(
     private val budgetDao: BudgetDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BudgetDataSource {
-    override fun getAllBudgets(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<List<BudgetEntity>> {
-        return budgetDao.getAllBudgets(startDate, endDate).flowOn(ioDispatcher)
+    override fun getBudgetForMonth(month: Long): Flow<BudgetEntity?> {
+        return budgetDao.getBudgetForMonth(month).flowOn(ioDispatcher)
     }
 
-    override fun getBudgetById(id: Long): Flow<BudgetEntity?> {
-        return budgetDao.getBudgetById(id).flowOn(ioDispatcher)
-    }
-
-    override fun getCategoryBudgets(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<List<BudgetEntity>> {
-        return budgetDao.getCategoryBudgets(startDate, endDate).flowOn(ioDispatcher)
-    }
-
-    override fun getMerchantBudgets(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<List<BudgetEntity>> {
-        return budgetDao.getMerchantBudgets(startDate, endDate).flowOn(ioDispatcher)
-    }
-
-    override fun getBudgetFor(
-        categoryOrMerchantName: String,
-        isMerchant: Boolean,
-        startDate: Long,
-        endDate: Long,
-    ): Flow<BudgetEntity?> {
-        return budgetDao.getBudgetFor(categoryOrMerchantName, isMerchant, startDate, endDate)
-            .flowOn(ioDispatcher)
-    }
-
-    override fun getTotalBudget(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double?> {
-        return budgetDao.getTotalBudget(startDate, endDate).flowOn(ioDispatcher)
-    }
-
-    override fun getTotalCategoryBudget(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double?> {
-        return budgetDao.getTotalCategoryBudget(startDate, endDate).flowOn(ioDispatcher)
-    }
-
-    override fun getTotalMerchantBudget(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double?> {
-        return budgetDao.getTotalMerchantBudget(startDate, endDate).flowOn(ioDispatcher)
-    }
-
-    override suspend fun insertBudget(budget: BudgetEntity) {
+    override suspend fun insertOrUpdateBudget(budget: BudgetEntity) {
         withContext(ioDispatcher) {
-            budgetDao.insertBudget(budget)
-        }
-    }
-
-    override suspend fun insertAllBudgets(budgets: List<BudgetEntity>) {
-        withContext(ioDispatcher) {
-            budgetDao.insertAllBudgets(budgets)
-        }
-    }
-
-    override suspend fun updateBudget(budget: BudgetEntity) {
-        withContext(ioDispatcher) {
-            budgetDao.updateBudget(budget)
+            budgetDao.insertOrUpdateBudget(budget)
         }
     }
 

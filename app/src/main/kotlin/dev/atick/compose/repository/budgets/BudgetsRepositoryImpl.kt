@@ -16,14 +16,19 @@
 
 package dev.atick.compose.repository.budgets
 
+import dev.atick.compose.data.budgets.UiBudget
 import dev.atick.compose.data.budgets.UiCumulativeExpense
+import dev.atick.core.utils.suspendRunCatching
+import dev.atick.storage.room.data.BudgetDataSource
 import dev.atick.storage.room.data.ExpenseDataSource
+import dev.atick.storage.room.models.BudgetEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class BudgetsRepositoryImpl @Inject constructor(
     private val expenseDataSource: ExpenseDataSource,
+    private val budgetDataSource: BudgetDataSource,
 ) : BudgetsRepository {
     override fun getCumulativeExpenses(
         startDate: Long,
@@ -35,8 +40,41 @@ class BudgetsRepositoryImpl @Inject constructor(
                     UiCumulativeExpense(
                         amount = cumulativeExpense.amount,
                         atTime = cumulativeExpense.atTime,
+
                     )
                 }
             }
+    }
+
+    override fun getBudgetForMonth(month: Long): Flow<UiBudget> {
+        return budgetDataSource.getBudgetForMonth(month)
+            .map { budgetEntity ->
+                UiBudget(
+                    month = budgetEntity?.month ?: month,
+                    amount = budgetEntity?.amount ?: 0.0,
+                )
+            }
+    }
+
+    override suspend fun insertOrUpdateBudget(budget: UiBudget): Result<Unit> {
+        return suspendRunCatching {
+            budgetDataSource.insertOrUpdateBudget(
+                BudgetEntity(
+                    month = budget.month,
+                    amount = budget.amount,
+                ),
+            )
+        }
+    }
+
+    override suspend fun deleteBudget(budget: UiBudget): Result<Unit> {
+        return suspendRunCatching {
+            budgetDataSource.deleteBudget(
+                BudgetEntity(
+                    month = budget.month,
+                    amount = budget.amount,
+                ),
+            )
+        }
     }
 }
