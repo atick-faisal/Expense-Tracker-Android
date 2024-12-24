@@ -16,6 +16,7 @@
 
 package dev.atick.compose.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,8 +36,12 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.NavigateBefore
 import androidx.compose.material.icons.automirrored.outlined.NavigateNext
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AddChart
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -61,6 +66,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -133,6 +139,24 @@ fun JetpackApp(
                 )
             }
 
+            val fabIcon: ImageVector = when (appState.currentTopLevelDestination) {
+                TopLevelDestination.EXPENSES -> Icons.Default.Edit
+                TopLevelDestination.BUDGETS -> Icons.Default.AddChart
+                else -> Icons.Default.Add
+            }
+
+            val fabLabel = when (appState.currentTopLevelDestination) {
+                TopLevelDestination.EXPENSES -> R.string.add_expense
+                TopLevelDestination.BUDGETS -> R.string.add_budget
+                else -> R.string.add
+            }
+
+            val fabAction = when (appState.currentTopLevelDestination) {
+                TopLevelDestination.EXPENSES -> appState::navigateToEditExpenseScreen
+                // TopLevelDestination.BUDGETS -> appState::navigateToEditBudgetScreen
+                else -> appState::navigateToEditExpenseScreen
+            }
+
             Scaffold(
                 containerColor = Color.Transparent,
                 contentColor = MaterialTheme.colorScheme.onBackground,
@@ -146,6 +170,15 @@ fun JetpackApp(
                             destinationsWithUnreadResources = emptySet(),
                             onNavigateToDestination = appState::navigateToTopLevelDestination,
                             currentDestination = appState.currentDestination,
+                        )
+                    }
+                },
+                floatingActionButton = {
+                    if (appState.shouldShowFab) {
+                        JetpackFloatingActionButton(
+                            icon = fabIcon,
+                            text = fabLabel,
+                            onClick = fabAction,
                         )
                     }
                 },
@@ -187,12 +220,7 @@ fun JetpackApp(
                                 onActionClick = { showSettingsDialog = true },
                                 onNavigationClick = { },
                             )
-                            AnimatedVisibility(
-                                !(
-                                    appState.currentTopLevelDestination == TopLevelDestination.SUBSCRIPTIONS ||
-                                        appState.currentTopLevelDestination == TopLevelDestination.CHAT
-                                    ),
-                            ) {
+                            AnimatedVisibility(visible = appState.shouldShowMonthSelector) {
                                 MonthSelector(
                                     displayMonthYear = "${monthInfo.monthName} ${monthInfo.year}",
                                     onNextMonthClick = { monthOffset++ },
@@ -210,6 +238,7 @@ fun JetpackApp(
                                     duration = SnackbarDuration.Short,
                                 ) == SnackbarResult.ActionPerformed
                             },
+                            onFabClick = { },
                         )
                         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
                     }
@@ -293,6 +322,19 @@ fun JetpackBottomBar(
             )
         }
     }
+}
+
+@Composable
+fun JetpackFloatingActionButton(
+    icon: ImageVector,
+    @StringRes text: Int,
+    onClick: () -> Unit,
+) {
+    ExtendedFloatingActionButton(
+        onClick = onClick,
+        icon = { Icon(icon, stringResource(text)) },
+        text = { Text(text = stringResource(text)) },
+    )
 }
 
 @Composable

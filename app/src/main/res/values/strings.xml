@@ -76,4 +76,7 @@
     <string name="due_date">Due Date</string>
     <string name="merchant">Merchant</string>
     <string name="to_be_continued">To be Continued</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="add_budget">Add Budget</string>
+    <string name="add">Add</string>
 </resources>

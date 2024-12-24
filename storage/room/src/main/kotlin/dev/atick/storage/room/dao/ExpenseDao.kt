@@ -21,7 +21,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
+import androidx.room.Upsert
 import dev.atick.storage.room.models.CumulativeExpense
 import dev.atick.storage.room.models.ExpenseAnalysis
 import dev.atick.storage.room.models.ExpenseEntity
@@ -70,7 +70,7 @@ interface ExpenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExpense(expense: ExpenseEntity): Long
 
-    @Update
+    @Upsert
     suspend fun updateExpense(expense: ExpenseEntity)
 
     @Delete
