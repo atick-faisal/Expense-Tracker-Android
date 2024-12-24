@@ -27,7 +27,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -35,12 +37,14 @@ import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.ChatBubble
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,15 +57,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
 import dev.atick.compose.data.chat.ChatScreenData
 import dev.atick.compose.data.chat.UiMessage
+import dev.atick.compose.data.chat.demoQuestions
 import dev.atick.core.ui.components.JetpackMultilineTextField
 import dev.atick.core.ui.utils.StatefulComposable
+import dev.atick.core.utils.MonthInfo
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun ChatRoute(
+    monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
     chatViewModel: ChatViewModel = hiltViewModel(),
 ) {
     val chatUiState by chatViewModel.chatUiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(monthInfo) {
+        chatViewModel.initializeChat(monthInfo, 10)
+    }
 
     StatefulComposable(
         state = chatUiState,
@@ -83,8 +95,19 @@ private fun ChatScreen(
 ) {
     val focusManager = LocalFocusManager.current
 
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(chatScreenData.messages.size) {
+        delay(100) // Small delay for smoother animation
+        listState.animateScrollToItem(
+            index = 0,
+            scrollOffset = 0,
+        )
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
+            state = listState,
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
@@ -99,8 +122,32 @@ private fun ChatScreen(
             reverseLayout = true,
         ) {
             items(chatScreenData.messages.reversed(), key = { it.id }) { message ->
-                ChatMessageItem(message, modifier = Modifier.padding(vertical = 8.dp).animateItem())
+                ChatMessageItem(
+                    message,
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .animateItem(),
+                )
                 // Spacer(modifier = Modifier.height(8.dp))
+            }
+        }
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            item {
+                Spacer(modifier = Modifier.width(16.dp))
+            }
+            items(demoQuestions) {
+                AssistChip(
+                    label = { Text(it) },
+                    onClick = {
+                        onNewMessageUpdate(it)
+                        onSendMessage()
+                    },
+                )
             }
         }
         JetpackMultilineTextField(
@@ -108,7 +155,7 @@ private fun ChatScreen(
             onValueChange = onNewMessageUpdate,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 16.dp),
             label = { Text(stringResource(id = R.string.type_message)) },
             leadingIcon = {
                 Icon(

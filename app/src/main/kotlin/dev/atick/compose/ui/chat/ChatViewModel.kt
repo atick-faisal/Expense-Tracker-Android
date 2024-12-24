@@ -26,6 +26,7 @@ import dev.atick.core.ui.utils.TextFieldData
 import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
 import dev.atick.core.ui.utils.updateWith
+import dev.atick.core.utils.MonthInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -50,8 +51,15 @@ class ChatViewModel @Inject constructor(
             }
             .catch { e -> _chatUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
+    }
 
-        _chatUiState.updateWith(viewModelScope) { chatRepository.initializeChat(10) }
+    fun initializeChat(monthInfo: MonthInfo, historyDepth: Int) {
+        _chatUiState.updateWith(viewModelScope) {
+            chatRepository.initializeChat(
+                monthInfo,
+                historyDepth,
+            )
+        }
     }
 
     fun onNewMessageUpdate(newMessage: String) {

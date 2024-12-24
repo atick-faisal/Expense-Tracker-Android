@@ -105,9 +105,8 @@ class JetpackAppState(
             (currentTopLevelDestination != null)
 
     val shouldShowMonthSelector: Boolean
-        @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
-            currentTopLevelDestination == TopLevelDestination.ANALYSIS ||
-            currentTopLevelDestination == TopLevelDestination.BUDGETS
+        @Composable get() = (currentTopLevelDestination != null) &&
+            currentTopLevelDestination != TopLevelDestination.SUBSCRIPTIONS
 
     val shouldShowFab: Boolean
         @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||

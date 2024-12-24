@@ -118,7 +118,7 @@ fun JetpackNavHost(
             onShowSnackbar = onShowSnackbar,
         )
         chatScreen(
-            // monthInfo = monthInfo,
+            monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
     }
