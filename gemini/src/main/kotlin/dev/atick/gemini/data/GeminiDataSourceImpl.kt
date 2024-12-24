@@ -39,13 +39,16 @@ class GeminiDataSourceImpl @Inject constructor(
 
     private lateinit var chat: Chat
 
-    override suspend fun initializeChat(messages: List<AiChatMessage>) {
+    override suspend fun initializeChat(messages: List<AiChatMessage>, context: String) {
         withContext(ioDispatcher) {
             val chatHistory = messages.toGeminiContents()
             chat = chatModel.startChat(chatHistory)
             chat.sendMessage(
-                "For the rest of the conversation, keep the response concise" +
-                    " and reply in plain text. Do not format the output.",
+                "For the rest of the conversation, try use the provided context below to answer." +
+                    " queries. If not enough information is available in the context, try to" +
+                    " provide helpful suggestion if possible. Keep the response concise" +
+                    " and reply in plain text. Do not format the output." +
+                    "\n\nContext: \n $context",
             )
         }
     }

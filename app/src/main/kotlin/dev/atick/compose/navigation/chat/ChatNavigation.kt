@@ -21,6 +21,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import dev.atick.compose.ui.chat.ChatRoute
+import dev.atick.core.utils.MonthInfo
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -31,10 +32,12 @@ fun NavController.navigateToChat(navOptions: NavOptions?) {
 }
 
 fun NavGraphBuilder.chatScreen(
+    monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
     composable<Chat> {
         ChatRoute(
+            monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
     }

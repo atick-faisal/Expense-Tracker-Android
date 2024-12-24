@@ -41,3 +41,15 @@ fun ChatEntity.asUiMessage(): UiMessage {
 fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
     return map(ChatEntity::asUiMessage)
 }
+
+val demoQuestions = listOf<String>(
+    "What's my total spending this month?",
+    "Which merchant did I spend most on?",
+    "How much did I spend at Netflix last month?",
+    "Am I over budget this month?",
+    "How much of my monthly budget is left?",
+    "List all my active subscriptions",
+    "How much do I spend on subscriptions monthly?",
+    "Where can I cut expenses?",
+    "Show my biggest one-time purchases",
+)

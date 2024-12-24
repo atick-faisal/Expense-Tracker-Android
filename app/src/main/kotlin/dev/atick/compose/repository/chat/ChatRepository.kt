@@ -17,10 +17,11 @@
 package dev.atick.compose.repository.chat
 
 import dev.atick.compose.data.chat.UiMessage
+import dev.atick.core.utils.MonthInfo
 import kotlinx.coroutines.flow.Flow
 
 interface ChatRepository {
     fun getAllMessages(): Flow<List<UiMessage>>
-    suspend fun initializeChat(historyDepth: Int): Result<Unit>
+    suspend fun initializeChat(monthInfo: MonthInfo, historyDepth: Int): Result<Unit>
     suspend fun sendMessage(message: String): Result<Unit>
 }
