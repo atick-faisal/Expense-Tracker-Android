@@ -79,4 +79,5 @@
     <string name="add_expense">Add Expense</string>
     <string name="add_budget">Add Budget</string>
     <string name="add">Add</string>
+    <string name="budget">Budget</string>
 </resources>

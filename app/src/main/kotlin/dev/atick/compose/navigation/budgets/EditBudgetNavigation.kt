@@ -18,43 +18,28 @@ package dev.atick.compose.navigation.budgets
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import dev.atick.compose.ui.budgets.BudgetsRoute
+import dev.atick.compose.ui.budgets.EditBudgetRoute
 import dev.atick.core.utils.MonthInfo
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object Budgets
+data object EditBudget
 
-@Serializable
-data object BudgetsNavGraph
-
-fun NavController.navigateToBudgetsNavGraph(navOptions: NavOptions? = null) {
-    navigate(BudgetsNavGraph, navOptions)
+fun NavController.navigateToEditBudgetScreen() {
+    navigate(EditBudget) { launchSingleTop = true }
 }
 
-fun NavController.navigateToBudgets(navOptions: NavOptions?) {
-    navigate(Budgets, navOptions)
-}
-
-fun NavGraphBuilder.budgetsScreen(
+fun NavGraphBuilder.editBudgetScreen(
     monthInfo: MonthInfo,
+    onBackClick: () -> Unit,
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {
-    composable<Budgets> {
-        BudgetsRoute(
+    composable<EditBudget> {
+        EditBudgetRoute(
             monthInfo = monthInfo,
+            onBackClick = onBackClick,
             onShowSnackbar = onShowSnackbar,
         )
-    }
-}
-
-fun NavGraphBuilder.budgetsNavGraph(
-    nestedNavGraphs: NavGraphBuilder.() -> Unit,
-) {
-    navigation<BudgetsNavGraph>(startDestination = Budgets) {
-        nestedNavGraphs()
     }
 }

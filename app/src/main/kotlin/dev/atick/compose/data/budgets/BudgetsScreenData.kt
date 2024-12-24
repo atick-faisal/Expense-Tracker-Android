@@ -16,20 +16,51 @@
 
 package dev.atick.compose.data.budgets
 
+import dev.atick.core.utils.getMonthInfoAt
+
 data class BudgetsScreenData(
-    val budgets: List<UiBudget> = emptyList(),
+    val budget: UiBudget = UiBudget(),
     val cumulativeExpenses: List<UiCumulativeExpense> = emptyList(),
-    val totalBudget: Double = 0.0,
-)
+) {
+    val currentExpenses: Double
+        get() = cumulativeExpenses.maxByOrNull { it.atTime }?.amount ?: 0.0
+
+    val percentageUsed: Double
+        get() = if (budget.amount == 0.0) {
+            100.0
+        } else {
+            (currentExpenses / budget.amount) * 100
+        }
+
+    val remainingBudget: Double
+        get() = budget.amount - currentExpenses
+
+    val isOverBudget: Boolean
+        get() = currentExpenses > budget.amount
+
+    val overBudgetAmount: Double
+        get() = if (isOverBudget) currentExpenses - budget.amount else 0.0
+
+    val budgetStatus: BudgetStatus
+        get() = when {
+            isOverBudget -> BudgetStatus.EXCEEDED
+            percentageUsed >= 95 -> BudgetStatus.CRITICAL
+            percentageUsed >= 75 -> BudgetStatus.WARNING
+            else -> BudgetStatus.SAFE
+        }
+}
 
 data class UiBudget(
-    val id: Long = 0,
-    val amount: Double,
-    val categoryOrMerchantName: String,
-    val description: String? = null,
-    val createdAt: Long = System.currentTimeMillis(),
-    val isMerchant: Boolean = false,
+    val month: Long = getMonthInfoAt(0).startDate,
+    val amount: Double = 0.0,
 )
+
+enum class BudgetStatus {
+    SAFE, // < 75% used
+    WARNING, // 75-95% used
+    CRITICAL, // 95-100% used
+    EXCEEDED, // > 100% used
+}
 
 data class UiCumulativeExpense(
     val amount: Double,

@@ -153,7 +153,7 @@ fun JetpackApp(
 
             val fabAction = when (appState.currentTopLevelDestination) {
                 TopLevelDestination.EXPENSES -> appState::navigateToEditExpenseScreen
-                // TopLevelDestination.BUDGETS -> appState::navigateToEditBudgetScreen
+                TopLevelDestination.BUDGETS -> appState::navigateToEditBudgetScreen
                 else -> appState::navigateToEditExpenseScreen
             }
 

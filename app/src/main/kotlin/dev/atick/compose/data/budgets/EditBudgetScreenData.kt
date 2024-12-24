@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package dev.atick.storage.room.models
+package dev.atick.compose.data.budgets
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import dev.atick.core.ui.utils.OneTimeEvent
+import dev.atick.core.utils.getMonthInfoAt
 
-@Entity(tableName = "budgets")
-data class BudgetEntity(
-    @PrimaryKey
-    val month: Long, // Timestamp of the start of the month
-    val amount: Double,
-    val description: String? = null,
-)
+data class EditBudgetScreenData(
+    val month: Long = getMonthInfoAt(0).startDate, // The timestamp of the start date of the month
+    val amount: Double = 0.0,
+    val navigateBack: OneTimeEvent<Boolean> = OneTimeEvent(false),
+) {
+    val formattedMonth: String
+        get() {
+            val monthInfo = getMonthInfoAt(0)
+            return "${monthInfo.monthName} ${monthInfo.year}"
+        }
+}

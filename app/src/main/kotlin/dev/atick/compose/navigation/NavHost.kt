@@ -25,7 +25,9 @@ import dev.atick.auth.navigation.navigateToSignUpRoute
 import dev.atick.auth.navigation.signInScreen
 import dev.atick.auth.navigation.signUpScreen
 import dev.atick.compose.navigation.analysis.analysisScreen
+import dev.atick.compose.navigation.budgets.budgetsNavGraph
 import dev.atick.compose.navigation.budgets.budgetsScreen
+import dev.atick.compose.navigation.budgets.editBudgetScreen
 import dev.atick.compose.navigation.chat.chatScreen
 import dev.atick.compose.navigation.expenses.ExpensesNavGraph
 import dev.atick.compose.navigation.expenses.editExpenseScreen
@@ -101,10 +103,17 @@ fun JetpackNavHost(
             monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
-        budgetsScreen(
-            monthInfo = monthInfo,
-            onShowSnackbar = onShowSnackbar,
-        )
+        budgetsNavGraph {
+            budgetsScreen(
+                monthInfo = monthInfo,
+                onShowSnackbar = onShowSnackbar,
+            )
+            editBudgetScreen(
+                monthInfo = monthInfo,
+                onBackClick = navController::popBackStack,
+                onShowSnackbar = onShowSnackbar,
+            )
+        }
         subscriptionsScreen(
             onShowSnackbar = onShowSnackbar,
         )

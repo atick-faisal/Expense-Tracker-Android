@@ -23,11 +23,11 @@ import dev.atick.compose.data.budgets.BudgetsScreenData
 import dev.atick.compose.repository.budgets.BudgetsRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
-import dev.atick.core.ui.utils.updateState
 import dev.atick.core.utils.MonthInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -42,10 +42,16 @@ class BudgetsViewModel @Inject constructor(
 
     fun refreshBudgets(monthInfo: MonthInfo) {
         budgetsRepository.getCumulativeExpenses(monthInfo.startDate, monthInfo.endDate)
-            .catch { e -> _budgetsUiState.update { it.copy(error = OneTimeEvent(e)) } }
-            .onEach { cumulativeExpenses ->
-                _budgetsUiState.updateState { copy(cumulativeExpenses = cumulativeExpenses) }
+            .combine(budgetsRepository.getBudgetForMonth(monthInfo.startDate)) { cumulativeExpenses, budget ->
+                BudgetsScreenData(
+                    cumulativeExpenses = cumulativeExpenses,
+                    budget = budget,
+                )
             }
+            .onEach { data ->
+                _budgetsUiState.update { it.copy(data = data) }
+            }
+            .catch { e -> _budgetsUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
     }
 }

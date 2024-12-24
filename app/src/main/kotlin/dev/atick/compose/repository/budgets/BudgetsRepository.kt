@@ -16,9 +16,13 @@
 
 package dev.atick.compose.repository.budgets
 
+import dev.atick.compose.data.budgets.UiBudget
 import dev.atick.compose.data.budgets.UiCumulativeExpense
 import kotlinx.coroutines.flow.Flow
 
 interface BudgetsRepository {
     fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<UiCumulativeExpense>>
+    fun getBudgetForMonth(month: Long): Flow<UiBudget>
+    suspend fun insertOrUpdateBudget(budget: UiBudget): Result<Unit>
+    suspend fun deleteBudget(budget: UiBudget): Result<Unit>
 }

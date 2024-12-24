@@ -32,7 +32,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import dev.atick.compose.navigation.TopLevelDestination
 import dev.atick.compose.navigation.analysis.navigateToAnalysis
-import dev.atick.compose.navigation.budgets.navigateToBudgets
+import dev.atick.compose.navigation.budgets.navigateToBudgetsNavGraph
+import dev.atick.compose.navigation.budgets.navigateToEditBudgetScreen
 import dev.atick.compose.navigation.chat.navigateToChat
 import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
 import dev.atick.compose.navigation.expenses.navigateToExpensesNavGraph
@@ -105,7 +106,8 @@ class JetpackAppState(
 
     val shouldShowMonthSelector: Boolean
         @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
-            currentTopLevelDestination == TopLevelDestination.ANALYSIS
+            currentTopLevelDestination == TopLevelDestination.ANALYSIS ||
+            currentTopLevelDestination == TopLevelDestination.BUDGETS
 
     val shouldShowFab: Boolean
         @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
@@ -125,6 +127,10 @@ class JetpackAppState(
         navController.navigateToEditExpenseScreen(0L)
     }
 
+    fun navigateToEditBudgetScreen() {
+        navController.navigateToEditBudgetScreen()
+    }
+
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
         val topLevelNavOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
@@ -140,7 +146,10 @@ class JetpackAppState(
             )
 
             TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
-            TopLevelDestination.BUDGETS -> navController.navigateToBudgets(topLevelNavOptions)
+            TopLevelDestination.BUDGETS -> navController.navigateToBudgetsNavGraph(
+                topLevelNavOptions,
+            )
+
             TopLevelDestination.SUBSCRIPTIONS -> navController.navigateToSubscriptions(
                 topLevelNavOptions,
             )
