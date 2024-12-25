@@ -17,7 +17,10 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="NightAdjusted.Theme.Nia" parent="android:Theme.Material.NoActionBar" />
+    <!--    https://developer.android.com/guide/topics/resources/app-languages#androidx-impl    -->
+    <!--    <style name="NightAdjusted.Theme.Nia" parent="android:Theme.Material.NoActionBar" />-->
+
+    <style name="NightAdjusted.Theme.Jetpack" parent="Theme.AppCompat.NoActionBar" />
 
     <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
         <item name="android:windowLightStatusBar">false</item>

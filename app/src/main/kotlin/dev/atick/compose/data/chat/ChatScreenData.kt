@@ -16,6 +16,7 @@
 
 package dev.atick.compose.data.chat
 
+import dev.atick.compose.R
 import dev.atick.core.ui.utils.TextFieldData
 import dev.atick.storage.room.models.ChatEntity
 
@@ -42,14 +43,14 @@ fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
     return map(ChatEntity::asUiMessage)
 }
 
-val demoQuestions = listOf<String>(
-    "What's my total spending this month?",
-    "Which merchant did I spend most on?",
-    "How much did I spend at Netflix last month?",
-    "Am I over budget this month?",
-    "How much of my monthly budget is left?",
-    "List all my active subscriptions",
-    "How much do I spend on subscriptions monthly?",
-    "Where can I cut expenses?",
-    "Show my biggest one-time purchases",
+val demoQuestions = listOf<Int>(
+    R.string.demo_question_1,
+    R.string.demo_question_2,
+    R.string.demo_question_3,
+    R.string.demo_question_4,
+    R.string.demo_question_5,
+    R.string.demo_question_6,
+    R.string.demo_question_7,
+    R.string.demo_question_8,
+    R.string.demo_question_9,
 )

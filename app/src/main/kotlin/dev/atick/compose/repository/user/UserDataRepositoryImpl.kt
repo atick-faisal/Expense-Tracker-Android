@@ -41,6 +41,15 @@ class UserDataRepositoryImpl @Inject constructor(
         get() = userPreferencesDataSource.userData
 
     /**
+     * Sets the user has finished onboarding in the user preferences.
+     *
+     * @return [Result] indicating the success or failure of the operation.
+     */
+    override suspend fun userFinishedOnboarding(): Result<Unit> {
+        return suspendRunCatching { setUserProfile(Profile(id = "123")) }
+    }
+
+    /**
      * Sets the user [Profile] in the user preferences.
      *
      * @param profile The user [Profile] to be set.

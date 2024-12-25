@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package dev.atick.sms.data
+package dev.atick.compose.di.sync
 
-import androidx.annotation.RequiresPermission
-import dev.atick.sms.models.SMSMessage
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import dev.atick.compose.sync.SyncManager
+import dev.atick.compose.sync.SyncManagerImpl
+import javax.inject.Singleton
 
-interface SMSDataSource {
-    @RequiresPermission(android.Manifest.permission.READ_SMS)
-    suspend fun querySMS(
-        senderName: String,
-        keywords: List<String>? = null,
-        startDate: Long? = null,
-        endDate: Long = System.currentTimeMillis(),
-    ): List<SMSMessage>
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class SyncModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindSyncManager(syncManagerImpl: SyncManagerImpl): SyncManager
 }

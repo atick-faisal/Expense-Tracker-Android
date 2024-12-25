@@ -58,6 +58,8 @@ dependencies {
     api(libs.androidx.navigation.compose)
     api(libs.androidx.hilt.navigation.compose)
 
+    // ... Accompanist Permissions
+    api(libs.accompanist.permissions)
 
     // ... Coil
     api(libs.coil.kt)

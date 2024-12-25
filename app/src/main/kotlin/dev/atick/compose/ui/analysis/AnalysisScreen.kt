@@ -63,6 +63,7 @@ import dev.atick.compose.R
 import dev.atick.compose.data.analysis.AnalysisScreenData
 import dev.atick.compose.data.analysis.UiAnalysis
 import dev.atick.compose.ui.components.ExpenseDistributionChart
+import dev.atick.compose.ui.components.Placeholder
 import dev.atick.core.ui.components.JetpackToggleOptions
 import dev.atick.core.ui.components.ToggleOption
 import dev.atick.core.ui.utils.StatefulComposable
@@ -97,6 +98,23 @@ private val AnalysisToggleOptions = listOf(
 private fun AnalysisScreen(
     analysisScreenData: AnalysisScreenData,
 ) {
+    if (analysisScreenData.categoryAnalyses.isEmpty() &&
+        analysisScreenData.merchantAnalyses.isEmpty()
+    ) {
+        Placeholder()
+    } else {
+        AnalysisList(
+            categoryAnalyses = analysisScreenData.categoryAnalyses,
+            merchantAnalyses = analysisScreenData.merchantAnalyses,
+        )
+    }
+}
+
+@Composable
+private fun AnalysisList(
+    categoryAnalyses: List<UiAnalysis>,
+    merchantAnalyses: List<UiAnalysis>,
+) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     LazyColumn(
@@ -122,12 +140,12 @@ private fun AnalysisScreen(
 
             item {
                 ExpenseDistributionChart(
-                    analyses = analysisScreenData.categoryAnalyses,
+                    analyses = categoryAnalyses,
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
 
-            items(analysisScreenData.categoryAnalyses) { analysis ->
+            items(categoryAnalyses) { analysis ->
                 ExpenseAnalysisCard(analysis = analysis)
             }
         }
@@ -142,12 +160,12 @@ private fun AnalysisScreen(
 
             item {
                 ExpenseDistributionChart(
-                    analyses = analysisScreenData.merchantAnalyses,
+                    analyses = merchantAnalyses,
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
 
-            items(analysisScreenData.merchantAnalyses) { analysis ->
+            items(merchantAnalyses) { analysis ->
                 ExpenseAnalysisCard(analysis = analysis)
             }
         }
@@ -155,7 +173,7 @@ private fun AnalysisScreen(
 }
 
 @Composable
-fun ExpenseAnalysisCard(
+private fun ExpenseAnalysisCard(
     analysis: UiAnalysis,
     modifier: Modifier = Modifier,
 ) {

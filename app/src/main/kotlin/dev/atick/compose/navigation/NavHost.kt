@@ -29,6 +29,8 @@ import dev.atick.compose.navigation.expenses.editExpenseScreen
 import dev.atick.compose.navigation.expenses.expensesNavGraph
 import dev.atick.compose.navigation.expenses.expensesScreen
 import dev.atick.compose.navigation.expenses.navigateToEditExpenseScreen
+import dev.atick.compose.navigation.intro.Intro
+import dev.atick.compose.navigation.intro.introScreen
 import dev.atick.compose.navigation.subscriptions.subscriptionsScreen
 import dev.atick.compose.ui.JetpackAppState
 import dev.atick.core.utils.MonthInfo
@@ -41,13 +43,15 @@ fun JetpackNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    val startDestination = ExpensesNavGraph::class
-    // if (appState.isUserLoggedIn) HomeNavGraph::class else AuthNavGraph::class
+    val startDestination = if (appState.isUserLoggedIn) ExpensesNavGraph::class else Intro::class
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier,
     ) {
+        introScreen(
+            onShowSnackbar = onShowSnackbar,
+        )
         expensesNavGraph {
             expensesScreen(
                 monthInfo = monthInfo,

@@ -17,6 +17,7 @@
 package dev.atick.compose.sync
 
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import androidx.annotation.StringRes
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
@@ -52,6 +53,7 @@ class SyncWorker @AssistedInject constructor(
         return context.syncForegroundInfo(title, total, current)
     }
 
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     override suspend fun doWork(): Result {
         return withContext(ioDispatcher) {
             try {
@@ -77,6 +79,7 @@ class SyncWorker @AssistedInject constructor(
     }
 
     companion object {
+        @RequiresPermission(android.Manifest.permission.READ_SMS)
         fun startUpSyncWork(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<DelegatingWorker>()
                 .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)

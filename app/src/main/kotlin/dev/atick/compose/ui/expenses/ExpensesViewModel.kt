@@ -16,6 +16,7 @@
 
 package dev.atick.compose.ui.expenses
 
+import androidx.annotation.RequiresPermission
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +28,6 @@ import dev.atick.core.ui.utils.UiState
 import dev.atick.core.ui.utils.updateState
 import dev.atick.core.ui.utils.updateWith
 import dev.atick.core.utils.MonthInfo
-import dev.atick.core.utils.getMonthInfoAt
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -43,8 +43,11 @@ class ExpensesViewModel @Inject constructor(
     private val _expensesUiState = MutableStateFlow(UiState(ExpensesScreenData()))
     val expensesUiState = _expensesUiState.asStateFlow()
 
-    init {
-        refreshExpenses(getMonthInfoAt(0))
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
+    fun requestSmsSync() {
+        _expensesUiState.updateWith(viewModelScope) {
+            expensesRepository.requestSync()
+        }
     }
 
     fun refreshExpenses(monthInfo: MonthInfo) {

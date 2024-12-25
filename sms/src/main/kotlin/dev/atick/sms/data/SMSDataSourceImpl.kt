@@ -18,6 +18,7 @@ package dev.atick.sms.data
 
 import android.content.ContentResolver
 import android.provider.Telephony
+import androidx.annotation.RequiresPermission
 import dev.atick.core.di.IoDispatcher
 import dev.atick.sms.models.SMSMessage
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,6 +30,7 @@ class SMSDataSourceImpl @Inject constructor(
     private val contentResolver: ContentResolver,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : SMSDataSource {
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     override suspend fun querySMS(
         senderName: String,
         keywords: List<String>?,

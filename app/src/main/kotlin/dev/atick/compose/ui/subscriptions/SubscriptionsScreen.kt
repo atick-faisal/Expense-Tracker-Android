@@ -28,8 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.atick.compose.R
+import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.subscriptions.SubscriptionsScreenData
 import dev.atick.compose.ui.components.ExpenseCard
+import dev.atick.compose.ui.components.Placeholder
 import dev.atick.core.ui.utils.StatefulComposable
 
 @Composable
@@ -59,12 +62,30 @@ private fun SubscriptionsScreen(
     subscriptionsScreenData: SubscriptionsScreenData,
     onCancellationClick: (String, Boolean) -> Unit,
 ) {
+    if (subscriptionsScreenData.subscriptions.isEmpty()) {
+        Placeholder(
+            title = R.string.no_subscriptions_title,
+            description = R.string.no_subscriptions_description,
+        )
+    } else {
+        SubscriptionsList(
+            subscriptions = subscriptionsScreenData.subscriptions,
+            onCancellationClick = onCancellationClick,
+        )
+    }
+}
+
+@Composable
+private fun SubscriptionsList(
+    subscriptions: List<UiExpense>,
+    onCancellationClick: (String, Boolean) -> Unit,
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp),
     ) {
-        items(subscriptionsScreenData.subscriptions, key = { it.id }) { subscription ->
+        items(subscriptions, key = { it.id }) { subscription ->
             ExpenseCard(
                 expense = subscription,
                 onExpenseClick = null,

@@ -16,11 +16,13 @@
 
 package dev.atick.compose.ui.expenses
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,11 +30,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import dev.atick.compose.data.expenses.ExpensesScreenData
+import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.ui.components.ExpenseCard
+import dev.atick.compose.ui.components.Placeholder
 import dev.atick.core.ui.utils.StatefulComposable
 import dev.atick.core.utils.MonthInfo
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun ExpensesRoute(
@@ -47,15 +54,21 @@ internal fun ExpensesRoute(
         expensesViewModel.refreshExpenses(monthInfo)
     }
 
+    val smsPermissionState = rememberPermissionState(android.Manifest.permission.READ_SMS)
+
+    LaunchedEffect(smsPermissionState) {
+        if (smsPermissionState.status.isGranted) {
+            @SuppressLint("MissingPermission")
+            expensesViewModel.requestSmsSync()
+        }
+    }
+
     StatefulComposable(
         state = expensesState,
         onShowSnackbar = onShowSnackbar,
     ) { expensesScreenData ->
         ExpensesScreen(
             expensesScreenData = expensesScreenData,
-            monthInfo = monthInfo,
-//            onNextMonthClick = expensesViewModel::incrementMonth,
-//            onPreviousMonthClick = expensesViewModel::decrementMonth,
             onExpenseClick = onExpenseClick,
             onRecurringTypeClick = expensesViewModel::setRecurringType,
         )
@@ -65,23 +78,48 @@ internal fun ExpensesRoute(
 @Composable
 private fun ExpensesScreen(
     expensesScreenData: ExpensesScreenData,
-    monthInfo: MonthInfo,
-//    onNextMonthClick: () -> Unit,
-//    onPreviousMonthClick: () -> Unit,
     onExpenseClick: (Long) -> Unit,
     onRecurringTypeClick: (String, UiRecurringType) -> Unit,
 ) {
+    if (expensesScreenData.expenses.isEmpty()) {
+        Placeholder()
+    } else {
+        ExpenseList(
+            expenses = expensesScreenData.expenses,
+            onExpenseClick = onExpenseClick,
+            onRecurringTypeClick = onRecurringTypeClick,
+        )
+    }
+}
+
+@Composable
+private fun ExpenseList(
+    expenses: List<UiExpense>,
+    onExpenseClick: (Long) -> Unit,
+    onRecurringTypeClick: (String, UiRecurringType) -> Unit,
+) {
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(expenses.size) {
+        delay(100) // Small delay for smoother animation
+        listState.animateScrollToItem(
+            index = 0,
+            scrollOffset = 0,
+        )
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp),
+        state = listState,
     ) {
-        items(expensesScreenData.expenses, key = { it.id }) { expense ->
+        items(expenses, key = { it.id }) { expense ->
             ExpenseCard(
                 expense = expense,
                 onExpenseClick = onExpenseClick,
                 onRecurringTypeClick = onRecurringTypeClick,
-                // modifier = Modifier.animateItem(),
+                modifier = Modifier.animateItem(),
             )
         }
     }

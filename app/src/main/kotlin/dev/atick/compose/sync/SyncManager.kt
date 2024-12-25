@@ -16,9 +16,12 @@
 
 package dev.atick.compose.sync
 
+import androidx.annotation.RequiresPermission
 import kotlinx.coroutines.flow.Flow
 
 interface SyncManager {
     val isSyncing: Flow<Boolean>
+
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     fun requestSync()
 }
