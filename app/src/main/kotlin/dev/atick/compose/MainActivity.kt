@@ -17,7 +17,6 @@
 package dev.atick.compose
 
 import android.Manifest
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.SystemBarStyle
@@ -25,16 +24,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import dev.atick.compose.ui.JetpackApp
@@ -42,12 +40,12 @@ import dev.atick.core.ui.extensions.checkForPermissions
 import dev.atick.core.ui.extensions.collectWithLifecycle
 import dev.atick.core.ui.theme.JetpackTheme
 import dev.atick.core.ui.utils.UiState
+import dev.atick.core.ui.utils.setLanguagePreference
 import dev.atick.network.utils.NetworkUtils
 import dev.atick.storage.preferences.models.DarkThemeConfig
 import dev.atick.storage.preferences.models.ThemeBrand
 import dev.atick.storage.preferences.models.UserData
 import timber.log.Timber
-import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -106,14 +104,10 @@ class MainActivity : AppCompatActivity() {
                 onDispose {}
             }
 
-//            LaunchedEffect(Unit) {
-//                delay(5000L)
-//                LocaleHelper.setLocale(this@MainActivity, "ar")
-//                this@MainActivity.recreate()
-//            }
-
-            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("ar")
-            AppCompatDelegate.setApplicationLocales(appLocale)
+            // Set the locale for the application based on the user's preferred language
+            LaunchedEffect(uiState.data.language) {
+                setLanguagePreference(uiState)
+            }
 
             JetpackTheme(
                 darkTheme = darkTheme,
@@ -211,19 +205,12 @@ private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
  */
 private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
-object LocaleHelper {
-    fun setLocale(context: Context, languageCode: String): Context {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-
-        val config = context.resources.configuration
-        val resources = context.resources
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        Timber.d("Current locale: ${Locale.getDefault().language}")
-        Timber.d("Current layout direction: ${config.layoutDirection}")
-
-        return context.createConfigurationContext(config)
-    }
+/**
+ * Sets the locale for the application based on the user's preferred language.
+ *
+ * @param uiState The UI state representing the user data.
+ */
+private fun setLanguagePreference(uiState: UiState<UserData>) {
+    Timber.d("Setting language preference to: ${uiState.data.language}")
+    setLanguagePreference(uiState.data.language)
 }

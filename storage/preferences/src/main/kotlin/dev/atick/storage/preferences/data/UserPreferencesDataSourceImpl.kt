@@ -62,6 +62,14 @@ class UserPreferencesDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun setLanguage(language: String) {
+        withContext(ioDispatcher) {
+            datastore.updateData { userData ->
+                userData.copy(language = language)
+            }
+        }
+    }
+
     /**
      * Sets the theme brand in the user preferences.
      *

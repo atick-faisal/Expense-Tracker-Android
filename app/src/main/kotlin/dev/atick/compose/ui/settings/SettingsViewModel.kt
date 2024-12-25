@@ -23,6 +23,7 @@ import dev.atick.compose.data.settings.UserEditableSettings
 import dev.atick.compose.repository.user.UserDataRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
+import dev.atick.core.ui.utils.setLanguagePreference
 import dev.atick.core.ui.utils.updateWith
 import dev.atick.storage.preferences.models.DarkThemeConfig
 import dev.atick.storage.preferences.models.ThemeBrand
@@ -50,6 +51,7 @@ class SettingsViewModel @Inject constructor(
             .map { userData ->
                 UiState(
                     UserEditableSettings(
+                        language = userData.language,
                         brand = userData.themeBrand,
                         useDynamicColor = userData.useDynamicColor,
                         darkThemeConfig = userData.darkThemeConfig,
@@ -59,6 +61,14 @@ class SettingsViewModel @Inject constructor(
             .onEach { data -> _settingsUiState.update { data } }
             .catch { e -> UiState(UserEditableSettings(), error = OneTimeEvent(e)) }
             .launchIn(viewModelScope)
+    }
+
+    fun updateLanguage(language: String) {
+        _settingsUiState.updateWith(viewModelScope) {
+            val result = userDataRepository.setLanguage(language)
+            setLanguagePreference(language)
+            result
+        }
     }
 
     fun updateThemeBrand(themeBrand: ThemeBrand) {
