@@ -52,10 +52,10 @@ develocity {
 
 rootProject.name = "Dhakarani"
 include(":app")
-include(":auth")
-include(":billing")
-include(":bluetooth:common")
-include(":bluetooth:classic")
+// include(":auth")
+// include(":billing")
+// include(":bluetooth:common")
+// include(":bluetooth:classic")
 include(":core:ui")
 include(":core:android")
 include(":network")
