@@ -114,9 +114,9 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":storage:room"))
     implementation(project(":storage:preferences"))
-    implementation(project(":bluetooth:classic"))
-    implementation(project(":auth"))
-    implementation(project(":billing"))
+    // implementation(project(":bluetooth:classic"))
+    // implementation(project(":auth"))
+    // implementation(project(":billing"))
     implementation(project(":gemini"))
     implementation(project(":sms"))
 

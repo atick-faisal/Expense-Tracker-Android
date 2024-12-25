@@ -19,11 +19,6 @@ package dev.atick.compose.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import dev.atick.auth.navigation.authNavGraph
-import dev.atick.auth.navigation.navigateToSignInRoute
-import dev.atick.auth.navigation.navigateToSignUpRoute
-import dev.atick.auth.navigation.signInScreen
-import dev.atick.auth.navigation.signUpScreen
 import dev.atick.compose.navigation.analysis.analysisScreen
 import dev.atick.compose.navigation.budgets.budgetsNavGraph
 import dev.atick.compose.navigation.budgets.budgetsScreen
@@ -43,7 +38,6 @@ fun JetpackNavHost(
     appState: JetpackAppState,
     monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
-    onFabClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
@@ -54,40 +48,6 @@ fun JetpackNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        authNavGraph(
-            nestedNavGraphs = {
-                signInScreen(
-                    onSignUpClick = navController::navigateToSignUpRoute,
-                    onShowSnackbar = onShowSnackbar,
-                )
-                signUpScreen(
-                    onSignInClick = navController::navigateToSignInRoute,
-                    onShowSnackbar = onShowSnackbar,
-                )
-            },
-        )
-        /*
-        homeNavGraph(
-            nestedNavGraphs = {
-                homeScreen(
-                    onPostClick = navController::navigateToDetailsScreen,
-                    onShowSnackbar = onShowSnackbar,
-                )
-                detailsScreen(
-                    onBackClick = navController::popBackStack,
-                    onShowSnackbar = onShowSnackbar,
-                )
-            },
-        )
-        profileScreen(
-            onShowSnackbar = onShowSnackbar,
-            onPurchaseClick = navController::navigateToBilling,
-        )
-        billingScreen(
-            onBackClick = navController::popBackStack,
-            onShowSnackbar = onShowSnackbar,
-        )
-        */
         expensesNavGraph {
             expensesScreen(
                 monthInfo = monthInfo,

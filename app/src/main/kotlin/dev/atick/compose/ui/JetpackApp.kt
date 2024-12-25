@@ -238,7 +238,6 @@ fun JetpackApp(
                                     duration = SnackbarDuration.Short,
                                 ) == SnackbarResult.ActionPerformed
                             },
-                            onFabClick = { },
                         )
                         Spacer(Modifier.windowInsetsBottomHeight(WindowInsets.safeDrawing))
                     }

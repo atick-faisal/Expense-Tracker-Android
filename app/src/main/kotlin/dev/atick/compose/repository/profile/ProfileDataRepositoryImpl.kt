@@ -16,7 +16,6 @@
 
 package dev.atick.compose.repository.profile
 
-import dev.atick.auth.data.AuthDataSource
 import dev.atick.compose.data.profile.ProfileScreenData
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.storage.preferences.data.UserPreferencesDataSource
@@ -29,11 +28,9 @@ import javax.inject.Inject
  * Implementation of [ProfileDataRepository] that provides profile screen data and sign-out functionality.
  *
  * @param userPreferencesDataSource The data source for user preferences.
- * @param authDataSource The data source for authentication operations.
  */
 class ProfileDataRepositoryImpl @Inject constructor(
     private val userPreferencesDataSource: UserPreferencesDataSource,
-    private val authDataSource: AuthDataSource,
 ) : ProfileDataRepository {
 
     /**
@@ -52,7 +49,6 @@ class ProfileDataRepositoryImpl @Inject constructor(
     /**
      * Suspend function to sign the user out.
      *
-     * This function signs the user out by delegating to the [AuthDataSource] and then updates the user's
      * profile data in [UserPreferencesDataSource].
      *
      * @return A [Result] representing the sign-out operation result. It contains [Unit] if
@@ -60,7 +56,6 @@ class ProfileDataRepositoryImpl @Inject constructor(
      */
     override suspend fun signOut(): Result<Unit> {
         return suspendRunCatching {
-            authDataSource.signOut()
             userPreferencesDataSource.setProfile(Profile())
         }
     }
