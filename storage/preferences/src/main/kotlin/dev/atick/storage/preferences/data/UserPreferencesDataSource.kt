@@ -40,6 +40,13 @@ interface UserPreferencesDataSource {
     suspend fun setProfile(profile: Profile)
 
     /**
+     * Sets the language in the user preferences.
+     *
+     * @param language The language to be set.
+     */
+    suspend fun setLanguage(language: String)
+
+    /**
      * Sets the theme brand in the user preferences.
      *
      * @param themeBrand The theme brand to be set.

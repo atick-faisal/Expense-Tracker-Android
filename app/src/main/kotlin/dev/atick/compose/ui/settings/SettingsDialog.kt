@@ -20,6 +20,7 @@ import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -42,6 +43,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -55,8 +59,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.atick.compose.R
+import dev.atick.compose.data.settings.Language
 import dev.atick.compose.data.settings.UserEditableSettings
 import dev.atick.core.ui.components.JetpackTextButton
+import dev.atick.core.ui.components.JetpackToggleOptions
+import dev.atick.core.ui.components.ToggleOption
 import dev.atick.core.ui.theme.supportsDynamicTheming
 import dev.atick.core.ui.utils.UiState
 import dev.atick.storage.preferences.models.DarkThemeConfig
@@ -76,6 +83,7 @@ fun SettingsDialog(
     SettingsDialog(
         onDismiss = onDismiss,
         settingsUiState = settingsUiState,
+        onChangeLanguage = viewModel::updateLanguage,
         onChangeThemeBrand = viewModel::updateThemeBrand,
         onChangeDynamicColorPreference = viewModel::updateDynamicColorPreference,
         onChangeDarkThemeConfig = viewModel::updateDarkThemeConfig,
@@ -87,6 +95,7 @@ fun SettingsDialog(
     settingsUiState: UiState<UserEditableSettings>,
     supportDynamicColor: Boolean = supportsDynamicTheming(),
     onDismiss: () -> Unit,
+    onChangeLanguage: (String) -> Unit,
     onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
     onChangeDynamicColorPreference: (useDynamicColor: Boolean) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
@@ -116,6 +125,7 @@ fun SettingsDialog(
                 SettingsPanel(
                     settings = settingsUiState.data,
                     supportDynamicColor = supportDynamicColor,
+                    onChangeLanguage = onChangeLanguage,
                     onChangeThemeBrand = onChangeThemeBrand,
                     onChangeDynamicColorPreference = onChangeDynamicColorPreference,
                     onChangeDarkThemeConfig = onChangeDarkThemeConfig,
@@ -142,23 +152,46 @@ fun SettingsDialog(
 private fun ColumnScope.SettingsPanel(
     settings: UserEditableSettings,
     supportDynamicColor: Boolean,
+    onChangeLanguage: (String) -> Unit,
     onChangeThemeBrand: (themeBrand: ThemeBrand) -> Unit,
     onChangeDynamicColorPreference: (useDynamicColor: Boolean) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
 ) {
-    SettingsDialogSectionTitle(text = stringResource(R.string.theme))
-    Column(Modifier.selectableGroup()) {
-        SettingsDialogThemeChooserRow(
-            text = stringResource(R.string.brand_default),
-            selected = settings.brand == ThemeBrand.DEFAULT,
-            onClick = { onChangeThemeBrand(ThemeBrand.DEFAULT) },
-        )
-        SettingsDialogThemeChooserRow(
-            text = stringResource(R.string.brand_android),
-            selected = settings.brand == ThemeBrand.ANDROID,
-            onClick = { onChangeThemeBrand(ThemeBrand.ANDROID) },
+    var languageSelectedIndex by remember {
+        mutableIntStateOf(
+            Language.entries.indexOfFirst { it.code == settings.language },
         )
     }
+
+    SettingsDialogSectionTitle(text = stringResource(R.string.language))
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center,
+    ) {
+        JetpackToggleOptions(
+            options = Language.entries.map { ToggleOption(it.title, it.icon) },
+            selectedIndex = languageSelectedIndex,
+            onSelectionChanged = {
+                languageSelectedIndex = it
+                onChangeLanguage(Language.entries[it].code)
+            },
+        )
+    }
+
+//    SettingsDialogSectionTitle(text = stringResource(R.string.theme))
+//    Column(Modifier.selectableGroup()) {
+//        SettingsDialogThemeChooserRow(
+//            text = stringResource(R.string.brand_default),
+//            selected = settings.brand == ThemeBrand.DEFAULT,
+//            onClick = { onChangeThemeBrand(ThemeBrand.DEFAULT) },
+//        )
+//        SettingsDialogThemeChooserRow(
+//            text = stringResource(R.string.brand_android),
+//            selected = settings.brand == ThemeBrand.ANDROID,
+//            onClick = { onChangeThemeBrand(ThemeBrand.ANDROID) },
+//        )
+//    }
+
     AnimatedVisibility(visible = settings.brand == ThemeBrand.DEFAULT && supportDynamicColor) {
         Column {
             SettingsDialogSectionTitle(text = stringResource(R.string.dynamic_color_preference))

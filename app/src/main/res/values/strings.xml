@@ -145,5 +145,8 @@
     <string name="demo_question_7">How much do I spend on subscriptions monthly?</string>
     <string name="demo_question_8">Where can I cut expenses?</string>
     <string name="demo_question_9">Show my biggest one-time purchases</string>
+    <string name="language">Language</string>
 
+    <string name="en" translatable="false">EN</string>
+    <string name="ar" translatable="false">عر</string>
 </resources>

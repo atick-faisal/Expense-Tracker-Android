@@ -62,6 +62,18 @@ class UserDataRepositoryImpl @Inject constructor(
     }
 
     /**
+     * Sets the language in the user preferences.
+     *
+     * @param language The language to be set.
+     * @return [Result] indicating the success or failure of the operation.
+     */
+    override suspend fun setLanguage(language: String): Result<Unit> {
+        return suspendRunCatching {
+            userPreferencesDataSource.setLanguage(language)
+        }
+    }
+
+    /**
      * Sets the theme brand in the user preferences.
      *
      * @param themeBrand The theme brand to be set.

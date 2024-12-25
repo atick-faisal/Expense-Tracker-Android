@@ -48,6 +48,14 @@ interface UserDataRepository {
     suspend fun setUserProfile(profile: Profile): Result<Unit>
 
     /**
+     * Sets the language in the user preferences.
+     *
+     * @param language The language to be set.
+     * @return [Result] indicating the success or failure of the operation.
+     */
+    suspend fun setLanguage(language: String): Result<Unit>
+
+    /**
      * Sets the theme brand in the user preferences.
      *
      * @param themeBrand The theme brand to be set.
