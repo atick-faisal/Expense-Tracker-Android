@@ -125,8 +125,8 @@ class ExpensesRepositoryImpl @Inject constructor(
         ) + 1000L // Add 1 second to avoid duplicate SMSes
 
         val smsList = smsDataSource.querySMS(
-            senderName = "QNB",
-            keywords = listOf("purchase"),
+            senderNames = ExpensesRepository.BANK_NAMES,
+            keywords = ExpensesRepository.KEYWORDS,
             startDate = startDate,
             endDate = System.currentTimeMillis(),
         )

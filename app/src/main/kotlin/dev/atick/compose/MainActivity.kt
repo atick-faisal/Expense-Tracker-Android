@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity() {
             permissions.add(Manifest.permission.POST_NOTIFICATIONS)
         }
 
+        permissions.add(Manifest.permission.RECEIVE_SMS)
         permissions.add(Manifest.permission.READ_SMS)
 
         // Check for permissions and launch Bluetooth enable request
