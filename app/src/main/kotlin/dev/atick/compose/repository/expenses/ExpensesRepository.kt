@@ -16,6 +16,7 @@
 
 package dev.atick.compose.repository.expenses
 
+import androidx.annotation.RequiresPermission
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.sync.SyncProgress
@@ -26,9 +27,16 @@ interface ExpensesRepository {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
     }
 
+    val isSyncing: Flow<Boolean>
+
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>>
     fun getExpenseById(id: Long): Flow<UiExpense>
     suspend fun updateExpense(expense: UiExpense): Result<Unit>
+
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
+    fun requestSync(): Result<Unit>
+
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     fun syncExpensesFromSms(): Flow<SyncProgress>
     suspend fun setRecurringType(merchant: String, recurringType: UiRecurringType): Result<Unit>
 }

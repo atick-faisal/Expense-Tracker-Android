@@ -20,11 +20,12 @@ import android.Manifest
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -33,6 +34,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import dev.atick.compose.ui.JetpackApp
@@ -44,14 +46,18 @@ import dev.atick.network.utils.NetworkUtils
 import dev.atick.storage.preferences.models.DarkThemeConfig
 import dev.atick.storage.preferences.models.ThemeBrand
 import dev.atick.storage.preferences.models.UserData
+import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
 /**
  * Main activity for the application.
  */
+// Switched to AppCompatActivity Temporarily
+// https://developer.android.com/guide/topics/resources/app-languages#androidx-impl
+// class MainActivity : ComponentActivity() {
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val permissions = mutableListOf<String>()
 
@@ -99,6 +105,15 @@ class MainActivity : ComponentActivity() {
                 )
                 onDispose {}
             }
+
+//            LaunchedEffect(Unit) {
+//                delay(5000L)
+//                LocaleHelper.setLocale(this@MainActivity, "ar")
+//                this@MainActivity.recreate()
+//            }
+
+            val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("ar")
+            AppCompatDelegate.setApplicationLocales(appLocale)
 
             JetpackTheme(
                 darkTheme = darkTheme,
@@ -202,7 +217,12 @@ object LocaleHelper {
         Locale.setDefault(locale)
 
         val config = context.resources.configuration
+        val resources = context.resources
         config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        Timber.d("Current locale: ${Locale.getDefault().language}")
+        Timber.d("Current layout direction: ${config.layoutDirection}")
 
         return context.createConfigurationContext(config)
     }

@@ -131,6 +131,9 @@ private fun ChatScreen(
                 // Spacer(modifier = Modifier.height(8.dp))
             }
         }
+
+        val demoQuestionsTexts = demoQuestions.map { stringResource(it) }
+
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
@@ -140,7 +143,7 @@ private fun ChatScreen(
             item {
                 Spacer(modifier = Modifier.width(16.dp))
             }
-            items(demoQuestions) {
+            items(demoQuestionsTexts) {
                 AssistChip(
                     label = { Text(it) },
                     onClick = {

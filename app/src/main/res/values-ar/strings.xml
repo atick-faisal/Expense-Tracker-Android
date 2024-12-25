@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2024 Atick Faisal
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 
 <resources>
     <string name="app_name">ذكراني</string>
@@ -84,4 +99,50 @@
     <string name="edit_expense">تعديل المصروف</string>
     <string name="due">مستحق: %1$s</string>
     <string name="paid">مدفوع: %1$s</string>
+    <string name="expense_ai">مساعد المصاريف الذكي</string>
+    <string name="your_smart_companion">رفيقك الذكي لإدارة الأموال بحكمة</string>
+    <string name="smart_expense_tracking">تتبع ذكي للمصاريف</string>
+    <string name="automatically_capture">التقاط وتصنيف مصاريفك تلقائياً من إشعارات الرسائل القصيرة. لا مزيد من متاعب الإدخال اليدوي!</string>
+    <string name="insightful_analysis">تحليل متعمق</string>
+    <string name="set_and_track">حدد وتتبع ميزانياتك الشهرية مع مراقبة فورية وتنبيهات ذكية</string>
+    <string name="subscription_control">التحكم في الاشتراكات</string>
+    <string name="never_miss_a_subscription">لا تفوت أي تجديد للاشتراك. احصل على تذكيرات في الوقت المناسب لمراجعة أو إلغاء الاشتراكات</string>
+    <string name="get_personalized_insights">احصل على رؤى ونصائح مخصصة حول عادات الإنفاق من مساعدك الذكي</string>
+    <string name="budget_management">إدارة الميزانية</string>
+    <string name="ai_financial_assistant">المساعد المالي الذكي</string>
+    <string name="understand_your_spending">افهم أنماط إنفاقك مع تحليلات مفصلة وتصورات جميلة</string>
+    <string name="skip">تخطي</string>
+    <string name="next">التالي</string>
+    <string name="get_started">ابدأ الآن</string>
+    <string name="placeholder_title">يبدو أن بطاقتك الائتمانية تأخذ استراحة!</string>
+    <string name="placeholder_default_description">لا تقلق. سنواصل إضافة العناصر هنا عند استخدامك لبطاقتك الائتمانية.</string>
+    <string name="no_subscriptions_title">يبدو أنه ليس لديك أي اشتراكات</string>
+    <string name="no_subscriptions_description">يمكنك تحويل أي مصروف إلى اشتراك بالنقر على الفترة المتكررة لذلك المصروف</string>
+    <string name="payment_status_pending">قيد الانتظار</string>
+    <string name="payment_status_paid">مدفوع</string>
+    <string name="payment_status_overdue">متأخر</string>
+    <string name="payment_status_cancelled">ملغي</string>
+    <string name="recurring_type_onetime">مرة واحدة</string>
+    <string name="recurring_type_daily">يومي</string>
+    <string name="recurring_type_weekly">أسبوعي</string>
+    <string name="recurring_type_monthly">شهري</string>
+    <string name="recurring_type_yearly">سنوي</string>
+    <string name="category_food">طعام</string>
+    <string name="category_essential">أساسي</string>
+    <string name="category_lifestyle">نمط الحياة</string>
+    <string name="category_transportation">مواصلات</string>
+    <string name="category_healthcare">رعاية صحية</string>
+    <string name="category_savings">مدخرات</string>
+    <string name="category_debt">دين</string>
+    <string name="category_education">تعليم</string>
+    <string name="category_others">أخرى</string>
+    <string name="demo_question_1">ما هو إجمالي إنفاقي هذا الشهر؟</string>
+    <string name="demo_question_2">مع أي تاجر أنفقت أكثر؟</string>
+    <string name="demo_question_3">كم أنفقت في نتفلكس الشهر الماضي؟</string>
+    <string name="demo_question_4">هل تجاوزت الميزانية هذا الشهر؟</string>
+    <string name="demo_question_5">كم تبقى من ميزانيتي الشهرية؟</string>
+    <string name="demo_question_6">اعرض جميع اشتراكاتي النشطة</string>
+    <string name="demo_question_7">كم أنفق على الاشتراكات شهرياً؟</string>
+    <string name="demo_question_8">أين يمكنني تقليل المصروفات؟</string>
+    <string name="demo_question_9">أظهر أكبر مشترياتي لمرة واحدة</string>
 </resources>

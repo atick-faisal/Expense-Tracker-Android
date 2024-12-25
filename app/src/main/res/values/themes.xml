@@ -19,13 +19,16 @@
 
     <!-- Allows us to override night specific attributes in the
          values-night folder. -->
-    <style name="NightAdjusted.Theme.Jetpack" parent="android:Theme.Material.Light.NoActionBar" />
+    <!--    https://developer.android.com/guide/topics/resources/app-languages#androidx-impl    -->
+    <!--    <style name="NightAdjusted.Theme.Jetpack" parent="android:Theme.Material.Light.NoActionBar" />-->
+
+    <style name="NightAdjusted.Theme.Jetpack" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <!-- The final theme we use -->
     <style name="Theme.Jetpack" parent="NightAdjusted.Theme.Jetpack" />
 
     <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
-        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 

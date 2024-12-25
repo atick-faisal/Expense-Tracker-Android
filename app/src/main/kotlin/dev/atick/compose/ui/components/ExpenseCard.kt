@@ -227,17 +227,7 @@ internal fun RecurringTypeChip(
                 ?: showToast("Recurring type: ${expense.recurringType.name}")
         },
         label = {
-            Text(
-                expense.recurringType.name.lowercase().replaceFirstChar {
-                    if (it.isLowerCase()) {
-                        it.titlecase(
-                            Locale.getDefault(),
-                        )
-                    } else {
-                        it.toString()
-                    }
-                },
-            )
+            Text(text = stringResource(expense.recurringType.value))
         },
         leadingIcon = {
             Icon(
@@ -296,7 +286,7 @@ internal fun CategoryTypeChip(
             MaterialTheme.colorScheme.onTertiaryContainer,
         )
 
-        UiCategoryType.CUSTOM -> Pair(
+        UiCategoryType.OTHERS -> Pair(
             MaterialTheme.colorScheme.surfaceVariant,
             MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -313,8 +303,7 @@ internal fun CategoryTypeChip(
         shape = MaterialTheme.shapes.small,
     ) {
         Text(
-            text = categoryType.name.lowercase()
-                .replaceFirstChar { it.titlecase(Locale.getDefault()) },
+            text = stringResource(categoryType.value),
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
             color = chipColors.second,
             style = MaterialTheme.typography.labelSmall,
@@ -355,7 +344,7 @@ internal fun PaymentStatusChip(
         shape = MaterialTheme.shapes.small,
     ) {
         Text(
-            text = status.name.lowercase().replaceFirstChar { it.titlecase(Locale.getDefault()) },
+            text = stringResource(status.value),
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
             color = chipColors.second,
             style = MaterialTheme.typography.labelMedium,

@@ -16,6 +16,8 @@
 
 package dev.atick.compose.data.expenses
 
+import androidx.annotation.StringRes
+import dev.atick.compose.R
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
@@ -47,31 +49,31 @@ enum class UiCurrencyType {
     BDT,
 }
 
-enum class UiPaymentStatus {
-    PENDING,
-    PAID,
-    OVERDUE,
-    CANCELLED,
+enum class UiPaymentStatus(@StringRes val value: Int) {
+    PENDING(R.string.payment_status_pending),
+    PAID(R.string.payment_status_paid),
+    OVERDUE(R.string.payment_status_overdue),
+    CANCELLED(R.string.payment_status_cancelled),
 }
 
-enum class UiRecurringType {
-    ONETIME,
-    DAILY,
-    WEEKLY,
-    MONTHLY,
-    YEARLY,
+enum class UiRecurringType(@StringRes val value: Int) {
+    ONETIME(R.string.recurring_type_onetime),
+    DAILY(R.string.recurring_type_daily),
+    WEEKLY(R.string.recurring_type_weekly),
+    MONTHLY(R.string.recurring_type_monthly),
+    YEARLY(R.string.recurring_type_yearly),
 }
 
-enum class UiCategoryType {
-    FOOD,
-    ESSENTIAL,
-    LIFESTYLE,
-    TRANSPORTATION,
-    HEALTHCARE,
-    SAVINGS,
-    DEBT,
-    EDUCATION,
-    CUSTOM,
+enum class UiCategoryType(@StringRes val value: Int) {
+    FOOD(R.string.category_food),
+    ESSENTIAL(R.string.category_essential),
+    LIFESTYLE(R.string.category_lifestyle),
+    TRANSPORTATION(R.string.category_transportation),
+    HEALTHCARE(R.string.category_healthcare),
+    SAVINGS(R.string.category_savings),
+    DEBT(R.string.category_debt),
+    EDUCATION(R.string.category_education),
+    OTHERS(R.string.category_others),
 }
 
 fun Long.asFormattedDate(): String {

@@ -27,6 +27,8 @@ import dev.atick.storage.preferences.models.UserData
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -44,6 +46,7 @@ class MainActivityViewModel @Inject constructor(
      * Represents the state of the UI for user data.
      */
     val uiState: StateFlow<UiState<UserData>> = userDataRepository.userData
+        .onEach { userData -> Timber.d("User data: $userData") }
         .map { userData -> UiState(userData) }
         .catch { e -> UiState(UserData(), error = OneTimeEvent(e)) }
         .stateInDelayed(UiState(UserData(), loading = true), viewModelScope)

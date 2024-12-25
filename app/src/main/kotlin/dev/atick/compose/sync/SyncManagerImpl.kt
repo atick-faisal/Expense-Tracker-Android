@@ -17,6 +17,7 @@
 package dev.atick.compose.sync
 
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkInfo
 import androidx.work.WorkInfo.State
@@ -30,7 +31,7 @@ import javax.inject.Inject
 /**
  * [SyncManager] backed by [WorkInfo] from [WorkManager]
  */
-internal class SyncManagerImpl @Inject constructor(
+class SyncManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : SyncManager {
     override val isSyncing: Flow<Boolean> =
@@ -38,6 +39,7 @@ internal class SyncManagerImpl @Inject constructor(
             .map(List<WorkInfo>::anyRunning)
             .conflate()
 
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     override fun requestSync() {
         val workManager = WorkManager.getInstance(context)
         // Run sync on app startup and ensure only one sync worker runs at any time

@@ -33,6 +33,13 @@ interface UserDataRepository {
     val userData: Flow<UserData>
 
     /**
+     * Sets the user has finished onboarding in the user preferences.
+     *
+     * @return [Result] indicating the success or failure of the operation.
+     */
+    suspend fun userFinishedOnboarding(): Result<Unit>
+
+    /**
      * Sets the user ID in the user preferences.
      *
      * @param profile The user ID to be set.

@@ -16,11 +16,13 @@
 
 package dev.atick.compose.repository.expenses
 
+import androidx.annotation.RequiresPermission
 import dev.atick.compose.data.expenses.UiCategoryType
 import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.compose.sync.SyncManager
 import dev.atick.compose.sync.SyncProgress
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
@@ -44,7 +46,11 @@ class ExpensesRepositoryImpl @Inject constructor(
     private val geminiRateLimiter: GeminiRateLimiter,
     private val smsDataSource: SMSDataSource,
     private val expenseDataSource: ExpenseDataSource,
+    private val syncManager: SyncManager,
 ) : ExpensesRepository {
+    override val isSyncing: Flow<Boolean>
+        get() = syncManager.isSyncing
+
     override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>> {
         return expenseDataSource.getAllExpenses(startDate, endDate)
             .map { expenses ->
@@ -103,6 +109,14 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
+    override fun requestSync(): Result<Unit> {
+        return runCatching {
+            syncManager.requestSync()
+        }
+    }
+
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     override fun syncExpensesFromSms() = flow<SyncProgress> {
         val lastExpenseTime = expenseDataSource.getLastExpenseTime()
         val startDate = max(

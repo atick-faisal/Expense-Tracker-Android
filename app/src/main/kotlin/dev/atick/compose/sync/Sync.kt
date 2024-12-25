@@ -17,12 +17,14 @@
 package dev.atick.compose.sync
 
 import android.content.Context
+import androidx.annotation.RequiresPermission
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 
 object Sync {
     // This method is initializes sync, the process that keeps the app's data current.
     // It is called from the app module's Application.onCreate() and should be only done once.
+    @RequiresPermission(android.Manifest.permission.READ_SMS)
     fun initialize(context: Context) {
         WorkManager.getInstance(context).apply {
             // Run sync on app startup and ensure only one sync worker runs at any time
