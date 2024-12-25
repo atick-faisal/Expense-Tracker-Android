@@ -25,6 +25,8 @@ import kotlinx.coroutines.flow.Flow
 interface ExpensesRepository {
     companion object {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
+        val BANK_NAMES = listOf("QNB", "QIB", "CBQ", "Doha Bank")
+        val KEYWORDS = listOf("purchase", "transaction")
     }
 
     val isSyncing: Flow<Boolean>

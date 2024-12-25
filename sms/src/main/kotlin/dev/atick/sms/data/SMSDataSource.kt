@@ -22,7 +22,7 @@ import dev.atick.sms.models.SMSMessage
 interface SMSDataSource {
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     suspend fun querySMS(
-        senderName: String,
+        senderNames: List<String>,
         keywords: List<String>? = null,
         startDate: Long? = null,
         endDate: Long = System.currentTimeMillis(),

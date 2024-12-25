@@ -32,7 +32,7 @@ class SMSDataSourceImpl @Inject constructor(
 ) : SMSDataSource {
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     override suspend fun querySMS(
-        senderName: String,
+        senderNames: List<String>,
         keywords: List<String>?,
         startDate: Long?,
         endDate: Long,
@@ -40,10 +40,19 @@ class SMSDataSourceImpl @Inject constructor(
         val selection = mutableListOf<String>()
         val selectionArgs = mutableListOf<String>()
 
-        // Add sender name to selection
-        if (senderName.isNotEmpty()) {
-            selection.add("${Telephony.Sms.ADDRESS} LIKE ?")
-            selectionArgs.add(senderName)
+//        if (senderNames.isNotEmpty()) {
+//            selection.add("${Telephony.Sms.ADDRESS} LIKE ?")
+//            selectionArgs.add(senderName)
+//        }
+
+        // Add sender names to selection
+        if (senderNames.isNotEmpty()) {
+            val senderConditions = senderNames.map {
+                "${Telephony.Sms.ADDRESS} LIKE ?"
+            }.joinToString(" OR ")
+
+            selection.add("($senderConditions)")
+            selectionArgs.addAll(senderNames.map { "%$it%" })
         }
 
         // Add keywords to selection
