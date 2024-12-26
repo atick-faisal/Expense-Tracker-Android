@@ -31,7 +31,7 @@ object Reminders {
         WorkManager.getInstance(context).apply {
             enqueueUniqueWork(
                 PAYMENT_REMINDER_WORK_NAME,
-                ExistingWorkPolicy.KEEP,
+                ExistingWorkPolicy.REPLACE,
                 PaymentReminderWorker.schedulePaymentReminder(
                     merchantName,
                     nextPaymentDate,
@@ -51,7 +51,7 @@ object Reminders {
         WorkManager.getInstance(context).apply {
             enqueueUniqueWork(
                 CANCELLATION_REMINDER_WORK_NAME,
-                ExistingWorkPolicy.KEEP,
+                ExistingWorkPolicy.REPLACE,
                 CancellationReminderWorker.scheduleCancellationReminder(
                     merchantName,
                     nextPaymentDate,

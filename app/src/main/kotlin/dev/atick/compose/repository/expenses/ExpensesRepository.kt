@@ -27,6 +27,7 @@ interface ExpensesRepository {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
         val BANK_NAMES = listOf("QNB", "QIB", "CBQ", "Doha Bank")
         val KEYWORDS = listOf("purchase", "transaction")
+        val IGNORE_WORDS = listOf("OTP", "withdrawal", "deposit", "bonus", "refund")
 
         const val RECURRING_DAILY = 24 * 60 * 60 * 1000L
         const val RECURRING_WEEKLY = 7 * 24 * 60 * 60 * 1000L
@@ -41,6 +42,7 @@ interface ExpensesRepository {
     fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>>
     fun getExpenseById(id: Long): Flow<UiExpense>
     suspend fun updateExpense(expense: UiExpense): Result<Unit>
+    suspend fun deleteExpense(expense: UiExpense): Result<Unit>
 
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     fun requestSync(): Result<Unit>

@@ -34,6 +34,7 @@ class SMSDataSourceImpl @Inject constructor(
     override suspend fun querySMS(
         senderNames: List<String>,
         keywords: List<String>?,
+        ignoreWords: List<String>?,
         startDate: Long?,
         endDate: Long,
     ): List<SMSMessage> {
@@ -64,6 +65,18 @@ class SMSDataSourceImpl @Inject constructor(
 
                 selection.add("($keywordConditions)")
                 selectionArgs.addAll(keywordList.map { "%$it%" })
+            }
+        }
+
+        // Add ignore words to selection
+        ignoreWords?.let { words ->
+            if (words.isNotEmpty()) {
+                val ignoreConditions = words.map {
+                    "${Telephony.Sms.BODY} NOT LIKE ?"
+                }.joinToString(" AND ")
+
+                selection.add("($ignoreConditions)")
+                selectionArgs.addAll(words.map { "%$it%" })
             }
         }
 

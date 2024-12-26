@@ -36,6 +36,7 @@ class PaymentReminderWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         return try {
+            Timber.d("PaymentReminderWorker: doWork()")
             val merchantName = inputData.getString(MERCHANT_NAME_KEY)!!
             val nextPaymentDate = inputData.getLong(
                 key = NOTIFICATION_TIME_KEY,

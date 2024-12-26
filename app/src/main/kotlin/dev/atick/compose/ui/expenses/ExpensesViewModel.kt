@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.atick.compose.data.expenses.ExpensesScreenData
+import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.ui.utils.OneTimeEvent
@@ -70,6 +71,12 @@ class ExpensesViewModel @Inject constructor(
 
         _expensesUiState.updateWith(viewModelScope) {
             expensesRepository.setRecurringType(merchant, newRecurringType)
+        }
+    }
+
+    fun deleteExpense(expense: UiExpense) {
+        _expensesUiState.updateWith(viewModelScope) {
+            expensesRepository.deleteExpense(expense)
         }
     }
 }

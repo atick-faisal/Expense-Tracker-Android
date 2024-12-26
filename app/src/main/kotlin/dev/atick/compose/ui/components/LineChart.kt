@@ -17,7 +17,6 @@
 package dev.atick.compose.ui.components
 
 import android.graphics.drawable.GradientDrawable
-import android.icu.text.NumberFormat
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,6 +39,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import dev.atick.compose.data.budgets.BudgetsScreenData
+import dev.atick.core.extensions.format
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -261,7 +261,8 @@ fun BudgetChart(
                         setLabelCount(6, true)
                         valueFormatter = object : IAxisValueFormatter {
                             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                                return NumberFormat.getCurrencyInstance().format(value)
+                                // return NumberFormat.getCurrencyInstance().format(value)
+                                return value.format(0)
                             }
                         }
                     }
@@ -279,7 +280,7 @@ fun BudgetChart(
                 }
 
                 val budgetEntries = data.cumulativeExpenses.map { expense ->
-                    Entry(expense.atTime.toFloat(), data.budget.amount.toFloat())
+                    Entry(expense.atTime.toFloat(), data.budget.amount?.toFloat() ?: 0f)
                 }
 
                 // Enhanced expense line dataset
@@ -290,7 +291,7 @@ fun BudgetChart(
                     setDrawValues(false)
                     circleRadius = 4f
                     circleColors = listOf(colorScheme.primary.toArgb())
-                    mode = LineDataSet.Mode.CUBIC_BEZIER
+                    // mode = LineDataSet.Mode.CUBIC_BEZIER
 
                     // Enhanced gradient
                     setDrawFilled(true)
@@ -330,7 +331,7 @@ fun BudgetChart(
                 }
 
                 // Set the data with animation
-                if (data.budget.amount == Double.MAX_VALUE) {
+                if (data.budget.amount == null) {
                     chart.data = LineData(expenseDataSet)
                 } else {
                     chart.data = LineData(expenseDataSet, budgetDataSet)

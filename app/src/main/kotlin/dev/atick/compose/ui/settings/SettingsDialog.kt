@@ -68,6 +68,7 @@ import dev.atick.core.ui.theme.supportsDynamicTheming
 import dev.atick.core.ui.utils.UiState
 import dev.atick.storage.preferences.models.DarkThemeConfig
 import dev.atick.storage.preferences.models.ThemeBrand
+import timber.log.Timber
 
 @Composable
 fun SettingsDialog(
@@ -157,7 +158,8 @@ private fun ColumnScope.SettingsPanel(
     onChangeDynamicColorPreference: (useDynamicColor: Boolean) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
 ) {
-    var languageSelectedIndex by remember {
+    var languageSelectedIndex by remember(settings.language) {
+        Timber.d("Language: ${settings.language}, index: ${Language.entries.indexOfFirst { it.code == settings.language }}")
         mutableIntStateOf(
             Language.entries.indexOfFirst { it.code == settings.language },
         )

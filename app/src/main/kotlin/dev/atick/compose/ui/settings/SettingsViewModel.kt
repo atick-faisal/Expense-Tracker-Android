@@ -35,6 +35,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,6 +50,7 @@ class SettingsViewModel @Inject constructor(
     fun updateUserData() {
         userDataRepository.userData
             .map { userData ->
+                Timber.d("userData: $userData")
                 UiState(
                     UserEditableSettings(
                         language = userData.language,
