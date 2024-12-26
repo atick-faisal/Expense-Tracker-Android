@@ -26,20 +26,26 @@ data class BudgetsScreenData(
         get() = cumulativeExpenses.maxByOrNull { it.atTime }?.amount ?: 0.0
 
     val percentageUsed: Double
-        get() = if (budget.amount == 0.0) {
+        get() = if (budget.amount == null) {
+            0.0
+        } else if (budget.amount == 0.0) {
             100.0
         } else {
             (currentExpenses / budget.amount) * 100
         }
 
     val remainingBudget: Double
-        get() = budget.amount - currentExpenses
+        get() = (budget.amount ?: currentExpenses) - currentExpenses
 
     val isOverBudget: Boolean
-        get() = currentExpenses > budget.amount
+        get() = currentExpenses > (budget.amount ?: Double.MAX_VALUE)
 
     val overBudgetAmount: Double
-        get() = if (isOverBudget) currentExpenses - budget.amount else 0.0
+        get() = if (isOverBudget && budget.amount != null) {
+            currentExpenses - budget.amount
+        } else {
+            0.0
+        }
 
     val budgetStatus: BudgetStatus
         get() = when {
@@ -52,7 +58,7 @@ data class BudgetsScreenData(
 
 data class UiBudget(
     val month: Long = getMonthInfoAt(0).startDate,
-    val amount: Double = Double.MAX_VALUE,
+    val amount: Double? = null,
 )
 
 enum class BudgetStatus {

@@ -51,7 +51,7 @@ class BudgetsRepositoryImpl @Inject constructor(
             .map { budgetEntity ->
                 UiBudget(
                     month = budgetEntity?.month ?: month,
-                    amount = budgetEntity?.amount ?: 0.0,
+                    amount = budgetEntity?.amount,
                 )
             }
     }
@@ -61,7 +61,7 @@ class BudgetsRepositoryImpl @Inject constructor(
             budgetDataSource.insertOrUpdateBudget(
                 BudgetEntity(
                     month = budget.month,
-                    amount = budget.amount,
+                    amount = budget.amount!!,
                 ),
             )
         }
@@ -72,7 +72,7 @@ class BudgetsRepositoryImpl @Inject constructor(
             budgetDataSource.deleteBudget(
                 BudgetEntity(
                     month = budget.month,
-                    amount = budget.amount,
+                    amount = budget.amount!!,
                 ),
             )
         }

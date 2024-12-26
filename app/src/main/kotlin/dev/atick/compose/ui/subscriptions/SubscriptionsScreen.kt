@@ -30,6 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
 import dev.atick.compose.data.expenses.UiExpense
+import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.data.subscriptions.SubscriptionsScreenData
 import dev.atick.compose.ui.components.ExpenseCard
 import dev.atick.compose.ui.components.Placeholder
@@ -52,6 +53,7 @@ internal fun SubscriptionsRoute(
     ) { categoriesScreenData ->
         SubscriptionsScreen(
             subscriptionsScreenData = categoriesScreenData,
+            onRecurringTypeClick = subscriptionsViewModel::setRecurringType,
             onCancellationClick = subscriptionsViewModel::setCancellation,
         )
     }
@@ -60,6 +62,7 @@ internal fun SubscriptionsRoute(
 @Composable
 private fun SubscriptionsScreen(
     subscriptionsScreenData: SubscriptionsScreenData,
+    onRecurringTypeClick: (String, UiRecurringType) -> Unit,
     onCancellationClick: (String, Boolean) -> Unit,
 ) {
     if (subscriptionsScreenData.subscriptions.isEmpty()) {
@@ -70,6 +73,7 @@ private fun SubscriptionsScreen(
     } else {
         SubscriptionsList(
             subscriptions = subscriptionsScreenData.subscriptions,
+            onRecurringTypeClick = onRecurringTypeClick,
             onCancellationClick = onCancellationClick,
         )
     }
@@ -78,6 +82,7 @@ private fun SubscriptionsScreen(
 @Composable
 private fun SubscriptionsList(
     subscriptions: List<UiExpense>,
+    onRecurringTypeClick: (String, UiRecurringType) -> Unit,
     onCancellationClick: (String, Boolean) -> Unit,
 ) {
     LazyColumn(
@@ -89,7 +94,7 @@ private fun SubscriptionsList(
             ExpenseCard(
                 expense = subscription,
                 onExpenseClick = null,
-                onRecurringTypeClick = null,
+                onRecurringTypeClick = onRecurringTypeClick,
                 onCancellationClick = onCancellationClick,
             )
         }

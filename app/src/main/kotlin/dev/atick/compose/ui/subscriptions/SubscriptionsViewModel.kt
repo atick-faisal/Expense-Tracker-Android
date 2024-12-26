@@ -19,7 +19,9 @@ package dev.atick.compose.ui.subscriptions
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.data.subscriptions.SubscriptionsScreenData
+import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.compose.repository.subscriptions.SubscriptionsRepository
 import dev.atick.core.ui.utils.OneTimeEvent
 import dev.atick.core.ui.utils.UiState
@@ -36,6 +38,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SubscriptionsViewModel @Inject constructor(
     private val subscriptionsRepository: SubscriptionsRepository,
+    private val expensesRepository: ExpensesRepository,
 ) : ViewModel() {
     private val _subscriptionsUiState = MutableStateFlow(UiState(SubscriptionsScreenData()))
     val subscriptionsUiState = _subscriptionsUiState.asStateFlow()
@@ -51,6 +54,20 @@ class SubscriptionsViewModel @Inject constructor(
             }
             .catch { e -> _subscriptionsUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .launchIn(viewModelScope)
+    }
+
+    fun setRecurringType(merchant: String, recurringType: UiRecurringType) {
+        val newRecurringType = when (recurringType) {
+            UiRecurringType.ONETIME -> UiRecurringType.DAILY
+            UiRecurringType.DAILY -> UiRecurringType.WEEKLY
+            UiRecurringType.WEEKLY -> UiRecurringType.MONTHLY
+            UiRecurringType.MONTHLY -> UiRecurringType.YEARLY
+            UiRecurringType.YEARLY -> UiRecurringType.ONETIME
+        }
+
+        _subscriptionsUiState.updateWith(viewModelScope) {
+            expensesRepository.setRecurringType(merchant, newRecurringType)
+        }
     }
 
     fun setCancellation(merchant: String, toBeCancelled: Boolean) {

@@ -103,7 +103,7 @@ private fun EditBudgetScreen(
             style = MaterialTheme.typography.titleSmall,
         )
         JetpackTextField(
-            value = budget.amount.toString(),
+            value = (budget.amount ?: 0.0).toString(),
             onValueChange = onAmountChange,
             label = { Text(stringResource(R.string.budget)) },
             modifier = Modifier.fillMaxWidth(),

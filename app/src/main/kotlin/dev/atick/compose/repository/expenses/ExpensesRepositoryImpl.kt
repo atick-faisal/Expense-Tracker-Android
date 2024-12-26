@@ -110,9 +110,34 @@ class ExpensesRepositoryImpl @Inject constructor(
                     toBeCancelled = expense.toBeCancelled,
                 ),
             )
+
+            // Update recurring type of all expenses from the same merchant
+            if (expense.recurringType != UiRecurringType.ONETIME) {
+                setRecurringType(expense.merchant, expense.recurringType)
+            }
+
             // Check if budget exceeded after updating expense
             // TODO: Might be better a to do this
             checkBudgetExceeded()
+        }
+    }
+
+    override suspend fun deleteExpense(expense: UiExpense): Result<Unit> {
+        return suspendRunCatching {
+            expenseDataSource.deleteExpense(
+                ExpenseEntity(
+                    id = expense.id,
+                    amount = expense.amount,
+                    currency = expense.currency.name,
+                    merchant = expense.merchant,
+                    category = expense.category.name,
+                    paymentStatus = expense.paymentStatus.name,
+                    recurringType = expense.recurringType.name,
+                    paymentDate = expense.paymentDate,
+                    dueDate = expense.dueDate,
+                    toBeCancelled = expense.toBeCancelled,
+                ),
+            )
         }
     }
 
@@ -134,6 +159,7 @@ class ExpensesRepositoryImpl @Inject constructor(
         val smsList = smsDataSource.querySMS(
             senderNames = ExpensesRepository.BANK_NAMES,
             keywords = ExpensesRepository.KEYWORDS,
+            ignoreWords = ExpensesRepository.IGNORE_WORDS,
             startDate = startDate,
             endDate = System.currentTimeMillis(),
         )

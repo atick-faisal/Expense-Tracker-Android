@@ -17,16 +17,30 @@
 package dev.atick.compose.ui.expenses
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -71,6 +85,7 @@ internal fun ExpensesRoute(
             expensesScreenData = expensesScreenData,
             onExpenseClick = onExpenseClick,
             onRecurringTypeClick = expensesViewModel::setRecurringType,
+            onDeleteExpense = expensesViewModel::deleteExpense,
         )
     }
 }
@@ -80,6 +95,7 @@ private fun ExpensesScreen(
     expensesScreenData: ExpensesScreenData,
     onExpenseClick: (Long) -> Unit,
     onRecurringTypeClick: (String, UiRecurringType) -> Unit,
+    onDeleteExpense: (UiExpense) -> Unit,
 ) {
     if (expensesScreenData.expenses.isEmpty()) {
         Placeholder()
@@ -88,6 +104,7 @@ private fun ExpensesScreen(
             expenses = expensesScreenData.expenses,
             onExpenseClick = onExpenseClick,
             onRecurringTypeClick = onRecurringTypeClick,
+            onDeleteExpense = onDeleteExpense,
         )
     }
 }
@@ -97,6 +114,7 @@ private fun ExpenseList(
     expenses: List<UiExpense>,
     onExpenseClick: (Long) -> Unit,
     onRecurringTypeClick: (String, UiRecurringType) -> Unit,
+    onDeleteExpense: (UiExpense) -> Unit,
 ) {
     val listState = rememberLazyListState()
 
@@ -114,13 +132,75 @@ private fun ExpenseList(
         contentPadding = PaddingValues(16.dp),
         state = listState,
     ) {
-        items(expenses, key = { it.id }) { expense ->
-            ExpenseCard(
-                expense = expense,
-                onExpenseClick = onExpenseClick,
-                onRecurringTypeClick = onRecurringTypeClick,
-                modifier = Modifier.animateItem(),
+        items(
+            items = expenses,
+            key = { item -> item.id },
+        ) { item ->
+            SwipeableItem(
+                onDelete = { },
+                content = {
+                    SwipeableItem(onDelete = { onDeleteExpense(item) }) {
+                        ExpenseCard(
+                            expense = item,
+                            onExpenseClick = onExpenseClick,
+                            onRecurringTypeClick = null,
+                            modifier = Modifier.animateItem(),
+                        )
+                    }
+                },
             )
         }
     }
+}
+
+@Composable
+fun SwipeableItem(
+    onDelete: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    val dismissState = rememberSwipeToDismissBoxState(
+        confirmValueChange = { dismissValue ->
+            when (dismissValue) {
+                SwipeToDismissBoxValue.StartToEnd -> false
+                SwipeToDismissBoxValue.EndToStart -> {
+                    onDelete()
+                    true
+                }
+
+                SwipeToDismissBoxValue.Settled -> false
+            }
+        },
+    )
+
+    SwipeToDismissBox(
+        state = dismissState,
+        backgroundContent = {
+            val color by animateColorAsState(
+                targetValue = when (dismissState.targetValue) {
+                    SwipeToDismissBoxValue.Settled -> Color.Transparent
+                    SwipeToDismissBoxValue.StartToEnd -> Color.Transparent
+                    SwipeToDismissBoxValue.EndToStart -> MaterialTheme.colorScheme.errorContainer
+                },
+                label = "backgroundColorAnimation",
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color)
+                    .padding(horizontal = 16.dp),
+                contentAlignment = Alignment.CenterEnd,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete",
+                    tint = MaterialTheme.colorScheme.onErrorContainer,
+                )
+            }
+        },
+        content = { content() },
+        enableDismissFromStartToEnd = false,
+        enableDismissFromEndToStart = true,
+        gesturesEnabled = true,
+    )
 }

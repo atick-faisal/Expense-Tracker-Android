@@ -89,17 +89,64 @@ private fun BudgetsScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp),
     ) {
-        item {
-            BudgetStatusCard(
-                screenData = budgetsScreenData,
-                currencyFormatter = currencyFormatter,
-            )
+        if (budgetsScreenData.budget.amount != null) {
+            item {
+                BudgetStatusCard(
+                    screenData = budgetsScreenData,
+                    currencyFormatter = currencyFormatter,
+                )
+            }
+        } else {
+            item {
+                BudgetNotSetCard()
+            }
         }
 
         item {
             BudgetChart(
                 data = budgetsScreenData,
                 modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
+}
+
+@Composable
+fun BudgetNotSetCard(
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+        ),
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = stringResource(R.string.budget_not_set),
+                    tint = MaterialTheme.colorScheme.onErrorContainer,
+                )
+                Text(
+                    text = stringResource(R.string.budget_not_set),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = stringResource(R.string.set_budget_to_track_expenses),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onErrorContainer,
             )
         }
     }
@@ -193,7 +240,11 @@ fun BudgetStatusCard(
             ) {
                 BudgetInfoRow(
                     label = stringResource(R.string.total_budget),
-                    value = currencyFormatter.format(screenData.budget.amount),
+                    value = if (screenData.budget.amount == null) {
+                        stringResource(R.string.not_set)
+                    } else {
+                        currencyFormatter.format(screenData.budget.amount)
+                    },
                     color = statusConfig.contentColor,
                 )
                 BudgetInfoRow(

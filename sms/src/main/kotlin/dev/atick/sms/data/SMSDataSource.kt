@@ -24,6 +24,7 @@ interface SMSDataSource {
     suspend fun querySMS(
         senderNames: List<String>,
         keywords: List<String>? = null,
+        ignoreWords: List<String>? = null,
         startDate: Long? = null,
         endDate: Long = System.currentTimeMillis(),
     ): List<SMSMessage>

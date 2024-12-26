@@ -146,4 +146,19 @@
     <string name="demo_question_8">أين يمكنني تقليل المصروفات؟</string>
     <string name="demo_question_9">أظهر أكبر مشترياتي لمرة واحدة</string>
     <string name="language">اللغة</string>
+    <string name="patnent_reminder_notification_channel_name">تذكير الدفع</string>
+    <string name="patnent_reminder_notification_channel_description">تذكير بالمدفوعات المتكررة</string>
+    <string name="canellation_reminder_notification_channel_name">تذكير الإلغاء</string>
+    <string name="canellation_reminder_notification_channel_description">تذكير بإلغاء المدفوعات</string>
+    <string name="payment_reminder_notification_title">دفعة قادمة: %1$s</string>
+    <string name="payment_reminder_notification_content">الدفعة القادمة في %1$s</string>
+    <string name="cancellation_reminder_notification_content">الدفعة القادمة في %1$s</string>
+    <string name="cancellation_reminder_notification_title">إلغاء %1$s</string>
+    <string name="budget_exceed_notification_channel_name">إشعارات الميزانية</string>
+    <string name="budget_exceed_notification_channel_description">إشعارات متعلقة بأحداث الميزانية</string>
+    <string name="budget_exceed_notification_title">تجاوز الميزانية الشهرية</string>
+    <string name="budget_exceed_notification_content">الميزانية: %.2f، الإنفاق: %.2f</string>
+    <string name="not_set">غير محدد</string>
+    <string name="budget_not_set">الميزانية غير محددة</string>
+    <string name="set_budget_to_track_expenses">حدد الميزانية لتتبع المصروفات</string>
 </resources>
