@@ -19,13 +19,21 @@ package dev.atick.core.extensions
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.annotation.DrawableRes
+import androidx.annotation.IntDef
+import androidx.annotation.StringRes
+import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -75,6 +83,137 @@ fun Context.hasPermission(permission: String): Boolean {
  */
 fun Context.isAllPermissionsGranted(permissions: List<String>): Boolean {
     return permissions.all { hasPermission(it) }
+}
+
+@IntDef(
+    NotificationManager.IMPORTANCE_DEFAULT,
+    NotificationManager.IMPORTANCE_HIGH,
+    NotificationManager.IMPORTANCE_LOW,
+    NotificationManager.IMPORTANCE_MIN,
+    NotificationManager.IMPORTANCE_NONE,
+    NotificationManager.IMPORTANCE_UNSPECIFIED,
+)
+@Retention(AnnotationRetention.SOURCE)
+annotation class Options
+
+/**
+ * Creates a notification channel with the specified channel ID, name, description, and importance.
+ *
+ * @param channelId The ID of the notification channel.
+ * @param channelName The name of the notification channel.
+ * @param channelDescription The description of the notification channel.
+ * @param importance The importance level of the notification channel.
+ */
+fun Context.createNotificationChannel(
+    channelId: String,
+    @StringRes channelName: Int,
+    @StringRes channelDescription: Int,
+    @Options importance: Int,
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val channel = NotificationChannel(
+            channelId,
+            getString(channelName),
+            importance,
+        ).apply {
+            description = getString(channelDescription)
+        }
+        val notificationManager: NotificationManager? =
+            getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+
+        notificationManager?.createNotificationChannel(channel)
+    }
+}
+
+/**
+ * Creates a notification using the specified channel ID, title, content, and icon.
+ *
+ * @param channelId The ID of the notification channel.
+ * @param title The title of the notification.
+ * @param content The content of the notification.
+ * @param icon The icon of the notification.
+ * @return The notification object.
+ */
+fun Context.createNotification(
+    channelId: String,
+    @StringRes title: Int,
+    @StringRes content: Int,
+    icon: Int,
+    pendingIntent: PendingIntent? = null,
+): Notification {
+    return NotificationCompat.Builder(
+        this,
+        channelId,
+    )
+        .setSmallIcon(icon)
+        .setContentTitle(getString(title))
+        .setContentText(getString(content))
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setOnlyAlertOnce(true)
+        .setContentIntent(pendingIntent)
+        .build()
+}
+
+/**
+ * Creates a notification using the specified channel ID, title, content, and icon.
+ *
+ * @param channelId The ID of the notification channel.
+ * @param title The title of the notification.
+ * @param content The content of the notification.
+ * @param icon The icon of the notification.
+ * @return The notification object.
+ */
+fun Context.createNotification(
+    channelId: String,
+    title: String,
+    content: String,
+    icon: Int,
+    pendingIntent: PendingIntent? = null,
+): Notification {
+    return NotificationCompat.Builder(
+        this,
+        channelId,
+    )
+        .setSmallIcon(icon)
+        .setContentTitle(title)
+        .setContentText(content)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setOnlyAlertOnce(true)
+        .setContentIntent(pendingIntent)
+        .build()
+}
+
+/**
+ * Creates a progress notification using the specified channel ID, title, total, current, and icon.
+ *
+ * @param channelId The ID of the notification channel.
+ * @param title The title of the notification.
+ * @param total The total progress value.
+ * @param current The current progress value.
+ * @param icon The icon of the notification.
+ * @return The notification object.
+ */
+fun Context.createProgressNotification(
+    channelId: String,
+    @StringRes title: Int,
+    total: Int,
+    current: Int,
+    @DrawableRes icon: Int,
+    pendingIntent: PendingIntent? = null,
+): Notification {
+    return NotificationCompat.Builder(
+        this,
+        channelId,
+    )
+        .setSmallIcon(icon)
+        // TODO: Generalize string formatting for title
+        .setContentTitle(getString(title, current, total))
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .setOngoing(true)
+        .setOnlyAlertOnce(true)
+        .setProgress(total, current, false)
+        .setContentIntent(pendingIntent)
+        .build()
 }
 
 /**

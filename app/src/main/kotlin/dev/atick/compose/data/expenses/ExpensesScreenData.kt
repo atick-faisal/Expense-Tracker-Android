@@ -18,9 +18,7 @@ package dev.atick.compose.data.expenses
 
 import androidx.annotation.StringRes
 import dev.atick.compose.R
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import dev.atick.core.extensions.asFormattedDateTime
 
 data class ExpensesScreenData(
     val expenses: List<UiExpense> = emptyList(),
@@ -38,7 +36,7 @@ data class UiExpense(
     val paymentDate: Long = System.currentTimeMillis(),
     val dueDate: Long? = null,
     val toBeCancelled: Boolean = false,
-    val formattedDate: String = paymentDate.asFormattedDate(),
+    val formattedDate: String = paymentDate.asFormattedDateTime(),
 )
 
 enum class UiCurrencyType {
@@ -74,14 +72,4 @@ enum class UiCategoryType(@StringRes val value: Int) {
     DEBT(R.string.category_debt),
     EDUCATION(R.string.category_education),
     OTHERS(R.string.category_others),
-}
-
-fun Long.asFormattedDate(): String {
-    val dateTime = Instant.fromEpochMilliseconds(this)
-        .toLocalDateTime(TimeZone.currentSystemDefault())
-    return "${
-        dateTime.month.name
-    } ${dateTime.dayOfMonth}, ${dateTime.year} at ${dateTime.hour}:${
-        dateTime.minute.toString().padStart(2, '0')
-    }"
 }

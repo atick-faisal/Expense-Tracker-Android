@@ -56,6 +56,24 @@ interface ExpenseDao {
 
     @Query(
         """
+        SELECT paymentDate FROM expenses 
+        WHERE merchant = :merchant
+        ORDER BY paymentDate DESC
+        LIMIT 1
+    """,
+    )
+    suspend fun getLastPaymentDate(merchant: String): Long?
+
+    @Query(
+        """
+        SELECT nextRecurringDate FROM expenses 
+        WHERE merchant = :merchant
+    """,
+    )
+    suspend fun getNextPaymentDate(merchant: String): Long?
+
+    @Query(
+        """
         SELECT * FROM expenses 
         WHERE toBeCancelled = 1 
         AND nextRecurringDate IS NOT NULL 
@@ -175,11 +193,12 @@ interface ExpenseDao {
     @Query(
         """
         UPDATE expenses 
-        SET recurringType = :recurringType 
+        SET recurringType = :recurringType,
+        nextRecurringDate = :nextRecurringDate
         WHERE merchant = :merchant
     """,
     )
-    suspend fun setRecurringType(merchant: String, recurringType: String)
+    suspend fun setRecurringType(merchant: String, recurringType: String, nextRecurringDate: Long)
 
     @Query(
         """

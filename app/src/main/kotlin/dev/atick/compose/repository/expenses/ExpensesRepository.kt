@@ -27,6 +27,13 @@ interface ExpensesRepository {
         const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
         val BANK_NAMES = listOf("QNB", "QIB", "CBQ", "Doha Bank")
         val KEYWORDS = listOf("purchase", "transaction")
+
+        const val RECURRING_DAILY = 24 * 60 * 60 * 1000L
+        const val RECURRING_WEEKLY = 7 * 24 * 60 * 60 * 1000L
+        const val RECURRING_MONTHLY = 30 * 24 * 60 * 60 * 1000L
+        const val RECURRING_YEARLY = 365 * 24 * 60 * 60 * 1000L
+
+        const val REMINDER_TIME_BEFORE_PAYMENT = 24 * 60 * 60 * 1000L
     }
 
     val isSyncing: Flow<Boolean>

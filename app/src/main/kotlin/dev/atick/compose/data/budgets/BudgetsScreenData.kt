@@ -52,7 +52,7 @@ data class BudgetsScreenData(
 
 data class UiBudget(
     val month: Long = getMonthInfoAt(0).startDate,
-    val amount: Double = 0.0,
+    val amount: Double = Double.MAX_VALUE,
 )
 
 enum class BudgetStatus {

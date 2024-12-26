@@ -32,6 +32,8 @@ interface ExpenseDataSource {
     suspend fun insertExpense(expense: ExpenseEntity): Long
     suspend fun updateExpense(expense: ExpenseEntity)
     suspend fun deleteExpense(expense: ExpenseEntity)
+    suspend fun getLastPaymentDate(merchant: String): Long
+    suspend fun getNextPaymentDate(merchant: String): Long?
 
     //    fun getCategorySpending(
 //        categoryType: String,
@@ -45,7 +47,13 @@ interface ExpenseDataSource {
 //        n: Int = 10,
 //    ): Flow<List<ExpenseGroup>>
     suspend fun getLastExpenseTime(): Long
+    fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double>
     fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<CumulativeExpense>>
-    suspend fun setRecurringType(merchant: String, recurringType: String)
+    suspend fun setRecurringPayment(
+        merchant: String,
+        recurringType: String,
+        nextRecurringDate: Long,
+    )
+
     suspend fun setCancellation(merchant: String, toBeCancelled: Boolean)
 }

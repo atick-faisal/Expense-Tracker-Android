@@ -23,6 +23,7 @@ import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -83,6 +84,18 @@ class ExpenseDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getLastPaymentDate(merchant: String): Long {
+        return withContext(ioDispatcher) {
+            expenseDao.getLastPaymentDate(merchant) ?: System.currentTimeMillis()
+        }
+    }
+
+    override suspend fun getNextPaymentDate(merchant: String): Long? {
+        return withContext(ioDispatcher) {
+            expenseDao.getNextPaymentDate(merchant)
+        }
+    }
+
 //    override fun getCategorySpending(
 //        categoryType: String,
 //        startDate: Long,
@@ -118,6 +131,14 @@ class ExpenseDataSourceImpl @Inject constructor(
         }
     }
 
+    override fun getTotalSpending(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<Double> {
+        return expenseDao.getTotalSpending(startDate, endDate).flowOn(ioDispatcher)
+            .map { it ?: 0.0 }
+    }
+
     override fun getCumulativeExpenses(
         startDate: Long,
         endDate: Long,
@@ -125,9 +146,13 @@ class ExpenseDataSourceImpl @Inject constructor(
         return expenseDao.getCumulativeExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
-    override suspend fun setRecurringType(merchant: String, recurringType: String) {
+    override suspend fun setRecurringPayment(
+        merchant: String,
+        recurringType: String,
+        nextRecurringDate: Long,
+    ) {
         withContext(ioDispatcher) {
-            expenseDao.setRecurringType(merchant, recurringType)
+            expenseDao.setRecurringType(merchant, recurringType, nextRecurringDate)
         }
     }
 

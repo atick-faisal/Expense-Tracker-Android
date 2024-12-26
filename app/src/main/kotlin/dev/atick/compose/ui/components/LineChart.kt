@@ -40,7 +40,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import dev.atick.compose.data.budgets.BudgetsScreenData
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -235,7 +234,6 @@ fun BudgetChart(
                         position = XAxis.XAxisPosition.BOTTOM
                         valueFormatter = object : IAxisValueFormatter {
                             override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-                                Timber.d("XValue: ${value.toInt()}, Size: ${data.cumulativeExpenses.size}")
 //                                 val index = value.toInt()
 //                                return if (index >= 0 && index < data.cumulativeExpenses.size) {
 //                                    dateFormatter.format(Date(data.cumulativeExpenses[index].atTime))
@@ -332,7 +330,11 @@ fun BudgetChart(
                 }
 
                 // Set the data with animation
-                chart.data = LineData(expenseDataSet, budgetDataSet)
+                if (data.budget.amount == Double.MAX_VALUE) {
+                    chart.data = LineData(expenseDataSet)
+                } else {
+                    chart.data = LineData(expenseDataSet, budgetDataSet)
+                }
 
                 // Refresh with animation
                 chart.animateX(1000)

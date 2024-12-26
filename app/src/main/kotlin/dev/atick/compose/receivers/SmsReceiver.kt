@@ -23,7 +23,7 @@ import android.content.Intent
 import android.provider.Telephony
 import dagger.hilt.android.AndroidEntryPoint
 import dev.atick.compose.repository.expenses.ExpensesRepository
-import dev.atick.compose.sync.SyncManager
+import dev.atick.compose.sync.TaskManager
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ import javax.inject.Inject
 class SmsReceiver @Inject constructor() : BroadcastReceiver() {
 
     @Inject
-    lateinit var syncManager: SyncManager
+    lateinit var taskManager: TaskManager
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
@@ -41,7 +41,7 @@ class SmsReceiver @Inject constructor() : BroadcastReceiver() {
                     if (ExpensesRepository.BANK_NAMES.any { sms.originatingAddress?.contains(it) == true }) {
                         Timber.d("SMS Received: ${sms.originatingAddress} - ${sms.messageBody}")
                         @SuppressLint("MissingPermission")
-                        syncManager.requestSync()
+                        taskManager.requestSync()
                     }
                 }
             }

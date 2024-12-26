@@ -18,7 +18,6 @@ package dev.atick.compose.sync
 
 import android.content.Context
 import androidx.annotation.RequiresPermission
-import androidx.annotation.StringRes
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
@@ -28,7 +27,6 @@ import androidx.work.OutOfQuotaPolicy
 import androidx.work.WorkerParameters
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import dev.atick.compose.R
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.core.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -46,11 +44,11 @@ class SyncWorker @AssistedInject constructor(
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
         Timber.d("SyncWorker: getForegroundInfo")
-        return context.syncForegroundInfo(R.string.sync_work_notification_title, 0, 0)
+        return context.syncForegroundInfo(0, 0)
     }
 
-    private fun getForegroundInfo(@StringRes title: Int, total: Int, current: Int): ForegroundInfo {
-        return context.syncForegroundInfo(title, total, current)
+    private fun getForegroundInfo(total: Int, current: Int): ForegroundInfo {
+        return context.syncForegroundInfo(total, current)
     }
 
     @RequiresPermission(android.Manifest.permission.READ_SMS)
@@ -64,7 +62,6 @@ class SyncWorker @AssistedInject constructor(
                         Timber.d("SyncWorker: Progress: $progress")
                         setForeground(
                             foregroundInfo = getForegroundInfo(
-                                title = R.string.sync_work_notification_title,
                                 total = progress.total,
                                 current = progress.current,
                             ),
