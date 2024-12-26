@@ -17,20 +17,38 @@
 package dev.atick.compose.sync
 
 import android.app.Notification
-import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
-import android.os.Build
-import androidx.annotation.StringRes
-import androidx.core.app.NotificationCompat
+import android.content.Intent
 import androidx.work.Constraints
 import androidx.work.ForegroundInfo
 import androidx.work.NetworkType
+import dev.atick.compose.MainActivity
 import dev.atick.compose.R
+import dev.atick.core.extensions.asFormattedDateTime
+import dev.atick.core.extensions.createNotification
+import dev.atick.core.extensions.createNotificationChannel
+import dev.atick.core.extensions.createProgressNotification
 
-const val SYNC_TOPIC = "sync"
 private const val SYNC_NOTIFICATION_ID = 0
 private const val SYNC_NOTIFICATION_CHANNEL_ID = "SyncNotificationChannel"
+
+const val PAYMENT_REMINDER_NOTIFICATION_ID = 1
+const val MERCHANT_NAME_KEY = "MerchantName"
+const val NOTIFICATION_TIME_KEY = "NotificationTime"
+private const val PAYMENT_REMINDER_NOTIFICATION_CHANNEL_ID = "PaymentReminderNotificationChannel"
+
+const val CANCELLATION_REMINDER_NOTIFICATION_ID = 2
+private const val CANCELLATION_REMINDER_NOTIFICATION_CHANNEL_ID =
+    "CancellationReminderNotificationChannel"
+
+const val BUDGET_AMOUNT_KEY = "BudgetAmount"
+const val CURRENT_AMOUNT_KEY = "CurrentAmount"
+const val BUDGET_EXCEED_NOTIFICATION_ID = 3
+private const val BUDGET_EXCEED_NOTIFICATION_CHANNEL_ID = "BudgetExceedNotificationChannel"
+
+private const val MAIN_DEFAULT_INTENT_REQUEST_CODE = 0
 
 // All sync work needs an internet connectionS
 val SyncConstraints
@@ -42,41 +60,104 @@ val SyncConstraints
  * Foreground information for sync on lower API levels when sync workers are being
  * run with a foreground service
  */
-fun Context.syncForegroundInfo(@StringRes title: Int, total: Int, current: Int) = ForegroundInfo(
+fun Context.syncForegroundInfo(total: Int, current: Int) = ForegroundInfo(
     SYNC_NOTIFICATION_ID,
-    syncWorkNotification(title, total, current),
+    syncWorkNotification(total, current),
 )
 
 /**
  * Notification displayed on lower API levels when sync workers are being
  * run with a foreground service
  */
-private fun Context.syncWorkNotification(@StringRes title: Int, total: Int, current: Int): Notification {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val channel = NotificationChannel(
-            SYNC_NOTIFICATION_CHANNEL_ID,
-            getString(R.string.sync_work_notification_channel_name),
-            NotificationManager.IMPORTANCE_DEFAULT,
-        ).apply {
-            description = getString(R.string.sync_work_notification_channel_description)
-        }
-        // Register the channel with the system
-        val notificationManager: NotificationManager? =
-            getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
-
-        notificationManager?.createNotificationChannel(channel)
-    }
-
-    return NotificationCompat.Builder(
-        this,
-        SYNC_NOTIFICATION_CHANNEL_ID,
+private fun Context.syncWorkNotification(total: Int, current: Int): Notification {
+    createNotificationChannel(
+        channelId = SYNC_NOTIFICATION_CHANNEL_ID,
+        channelName = R.string.sync_work_notification_channel_name,
+        channelDescription = R.string.sync_work_notification_channel_description,
+        importance = NotificationManager.IMPORTANCE_DEFAULT,
     )
-        .setSmallIcon(
-            R.drawable.ic_launcher_foreground,
-        )
-        .setContentTitle(getString(title, current, total))
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setOnlyAlertOnce(true)
-        .setProgress(total, current, false)
-        .build()
+
+    return createProgressNotification(
+        channelId = SYNC_NOTIFICATION_CHANNEL_ID,
+        title = R.string.sync_work_notification_title,
+        total = total,
+        current = current,
+        icon = R.drawable.ic_ai_sms_sync,
+        pendingIntent = getDefaultIntent(this),
+    )
 }
+
+fun Context.paymentReminderNotification(
+    merchantName: String,
+    nextPaymentDate: Long,
+): Notification {
+    val formattedDate = nextPaymentDate.asFormattedDateTime()
+
+    createNotificationChannel(
+        channelId = PAYMENT_REMINDER_NOTIFICATION_CHANNEL_ID,
+        channelName = R.string.patnent_reminder_notification_channel_name,
+        channelDescription = R.string.patnent_reminder_notification_channel_description,
+        importance = NotificationManager.IMPORTANCE_DEFAULT,
+    )
+
+    return createNotification(
+        channelId = PAYMENT_REMINDER_NOTIFICATION_CHANNEL_ID,
+        title = getString(R.string.payment_reminder_notification_title, merchantName),
+        content = getString(R.string.payment_reminder_notification_content, formattedDate),
+        icon = R.drawable.ic_upcoming,
+        pendingIntent = getDefaultIntent(this),
+    )
+}
+
+fun Context.cancellationReminderNotification(
+    merchantName: String,
+    nextPaymentDate: Long,
+): Notification {
+    val formattedDate = nextPaymentDate.asFormattedDateTime()
+
+    createNotificationChannel(
+        channelId = CANCELLATION_REMINDER_NOTIFICATION_CHANNEL_ID,
+        channelName = R.string.canellation_reminder_notification_channel_name,
+        channelDescription = R.string.canellation_reminder_notification_channel_description,
+        importance = NotificationManager.IMPORTANCE_HIGH,
+    )
+
+    return createNotification(
+        channelId = CANCELLATION_REMINDER_NOTIFICATION_CHANNEL_ID,
+        title = getString(R.string.cancellation_reminder_notification_title, merchantName),
+        content = getString(R.string.cancellation_reminder_notification_content, formattedDate),
+        icon = R.drawable.ic_hourglass_bottom,
+        pendingIntent = getDefaultIntent(this),
+    )
+}
+
+fun Context.budgetExceedNotification(
+    budgetAmount: Double,
+    currentAmount: Double,
+): Notification {
+    createNotificationChannel(
+        channelId = BUDGET_EXCEED_NOTIFICATION_CHANNEL_ID,
+        channelName = R.string.budget_exceed_notification_channel_name,
+        channelDescription = R.string.budget_exceed_notification_channel_description,
+        importance = NotificationManager.IMPORTANCE_HIGH,
+    )
+
+    return createNotification(
+        channelId = BUDGET_EXCEED_NOTIFICATION_CHANNEL_ID,
+        title = getString(R.string.budget_exceed_notification_title),
+        content = getString(
+            R.string.budget_exceed_notification_content,
+            budgetAmount,
+            currentAmount,
+        ),
+        icon = R.drawable.ic_wallet,
+        pendingIntent = getDefaultIntent(this),
+    )
+}
+
+private fun getDefaultIntent(context: Context) = PendingIntent.getActivity(
+    /* context = */ context,
+    /* requestCode = */ MAIN_DEFAULT_INTENT_REQUEST_CODE,
+    /* intent = */ Intent(context, MainActivity::class.java),
+    /* flags = */ PendingIntent.FLAG_IMMUTABLE,
+)

@@ -21,6 +21,7 @@ import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
+import dev.atick.compose.sync.TaskManager
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.storage.room.data.ExpenseDataSource
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,7 @@ import javax.inject.Inject
 
 class SubscriptionsRepositoryImpl @Inject constructor(
     private val expenseDataSource: ExpenseDataSource,
+    private val taskManager: TaskManager,
 ) : SubscriptionsRepository {
     override fun getSubscriptions(): Flow<List<UiExpense>> {
         return expenseDataSource.getRecurringExpenses()
@@ -56,6 +58,16 @@ class SubscriptionsRepositoryImpl @Inject constructor(
     ): Result<Unit> {
         return suspendRunCatching {
             expenseDataSource.setCancellation(merchant, toBeCancelled)
+
+            // Schedule cancellation reminder if the subscription to be cancelled
+            val nextPaymentDate = expenseDataSource.getNextPaymentDate(merchant)
+            if (toBeCancelled && nextPaymentDate != null) {
+                taskManager.scheduleCancellationReminder(
+                    merchantName = merchant,
+                    nextPaymentDate = nextPaymentDate,
+                    reminderTime = nextPaymentDate - SubscriptionsRepository.CANCELLATION_REMINDER_TIME,
+                )
+            }
         }
     }
 }

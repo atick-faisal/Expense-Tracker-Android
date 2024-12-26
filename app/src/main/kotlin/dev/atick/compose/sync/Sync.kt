@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.annotation.RequiresPermission
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
+import timber.log.Timber
 
 object Sync {
     // This method is initializes sync, the process that keeps the app's data current.
@@ -28,6 +29,7 @@ object Sync {
     fun initialize(context: Context) {
         WorkManager.getInstance(context).apply {
             // Run sync on app startup and ensure only one sync worker runs at any time
+            Timber.d("Sync: initialize")
             enqueueUniqueWork(
                 SYNC_WORK_NAME,
                 ExistingWorkPolicy.KEEP,

@@ -42,10 +42,29 @@ private const val WORKER_CLASS_NAME = "RouterWorkerDelegateClassName"
 /**
  * Adds metadata to a WorkRequest to identify what [CoroutineWorker] the [DelegatingWorker] should
  * delegate to
+ *
+ * @param inputData a list of key-value pairs to be added to the WorkRequest's input data
+ *
+ * @return a [Data] object with the worker class name and any additional input data
  */
-internal fun KClass<out CoroutineWorker>.delegatedData() =
+internal fun KClass<out CoroutineWorker>.delegatedData(
+    inputData: List<Pair<String, Any>> = emptyList(),
+) =
     Data.Builder()
         .putString(WORKER_CLASS_NAME, qualifiedName)
+        .apply {
+            inputData.forEach { (key, value) ->
+                when (value) {
+                    is String -> putString(key, value)
+                    is Int -> putInt(key, value)
+                    is Long -> putLong(key, value)
+                    is Boolean -> putBoolean(key, value)
+                    is Float -> putFloat(key, value)
+                    is Double -> putDouble(key, value)
+                    else -> throw IllegalArgumentException("Unsupported type: ${value::class}")
+                }
+            }
+        }
         .build()
 
 /**

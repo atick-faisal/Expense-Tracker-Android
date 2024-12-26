@@ -149,4 +149,16 @@
 
     <string name="en" translatable="false">EN</string>
     <string name="ar" translatable="false">عر</string>
+    <string name="patnent_reminder_notification_channel_name">Payment Reminder</string>
+    <string name="patnent_reminder_notification_channel_description">Reminder for Recurring Payments</string>
+    <string name="canellation_reminder_notification_channel_name">Cancellation Reminder</string>
+    <string name="canellation_reminder_notification_channel_description">Reminder for Payment Cancellations</string>
+    <string name="payment_reminder_notification_title">Upcoming Payment: %1$s</string>
+    <string name="payment_reminder_notification_content">Next payment on %1$s</string>
+    <string name="cancellation_reminder_notification_content">Next payment on %1$s</string>
+    <string name="cancellation_reminder_notification_title">Cancel %1$s</string>
+    <string name="budget_exceed_notification_channel_name">Budget Notifications</string>
+    <string name="budget_exceed_notification_channel_description">Notifications regarding budget events</string>
+    <string name="budget_exceed_notification_title">Monthly Budget Exceeded</string>
+    <string name="budget_exceed_notification_content">Budget: %.2f, Spending: %.2f</string>
 </resources>

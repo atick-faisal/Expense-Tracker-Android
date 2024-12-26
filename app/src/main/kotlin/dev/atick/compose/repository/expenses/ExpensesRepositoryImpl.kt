@@ -22,8 +22,9 @@ import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
-import dev.atick.compose.sync.SyncManager
 import dev.atick.compose.sync.SyncProgress
+import dev.atick.compose.sync.TaskManager
+import dev.atick.core.utils.getMonthInfoAt
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
 import dev.atick.gemini.data.GeminiException
@@ -31,10 +32,12 @@ import dev.atick.gemini.data.GeminiRateLimiter
 import dev.atick.gemini.models.AiSMS
 import dev.atick.sms.data.SMSDataSource
 import dev.atick.sms.models.SMSMessage
+import dev.atick.storage.room.data.BudgetDataSource
 import dev.atick.storage.room.data.ExpenseDataSource
 import dev.atick.storage.room.models.ExpenseEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
@@ -46,10 +49,11 @@ class ExpensesRepositoryImpl @Inject constructor(
     private val geminiRateLimiter: GeminiRateLimiter,
     private val smsDataSource: SMSDataSource,
     private val expenseDataSource: ExpenseDataSource,
-    private val syncManager: SyncManager,
+    private val budgetDataSource: BudgetDataSource,
+    private val taskManager: TaskManager,
 ) : ExpensesRepository {
     override val isSyncing: Flow<Boolean>
-        get() = syncManager.isSyncing
+        get() = taskManager.isSyncing
 
     override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>> {
         return expenseDataSource.getAllExpenses(startDate, endDate)
@@ -106,13 +110,16 @@ class ExpensesRepositoryImpl @Inject constructor(
                     toBeCancelled = expense.toBeCancelled,
                 ),
             )
+            // Check if budget exceeded after updating expense
+            // TODO: Might be better a to do this
+            checkBudgetExceeded()
         }
     }
 
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     override fun requestSync(): Result<Unit> {
         return runCatching {
-            syncManager.requestSync()
+            taskManager.requestSync()
         }
     }
 
@@ -139,6 +146,7 @@ class ExpensesRepositoryImpl @Inject constructor(
             Timber.d("SMS $i$: $sms")
 
             processSms(sms)
+            checkBudgetExceeded()
 
             emit(
                 SyncProgress(
@@ -155,9 +163,26 @@ class ExpensesRepositoryImpl @Inject constructor(
         recurringType: UiRecurringType,
     ): Result<Unit> {
         return suspendRunCatching {
-            expenseDataSource.setRecurringType(
+            val lastPaymentDate = expenseDataSource.getLastPaymentDate(merchant)
+            val nextPaymentDate = when (recurringType) {
+                UiRecurringType.ONETIME -> Long.MAX_VALUE
+                UiRecurringType.DAILY -> lastPaymentDate + ExpensesRepository.RECURRING_DAILY
+                UiRecurringType.WEEKLY -> lastPaymentDate + ExpensesRepository.RECURRING_WEEKLY
+                UiRecurringType.MONTHLY -> lastPaymentDate + ExpensesRepository.RECURRING_MONTHLY
+                UiRecurringType.YEARLY -> lastPaymentDate + ExpensesRepository.RECURRING_YEARLY
+            }
+
+            expenseDataSource.setRecurringPayment(
                 merchant,
                 recurringType.name,
+                nextPaymentDate,
+            )
+
+            // Schedule reminder for next payment
+            taskManager.schedulePaymentReminder(
+                merchantName = merchant,
+                nextPaymentDate = nextPaymentDate,
+                reminderTime = nextPaymentDate - ExpensesRepository.REMINDER_TIME_BEFORE_PAYMENT,
             )
         }
     }
@@ -231,6 +256,31 @@ class ExpensesRepositoryImpl @Inject constructor(
                     -> throw e
                 }
             }
+        }
+    }
+
+    private suspend fun checkBudgetExceeded() {
+        val monthInfo = getMonthInfoAt(0)
+
+        val budgetAmount = budgetDataSource.getBudgetForMonth(monthInfo.startDate)
+            .firstOrNull()?.amount
+
+        if (budgetAmount == null) {
+            Timber.w("Budget not set for month: ${monthInfo.startDate}")
+            return
+        }
+
+        val totalSpending = expenseDataSource.getTotalSpending(
+            startDate = monthInfo.startDate,
+            endDate = monthInfo.endDate,
+        ).firstOrNull() ?: 0.0
+
+        if (totalSpending > budgetAmount) {
+            Timber.w("Budget exceeded! Total spending: $totalSpending")
+            taskManager.showBudgetExceedWarning(
+                budgetAmount = budgetAmount,
+                currentAmount = totalSpending,
+            )
         }
     }
 }

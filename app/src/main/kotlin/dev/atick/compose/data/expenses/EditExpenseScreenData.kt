@@ -16,6 +16,7 @@
 
 package dev.atick.compose.data.expenses
 
+import dev.atick.core.extensions.asFormattedDateTime
 import dev.atick.core.ui.utils.OneTimeEvent
 
 data class EditExpenseScreenData(
@@ -29,6 +30,6 @@ data class EditExpenseScreenData(
     val paymentDate: Long = System.currentTimeMillis(),
     val dueDate: Long? = null,
     val toBeCancelled: Boolean = false,
-    val formattedDate: String = paymentDate.asFormattedDate(),
+    val formattedDate: String = paymentDate.asFormattedDateTime(),
     val navigateBack: OneTimeEvent<Boolean> = OneTimeEvent(false),
 )

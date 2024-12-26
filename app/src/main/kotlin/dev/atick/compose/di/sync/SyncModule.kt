@@ -20,8 +20,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.atick.compose.sync.SyncManager
-import dev.atick.compose.sync.SyncManagerImpl
+import dev.atick.compose.sync.TaskManager
+import dev.atick.compose.sync.TaskManagerImpl
 import javax.inject.Singleton
 
 @Module
@@ -30,5 +30,5 @@ abstract class SyncModule {
 
     @Binds
     @Singleton
-    abstract fun bindSyncManager(syncManagerImpl: SyncManagerImpl): SyncManager
+    abstract fun bindTaskManager(taskManagerImpl: TaskManagerImpl): TaskManager
 }

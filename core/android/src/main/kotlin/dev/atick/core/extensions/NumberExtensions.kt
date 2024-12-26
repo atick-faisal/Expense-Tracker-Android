@@ -16,6 +16,9 @@
 
 package dev.atick.core.extensions
 
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
@@ -56,4 +59,15 @@ fun <T> T.format(nDecimal: Int = 2): String where T : Number, T : Comparable<T> 
             }.format(this)
         }
     }
+}
+
+fun Long.asFormattedDateTime(): String {
+    val dateTime = Instant.fromEpochMilliseconds(this)
+        .toLocalDateTime(TimeZone.currentSystemDefault())
+    val amPm = if (dateTime.hour < 12) "AM" else "PM"
+    val hour = if (dateTime.hour % 12 == 0) 12 else dateTime.hour % 12
+
+    return "${dateTime.month.name} ${dateTime.dayOfMonth}, ${dateTime.year} at $hour:${
+        dateTime.minute.toString().padStart(2, '0')
+    } $amPm"
 }

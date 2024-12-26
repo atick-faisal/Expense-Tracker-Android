@@ -20,6 +20,9 @@ import dev.atick.compose.data.expenses.UiExpense
 import kotlinx.coroutines.flow.Flow
 
 interface SubscriptionsRepository {
+    companion object {
+        const val CANCELLATION_REMINDER_TIME = 3 * 24 * 60 * 60 * 1000L
+    }
     fun getSubscriptions(): Flow<List<UiExpense>>
     suspend fun setCancellation(merchant: String, toBeCancelled: Boolean): Result<Unit>
 }
