@@ -27,7 +27,7 @@ androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.0.1"
 androidxHiltNavigationCompose = "1.2.0"
 accompanistVersion = "0.37.0"
-lottieCompose = "6.6.0"
+lottieCompose = "6.6.2"
 
 # ... NETWORK ...
 okhttp = "4.12.0"
