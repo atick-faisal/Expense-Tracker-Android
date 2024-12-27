@@ -61,6 +61,15 @@ fun <T> T.format(nDecimal: Int = 2): String where T : Number, T : Comparable<T> 
     }
 }
 
+/**
+ * Formats a Long timestamp to a human-readable date-time string.
+ * Uses the system default time zone.
+ *
+ * @return Formatted date-time string
+ *
+ * Example:
+ * 1640995200000L.asFormattedDateTime() -> "December 31, 2021 at 11:59 PM"
+ */
 fun Long.asFormattedDateTime(): String {
     val dateTime = Instant.fromEpochMilliseconds(this)
         .toLocalDateTime(TimeZone.currentSystemDefault())

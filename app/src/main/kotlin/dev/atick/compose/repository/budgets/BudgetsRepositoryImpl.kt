@@ -26,10 +26,24 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Implementation of [BudgetsRepository] that fetches data from the [BudgetDataSource] and [ExpenseDataSource].
+ *
+ * @param expenseDataSource The data source for expense data.
+ * @param budgetDataSource The data source for budget data.
+ */
 class BudgetsRepositoryImpl @Inject constructor(
     private val expenseDataSource: ExpenseDataSource,
     private val budgetDataSource: BudgetDataSource,
 ) : BudgetsRepository {
+
+    /**
+     * Gets the cumulative expenses.
+     *
+     * @param startDate The start date of the analysis.
+     * @param endDate The end date of the analysis.
+     * @return A [Flow] of [List] of [UiCumulativeExpense] representing the cumulative expenses.
+     */
     override fun getCumulativeExpenses(
         startDate: Long,
         endDate: Long,
@@ -46,6 +60,12 @@ class BudgetsRepositoryImpl @Inject constructor(
             }
     }
 
+    /**
+     * Gets the budget for the month.
+     *
+     * @param month The month for which the budget is to be fetched.
+     * @return A [Flow] of [UiBudget] representing the budget for the month.
+     */
     override fun getBudgetForMonth(month: Long): Flow<UiBudget> {
         return budgetDataSource.getBudgetForMonth(month)
             .map { budgetEntity ->
@@ -56,6 +76,12 @@ class BudgetsRepositoryImpl @Inject constructor(
             }
     }
 
+    /**
+     * Inserts or updates the budget.
+     *
+     * @param budget The budget to be inserted or updated.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     override suspend fun insertOrUpdateBudget(budget: UiBudget): Result<Unit> {
         return suspendRunCatching {
             budgetDataSource.insertOrUpdateBudget(
@@ -67,6 +93,12 @@ class BudgetsRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Deletes the budget.
+     *
+     * @param budget The budget to be deleted.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     override suspend fun deleteBudget(budget: UiBudget): Result<Unit> {
         return suspendRunCatching {
             budgetDataSource.deleteBudget(

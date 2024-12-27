@@ -16,11 +16,25 @@
 
 package dev.atick.compose.data.analysis
 
+import dev.atick.storage.room.models.ExpenseAnalysis
+
+/** Data class representing the analysis screen data.
+ * @param categoryAnalyses The list of category analyses.
+ * @param merchantAnalyses The list of merchant analyses.
+ */
 data class AnalysisScreenData(
     val categoryAnalyses: List<UiAnalysis> = emptyList(),
     val merchantAnalyses: List<UiAnalysis> = emptyList(),
 )
 
+/** Data class representing the UI analysis data.
+ * @param categoryOrMerchant The category or merchant name.
+ * @param spending The total spending in the category or merchant.
+ * @param currency The currency of the spending.
+ * @param maxAmount The maximum amount spent in the category or merchant.
+ * @param minAmount The minimum amount spent in the category or merchant.
+ * @param percentage The percentage of the total spending in the category or merchant.
+ */
 data class UiAnalysis(
     val categoryOrMerchant: String,
     val spending: Double,
@@ -29,3 +43,24 @@ data class UiAnalysis(
     val minAmount: Double,
     val percentage: Double,
 )
+
+/** Converts an [ExpenseAnalysis] to a [UiAnalysis].
+ * @return The [UiAnalysis] representation of the [ExpenseAnalysis].
+ */
+fun ExpenseAnalysis.toUiAnalysis(): UiAnalysis {
+    return UiAnalysis(
+        categoryOrMerchant = categoryOrMerchant,
+        spending = spending,
+        currency = currency,
+        maxAmount = maxAmount,
+        minAmount = minAmount,
+        percentage = percentage ?: 0.0,
+    )
+}
+
+/** Converts a list of [ExpenseAnalysis] to a list of [UiAnalysis].
+ * @return The list of [UiAnalysis] representation of the list of [ExpenseAnalysis].
+ */
+fun List<ExpenseAnalysis>.toUiAnalyses(): List<UiAnalysis> {
+    return map { it.toUiAnalysis() }
+}

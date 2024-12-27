@@ -26,10 +26,22 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Implementation of [SMSDataSource] that queries SMS messages from the device.
+ */
 class SMSDataSourceImpl @Inject constructor(
     private val contentResolver: ContentResolver,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : SMSDataSource {
+    /**
+     * Queries SMS messages based on the provided parameters.
+     * @param senderNames The names of the senders to filter by.
+     * @param keywords The keywords to filter by.
+     * @param ignoreWords The words to ignore.
+     * @param startDate The start date to filter by.
+     * @param endDate The end date to filter by.
+     * @return The list of SMS messages that match the provided parameters.
+     */
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     override suspend fun querySMS(
         senderNames: List<String>,
@@ -40,11 +52,6 @@ class SMSDataSourceImpl @Inject constructor(
     ): List<SMSMessage> {
         val selection = mutableListOf<String>()
         val selectionArgs = mutableListOf<String>()
-
-//        if (senderNames.isNotEmpty()) {
-//            selection.add("${Telephony.Sms.ADDRESS} LIKE ?")
-//            selectionArgs.add(senderName)
-//        }
 
         // Add sender names to selection
         if (senderNames.isNotEmpty()) {
@@ -95,6 +102,12 @@ class SMSDataSourceImpl @Inject constructor(
         )
     }
 
+    /**
+     * Queries SMS messages based on the provided selection and selection arguments.
+     * @param selection The selection to filter by.
+     * @param selectionArgs The selection arguments.
+     * @return The list of SMS messages that match the provided selection.
+     */
     private suspend fun querySMS(
         selection: String,
         selectionArgs: Array<String>,

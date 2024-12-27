@@ -25,20 +25,33 @@ import dev.atick.compose.ui.budgets.BudgetsRoute
 import dev.atick.core.utils.MonthInfo
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents the budgets route.
+ */
 @Serializable
 data object Budgets
 
+/**
+ * Represents the budgets navigation graph.
+ */
 @Serializable
 data object BudgetsNavGraph
 
+/**
+ * Navigates to the budgets navigation graph.
+ *
+ * @param navOptions The navigation options.
+ */
 fun NavController.navigateToBudgetsNavGraph(navOptions: NavOptions? = null) {
     navigate(BudgetsNavGraph, navOptions)
 }
 
-fun NavController.navigateToBudgets(navOptions: NavOptions?) {
-    navigate(Budgets, navOptions)
-}
-
+/**
+ * Navigates to the budgets screen.
+ *
+ * @param monthInfo The month information.
+ * @param onShowSnackbar The callback to show a snackbar.
+ */
 fun NavGraphBuilder.budgetsScreen(
     monthInfo: MonthInfo,
     onShowSnackbar: suspend (String, String?) -> Boolean,
@@ -51,6 +64,11 @@ fun NavGraphBuilder.budgetsScreen(
     }
 }
 
+/**
+ * Builds the budgets navigation graph.
+ *
+ * @param nestedNavGraphs The nested navigation graphs.
+ */
 fun NavGraphBuilder.budgetsNavGraph(
     nestedNavGraphs: NavGraphBuilder.() -> Unit,
 ) {

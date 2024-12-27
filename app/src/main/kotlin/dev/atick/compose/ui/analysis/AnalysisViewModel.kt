@@ -41,13 +41,18 @@ class AnalysisViewModel @Inject constructor(
     val analysisUiState = _analysisUiState.asStateFlow()
 
     fun refreshAnalysis(monthInfo: MonthInfo) {
-        analysisRepository.getCategoryAnalyses(monthInfo.startDate, monthInfo.endDate, 10)
+        // Fetch the category and merchant analyses for the given month.
+        analysisRepository.getCategoryAnalyses(
+            startDate = monthInfo.startDate,
+            endDate = monthInfo.endDate,
+            topN = 10,
+        )
             .catch { e -> _analysisUiState.update { it.copy(error = OneTimeEvent(e)) } }
             .combine(
                 analysisRepository.getMerchantAnalyses(
-                    monthInfo.startDate,
-                    monthInfo.endDate,
-                    10,
+                    startDate = monthInfo.startDate,
+                    endDate = monthInfo.endDate,
+                    topN = 10,
                 ),
             ) { categoryAnalysis, merchantAnalysis ->
                 _analysisUiState.updateState {

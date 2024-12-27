@@ -20,9 +20,40 @@ import dev.atick.compose.data.budgets.UiBudget
 import dev.atick.compose.data.budgets.UiCumulativeExpense
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Repository for fetching budget data.
+ */
 interface BudgetsRepository {
+    /**
+     * Gets the cumulative expenses.
+     *
+     * @param startDate The start date of the analysis.
+     * @param endDate The end date of the analysis.
+     * @return A [Flow] of [List] of [UiCumulativeExpense] representing the cumulative expenses.
+     */
     fun getCumulativeExpenses(startDate: Long, endDate: Long): Flow<List<UiCumulativeExpense>>
+
+    /**
+     * Gets the budget for the month.
+     *
+     * @param month The month for which the budget is to be fetched.
+     * @return A [Flow] of [UiBudget] representing the budget for the month.
+     */
     fun getBudgetForMonth(month: Long): Flow<UiBudget>
+
+    /**
+     * Inserts or updates the budget.
+     *
+     * @param budget The budget to be inserted or updated.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     suspend fun insertOrUpdateBudget(budget: UiBudget): Result<Unit>
+
+    /**
+     * Deletes the budget.
+     *
+     * @param budget The budget to be deleted.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     suspend fun deleteBudget(budget: UiBudget): Result<Unit>
 }

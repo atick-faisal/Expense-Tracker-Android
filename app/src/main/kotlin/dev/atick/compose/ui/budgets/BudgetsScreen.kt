@@ -52,8 +52,7 @@ import dev.atick.compose.R
 import dev.atick.compose.data.budgets.BudgetStatus
 import dev.atick.compose.data.budgets.BudgetsScreenData
 import dev.atick.compose.data.expenses.UiCurrencyType
-import dev.atick.compose.ui.components.BudgetChart
-import dev.atick.compose.ui.components.rememberCurrencyFormatter
+import dev.atick.compose.ui.common.rememberCurrencyFormatter
 import dev.atick.core.extensions.format
 import dev.atick.core.ui.utils.StatefulComposable
 import dev.atick.core.utils.MonthInfo

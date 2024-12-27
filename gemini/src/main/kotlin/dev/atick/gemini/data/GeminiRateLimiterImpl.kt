@@ -19,9 +19,20 @@ package dev.atick.gemini.data
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
+/**
+ * Implementation of [GeminiRateLimiter] that uses a sliding window algorithm to rate limit requests.
+ *
+ * @constructor Creates a [GeminiRateLimiterImpl] instance.
+ */
 class GeminiRateLimiterImpl @Inject constructor() : GeminiRateLimiter {
+    /**
+     * List of request timestamps.
+     */
     private val requestTimestamps = mutableListOf<Long>()
 
+    /**
+     * Checks if the rate limit has been reached and delays the request if necessary.
+     */
     override suspend fun checkAndDelay() {
         val currentTime = System.currentTimeMillis()
 

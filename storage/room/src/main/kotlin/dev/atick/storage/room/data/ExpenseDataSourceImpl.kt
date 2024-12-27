@@ -27,10 +27,24 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Implementation of the ExpenseDataSource interface for accessing and managing expense data.
+ *
+ * @property expenseDao The DAO for accessing expense data.
+ * @property ioDispatcher The CoroutineDispatcher for IO operations.
+ */
 class ExpenseDataSourceImpl @Inject constructor(
     private val expenseDao: ExpenseDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ExpenseDataSource {
+
+    /**
+     * Retrieves all expenses within a specified date range.
+     *
+     * @param startDate The start date of the range (inclusive) in milliseconds since epoch.
+     * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
+     * @return A Flow emitting a list of ExpenseEntity objects representing the expenses within the specified date range.
+     */
     override fun getAllExpenses(
         startDate: Long,
         endDate: Long,
@@ -38,99 +52,101 @@ class ExpenseDataSourceImpl @Inject constructor(
         return expenseDao.getAllExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
+    /**
+     * Retrieves an expense by its ID.
+     *
+     * @param id The ID of the expense to retrieve.
+     * @return A Flow emitting the ExpenseEntity object with the specified ID, or null if not found.
+     */
     override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
         return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
     }
 
+    /**
+     * Retrieves all recurring expenses.
+     *
+     * @return A Flow emitting a list of ExpenseEntity objects that are recurring.
+     */
     override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
         return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
     }
 
-//    override fun getExpenseById(id: Long): Flow<ExpenseEntity?> {
-//        return expenseDao.getExpenseById(id).flowOn(ioDispatcher)
-//    }
-//
-//    override fun getRecurringExpenses(): Flow<List<ExpenseEntity>> {
-//        return expenseDao.getRecurringExpenses().flowOn(ioDispatcher)
-//    }
-//
-//    override fun getUpcomingRecurringExpenses(date: Long): Flow<List<ExpenseEntity>> {
-//        return expenseDao.getUpcomingRecurringExpenses(date).flowOn(ioDispatcher)
-//    }
-//
-//    override fun getExpensesToBeCancelled(date: Long): Flow<List<ExpenseEntity>> {
-//        return expenseDao.getExpensesToBeCancelled(date).flowOn(ioDispatcher)
-//    }
-
-//    override fun getExpensesByCategory(categoryType: String): Flow<List<ExpenseEntity>> {
-//        return expenseDao.getExpensesByCategory(categoryType).flowOn(ioDispatcher)
-//    }
-
+    /**
+     * Inserts a new expense into the data source.
+     *
+     * @param expense The ExpenseEntity object representing the expense to be inserted.
+     * @return The ID of the newly inserted expense.
+     */
     override suspend fun insertExpense(expense: ExpenseEntity): Long {
         return withContext(ioDispatcher) {
             expenseDao.insertExpense(expense)
         }
     }
 
+    /**
+     * Updates an existing expense in the data source.
+     *
+     * @param expense The ExpenseEntity object representing the expense to be updated.
+     */
     override suspend fun updateExpense(expense: ExpenseEntity) {
         withContext(ioDispatcher) {
             expenseDao.updateExpense(expense)
         }
     }
 
+    /**
+     * Deletes an expense from the data source.
+     *
+     * @param expense The ExpenseEntity object representing the expense to be deleted.
+     */
     override suspend fun deleteExpense(expense: ExpenseEntity) {
         withContext(ioDispatcher) {
             expenseDao.deleteExpense(expense)
         }
     }
 
+    /**
+     * Retrieves the last payment date for a specific merchant.
+     *
+     * @param merchant The name of the merchant.
+     * @return The last payment date in milliseconds since epoch.
+     */
     override suspend fun getLastPaymentDate(merchant: String): Long {
         return withContext(ioDispatcher) {
             expenseDao.getLastPaymentDate(merchant) ?: System.currentTimeMillis()
         }
     }
 
+    /**
+     * Retrieves the next payment date for a specific merchant.
+     *
+     * @param merchant The name of the merchant.
+     * @return The next payment date in milliseconds since epoch, or null if not found.
+     */
     override suspend fun getNextPaymentDate(merchant: String): Long? {
         return withContext(ioDispatcher) {
             expenseDao.getNextPaymentDate(merchant)
         }
     }
 
-//    override fun getCategorySpending(
-//        categoryType: String,
-//        startDate: Long,
-//        endDate: Long,
-//    ): Flow<Double> {
-//        return expenseDao.getCategorySpending(
-//            categoryType = categoryType,
-//            startDate = startDate,
-//            endDate = endDate,
-//        ).map { it ?: 0.0 }.flowOn(ioDispatcher)
-//    }
-//
-//    override suspend fun getTotalAmount(
-//        startDate: Long,
-//        endDate: Long,
-//    ): Double {
-//        return withContext(ioDispatcher) {
-//            expenseDao.getTotalAmount(startDate, endDate) ?: 0.0
-//        }
-//    }
-//
-//    override fun getTopExpensesByDescription(
-//        startDate: Long,
-//        endDate: Long,
-//        n: Int,
-//    ): Flow<List<ExpenseGroup>> {
-//        return expenseDao.getTopExpensesByDescription(startDate, endDate, n).flowOn(ioDispatcher)
-//    }
-
+    /**
+     * Retrieves the time of the last expense.
+     *
+     * @return The time of the last expense in milliseconds since epoch.
+     */
     override suspend fun getLastExpenseTime(): Long {
         return withContext(ioDispatcher) {
             expenseDao.getLastExpenseTime() ?: 0
         }
     }
 
+    /**
+     * Retrieves the total spending within a specified date range.
+     *
+     * @param startDate The start date of the range (inclusive) in milliseconds since epoch.
+     * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
+     * @return A Flow emitting the total spending as a Double.
+     */
     override fun getTotalSpending(
         startDate: Long,
         endDate: Long,
@@ -139,6 +155,13 @@ class ExpenseDataSourceImpl @Inject constructor(
             .map { it ?: 0.0 }
     }
 
+    /**
+     * Retrieves cumulative expenses within a specified date range.
+     *
+     * @param startDate The start date of the range (inclusive) in milliseconds since epoch.
+     * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
+     * @return A Flow emitting a list of CumulativeExpense objects within the specified date range.
+     */
     override fun getCumulativeExpenses(
         startDate: Long,
         endDate: Long,
@@ -146,6 +169,13 @@ class ExpenseDataSourceImpl @Inject constructor(
         return expenseDao.getCumulativeExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
+    /**
+     * Sets a recurring payment for a specific merchant.
+     *
+     * @param merchant The name of the merchant.
+     * @param recurringType The type of recurring payment.
+     * @param nextRecurringDate The next recurring date in milliseconds since epoch.
+     */
     override suspend fun setRecurringPayment(
         merchant: String,
         recurringType: String,
@@ -156,6 +186,12 @@ class ExpenseDataSourceImpl @Inject constructor(
         }
     }
 
+    /**
+     * Sets the cancellation status for a specific merchant.
+     *
+     * @param merchant The name of the merchant.
+     * @param toBeCancelled The cancellation status to be set.
+     */
     override suspend fun setCancellation(merchant: String, toBeCancelled: Boolean) {
         withContext(ioDispatcher) {
             expenseDao.setCancellation(merchant, toBeCancelled)

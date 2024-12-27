@@ -24,26 +24,6 @@ import dev.atick.storage.room.dao.ExpenseDao
 import dev.atick.storage.room.models.BudgetEntity
 import dev.atick.storage.room.models.ChatEntity
 import dev.atick.storage.room.models.ExpenseEntity
-import dev.atick.storage.room.models.PostEntity
-
-/**
- * Room database for Jetpack.
- */
-@Database(
-    version = 1,
-    exportSchema = false,
-    entities = [
-        PostEntity::class,
-    ],
-)
-abstract class JetpackDatabase : RoomDatabase() {
-    /**
-     * Get the data access object for [PostEntity] entity.
-     *
-     * @return The data access object for [PostEntity] entity.
-     */
-    abstract fun getJetpackDao(): JetpackDao
-}
 
 /**
  * Room database for Expense.
@@ -63,25 +43,6 @@ abstract class ExpenseDatabase : RoomDatabase() {
      */
     abstract fun getExpenseDao(): ExpenseDao
 }
-
-// /**
-// * Room database for Category.
-// */
-// @Database(
-//    version = 1,
-//    exportSchema = false,
-//    entities = [
-//        CategoryEntity::class,
-//    ],
-// )
-// abstract class CategoryDatabase : RoomDatabase() {
-//    /**
-//     * Get the data access object for [CategoryEntity] entity.
-//     *
-//     * @return The data access object for [CategoryEntity] entity.
-//     */
-//    abstract fun getCategoryDao(): CategoryDao
-// }
 
 /**
  * Room database for Budget.

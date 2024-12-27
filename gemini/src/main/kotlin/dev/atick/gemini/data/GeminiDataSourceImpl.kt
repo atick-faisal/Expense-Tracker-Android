@@ -31,14 +31,31 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Implementation of [GeminiDataSource] that uses the provided [GenerativeModel]s to interact with
+ * the Gemini AI.
+ *
+ * @param chatModel The chat model to use.
+ * @param expensesModel The expenses model to use.
+ * @param ioDispatcher The [CoroutineDispatcher] to use for IO operations.
+ */
 class GeminiDataSourceImpl @Inject constructor(
     @ChatModel private val chatModel: GenerativeModel,
     @ExpensesModel private val expensesModel: GenerativeModel,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : GeminiDataSource {
 
+    /**
+     * The chat instance to use for the chat AI.
+     */
     private lateinit var chat: Chat
 
+    /**
+     * Initializes the chat with the given messages and context.
+     *
+     * @param messages The list of messages to initialize the chat with.
+     * @param context The context to initialize the chat with.
+     */
     override suspend fun initializeChat(messages: List<AiChatMessage>, context: String) {
         withContext(ioDispatcher) {
             val chatHistory = messages.toGeminiContents()
@@ -53,6 +70,12 @@ class GeminiDataSourceImpl @Inject constructor(
         }
     }
 
+    /**
+     * Sends a chat message to the AI.
+     *
+     * @param message The message to send.
+     * @return The response from the AI.
+     */
     override suspend fun sendChatMessage(message: String): String {
         return withContext(ioDispatcher) {
             chat.sendMessage(message).text?.trim()
@@ -60,6 +83,12 @@ class GeminiDataSourceImpl @Inject constructor(
         }
     }
 
+    /**
+     * Gets an expense from the given SMS.
+     *
+     * @param aiSMS The SMS to get the expense from.
+     * @return The expense from the SMS.
+     */
     override suspend fun getExpenseFromSMS(aiSMS: AiSMS): AiExpense {
         return withContext(ioDispatcher) {
             val response = try {

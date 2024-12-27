@@ -49,8 +49,8 @@ import com.google.accompanist.permissions.rememberPermissionState
 import dev.atick.compose.data.expenses.ExpensesScreenData
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiRecurringType
-import dev.atick.compose.ui.components.ExpenseCard
-import dev.atick.compose.ui.components.Placeholder
+import dev.atick.compose.ui.common.ExpenseCard
+import dev.atick.compose.ui.common.Placeholder
 import dev.atick.core.ui.utils.StatefulComposable
 import dev.atick.core.utils.MonthInfo
 import kotlinx.coroutines.delay

@@ -93,7 +93,7 @@ android {
             }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -114,9 +114,6 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":storage:room"))
     implementation(project(":storage:preferences"))
-    // implementation(project(":bluetooth:classic"))
-    // implementation(project(":auth"))
-    // implementation(project(":billing"))
     implementation(project(":gemini"))
     implementation(project(":sms"))
 
@@ -134,11 +131,6 @@ dependencies {
     implementation(libs.androidx.hilt.work)
     ksp(libs.androidx.hilt.compiler)
 
-    // ... Vico
-//    implementation(libs.vico.core)
-//    implementation(libs.vico.compose)
-//    implementation(libs.vico.compose.m3)
-
     // ... MPAndroidChart
-    implementation("com.github.AppDevNext:AndroidChart:3.1.0.25")
+    implementation(libs.androidchart)
 }

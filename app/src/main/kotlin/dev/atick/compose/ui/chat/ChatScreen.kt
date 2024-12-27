@@ -58,6 +58,7 @@ import dev.atick.compose.R
 import dev.atick.compose.data.chat.ChatScreenData
 import dev.atick.compose.data.chat.UiMessage
 import dev.atick.compose.data.chat.demoQuestions
+import dev.atick.compose.repository.chat.ChatRepository
 import dev.atick.core.ui.components.JetpackMultilineTextField
 import dev.atick.core.ui.utils.StatefulComposable
 import dev.atick.core.utils.MonthInfo
@@ -72,7 +73,7 @@ internal fun ChatRoute(
     val chatUiState by chatViewModel.chatUiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(monthInfo) {
-        chatViewModel.initializeChat(monthInfo, 10)
+        chatViewModel.initializeChat(monthInfo, ChatRepository.MAX_HISTORY_DEPTH)
     }
 
     StatefulComposable(

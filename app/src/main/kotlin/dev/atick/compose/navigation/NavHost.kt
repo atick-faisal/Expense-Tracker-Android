@@ -35,6 +35,14 @@ import dev.atick.compose.navigation.subscriptions.subscriptionsScreen
 import dev.atick.compose.ui.JetpackAppState
 import dev.atick.core.utils.MonthInfo
 
+/**
+ * Builds the App NavHost.
+ *
+ * @param appState The Jetpack app state.
+ * @param monthInfo The month information.
+ * @param onShowSnackbar The callback to show a snackbar.
+ * @param modifier The modifier.
+ */
 @Composable
 fun JetpackNavHost(
     appState: JetpackAppState,
@@ -43,15 +51,19 @@ fun JetpackNavHost(
     modifier: Modifier = Modifier,
 ) {
     val navController = appState.navController
-    val startDestination = if (appState.isUserLoggedIn) ExpensesNavGraph::class else Intro::class
+    val startDestination = if (appState.userOnboarded) ExpensesNavGraph::class else Intro::class
+
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier,
     ) {
+        // Intro
         introScreen(
             onShowSnackbar = onShowSnackbar,
         )
+
+        // Expenses
         expensesNavGraph {
             expensesScreen(
                 monthInfo = monthInfo,
@@ -63,10 +75,14 @@ fun JetpackNavHost(
                 onShowSnackbar = onShowSnackbar,
             )
         }
+
+        // Analysis
         analysisScreen(
             monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,
         )
+
+        // Budgets
         budgetsNavGraph {
             budgetsScreen(
                 monthInfo = monthInfo,
@@ -78,9 +94,13 @@ fun JetpackNavHost(
                 onShowSnackbar = onShowSnackbar,
             )
         }
+
+        // Subscriptions
         subscriptionsScreen(
             onShowSnackbar = onShowSnackbar,
         )
+
+        // Chat
         chatScreen(
             monthInfo = monthInfo,
             onShowSnackbar = onShowSnackbar,

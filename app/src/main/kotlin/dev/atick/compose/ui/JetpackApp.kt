@@ -92,11 +92,11 @@ import dev.atick.network.utils.NetworkUtils
 
 @Composable
 fun JetpackApp(
-    isUserLoggedIn: Boolean,
+    userOnboarded: Boolean,
     windowSizeClass: WindowSizeClass,
     networkUtils: NetworkUtils,
     appState: JetpackAppState = rememberJetpackAppState(
-        isUserLoggedIn = isUserLoggedIn,
+        userOnboarded = userOnboarded,
         windowSizeClass = windowSizeClass,
         networkUtils = networkUtils,
     ),

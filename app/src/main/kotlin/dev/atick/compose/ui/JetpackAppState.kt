@@ -49,21 +49,21 @@ import kotlinx.coroutines.flow.map
 
 @Composable
 fun rememberJetpackAppState(
-    isUserLoggedIn: Boolean,
+    userOnboarded: Boolean,
     windowSizeClass: WindowSizeClass,
     networkUtils: NetworkUtils,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
 ): JetpackAppState {
     return remember(
-        isUserLoggedIn,
+        userOnboarded,
         navController,
         windowSizeClass,
         coroutineScope,
         networkUtils,
     ) {
         JetpackAppState(
-            isUserLoggedIn,
+            userOnboarded,
             navController,
             windowSizeClass,
             coroutineScope,
@@ -75,7 +75,7 @@ fun rememberJetpackAppState(
 @Suppress("MemberVisibilityCanBePrivate", "UNUSED")
 @Stable
 class JetpackAppState(
-    val isUserLoggedIn: Boolean,
+    val userOnboarded: Boolean,
     val navController: NavHostController,
     val windowSizeClass: WindowSizeClass,
     coroutineScope: CoroutineScope,

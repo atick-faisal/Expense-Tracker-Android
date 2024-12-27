@@ -37,18 +37,32 @@ import dev.atick.gemini.models.AiRecurringType
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
+/**
+ * Annotation class for the chat model.
+ */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ChatModel
 
+/**
+ * Annotation class for the expenses model.
+ */
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ExpensesModel
 
+/**
+ * Dagger module that provides the binding for the [GenerativeModel] interface.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object GeminiModule {
 
+    /**
+     * Provides the [GenerativeModel] for the expenses model.
+     *
+     * @return The [GenerativeModel] for the expenses model.
+     */
     @Provides
     @Singleton
     @ExpensesModel
@@ -100,7 +114,13 @@ object GeminiModule {
                             description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
                         ),
                     ),
-                    required = listOf("amount", "currency", "category", "paymentStatus", "recurringType"),
+                    required = listOf(
+                        "amount",
+                        "currency",
+                        "category",
+                        "paymentStatus",
+                        "recurringType",
+                    ),
                 )
             },
             safetySettings = listOf(
@@ -112,6 +132,11 @@ object GeminiModule {
         )
     }
 
+    /**
+     * Provides the [GenerativeModel] for the chat model.
+     *
+     * @return The [GenerativeModel] for the chat model.
+     */
     @Provides
     @Singleton
     @ChatModel
@@ -134,6 +159,11 @@ object GeminiModule {
         )
     }
 
+    /**
+     * Provides the [GeminiRateLimiter] for the Gemini API.
+     *
+     * @return The [GeminiRateLimiter] for the Gemini API.
+     */
     @Provides
     @Singleton
     fun provideGeminiRateLimiter(): GeminiRateLimiter {
