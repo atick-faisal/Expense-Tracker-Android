@@ -34,7 +34,7 @@ interface ExpensesRepository {
         const val RECURRING_MONTHLY = 30 * 24 * 60 * 60 * 1000L
         const val RECURRING_YEARLY = 365 * 24 * 60 * 60 * 1000L
 
-        const val REMINDER_TIME_BEFORE_PAYMENT = 24 * 60 * 60 * 1000L
+        const val REMINDER_TIME_BEFORE_PAYMENT = 3 * 24 * 60 * 60 * 1000L
     }
 
     val isSyncing: Flow<Boolean>
