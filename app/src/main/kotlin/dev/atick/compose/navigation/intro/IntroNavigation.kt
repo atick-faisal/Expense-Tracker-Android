@@ -16,20 +16,22 @@
 
 package dev.atick.compose.navigation.intro
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import dev.atick.compose.ui.intro.IntroRoute
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents the intro route.
+ */
 @Serializable
 data object Intro
 
-fun NavController.navigateToIntro(navOptions: NavOptions?) {
-    navigate(Intro, navOptions)
-}
-
+/**
+ * Builds the intro screen.
+ *
+ * @param onShowSnackbar The callback to show a snackbar.
+ */
 fun NavGraphBuilder.introScreen(
     onShowSnackbar: suspend (String, String?) -> Boolean,
 ) {

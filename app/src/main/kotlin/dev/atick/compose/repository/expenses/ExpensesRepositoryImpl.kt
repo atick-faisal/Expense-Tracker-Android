@@ -17,13 +17,13 @@
 package dev.atick.compose.repository.expenses
 
 import androidx.annotation.RequiresPermission
-import dev.atick.compose.data.expenses.UiCategoryType
-import dev.atick.compose.data.expenses.UiCurrencyType
 import dev.atick.compose.data.expenses.UiExpense
-import dev.atick.compose.data.expenses.UiPaymentStatus
 import dev.atick.compose.data.expenses.UiRecurringType
-import dev.atick.compose.sync.SyncProgress
-import dev.atick.compose.sync.TaskManager
+import dev.atick.compose.data.expenses.toExpenseEntity
+import dev.atick.compose.data.expenses.toUiExpense
+import dev.atick.compose.data.expenses.toUiExpenses
+import dev.atick.compose.worker.SyncProgress
+import dev.atick.compose.worker.TaskManager
 import dev.atick.core.utils.getMonthInfoAt
 import dev.atick.core.utils.suspendRunCatching
 import dev.atick.gemini.data.GeminiDataSource
@@ -44,6 +44,16 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.max
 
+/**
+ * Implementation of [ExpensesRepository] that fetches data from the [ExpenseDataSource], [BudgetDataSource], [SMSDataSource], and [GeminiDataSource].
+ *
+ * @param geminiDataSource The data source for Gemini data.
+ * @param geminiRateLimiter The rate limiter for Gemini API requests.
+ * @param smsDataSource The data source for SMS data.
+ * @param expenseDataSource The data source for expense data.
+ * @param budgetDataSource The data source for budget data.
+ * @param taskManager The task manager for syncing and notifications.
+ */
 class ExpensesRepositoryImpl @Inject constructor(
     private val geminiDataSource: GeminiDataSource,
     private val geminiRateLimiter: GeminiRateLimiter,
@@ -52,64 +62,47 @@ class ExpensesRepositoryImpl @Inject constructor(
     private val budgetDataSource: BudgetDataSource,
     private val taskManager: TaskManager,
 ) : ExpensesRepository {
+    /**
+     * Flow of Boolean that indicates whether the repository is syncing.
+     */
     override val isSyncing: Flow<Boolean>
         get() = taskManager.isSyncing
 
+    /**
+     * Gets all the expenses.
+     *
+     * @param startDate The start date of the expenses.
+     * @param endDate The end date of the expenses.
+     * @return A [Flow] of [List] of [UiExpense] representing the expenses.
+     */
     override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>> {
         return expenseDataSource.getAllExpenses(startDate, endDate)
-            .map { expenses ->
-                expenses.map { expense ->
-                    UiExpense(
-                        id = expense.id,
-                        amount = expense.amount,
-                        currency = UiCurrencyType.valueOf(expense.currency),
-                        merchant = expense.merchant,
-                        category = UiCategoryType.valueOf(expense.category),
-                        paymentStatus = UiPaymentStatus.valueOf(expense.paymentStatus),
-                        recurringType = UiRecurringType.valueOf(expense.recurringType),
-                        paymentDate = expense.paymentDate,
-                        dueDate = expense.dueDate,
-                        toBeCancelled = expense.toBeCancelled,
-                    )
-                }
-            }
+            .map { expenses -> expenses.toUiExpenses() }
     }
 
+    /**
+     * Gets the expense by ID.
+     *
+     * @param id The ID of the expense.
+     * @return A [Flow] of [UiExpense] representing the expense.
+     */
     override fun getExpenseById(id: Long): Flow<UiExpense> {
         return expenseDataSource.getExpenseById(id)
             .map { expense ->
-                expense ?: throw IllegalArgumentException("Expense not found")
-                UiExpense(
-                    id = expense.id,
-                    amount = expense.amount,
-                    currency = UiCurrencyType.valueOf(expense.currency),
-                    merchant = expense.merchant,
-                    category = UiCategoryType.valueOf(expense.category),
-                    paymentStatus = UiPaymentStatus.valueOf(expense.paymentStatus),
-                    recurringType = UiRecurringType.valueOf(expense.recurringType),
-                    paymentDate = expense.paymentDate,
-                    dueDate = expense.dueDate,
-                    toBeCancelled = expense.toBeCancelled,
-                )
+                expense?.toUiExpense()
+                    ?: throw IllegalArgumentException("Expense not found")
             }
     }
 
+    /**
+     * Updates the expense.
+     *
+     * @param expense The expense to be updated.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     override suspend fun updateExpense(expense: UiExpense): Result<Unit> {
         return suspendRunCatching {
-            expenseDataSource.updateExpense(
-                ExpenseEntity(
-                    id = expense.id,
-                    amount = expense.amount,
-                    currency = expense.currency.name,
-                    merchant = expense.merchant,
-                    category = expense.category.name,
-                    paymentStatus = expense.paymentStatus.name,
-                    recurringType = expense.recurringType.name,
-                    paymentDate = expense.paymentDate,
-                    dueDate = expense.dueDate,
-                    toBeCancelled = expense.toBeCancelled,
-                ),
-            )
+            expenseDataSource.updateExpense(expense.toExpenseEntity())
 
             // Update recurring type of all expenses from the same merchant
             if (expense.recurringType != UiRecurringType.ONETIME) {
@@ -122,25 +115,23 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Deletes the expense.
+     *
+     * @param expense The expense to be deleted.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     override suspend fun deleteExpense(expense: UiExpense): Result<Unit> {
         return suspendRunCatching {
-            expenseDataSource.deleteExpense(
-                ExpenseEntity(
-                    id = expense.id,
-                    amount = expense.amount,
-                    currency = expense.currency.name,
-                    merchant = expense.merchant,
-                    category = expense.category.name,
-                    paymentStatus = expense.paymentStatus.name,
-                    recurringType = expense.recurringType.name,
-                    paymentDate = expense.paymentDate,
-                    dueDate = expense.dueDate,
-                    toBeCancelled = expense.toBeCancelled,
-                ),
-            )
+            expenseDataSource.deleteExpense(expense.toExpenseEntity())
         }
     }
 
+    /**
+     * Requests a sync of the expenses.
+     *
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     override fun requestSync(): Result<Unit> {
         return runCatching {
@@ -148,6 +139,11 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Syncs the expenses from the SMS.
+     *
+     * @return A [Flow] of [SyncProgress] representing the progress of the sync.
+     */
     @RequiresPermission(android.Manifest.permission.READ_SMS)
     override fun syncExpensesFromSms() = flow<SyncProgress> {
         val lastExpenseTime = expenseDataSource.getLastExpenseTime()
@@ -184,6 +180,13 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Sets the recurring type for the merchant.
+     *
+     * @param merchant The merchant for which the recurring type is to be set.
+     * @param recurringType The recurring type to be set.
+     * @return A [Result] indicating the success or failure of the operation.
+     */
     override suspend fun setRecurringType(
         merchant: String,
         recurringType: UiRecurringType,
@@ -213,6 +216,11 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Processes the SMS to extract the expense information.
+     *
+     * @param sms The SMS to be processed.
+     */
     private suspend fun processSms(sms: SMSMessage) {
         var isSuccess = false
         var retryAttempts = 0
@@ -231,12 +239,6 @@ class ExpensesRepositoryImpl @Inject constructor(
                 )
 
                 Timber.d("Expense: $expense")
-
-//                val paymentDate = expense.paymentDate?.run {
-//                    LocalDateTime.parse(this)
-//                        .toInstant(TimeZone.currentSystemDefault())
-//                        .toEpochMilliseconds()
-//                } ?: System.currentTimeMillis()
 
                 expenseDataSource.insertExpense(
                     ExpenseEntity(
@@ -285,6 +287,9 @@ class ExpensesRepositoryImpl @Inject constructor(
         }
     }
 
+    /**
+     * Checks if the budget is exceeded and shows a warning if it is.
+     */
     private suspend fun checkBudgetExceeded() {
         val monthInfo = getMonthInfoAt(0)
 

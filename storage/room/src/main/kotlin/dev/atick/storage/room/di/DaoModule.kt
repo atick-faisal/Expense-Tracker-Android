@@ -23,7 +23,6 @@ import dagger.hilt.components.SingletonComponent
 import dev.atick.storage.room.data.BudgetDatabase
 import dev.atick.storage.room.data.ChatDatabase
 import dev.atick.storage.room.data.ExpenseDatabase
-import dev.atick.storage.room.data.JetpackDatabase
 import javax.inject.Singleton
 
 /**
@@ -36,16 +35,6 @@ import javax.inject.Singleton
 )
 @InstallIn(SingletonComponent::class)
 object DaoModule {
-
-    /**
-     * Get the data access.
-     *
-     * @param jetpackDatabase The database for Jetpack.
-     * @return The data access object.
-     */
-    @Singleton
-    @Provides
-    fun provideJetpackDao(jetpackDatabase: JetpackDatabase) = jetpackDatabase.getJetpackDao()
 
     /**
      * Get the expense data access.
@@ -66,16 +55,6 @@ object DaoModule {
     @Singleton
     @Provides
     fun provideBudgetDao(budgetDatabase: BudgetDatabase) = budgetDatabase.getBudgetDao()
-
-//    /**
-//     * Get the category data access.
-//     *
-//     * @param categoryDatabase The database for categories.
-//     * @return The category data access object.
-//     */
-//    @Singleton
-//    @Provides
-//    fun provideCategoryDao(categoryDatabase: CategoryDatabase) = categoryDatabase.getCategoryDao()
 
     /**
      * Get the chat data access.

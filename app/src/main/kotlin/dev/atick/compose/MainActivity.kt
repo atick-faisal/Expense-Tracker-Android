@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 disableDynamicTheming = shouldDisableDynamicTheming(uiState),
             ) {
                 JetpackApp(
-                    isUserLoggedIn = isUserLoggedIn(uiState),
+                    userOnboarded = isOnboardingComplete(uiState),
                     networkUtils = networkUtils,
                     windowSizeClass = calculateWindowSizeClass(this),
                 )
@@ -189,7 +189,7 @@ private fun shouldUseDarkTheme(
  * @param uiState The UI state representing the user data.
  * @return `true` if the user is considered logged in; `false` otherwise.
  */
-private fun isUserLoggedIn(uiState: UiState<UserData>): Boolean {
+private fun isOnboardingComplete(uiState: UiState<UserData>): Boolean {
     // User is considered logged in during loading (assuming ongoing session).
     return uiState.data.id.isNotEmpty() || uiState.loading
 }

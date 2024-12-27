@@ -25,6 +25,14 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
+/**
+ * Data class that represents information about a month.
+ *
+ * @param monthName The name of the month.
+ * @param year The year of the month.
+ * @param startDate The start date of the month in milliseconds.
+ * @param endDate The end date of the month in milliseconds.
+ */
 data class MonthInfo(
     val monthName: String,
     val year: Int,
@@ -32,6 +40,17 @@ data class MonthInfo(
     val endDate: Long,
 )
 
+/**
+ * Returns information about the month at the specified offset.
+ *
+ * @param monthOffset The offset of the month to get information about.
+ * @return Information about the month at the specified offset.
+ * Example usage:
+ * ```
+ * val monthInfo = getMonthInfoAt(1)
+ * println("Month: ${monthInfo.monthName}, Year: ${monthInfo.year}")
+ * ```
+ */
 fun getMonthInfoAt(monthOffset: Int = 0): MonthInfo {
     val offsetDate = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault())

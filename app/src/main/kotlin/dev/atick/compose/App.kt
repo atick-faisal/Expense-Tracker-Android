@@ -20,7 +20,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import dev.atick.compose.sync.Sync
+import dev.atick.compose.worker.Sync
 import dev.atick.core.extensions.hasPermission
 import timber.log.Timber
 

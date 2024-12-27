@@ -18,34 +18,10 @@ package dev.atick.compose.data.subscriptions
 
 import dev.atick.compose.data.expenses.UiExpense
 
+/**
+ * Data class representing the subscriptions screen data.
+ * @param subscriptions The list of subscriptions.
+ */
 data class SubscriptionsScreenData(
     val subscriptions: List<UiExpense> = emptyList(),
 )
-
-// data class UiCategory(
-//    val type: UiCategoryType,
-//    val name: String = type.toString().capitalize(Locale.current),
-//    val icon: ImageVector = when (type) {
-//        UiCategoryType.ESSENTIAL -> Icons.Default.Home
-//        UiCategoryType.LIFESTYLE -> Icons.Default.Weekend
-//        UiCategoryType.TRANSPORTATION -> Icons.Default.DirectionsCar
-//        UiCategoryType.HEALTHCARE -> Icons.Default.LocalHospital
-//        UiCategoryType.SAVINGS -> Icons.Default.AccountBalance
-//        UiCategoryType.DEBT -> Icons.Default.CreditCard
-//        UiCategoryType.EDUCATION -> Icons.Default.School
-//        UiCategoryType.CUSTOM -> Icons.Default.Create
-//        UiCategoryType.FOOD -> Icons.Default.Restaurant
-//    },
-// )
-//
-// enum class UiCategoryType {
-//    FOOD,
-//    ESSENTIAL,
-//    LIFESTYLE,
-//    TRANSPORTATION,
-//    HEALTHCARE,
-//    SAVINGS,
-//    DEBT,
-//    EDUCATION,
-//    CUSTOM,
-// }

@@ -28,8 +28,6 @@ import dev.atick.storage.room.data.ChatDataSource
 import dev.atick.storage.room.data.ChatDataSourceImpl
 import dev.atick.storage.room.data.ExpenseDataSource
 import dev.atick.storage.room.data.ExpenseDataSourceImpl
-import dev.atick.storage.room.data.LocalDataSource
-import dev.atick.storage.room.data.LocalDataSourceImpl
 import javax.inject.Singleton
 
 /**
@@ -38,18 +36,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {
-
-    /**
-     * Binds the [LocalDataSourceImpl] implementation to the [LocalDataSource] interface.
-     *
-     * @param localDataSourceImpl The concrete implementation of [LocalDataSourceImpl].
-     * @return An instance of [LocalDataSource] representing the local data source.
-     */
-    @Binds
-    @Singleton
-    abstract fun bindLocalDataSource(
-        localDataSourceImpl: LocalDataSourceImpl,
-    ): LocalDataSource
 
     /**
      * Binds the [ChatDataSourceImpl] implementation to the [ChatDataSource] interface.
@@ -86,18 +72,6 @@ abstract class DataSourceModule {
     abstract fun bindAnalysesDataSource(
         analysisDataSourceImpl: AnalysisDataSourceImpl,
     ): AnalysisDataSource
-
-//    /**
-//     * Binds the [CategoryDataSourceImpl] implementation to the [CategoryDataSource] interface.
-//     *
-//     * @param categoryDataSourceImpl The concrete implementation of [CategoryDataSourceImpl].
-//     * @return An instance of [CategoryDataSource] representing the category data source.
-//     */
-//    @Binds
-//    @Singleton
-//    abstract fun bindCategoryDataSource(
-//        categoryDataSourceImpl: CategoryDataSourceImpl,
-//    ): CategoryDataSource
 
     /**
      * Binds the [BudgetDataSourceImpl] implementation to the [BudgetDataSource] interface.

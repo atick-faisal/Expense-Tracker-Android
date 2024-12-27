@@ -32,8 +32,8 @@ import dev.atick.compose.R
 import dev.atick.compose.data.expenses.UiExpense
 import dev.atick.compose.data.expenses.UiRecurringType
 import dev.atick.compose.data.subscriptions.SubscriptionsScreenData
-import dev.atick.compose.ui.components.ExpenseCard
-import dev.atick.compose.ui.components.Placeholder
+import dev.atick.compose.ui.common.ExpenseCard
+import dev.atick.compose.ui.common.Placeholder
 import dev.atick.core.ui.utils.StatefulComposable
 
 @Composable

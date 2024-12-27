@@ -19,6 +19,22 @@ package dev.atick.storage.room.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entity representing an expense in the database.
+ *
+ * @property id The unique identifier for the expense, auto-generated.
+ * @property amount The amount of the expense.
+ * @property currency The currency of the expense amount.
+ * @property merchant The merchant associated with the expense.
+ * @property category The category of the expense.
+ * @property paymentStatus The payment status of the expense.
+ * @property recurringType The type of recurring payment for the expense.
+ * @property paymentDate The date of the payment in milliseconds since epoch.
+ * @property dueDate The optional due date of the expense in milliseconds since epoch.
+ * @property toBeCancelled A flag indicating whether the expense is to be cancelled.
+ * @property nextRecurringDate The optional next recurring date in milliseconds since epoch.
+ * @property createdAt The timestamp of when the expense was created, in milliseconds since epoch.
+ */
 @Entity(tableName = "expenses")
 data class ExpenseEntity(
     @PrimaryKey(autoGenerate = true)

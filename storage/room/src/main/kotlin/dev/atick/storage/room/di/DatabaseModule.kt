@@ -26,7 +26,6 @@ import dagger.hilt.components.SingletonComponent
 import dev.atick.storage.room.data.BudgetDatabase
 import dev.atick.storage.room.data.ChatDatabase
 import dev.atick.storage.room.data.ExpenseDatabase
-import dev.atick.storage.room.data.JetpackDatabase
 import javax.inject.Singleton
 
 /**
@@ -36,29 +35,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    private const val JETPACK_DATABASE_NAME = "dev.atick.jetpack.room"
     private const val EXPENSE_DATABASE_NAME = "dev.atick.expense.room"
-    private const val CATEGORY_DATABASE_NAME = "dev.atick.category.room"
     private const val BUDGET_DATABASE_NAME = "dev.atick.budget.room"
     private const val CHAT_DATABASE_NAME = "dev.atick.chat.room"
-
-    /**
-     * Get the database for Jetpack.
-     *
-     * @param appContext The application context.
-     * @return The database for Jetpack.
-     */
-    @Singleton
-    @Provides
-    fun provideRoomDatabase(
-        @ApplicationContext appContext: Context,
-    ): JetpackDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            JetpackDatabase::class.java,
-            JETPACK_DATABASE_NAME,
-        ).fallbackToDestructiveMigration().build()
-    }
 
     /**
      * Get the database for Expense.
@@ -77,26 +56,6 @@ object DatabaseModule {
             EXPENSE_DATABASE_NAME,
         ).fallbackToDestructiveMigration().build()
     }
-
-//    /**
-//     * Get the database for Category.
-//     *
-//     * @param appContext The application context.
-//     * @param callback The callback for Category database.
-//     * @return The database for Category.
-//     */
-//    @Singleton
-//    @Provides
-//    fun provideCategoryDatabase(
-//        @ApplicationContext appContext: Context,
-//        callback: CategoryDatabaseCallback,
-//    ): CategoryDatabase {
-//        return Room.databaseBuilder(
-//            appContext,
-//            CategoryDatabase::class.java,
-//            CATEGORY_DATABASE_NAME,
-//        ).addCallback(callback).fallbackToDestructiveMigration().build()
-//    }
 
     /**
      * Get the database for Budget.

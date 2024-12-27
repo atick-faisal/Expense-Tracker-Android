@@ -62,8 +62,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.atick.compose.R
 import dev.atick.compose.data.analysis.AnalysisScreenData
 import dev.atick.compose.data.analysis.UiAnalysis
-import dev.atick.compose.ui.components.ExpenseDistributionChart
-import dev.atick.compose.ui.components.Placeholder
+import dev.atick.compose.ui.common.Placeholder
 import dev.atick.core.ui.components.JetpackToggleOptions
 import dev.atick.core.ui.components.ToggleOption
 import dev.atick.core.ui.utils.StatefulComposable
@@ -98,6 +97,7 @@ private val AnalysisToggleOptions = listOf(
 private fun AnalysisScreen(
     analysisScreenData: AnalysisScreenData,
 ) {
+    // Show placeholder if there are no analyses
     if (analysisScreenData.categoryAnalyses.isEmpty() &&
         analysisScreenData.merchantAnalyses.isEmpty()
     ) {
@@ -117,11 +117,13 @@ private fun AnalysisList(
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
+    // Show the analyses based on the selected index
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        // Toggle options
         item {
             JetpackToggleOptions(
                 options = AnalysisToggleOptions,
@@ -131,6 +133,7 @@ private fun AnalysisList(
         }
 
         if (selectedIndex == 0) {
+            // Show the top categories
             item {
                 SectionHeader(
                     title = stringResource(R.string.top_categories),
@@ -138,6 +141,7 @@ private fun AnalysisList(
                 )
             }
 
+            // Show the distribution chart
             item {
                 ExpenseDistributionChart(
                     analyses = categoryAnalyses,
@@ -145,12 +149,14 @@ private fun AnalysisList(
                 )
             }
 
+            // Show the category analyses
             items(categoryAnalyses) { analysis ->
                 ExpenseAnalysisCard(analysis = analysis)
             }
         }
 
         if (selectedIndex == 1) {
+            // Show the top merchants
             item {
                 SectionHeader(
                     title = stringResource(R.string.top_merchants),
@@ -158,6 +164,7 @@ private fun AnalysisList(
                 )
             }
 
+            // Show the distribution chart
             item {
                 ExpenseDistributionChart(
                     analyses = merchantAnalyses,
@@ -165,6 +172,7 @@ private fun AnalysisList(
                 )
             }
 
+            // Show the merchant analyses
             items(merchantAnalyses) { analysis ->
                 ExpenseAnalysisCard(analysis = analysis)
             }
@@ -200,18 +208,20 @@ private fun ExpenseAnalysisCard(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
+                // Category or merchant name
                 Text(
                     text = analysis.categoryOrMerchant,
                     style = MaterialTheme.typography.bodyLarge,
-                    // fontWeight = FontWeight.Bold,
                 )
 
+                // Spending amount
                 Text(
                     text = "${analysis.currency} ${analysis.spending}",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
 
+                // Min and max amounts
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -222,18 +232,23 @@ private fun ExpenseAnalysisCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
+                        // Minimum icon
                         Icon(
                             imageVector = Icons.Filled.ArrowDownward,
                             contentDescription = "Minimum amount",
                             tint = MaterialTheme.colorScheme.tertiary,
                             modifier = Modifier.size(16.dp),
                         )
+
                         Column {
+                            // Minimum label
                             Text(
                                 text = stringResource(R.string.min),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+
+                            // Minimum amount
                             Text(
                                 text = "${analysis.currency} ${analysis.minAmount}",
                                 style = MaterialTheme.typography.bodyMedium,
@@ -247,18 +262,23 @@ private fun ExpenseAnalysisCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
+                        // Maximum icon
                         Icon(
                             imageVector = Icons.Filled.ArrowUpward,
                             contentDescription = "Maximum amount",
                             tint = MaterialTheme.colorScheme.error,
                             modifier = Modifier.size(16.dp),
                         )
+
                         Column {
+                            // Maximum label
                             Text(
                                 text = stringResource(R.string.max),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
+
+                            // Maximum amount
                             Text(
                                 text = "${analysis.currency} ${analysis.maxAmount}",
                                 style = MaterialTheme.typography.bodyMedium,
@@ -268,6 +288,7 @@ private fun ExpenseAnalysisCard(
                 }
             }
 
+            // Percentage and chart
             Box(
                 modifier = Modifier.size(64.dp),
                 contentAlignment = Alignment.Center,

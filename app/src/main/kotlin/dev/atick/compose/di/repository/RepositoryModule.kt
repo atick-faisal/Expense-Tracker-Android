@@ -28,10 +28,6 @@ import dev.atick.compose.repository.chat.ChatRepository
 import dev.atick.compose.repository.chat.ChatRepositoryImpl
 import dev.atick.compose.repository.expenses.ExpensesRepository
 import dev.atick.compose.repository.expenses.ExpensesRepositoryImpl
-import dev.atick.compose.repository.home.PostsRepository
-import dev.atick.compose.repository.home.PostsRepositoryImpl
-import dev.atick.compose.repository.profile.ProfileDataRepository
-import dev.atick.compose.repository.profile.ProfileDataRepositoryImpl
 import dev.atick.compose.repository.subscriptions.SubscriptionsRepository
 import dev.atick.compose.repository.subscriptions.SubscriptionsRepositoryImpl
 import dev.atick.compose.repository.user.UserDataRepository
@@ -39,24 +35,11 @@ import dev.atick.compose.repository.user.UserDataRepositoryImpl
 import javax.inject.Singleton
 
 /**
- * Dagger module that provides the binding for the [PostsRepository] interface.
+ * Dagger module that provides the binding for repository interfaces.
  */
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-
-    /**
-     * Binds the [PostsRepositoryImpl] implementation to the [PostsRepository] interface.
-     *
-     * @param postsRepositoryImpl The implementation of [PostsRepository] to be bound.
-     * @return The [PostsRepository] interface.
-     */
-    @Binds
-    @Singleton
-    abstract fun bindPostsRepository(
-        postsRepositoryImpl: PostsRepositoryImpl,
-    ): PostsRepository
-
     /**
      * Binds the [UserDataRepositoryImpl] implementation to the [UserDataRepository] interface.
      *
@@ -70,43 +53,59 @@ abstract class RepositoryModule {
     ): UserDataRepository
 
     /**
-     * This method is used to bind a [ProfileDataRepositoryImpl] instance to the [ProfileDataRepository] interface.
-     * It is annotated with [@Binds](https://developer.android.com/reference/dagger/Binds) and [@Singleton](https://developer.android.com/reference/javax/inject/Singleton), indicating that a single instance
-     * of [ProfileDataRepositoryImpl] should be used as the implementation of [ProfileDataRepository] throughout the application.
+     * Binds the [AnalysisRepositoryImpl] implementation to the [AnalysisRepository] interface.
      *
-     * @param profileDataRepositoryImpl The [ProfileDataRepositoryImpl] instance to be bound to [ProfileDataRepository].
-     * @return An instance of [ProfileDataRepository] representing the bound implementation.
+     * @param analysisRepositoryImpl The implementation of [AnalysisRepository] to be bound.
+     * @return The [AnalysisRepository] interface.
      */
-    @Binds
-    @Singleton
-    abstract fun bindProfileDataRepository(
-        profileDataRepositoryImpl: ProfileDataRepositoryImpl,
-    ): ProfileDataRepository
-
     @Binds
     @Singleton
     abstract fun bindAnalysisRepository(
         analysisRepositoryImpl: AnalysisRepositoryImpl,
     ): AnalysisRepository
 
+    /**
+     * Binds the [BudgetsRepositoryImpl] implementation to the [BudgetsRepository] interface.
+     *
+     * @param budgetsRepositoryImpl The implementation of [BudgetsRepository] to be bound.
+     * @return The [BudgetsRepository] interface.
+     */
     @Binds
     @Singleton
     abstract fun bindBudgetsRepository(
         budgetsRepositoryImpl: BudgetsRepositoryImpl,
     ): BudgetsRepository
 
+    /**
+     * Binds the [SubscriptionsRepositoryImpl] implementation to the [SubscriptionsRepository] interface.
+     *
+     * @param subscriptionRepositoryImpl The implementation of [SubscriptionsRepository] to be bound.
+     * @return The [SubscriptionsRepository] interface.
+     */
     @Binds
     @Singleton
     abstract fun bindCategoriesRepository(
-        categoriesRepositoryImpl: SubscriptionsRepositoryImpl,
+        subscriptionRepositoryImpl: SubscriptionsRepositoryImpl,
     ): SubscriptionsRepository
 
+    /**
+     * Binds the [ChatRepositoryImpl] implementation to the [ChatRepository] interface.
+     *
+     * @param chatRepositoryImpl The implementation of [ChatRepository] to be bound.
+     * @return The [ChatRepository] interface.
+     */
     @Binds
     @Singleton
     abstract fun bindChatRepository(
         chatRepositoryImpl: ChatRepositoryImpl,
     ): ChatRepository
 
+    /**
+     * Binds the [ExpensesRepositoryImpl] implementation to the [ExpensesRepository] interface.
+     *
+     * @param expensesRepositoryImpl The implementation of [ExpensesRepository] to be bound.
+     * @return The [ExpensesRepository] interface.
+     */
     @Binds
     @Singleton
     abstract fun bindExpensesRepository(

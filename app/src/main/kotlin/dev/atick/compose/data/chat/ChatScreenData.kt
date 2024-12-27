@@ -20,17 +20,31 @@ import dev.atick.compose.R
 import dev.atick.core.ui.utils.TextFieldData
 import dev.atick.storage.room.models.ChatEntity
 
+/**
+ * Data class representing the chat screen data.
+ * @param newMessage The new message data.
+ * @param messages The list of messages.
+ */
 data class ChatScreenData(
     val newMessage: TextFieldData = TextFieldData(""),
     val messages: List<UiMessage> = emptyList(),
 )
 
+/**
+ * Data class representing the UI message data.
+ * @param id The message ID.
+ * @param text The message text.
+ * @param isFromUser Whether the message is from the user.
+ */
 data class UiMessage(
     val id: Long,
     val text: String,
     val isFromUser: Boolean = true,
 )
 
+/**
+ * Converts a [ChatEntity] to a [UiMessage].
+ */
 fun ChatEntity.asUiMessage(): UiMessage {
     return UiMessage(
         id = id,
@@ -39,10 +53,16 @@ fun ChatEntity.asUiMessage(): UiMessage {
     )
 }
 
+/**
+ * Converts a list of [ChatEntity] to a list of [UiMessage].
+ */
 fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
     return map(ChatEntity::asUiMessage)
 }
 
+/**
+ * The list of demo questions.
+ */
 val demoQuestions = listOf<Int>(
     R.string.demo_question_1,
     R.string.demo_question_2,
