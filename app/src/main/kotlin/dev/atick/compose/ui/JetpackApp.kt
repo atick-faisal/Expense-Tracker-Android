@@ -39,8 +39,7 @@ import androidx.compose.material.icons.automirrored.outlined.NavigateNext
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddChart
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -67,6 +66,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -157,6 +157,8 @@ fun JetpackApp(
                 else -> appState::navigateToEditExpenseScreen
             }
 
+            val context = LocalContext.current
+
             Scaffold(
                 containerColor = Color.Transparent,
                 contentColor = MaterialTheme.colorScheme.onBackground,
@@ -210,15 +212,12 @@ fun JetpackApp(
                         if (destination != null) {
                             JetpackTopAppBar(
                                 titleRes = destination.titleTextId,
-                                navigationIcon = Icons.Default.Menu,
-                                navigationIconContentDescription = stringResource(id = R.string.search),
-                                actionIcon = Icons.Default.Settings,
+                                actionIcon = Icons.Outlined.MoreVert,
                                 actionIconContentDescription = stringResource(id = R.string.more),
                                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                                     containerColor = Color.Transparent,
                                 ),
                                 onActionClick = { showSettingsDialog = true },
-                                onNavigationClick = { },
                             )
                             AnimatedVisibility(visible = appState.shouldShowMonthSelector) {
                                 MonthSelector(
