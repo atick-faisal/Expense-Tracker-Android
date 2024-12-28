@@ -60,7 +60,7 @@ data class OnboardingPage(
 val onboardingPages = listOf(
     OnboardingPage(
         imageRes = R.mipmap.ic_launcher_foreground,
-        title = R.string.expense_ai,
+        title = R.string.app_name,
         description = R.string.your_smart_companion,
     ),
     OnboardingPage(
