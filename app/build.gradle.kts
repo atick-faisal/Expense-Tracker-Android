@@ -48,7 +48,7 @@ android {
     defaultConfig {
         versionCode = mVersionCode
         versionName = mVersionName
-        applicationId = "dev.atick.dhakarani"
+        applicationId = "dev.atick.expense.wise"
     }
 
     signingConfigs {
@@ -70,7 +70,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             applicationVariants.all {
                 outputs.all {
                     (this as BaseVariantOutputImpl).outputFileName =

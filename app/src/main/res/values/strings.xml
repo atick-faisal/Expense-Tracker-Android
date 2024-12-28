@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">Dhakarani</string>
+    <string name="app_name">ExpenseWise</string>
     <string name="btn_click_text">Get Item</string>
     <string name="home">Home</string>
     <string name="error_item_loading">Error Loading Item</string>

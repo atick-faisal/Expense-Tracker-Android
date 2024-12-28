@@ -50,7 +50,7 @@ develocity {
     }
 }
 
-rootProject.name = "Dhakarani"
+rootProject.name = "ExpenseWise"
 include(":app")
 include(":core:ui")
 include(":core:android")
