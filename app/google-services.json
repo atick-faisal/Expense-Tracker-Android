@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1052755869243:android:60c1ea631c37341cb4e61e",
         "android_client_info": {
-          "package_name": "dev.atick.dhakarani"
+          "package_name": "dev.atick.spend.wise"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "",
           "client_type": 1,
           "android_info": {
-            "package_name": "dev.atick.dhakarani",
+            "package_name": "dev.atick.spend.wise",
             "certificate_hash": ""
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "",
           "client_type": 1,
           "android_info": {
-            "package_name": "dev.atick.dhakarani",
+            "package_name": "dev.atick.spend.wise",
             "certificate_hash": ""
           }
         },
