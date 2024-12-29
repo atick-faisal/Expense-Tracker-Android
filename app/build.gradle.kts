@@ -48,7 +48,7 @@ android {
     defaultConfig {
         versionCode = mVersionCode
         versionName = mVersionName
-        applicationId = "dev.atick.expense.wise"
+        applicationId = "dev.atick.spend.wise"
     }
 
     signingConfigs {

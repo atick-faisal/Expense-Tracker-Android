@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">ExpenseWise</string>
+    <string name="app_name">SpendWise</string>
     <string name="btn_click_text">الحصول على العنصر</string>
     <string name="home">الرئيسية</string>
     <string name="error_item_loading">خطأ في تحميل العنصر</string>
