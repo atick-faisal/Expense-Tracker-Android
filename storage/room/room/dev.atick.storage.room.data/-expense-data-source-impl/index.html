@@ -41224,47 +41224,47 @@ class <a href="./">ExpenseDataSourceImpl</a>@Injectconstructor(expenseDao: <a hr
 </tr>
 <tr>
 <td><a href="get-all-expenses/">getAllExpenses</a></td>
-<td>[androidJvm]<br>open override fun <a href="get-all-expenses/">getAllExpenses</a>(startDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>&gt;&gt;<br>Retrieves all expenses within a specified date range.</td>
+<td>[androidJvm]<br>open override fun <a href="get-all-expenses/">getAllExpenses</a>(startDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>&gt;&gt;<br>Retrieves all expenses within a specified date range.</td>
 </tr>
 <tr>
 <td><a href="get-cumulative-expenses/">getCumulativeExpenses</a></td>
-<td>[androidJvm]<br>open override fun <a href="get-cumulative-expenses/">getCumulativeExpenses</a>(startDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-cumulative-expense/">CumulativeExpense</a>&gt;&gt;<br>Retrieves cumulative expenses within a specified date range.</td>
+<td>[androidJvm]<br>open override fun <a href="get-cumulative-expenses/">getCumulativeExpenses</a>(startDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-cumulative-expense/">CumulativeExpense</a>&gt;&gt;<br>Retrieves cumulative expenses within a specified date range.</td>
 </tr>
 <tr>
 <td><a href="get-expense-by-id/">getExpenseById</a></td>
-<td>[androidJvm]<br>open override fun <a href="get-expense-by-id/">getExpenseById</a>(id: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>?&gt;<br>Retrieves an expense by its ID.</td>
+<td>[androidJvm]<br>open override fun <a href="get-expense-by-id/">getExpenseById</a>(id: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>?&gt;<br>Retrieves an expense by its ID.</td>
 </tr>
 <tr>
 <td><a href="get-last-expense-time/">getLastExpenseTime</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="get-last-expense-time/">getLastExpenseTime</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>Retrieves the time of the last expense.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="get-last-expense-time/">getLastExpenseTime</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><br>Retrieves the time of the last expense.</td>
 </tr>
 <tr>
 <td><a href="get-last-payment-date/">getLastPaymentDate</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="get-last-payment-date/">getLastPaymentDate</a>(merchant: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>Retrieves the last payment date for a specific merchant.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="get-last-payment-date/">getLastPaymentDate</a>(merchant: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><br>Retrieves the last payment date for a specific merchant.</td>
 </tr>
 <tr>
 <td><a href="get-next-payment-date/">getNextPaymentDate</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="get-next-payment-date/">getNextPaymentDate</a>(merchant: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>?<br>Retrieves the next payment date for a specific merchant.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="get-next-payment-date/">getNextPaymentDate</a>(merchant: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>?<br>Retrieves the next payment date for a specific merchant.</td>
 </tr>
 <tr>
 <td><a href="get-recurring-expenses/">getRecurringExpenses</a></td>
-<td>[androidJvm]<br>open override fun <a href="get-recurring-expenses/">getRecurringExpenses</a>(): Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>&gt;&gt;<br>Retrieves all recurring expenses.</td>
+<td>[androidJvm]<br>open override fun <a href="get-recurring-expenses/">getRecurringExpenses</a>(): Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>&gt;&gt;<br>Retrieves all recurring expenses.</td>
 </tr>
 <tr>
 <td><a href="get-total-spending/">getTotalSpending</a></td>
-<td>[androidJvm]<br>open override fun <a href="get-total-spending/">getTotalSpending</a>(startDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a>&gt;<br>Retrieves the total spending within a specified date range.</td>
+<td>[androidJvm]<br>open override fun <a href="get-total-spending/">getTotalSpending</a>(startDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a>&gt;<br>Retrieves the total spending within a specified date range.</td>
 </tr>
 <tr>
 <td><a href="insert-expense/">insertExpense</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="insert-expense/">insertExpense</a>(expense: <a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><br>Inserts a new expense into the data source.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="insert-expense/">insertExpense</a>(expense: <a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><br>Inserts a new expense into the data source.</td>
 </tr>
 <tr>
 <td><a href="set-cancellation/">setCancellation</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="set-cancellation/">setCancellation</a>(merchant: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, toBeCancelled: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>)<br>Sets the cancellation status for a specific merchant.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="set-cancellation/">setCancellation</a>(merchant: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>, toBeCancelled: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>)<br>Sets the cancellation status for a specific merchant.</td>
 </tr>
 <tr>
 <td><a href="set-recurring-payment/">setRecurringPayment</a></td>
-<td>[androidJvm]<br>open suspend override fun <a href="set-recurring-payment/">setRecurringPayment</a>(merchant: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, recurringType: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, nextRecurringDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>)<br>Sets a recurring payment for a specific merchant.</td>
+<td>[androidJvm]<br>open suspend override fun <a href="set-recurring-payment/">setRecurringPayment</a>(merchant: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>, recurringType: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>, nextRecurringDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>)<br>Sets a recurring payment for a specific merchant.</td>
 </tr>
 <tr>
 <td><a href="update-expense/">updateExpense</a></td>

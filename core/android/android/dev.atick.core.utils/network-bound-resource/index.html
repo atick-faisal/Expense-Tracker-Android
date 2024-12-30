@@ -41248,7 +41248,7 @@
 <p>//<a href="../../../">android</a>/<a href="../">dev.atick.core.utils</a>/<a href="./">networkBoundResource</a></p>
 <h1 id="networkboundresource">networkBoundResource</h1>
 <p>[androidJvm]\
-inline fun &lt;<a href="./">ResultType</a>, <a href="./">RequestType</a>&gt; <a href="./">networkBoundResource</a>(crossinline query: () -&gt; Flow&lt;<a href="./">ResultType</a>&gt;, crossinline fetch: suspend () -&gt; <a href="./">RequestType</a>, crossinline saveFetchedResult: suspend (<a href="./">RequestType</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>, crossinline shouldFetch: (<a href="./">ResultType</a>) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }): Flow&lt;<a href="../-resource/">Resource</a>&lt;<a href="./">ResultType</a>&gt;&gt;</p>
+inline fun &lt;<a href="./">ResultType</a>, <a href="./">RequestType</a>&gt; <a href="./">networkBoundResource</a>(crossinline query: () -&gt; Flow&lt;<a href="./">ResultType</a>&gt;, crossinline fetch: suspend () -&gt; <a href="./">RequestType</a>, crossinline saveFetchedResult: suspend (<a href="./">RequestType</a>) -&gt; <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>, crossinline shouldFetch: (<a href="./">ResultType</a>) -&gt; <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> = { true }): Flow&lt;<a href="../-resource/">Resource</a>&lt;<a href="./">ResultType</a>&gt;&gt;</p>
 <p>Creates a network-bound resource flow that performs a query and fetches new data if necessary.</p>
 <h4 id="return">Return</h4>
 <p>A flow emitting the resource state based on the query and fetch operations.</p>

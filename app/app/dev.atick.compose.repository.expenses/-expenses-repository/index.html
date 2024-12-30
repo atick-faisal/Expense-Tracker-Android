@@ -41246,7 +41246,7 @@
 <tbody>
 <tr>
 <td><a href="is-syncing/">isSyncing</a></td>
-<td>[androidJvm]<br>abstract val <a href="is-syncing/">isSyncing</a>: Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;<br>A Flow that emits a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> indicating whether the expenses are syncing.</td>
+<td>[androidJvm]<br>abstract val <a href="is-syncing/">isSyncing</a>: Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a>&gt;<br>A Flow that emits a <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a> indicating whether the expenses are syncing.</td>
 </tr>
 </tbody>
 </table>
@@ -41261,23 +41261,23 @@
 <tbody>
 <tr>
 <td><a href="delete-expense/">deleteExpense</a></td>
-<td>[androidJvm]<br>abstract suspend fun <a href="delete-expense/">deleteExpense</a>(expense: <a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Deletes the expense.</td>
+<td>[androidJvm]<br>abstract suspend fun <a href="delete-expense/">deleteExpense</a>(expense: <a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Deletes the expense.</td>
 </tr>
 <tr>
 <td><a href="get-all-expenses/">getAllExpenses</a></td>
-<td>[androidJvm]<br>abstract fun <a href="get-all-expenses/">getAllExpenses</a>(startDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>&gt;&gt;<br>Gets all the expenses.</td>
+<td>[androidJvm]<br>abstract fun <a href="get-all-expenses/">getAllExpenses</a>(startDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>, endDate: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>&gt;&gt;<br>Gets all the expenses.</td>
 </tr>
 <tr>
 <td><a href="get-expense-by-id/">getExpenseById</a></td>
-<td>[androidJvm]<br>abstract fun <a href="get-expense-by-id/">getExpenseById</a>(id: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>&gt;<br>Gets the expense by ID.</td>
+<td>[androidJvm]<br>abstract fun <a href="get-expense-by-id/">getExpenseById</a>(id: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a>): Flow&lt;<a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>&gt;<br>Gets the expense by ID.</td>
 </tr>
 <tr>
 <td><a href="request-sync/">requestSync</a></td>
-<td>[androidJvm]<br>@<a href="https://developer.android.com/reference/kotlin/androidx/annotation/RequiresPermission.html">RequiresPermission</a>(value = &quot;android.permission.READ_SMS&quot;)<br>abstract fun <a href="request-sync/">requestSync</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Requests a sync of the expenses.</td>
+<td>[androidJvm]<br>@<a href="https://developer.android.com/reference/kotlin/androidx/annotation/RequiresPermission.html">RequiresPermission</a>(value = &quot;android.permission.READ_SMS&quot;)<br>abstract fun <a href="request-sync/">requestSync</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Requests a sync of the expenses.</td>
 </tr>
 <tr>
 <td><a href="set-recurring-type/">setRecurringType</a></td>
-<td>[androidJvm]<br>abstract suspend fun <a href="set-recurring-type/">setRecurringType</a>(merchant: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a>, recurringType: <a href="../../dev.atick.compose.data.expenses/-ui-recurring-type/">UiRecurringType</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Sets the recurring type for the merchant.</td>
+<td>[androidJvm]<br>abstract suspend fun <a href="set-recurring-type/">setRecurringType</a>(merchant: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>, recurringType: <a href="../../dev.atick.compose.data.expenses/-ui-recurring-type/">UiRecurringType</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Sets the recurring type for the merchant.</td>
 </tr>
 <tr>
 <td><a href="sync-expenses-from-sms/">syncExpensesFromSms</a></td>
@@ -41285,7 +41285,7 @@
 </tr>
 <tr>
 <td><a href="update-expense/">updateExpense</a></td>
-<td>[androidJvm]<br>abstract suspend fun <a href="update-expense/">updateExpense</a>(expense: <a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Inserts the expense.</td>
+<td>[androidJvm]<br>abstract suspend fun <a href="update-expense/">updateExpense</a>(expense: <a href="../../dev.atick.compose.data.expenses/-ui-expense/">UiExpense</a>): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-result/index.html">Result</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a>&gt;<br>Inserts the expense.</td>
 </tr>
 </tbody>
 </table>
