@@ -1,159 +1,88 @@
-![Jetpack Logo](https://github.com/atick-faisal/Jetpack-Compose-Starter/assets/38709932/6d8f68ad-3045-4736-99ed-86c1593f1241)
+# 💸 Expense Tracker - Your Smart Money Manager
+
+![feature_graphic_high_res](https://github.com/user-attachments/assets/e9f8e82f-5e8f-4963-8eb8-720695b95f6b)
 
 <p align="center">
-    <a href="https://github.com/atick-faisal/Jetpack-Compose-Starter/releases"><img src="https://img.shields.io/github/release/atick-faisal/Jetpack-Compose-Starter?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-    <a href="https://github.com/atick-faisal/Jetpack-Compose-Starter/issues"><img src="https://img.shields.io/github/issues/atick-faisal/Jetpack-Compose-Starter?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
-    <a href="https://github.com/atick-faisal/Jetpack-Compose-Starter/contributors"><img src="https://img.shields.io/github/contributors/atick-faisal/Jetpack-Compose-Starter?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
-    <img src="https://img.shields.io/github/actions/workflow/status/atick-faisal/Jetpack-Compose-Starter/Build.yaml?style=for-the-badge&logo=android&labelColor=363a4f"/>
+    <a href="https://github.com/atick-faisal/Expense-Tracker-Android/releases"><img src="https://img.shields.io/github/release/atick-faisal/Expense-Tracker-Android?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+    <a href="https://github.com/atick-faisal/Expense-Tracker-Android/issues"><img src="https://img.shields.io/github/issues/atick-faisal/Expense-Tracker-Android?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+    <a href="https://github.com/atick-faisal/Expense-Tracker-Android/contributors"><img src="https://img.shields.io/github/contributors/atick-faisal/Expense-Tracker-Android?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
-## What is it
+Ever wished your wallet could talk? Well, now it can! 🗣️ This isn't just another expense tracker – it's your personal financial companion powered by artificial intelligence. Built with modern Android tech and a sprinkle of AI magic ✨, it turns those boring bank SMSs into meaningful insights about your spending habits.
 
-It's a starting template that I use for all my Android apps. It is based on the architecture of the [Now In Android](https://github.com/android/nowinandroid) app by Google. Check out the app from the latest [Release](https://github.com/atick-faisal/Jetpack-Compose-Starter/releases).
+## ✨ What Makes It Special?
 
-![Screenshots](https://github.com/atick-faisal/Jetpack-Compose-Starter/blob/main/assets/ss.png)
+- 🤖 **AI-Powered Analysis**: Our Gemini AI integration automatically categorizes your expenses - no more manual entry headaches!
+- 📱 **SMS Wizardry**: Automagically picks up and processes your bank notifications
+- 🎨 **Eye Candy UI**: Gorgeous Material Design 3 interface that adapts to your phone's theme
+- 🌙 **Dark Mode Love**: Because counting money at night shouldn't hurt your eyes
+- 📊 **Smart Analytics**: Beautiful charts and insights that actually make sense
+- ⏰ **Never Miss a Payment**: Smart reminders for your subscriptions and bills
 
-> [!WARNING]
-> Firebase authentication and crashlytics requires Firebase console setup and the `google-services.json` file. I have provided a template to ensure a successful build. However, you need to provide your own in order to use all the functionalities.
+## 🛠️ The Cool Tech Behind It
 
-## Documentation
+- 🎭 **Jetpack Compose** - The future of Android UI
+- 🧠 **Google Gemini AI** - The brains behind the operation
+- 🔥 **Firebase** - Keeping your data safe and synced
+- 💾 **Room Database** - Because offline is the new online
+- 💉 **Hilt** - Making dependencies a breeze
 
-<br>
-<p align="center">
-        <img src="https://github.com/atick-faisal/Jetpack-Compose-Starter/assets/38709932/02fde5d3-f564-4020-8778-47b2d6a1b7b5" width=400 />
-    <br>
-    <a href="https://atick.dev/Jetpack-Compose-Starter">Read The Documentation Here</a>
-</p>
-
-## Features
-
-This template offers Modern Android Development principles and Architecture guidelines. It provides an out-of-the-box template for:
-
-- Connecting to a remote API using Retrofit and OKHttp
-- Persistent database solution using Room and Datastore
-- Sign In Authentication using Firebase i.e. Google ID and Email
-- Bluetooth communication using classic and low-energy (upcoming) protocols
-
-> [!NOTE]
-> Firebase auth needs [setting up](https://developers.google.com/android/guides/client-auth?sjid=11391664450238405928-EU) first using the SHA fingerprint. Get the SHA fingerprint of the app and add it to firebase console.
-
-It contains easy-to-use Interfaces for common tasks. For example, the following provides utilities for Bluetooth communication:
-
-```kotlin
-/**
- * BluetoothManager interface provides methods to manage Bluetooth connections.
- */
-interface BluetoothManager {
-    /**
-     * Attempts to establish a Bluetooth connection with the specified device address.
-     *
-     * @param address The address of the Bluetooth device to connect to.
-     * @return A [Result] indicating the success or failure of the connection attempt.
-     */
-    suspend fun connect(address: String): Result<Unit>
-
-    /**
-     * Returns the state of the connected Bluetooth device.
-     *
-     * @return A [StateFlow] emitting the current state of the connected Bluetooth device.
-     */
-    fun getConnectedDeviceState(): StateFlow<BtDevice?>
-
-    /**
-     * Closes the existing Bluetooth connection.
-     *
-     * @return A [Result] indicating the success or failure of closing the connection.
-     */
-    suspend fun closeConnection(): Result<Unit>
-}
-```
-
-It also contains several utilities and extension functions to make repetitive tasks easier. For example:
-
-```kotlin
-/**
- * Displays a short toast message.
- *
- * @param message The message to be displayed in the toast.
- */
-fun Context.showToast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
-/**
- * Checks if the app has a given permission.
- *
- * @param permission The permission to check.
- * @return `true` if the permission is granted, `false` otherwise.
- */
-fun Context.hasPermission(permission: String): Boolean {
-    return ContextCompat.checkSelfPermission(this, permission) ==
-        PackageManager.PERMISSION_GRANTED
-}
-
-/**
- * Checks if all the given permissions are granted.
- *
- * @param permissions List of permissions to check.
- * @return `true` if all permissions are granted, `false` otherwise.
- */
-fun Context.isAllPermissionsGranted(permissions: List<String>): Boolean {
-    return permissions.all { hasPermission(it) }
-}
-```
-
-## Technologies
-
-- Kotlin 2.0
-- Jetpack Compose
-- Kotlin Coroutines
-- Kotlin Flow for Reactive Data
-- Retrofit and OkHttp
-- Firebase Auth
-- Firebase Crashlytics
-- Room Database
-- Preferences Datastore
-- Dependency Injection with Hilt
-- Gradle Kotlin DSL
-- Gradle Version Catalog
-- Convention Plugin
-
-## Architecture
-
-This template follows the [official architecture guidance](https://developer.android.com/topic/architecture) suggested by Google.
-
-## Modularization
-
-![Modularization](https://github.com/atick-faisal/Jetpack-Compose-Starter/blob/main/assets/modularization.svg)
-
-## Building
-
-### Debug
-
-This project requires Firebase for analytics. Building the app requires `google-services.json` to be present inside the `app` dir. This file can be generated from the [Firebase Console](https://firebase.google.com/docs/android/setup). After that, run the following from the terminal.
-
-```sh
-$ ./gradlew assembleDebug
-```
-
-Or, use `Build > Rebuild Project`.
-
-### Release
-
-Building the `release` version requires a `Keystore` file in the `app` dir. Also, a `keystore.properties` file needs to be created in the `rootDir`.
+## 📂 Project Blueprint
 
 ```
-storePassword=****
-keyPassword=*****
-keyAlias=****
-storeFile=keystore file name (e.g., key.jks)
+app/               # Where the magic begins 🎩
+├── auth/          # Keeping the bad guys out 🔐
+├── billing/       # Money stuff (the irony!) 💰
+├── core/          # The heart of the app ❤️
+├── gemini/        # AI sorcery 🤖
+├── network/       # Internet whisperer 🌐
+├── storage/       # Data vault 💾
+└── sms/           # Message decoder 📱
 ```
 
-After that, run the following from the terminal.
+## 🚀 Let's Get You Started!
 
-```sh
-$ ./gradlew assembleRelease
+### 📋 Shopping List
+
+- Android Studio Hedgehog+ (yes, that's its real name! 🦔)
+- JDK 17+ (because we're modern like that ☕)
+- Android SDK (API 24+) 📱
+
+### 🛠️ Setup Steps
+
+1. **Clone the Magic** 🧙‍♂️
+```bash
+git clone https://github.com/atick-faisal/Expense-Tracker-Android.git
 ```
+
+2. **Firebase Setup** 🔥
+   - Create a Firebase project (it's easier than making instant noodles!)
+   - Drop `google-services.json` into the app directory
+   - Enable Authentication and Analytics in Firebase Console
+
+3. **Gemini API Magic** 🪄
+   - Grab an API key from Google AI Studio
+   - Add to `local.properties`:
+   ```properties
+   GEMINI_API_KEY="your_magical_key_here"
+   ```
+
+4. **Launch!** 🚀
+```bash
+./gradlew assembleDebug
+```
+
+## 🤝 Join the Fun!
+
+Got ideas? Found a bug? Want to make this even more awesome? We'd love your help! Here's how:
+
+1. 🍴 Fork it
+2. 🌿 Create your feature branch
+3. 💾 Commit your changes
+4. 🚀 Push to your branch
+5. 🎯 Open a Pull Request
+
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) for the full scoop!
 
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
 <p align="center"><a href="https://sites.google.com/view/mchowdhury" target="_blank">Qatar University Machine Learning Group</a>
