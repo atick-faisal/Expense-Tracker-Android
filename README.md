@@ -10,6 +10,17 @@
 
 Ever wished your wallet could talk? Well, now it can! 🗣️ This isn't just another expense tracker – it's your personal financial companion powered by artificial intelligence. Built with modern Android tech and a sprinkle of AI magic ✨, it turns those boring bank SMSs into meaningful insights about your spending habits.
 
+> [!IMPORTANT]
+> Currently, SMS analysis is only supported for the following Qatar banks:
+> - QNB (Qatar National Bank)
+> - QIB (Qatar Islamic Bank)
+> - CBQ (Commercial Bank of Qatar)
+> - Doha Bank
+>
+> Want to add support for your bank? Please create an issue with:
+> - Bank name as it appears in SMS inbox
+> - A sample SMS from a card purchase (please remove sensitive information)
+
 ## ✨ What Makes It Special?
 
 - 🤖 **AI-Powered Analysis**: Our Gemini AI integration automatically categorizes your expenses - no more manual entry headaches!
