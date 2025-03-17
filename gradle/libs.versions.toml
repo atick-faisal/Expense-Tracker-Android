@@ -42,7 +42,7 @@ room = "2.6.1"
 
 # ... AUTH ...
 playServicesAuth = "21.3.0"
-androidxCredentials = "1.3.0"
+androidxCredentials = "1.5.0"
 identityGoogleId = "1.1.1"
 
 # ... FIREBASE ...
