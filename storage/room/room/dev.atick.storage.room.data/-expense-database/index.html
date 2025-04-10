@@ -43688,10 +43688,6 @@ abstract class <a href="./">ExpenseDatabase</a> : <a href="https://developer.and
 </thead>
 <tbody>
 <tr>
-<td><a href="../-chat-database/#155738858%2FProperties%2F-2125445516">backingFieldMap</a></td>
-<td>[androidJvm]<br>val <a href="../-chat-database/#155738858%2FProperties%2F-2125445516">backingFieldMap</a>: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt;</td>
-</tr>
-<tr>
 <td><a href="../-chat-database/#-990093491%2FProperties%2F-2125445516">invalidationTracker</a></td>
 <td>[androidJvm]<br>open val <a href="../-chat-database/#-990093491%2FProperties%2F-2125445516">invalidationTracker</a>: <a href="https://developer.android.com/reference/kotlin/androidx/room/InvalidationTracker.html">InvalidationTracker</a></td>
 </tr>
@@ -43755,24 +43751,40 @@ abstract class <a href="./">ExpenseDatabase</a> : <a href="https://developer.and
 <td>[androidJvm]<br>open fun <a href="../-chat-database/#162913197%2FFunctions%2F-2125445516">compileStatement</a>(sql: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a>): <a href="https://developer.android.com/reference/kotlin/androidx/sqlite/db/SupportSQLiteStatement.html">SupportSQLiteStatement</a></td>
 </tr>
 <tr>
+<td><a href="../-chat-database/#1420085996%2FFunctions%2F-2125445516">createAutoMigrations</a></td>
+<td>[androidJvm]<br>open fun <a href="../-chat-database/#1420085996%2FFunctions%2F-2125445516">createAutoMigrations</a>(autoMigrationSpecs: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;, <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/kotlin/androidx/room/migration/Migration.html">Migration</a>&gt;</td>
+</tr>
+<tr>
 <td><a href="../-chat-database/#622722960%2FFunctions%2F-2125445516">endTransaction</a></td>
 <td>[androidJvm]<br>open fun <a href="../-chat-database/#622722960%2FFunctions%2F-2125445516">~~endTransaction~~</a>()</td>
 </tr>
 <tr>
 <td><a href="../-chat-database/#178130989%2FFunctions%2F-2125445516">getAutoMigrations</a></td>
-<td>[androidJvm]<br>open fun <a href="../-chat-database/#178130989%2FFunctions%2F-2125445516">getAutoMigrations</a>(autoMigrationSpecs: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;, <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/kotlin/androidx/room/migration/Migration.html">Migration</a>&gt;</td>
+<td>[androidJvm]<br>open fun <a href="../-chat-database/#178130989%2FFunctions%2F-2125445516">~~getAutoMigrations~~</a>(autoMigrationSpecs: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a>&lt;<a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;, <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="https://developer.android.com/reference/kotlin/androidx/room/migration/Migration.html">Migration</a>&gt;</td>
+</tr>
+<tr>
+<td><a href="../-chat-database/#-1278223499%2FFunctions%2F-2125445516">getCoroutineScope</a></td>
+<td>[androidJvm]<br>fun <a href="../-chat-database/#-1278223499%2FFunctions%2F-2125445516">getCoroutineScope</a>(): CoroutineScope</td>
 </tr>
 <tr>
 <td><a href="get-expense-dao/">getExpenseDao</a></td>
 <td>[androidJvm]<br>abstract fun <a href="get-expense-dao/">getExpenseDao</a>(): <a href="../../dev.atick.storage.room.dao/-expense-dao/">ExpenseDao</a><br>Get the data access object for <a href="../../dev.atick.storage.room.models/-expense-entity/">ExpenseEntity</a> entity.</td>
 </tr>
 <tr>
-<td><a href="../-chat-database/#1623281881%2FFunctions%2F-2125445516">getRequiredAutoMigrationSpecs</a></td>
-<td>[androidJvm]<br>open fun <a href="../-chat-database/#1623281881%2FFunctions%2F-2125445516">getRequiredAutoMigrationSpecs</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;&gt;</td>
+<td><a href="../-chat-database/#-779149974%2FFunctions%2F-2125445516">getQueryContext</a></td>
+<td>[androidJvm]<br>fun <a href="../-chat-database/#-779149974%2FFunctions%2F-2125445516">getQueryContext</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a></td>
 </tr>
 <tr>
-<td><a href="../-chat-database/#-194849133%2FFunctions%2F-2125445516">getTypeConverter</a></td>
-<td>[androidJvm]<br>open fun &lt;<a href="../-chat-database/#-194849133%2FFunctions%2F-2125445516">T</a>&gt; <a href="../-chat-database/#-194849133%2FFunctions%2F-2125445516">getTypeConverter</a>(klass: <a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;<a href="../-chat-database/#-194849133%2FFunctions%2F-2125445516">T</a>&gt;): <a href="../-chat-database/#-194849133%2FFunctions%2F-2125445516">T</a>?</td>
+<td><a href="../-chat-database/#-432702106%2FFunctions%2F-2125445516">getRequiredAutoMigrationSpecClasses</a></td>
+<td>[androidJvm]<br>open fun <a href="../-chat-database/#-432702106%2FFunctions%2F-2125445516">getRequiredAutoMigrationSpecClasses</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;&gt;</td>
+</tr>
+<tr>
+<td><a href="../-chat-database/#1623281881%2FFunctions%2F-2125445516">getRequiredAutoMigrationSpecs</a></td>
+<td>[androidJvm]<br>open fun <a href="../-chat-database/#1623281881%2FFunctions%2F-2125445516">~~getRequiredAutoMigrationSpecs~~</a>(): <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;out <a href="https://developer.android.com/reference/kotlin/androidx/room/migration/AutoMigrationSpec.html">AutoMigrationSpec</a>&gt;&gt;</td>
+</tr>
+<tr>
+<td><a href="../-chat-database/#-1472154772%2FFunctions%2F-2125445516">getTypeConverter</a></td>
+<td>[androidJvm]<br>open fun &lt;<a href="../-chat-database/#-1472154772%2FFunctions%2F-2125445516">T</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-chat-database/#-1472154772%2FFunctions%2F-2125445516">~~getTypeConverter~~</a>(klass: <a href="https://developer.android.com/reference/kotlin/java/lang/Class.html">Class</a>&lt;<a href="../-chat-database/#-1472154772%2FFunctions%2F-2125445516">T</a>&gt;): <a href="../-chat-database/#-1472154772%2FFunctions%2F-2125445516">T</a>?<br>fun &lt;<a href="../-chat-database/#2031305957%2FFunctions%2F-2125445516">T</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-chat-database/#2031305957%2FFunctions%2F-2125445516">getTypeConverter</a>(klass: <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;<a href="../-chat-database/#2031305957%2FFunctions%2F-2125445516">T</a>&gt;): <a href="../-chat-database/#2031305957%2FFunctions%2F-2125445516">T</a></td>
 </tr>
 <tr>
 <td><a href="../-chat-database/#1039887154%2FFunctions%2F-2125445516">init</a></td>
