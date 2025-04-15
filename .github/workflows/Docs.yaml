@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '**/*'
-      - '!**/.github/workflows/**'
 
 jobs:
   mkdocs:
@@ -40,6 +37,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+
+      - name: Test README quality
+        uses: atick-faisal/llm-readme-tester@v1
+        with:
+          google_api_key: ${{ secrets.GOOGLE_API_KEY }}
+          checks: "all"
 
       - name: Generate Docs
         run: |
