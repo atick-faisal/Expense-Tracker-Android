@@ -39,7 +39,7 @@ jobs:
           python-version: '3.13'
 
       - name: Test README quality
-        uses: atick-faisal/llm-readme-tester@v1.0.1
+        uses: atick-faisal/llm-readme-tester@v1.1.2
         with:
           google_api_key: ${{ secrets.GOOGLE_API_KEY }}
           checks: "all"
