@@ -157,7 +157,8 @@ fun BudgetChart(
                     )
 
                     // Improved highlighting
-                    highLightColor = colorScheme.primary.copy(alpha = 0.7f).toArgb()
+                    setHighLightColor(colorScheme.primary.copy(alpha = 0.7f).toArgb())
+
                     highlightLineWidth = 1.5f
                     setDrawHorizontalHighlightIndicator(false)
 
@@ -178,7 +179,7 @@ fun BudgetChart(
                     valueTextColor = colorScheme.onSurface.toArgb()
 
                     // Enhanced highlighting
-                    highLightColor = colorScheme.error.copy(alpha = 0.7f).toArgb()
+                    setHighLightColor(colorScheme.error.copy(alpha = 0.7f).toArgb())
                     highlightLineWidth = 1.5f
                     setDrawHorizontalHighlightIndicator(false)
                 }
