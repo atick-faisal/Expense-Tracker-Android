@@ -58,7 +58,7 @@ googleOss = "17.2.1"
 googleOssPlugin = "0.10.6"
 
 # ... Billing ...
-playBilling = "7.1.1"
+playBilling = "8.0.0"
 
 # ... Gemini ...
 generativeai = "0.9.0"
