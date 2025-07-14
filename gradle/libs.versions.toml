@@ -54,7 +54,7 @@ daggerHilt = "2.56.2"
 daggerHiltExt = "1.2.0"
 
 # ... Open Source Licenses ...
-googleOss = "17.1.0"
+googleOss = "17.2.0"
 googleOssPlugin = "0.10.6"
 
 # ... Billing ...
