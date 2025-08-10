@@ -48,6 +48,7 @@ class UiLibraryConventionPlugin : Plugin<Project> {
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
                         "-opt-in=com.google.accompanist.permissions.ExperimentalPermissionsApi",
+                        "-Xannotation-default-target=param-property"
                     )
                 }
             }

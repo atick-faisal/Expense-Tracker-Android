@@ -54,7 +54,7 @@ object DatabaseModule {
             appContext,
             ExpenseDatabase::class.java,
             EXPENSE_DATABASE_NAME,
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration(false).build()
     }
 
     /**
@@ -72,7 +72,7 @@ object DatabaseModule {
             appContext,
             BudgetDatabase::class.java,
             BUDGET_DATABASE_NAME,
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration(false).build()
     }
 
     /**
@@ -90,6 +90,6 @@ object DatabaseModule {
             appContext,
             ChatDatabase::class.java,
             CHAT_DATABASE_NAME,
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration(false).build()
     }
 }
