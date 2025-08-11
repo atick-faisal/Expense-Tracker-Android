@@ -18,6 +18,10 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v4
 
+      - name: Create local.properties
+        run: |
+          echo "GEMINI_API_KEY=${{ secrets.GOOGLE_API_KEY }}" >> local.properties
+
       - name: Set up Google Services
         run: |
           touch app/google-services.json
