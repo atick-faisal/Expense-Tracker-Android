@@ -142,7 +142,7 @@ object GeminiModule {
     @ChatModel
     fun provideChatModel(): GenerativeModel {
         return GenerativeModel(
-            modelName = "gemini-1.5-flash-001",
+            modelName = "gemini-2.0-flash",
             apiKey = BuildConfig.GEMINI_API_KEY,
             generationConfig = generationConfig {
                 temperature = 0.15f
