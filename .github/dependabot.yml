@@ -4,6 +4,15 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    labels: [ "version update" ]
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
+    reviewers:
+      - atick-faisal
+      
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
@@ -11,15 +20,13 @@ updates:
     registries: "*"
     labels: [ "version update" ]
     groups:
-      kotlin-ksp-compose:
+      all-dependencies:
         patterns:
-          - "org.jetbrains.kotlin:*"
-          - "org.jetbrains.kotlin.jvm"
-          - "com.google.devtools.ksp"
-          - "androidx.compose.compiler:compiler"
+          - "*"
     open-pull-requests-limit: 10
     reviewers:
       - atick-faisal
+      
 registries:
   maven-google:
     type: "maven-repository"
