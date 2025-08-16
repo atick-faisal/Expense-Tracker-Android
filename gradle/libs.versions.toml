@@ -71,8 +71,8 @@ androidchartVersion = "3.1.0.30"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
-compileSdk = "35"
-targetSdk = "35"
+compileSdk = "36"
+targetSdk = "36"
 
 
 [plugins]
@@ -161,9 +161,9 @@ identity-google-id = { group = "com.google.android.libraries.identity.googleid",
 
 # ... FIREBASE ...
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 
 # ... DAGGER-HILT ...
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }

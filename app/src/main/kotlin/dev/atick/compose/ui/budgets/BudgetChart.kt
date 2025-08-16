@@ -159,7 +159,7 @@ fun BudgetChart(
                     // Improved highlighting
                     setHighLightColor(colorScheme.primary.copy(alpha = 0.7f).toArgb())
 
-                    highlightLineWidth = 1.5f
+                    setHighlightLineWidth(1.5f)
                     setDrawHorizontalHighlightIndicator(false)
 
                     // Enhanced circles
@@ -180,7 +180,7 @@ fun BudgetChart(
 
                     // Enhanced highlighting
                     setHighLightColor(colorScheme.error.copy(alpha = 0.7f).toArgb())
-                    highlightLineWidth = 1.5f
+                    setHighlightLineWidth(1.5f)
                     setDrawHorizontalHighlightIndicator(false)
                 }
 
