@@ -42,6 +42,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                     jvmTarget.set(JvmTarget.fromTarget(javaVersion))
                     freeCompilerArgs.addAll(
                         "-Xannotation-default-target=param-property",
+                        "-opt-in=kotlin.time.ExperimentalTime",
                     )
                 }
             }
