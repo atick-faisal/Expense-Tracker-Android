@@ -50,7 +50,7 @@ firebaseBom = "34.1.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 # ... DAGGER-HILT ...
-daggerHilt = "2.57"
+daggerHilt = "2.57.1"
 daggerHiltExt = "1.2.0"
 
 # ... Open Source Licenses ...
