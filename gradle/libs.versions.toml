@@ -2,10 +2,10 @@
 
 # ... PROJECT ...
 java = "21"
-kotlin = "2.2.10"
-androidGradlePlugin = "8.12.1"
+kotlin = "2.2.20"
+androidGradlePlugin = "8.13.0"
 gmsPlugin = "4.4.3"
-ksp = "2.2.10-2.0.2"
+ksp = "2.2.20-2.0.3"
 dokka = "2.0.0"
 secrets = "2.0.1"
 
@@ -17,17 +17,17 @@ kotlinxSerializationJson = "1.9.0"
 timber = "5.0.1"
 
 # ... CORE:UI ...
-androidxNavigation = "2.9.3"
+androidxNavigation = "2.9.4"
 androidxFragment = "1.8.9"
 androidxAppCompat = "1.7.1"
-androidxActivity = "1.10.1"
-androidxLifecycle = "2.9.3"
-androidxComposeBom = "2025.08.01"
+androidxActivity = "1.11.0"
+androidxLifecycle = "2.9.4"
+androidxComposeBom = "2025.09.00"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.0.1"
-androidxHiltNavigationCompose = "1.2.0"
+androidxHiltNavigationCompose = "1.3.0"
 accompanistVersion = "0.37.3"
-lottieCompose = "6.6.7"
+lottieCompose = "6.6.9"
 
 # ... NETWORK ...
 okhttp = "5.1.0"
@@ -38,7 +38,7 @@ coil = "2.7.0"
 androidxDataStore = "1.1.7"
 
 # ... STORAGE:ROOM ...
-room = "2.7.2"
+room = "2.8.0"
 
 # ... AUTH ...
 playServicesAuth = "21.4.0"
@@ -46,16 +46,16 @@ androidxCredentials = "1.5.0"
 identityGoogleId = "1.1.1"
 
 # ... FIREBASE ...
-firebaseBom = "34.1.0"
+firebaseBom = "34.3.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 # ... DAGGER-HILT ...
 daggerHilt = "2.57.1"
-daggerHiltExt = "1.2.0"
+daggerHiltExt = "1.3.0"
 
 # ... Open Source Licenses ...
-googleOss = "17.2.2"
-googleOssPlugin = "0.10.7"
+googleOss = "17.3.0"
+googleOssPlugin = "0.10.9"
 
 # ... Billing ...
 playBilling = "8.0.0"
@@ -64,10 +64,10 @@ playBilling = "8.0.0"
 generativeai = "0.9.0"
 
 # ... WORK_MANAGER ...
-workVersion = "2.10.3"
+workVersion = "2.10.4"
 
 # ... MPAndroidChart ...
-androidchartVersion = "3.1.0.30"
+androidchartVersion = "3.1.0.31"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
