@@ -7,6 +7,7 @@ androidGradlePlugin = "8.13.0"
 gmsPlugin = "4.4.4"
 ksp = "2.2.20-2.0.4"
 dokka = "2.1.0"
+dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
 
 # ... CORE:ANDROID ...
@@ -88,6 +89,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+google-oss-licenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "googleOssPlugin" }
 
 # ... Custom Plugins ...
 jetpack-library = { id = "dev.atick.library" }
@@ -95,6 +97,7 @@ jetpack-ui-library = { id = "dev.atick.ui.library" }
 jetpack-application = { id = "dev.atick.application" }
 jetpack-dagger-hilt = { id = "dev.atick.dagger.hilt" }
 jetpack-firebase = { id = "dev.atick.firebase" }
+jetpack-dokka = { id = "dev.atick.dokka" }
 
 [libraries]
 
@@ -176,6 +179,7 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+dokka-gradlePlugin = { group = "org.jetbrains.dokka", name = "org.jetbrains.dokka.gradle.plugin", version.ref = "dokka" }
 
 # ... Open Source Licenses ...
 google-oss-licenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "googleOss" }
@@ -192,5 +196,9 @@ androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version
 
 # ... MPAndroidChart ...
 androidchart = { module = "com.github.AppDevNext:AndroidChart", version.ref = "androidchartVersion" }
+
+# ... DOKKA PLUGINS ...
+dokka-android-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
+dokka-mermaid-plugin = { module = "com.glureau:html-mermaid-dokka-plugin", version.ref = "dokkaMermaid" }
 
 

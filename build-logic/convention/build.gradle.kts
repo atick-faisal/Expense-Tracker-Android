@@ -14,7 +14,6 @@
  *   limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
@@ -41,6 +40,7 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.dokka.gradlePlugin)
 }
 
 gradlePlugin {
@@ -64,6 +64,10 @@ gradlePlugin {
         register("firebase") {
             id = "dev.atick.firebase"
             implementationClass = "FirebaseConventionPlugin"
+        }
+        register("dokka") {
+            id = "dev.atick.dokka"
+            implementationClass = "DokkaConventionPlugin"
         }
     }
 }
