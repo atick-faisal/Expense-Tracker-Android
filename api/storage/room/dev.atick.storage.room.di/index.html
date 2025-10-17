@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.atick.storage.room.di</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    ExpenseWise
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":storage:room/debug">debug</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":storage:room/main">androidJvm</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":storage:room/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":storage:room/debug" data-filter=":storage:room/debug">
+                                <span class="checkbox--icon"></span>
+                                debug
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":storage:room/main" data-filter=":storage:room/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":storage:room/release" data-filter=":storage:room/release">
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    ExpenseWise
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="room::dev.atick.storage.room.di////PointingToDeclaration//705423701">
+  <div class="breadcrumbs"><a href="../index.html">room</a><span class="delimiter">/</span><span class="current">dev.atick.storage.room.di</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-103376410%2FClasslikes%2F2013704431" anchor-label="DaoModule" id="-103376410%2FClasslikes%2F2013704431" data-filterable-set=":storage:room/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-dao-module/index.html"><span>Dao</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-103376410%2FClasslikes%2F2013704431"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main" data-active="" data-toggle=":storage:room/main">androidJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger/Module///PointingToDeclaration/"><span class="token annotation builtin">Module</span></span><span class="token punctuation">(</span><span>includes<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="-database-module/index.html">DatabaseModule::class</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">object </span><a href="-dao-module/index.html">DaoModule</a></div><div class="brief "><p class="paragraph">Dagger module for data access object.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1933703129%2FClasslikes%2F-1580226268" anchor-label="DaoModule_ProvideBudgetDaoFactory" id="-1933703129%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-dao-module_-provide-budget-dao-factory/index.html"><span>DaoModule_</span><wbr><span>Provide</span><wbr><span>Budget</span><wbr><span>Dao</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1933703129%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-dao-module_-provide-budget-dao-factory/index.html">DaoModule_ProvideBudgetDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-budget-dao/index.html">BudgetDao</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-dao-module_-provide-budget-dao-factory/index.html">DaoModule_ProvideBudgetDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-budget-dao/index.html">BudgetDao</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1528816652%2FClasslikes%2F-1580226268" anchor-label="DaoModule_ProvideChatDaoFactory" id="-1528816652%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-dao-module_-provide-chat-dao-factory/index.html"><span>DaoModule_</span><wbr><span>Provide</span><wbr><span>Chat</span><wbr><span>Dao</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1528816652%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-dao-module_-provide-chat-dao-factory/index.html">DaoModule_ProvideChatDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-chat-dao/index.html">ChatDao</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-dao-module_-provide-chat-dao-factory/index.html">DaoModule_ProvideChatDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-chat-dao/index.html">ChatDao</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1494712978%2FClasslikes%2F-1580226268" anchor-label="DaoModule_ProvideExpenseDaoFactory" id="-1494712978%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-dao-module_-provide-expense-dao-factory/index.html"><span>DaoModule_</span><wbr><span>Provide</span><wbr><span>Expense</span><wbr><span>Dao</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1494712978%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-dao-module_-provide-expense-dao-factory/index.html">DaoModule_ProvideExpenseDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-expense-dao/index.html">ExpenseDao</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-dao-module_-provide-expense-dao-factory/index.html">DaoModule_ProvideExpenseDaoFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.dao/-expense-dao/index.html">ExpenseDao</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1234994583%2FClasslikes%2F2013704431" anchor-label="DatabaseModule" id="1234994583%2FClasslikes%2F2013704431" data-filterable-set=":storage:room/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-database-module/index.html"><span>Database</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1234994583%2FClasslikes%2F2013704431"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main" data-active="" data-toggle=":storage:room/main">androidJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger/Module///PointingToDeclaration/"><span class="token annotation builtin">Module</span></span></div></div><span class="token keyword">object </span><a href="-database-module/index.html">DatabaseModule</a></div><div class="brief "><p class="paragraph">Dagger module for database.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1366237347%2FClasslikes%2F-1580226268" anchor-label="DatabaseModule_ProvideBudgetDatabaseFactory" id="1366237347%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-database-module_-provide-budget-database-factory/index.html"><span>Database</span><wbr><span>Module_</span><wbr><span>Provide</span><wbr><span>Budget</span><wbr><span>Database</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1366237347%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-database-module_-provide-budget-database-factory/index.html">DatabaseModule_ProvideBudgetDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-budget-database/index.html">BudgetDatabase</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-database-module_-provide-budget-database-factory/index.html">DatabaseModule_ProvideBudgetDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-budget-database/index.html">BudgetDatabase</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="210703542%2FClasslikes%2F-1580226268" anchor-label="DatabaseModule_ProvideChatDatabaseFactory" id="210703542%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-database-module_-provide-chat-database-factory/index.html"><span>Database</span><wbr><span>Module_</span><wbr><span>Provide</span><wbr><span>Chat</span><wbr><span>Database</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="210703542%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-database-module_-provide-chat-database-factory/index.html">DatabaseModule_ProvideChatDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-chat-database/index.html">ChatDatabase</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-database-module_-provide-chat-database-factory/index.html">DatabaseModule_ProvideChatDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-chat-database/index.html">ChatDatabase</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1412456894%2FClasslikes%2F-1580226268" anchor-label="DatabaseModule_ProvideExpenseDatabaseFactory" id="1412456894%2FClasslikes%2F-1580226268" data-filterable-set=":storage:room/debug,:storage:room/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/debug,:storage:room/release" data-filterable-set=":storage:room/debug,:storage:room/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../../storage/room/dev.atick.storage.room.di/[release]-database-module_-provide-expense-database-factory/index.html"><span>Database</span><wbr><span>Module_</span><wbr><span>Provide</span><wbr><span>Expense</span><wbr><span>Database</span><wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1412456894%2FClasslikes%2F-1580226268"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/debug" data-filterable-set=":storage:room/debug" data-active="" data-toggle=":storage:room/debug">debug</button><button class="platform-bookmark" data-filterable-current=":storage:room/release" data-filterable-set=":storage:room/release" data-toggle=":storage:room/release">release</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/debug"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[debug]-database-module_-provide-expense-database-factory/index.html">DatabaseModule_ProvideExpenseDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-expense-database/index.html">ExpenseDatabase</a><span class="token operator">&gt; </span></div></div><div class="content sourceset-dependent-content" data-togglable=":storage:room/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger.internal/DaggerGenerated///PointingToDeclaration/"><span class="token annotation builtin">DaggerGenerated</span></span></div><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/javax/annotation/processing/Generated.html"><span class="token annotation builtin">Generated</span></a><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dagger.internal.codegen.ComponentProcessor"</span></span><span class="token punctuation">, </span></span><wbr><span>comments<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"https://dagger.dev"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">class </span><a href="[release]-database-module_-provide-expense-database-factory/index.html">DatabaseModule_ProvideExpenseDatabaseFactory</a> : <span data-unresolved-link="dagger.internal/Factory///PointingToDeclaration/">Factory</span><span class="token operator">&lt;</span><a href="../../../storage/room/dev.atick.storage.room.data/-expense-database/index.html">ExpenseDatabase</a><span class="token operator">&gt; </span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2014298579%2FClasslikes%2F2013704431" anchor-label="DataSourceModule" id="-2014298579%2FClasslikes%2F2013704431" data-filterable-set=":storage:room/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-data-source-module/index.html"><span>Data</span><wbr><span>Source</span><wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2014298579%2FClasslikes%2F2013704431"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":storage:room/main" data-filterable-set=":storage:room/main" data-active="" data-toggle=":storage:room/main">androidJvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":storage:room/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="dagger/Module///PointingToDeclaration/"><span class="token annotation builtin">Module</span></span></div></div><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-data-source-module/index.html">DataSourceModule</a></div><div class="brief "><p class="paragraph">Dagger Hilt module responsible for providing implementations of data source interfaces.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
