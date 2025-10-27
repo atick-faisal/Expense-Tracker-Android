@@ -2,10 +2,10 @@
 
 # ... PROJECT ...
 java = "21"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 androidGradlePlugin = "8.13.0"
 gmsPlugin = "4.4.4"
-ksp = "2.2.20-2.0.4"
+ksp = "2.3.0"
 dokka = "2.1.0"
 dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
@@ -23,7 +23,7 @@ androidxFragment = "1.8.9"
 androidxAppCompat = "1.7.1"
 androidxActivity = "1.11.0"
 androidxLifecycle = "2.9.4"
-androidxComposeBom = "2025.10.00"
+androidxComposeBom = "2025.10.01"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.0.1"
 androidxHiltNavigationCompose = "1.3.0"
@@ -39,7 +39,7 @@ coil = "2.7.0"
 androidxDataStore = "1.1.7"
 
 # ... STORAGE:ROOM ...
-room = "2.8.2"
+room = "2.8.3"
 
 # ... AUTH ...
 playServicesAuth = "21.4.0"
@@ -65,7 +65,7 @@ playBilling = "8.0.0"
 generativeai = "0.9.0"
 
 # ... WORK_MANAGER ...
-workVersion = "2.10.5"
+workVersion = "2.11.0"
 
 # ... MPAndroidChart ...
 androidchartVersion = "3.1.0.31"
