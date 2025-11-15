@@ -42,7 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -143,7 +143,7 @@ private fun ExpenseList(
                         ExpenseCard(
                             expense = item,
                             onExpenseClick = onExpenseClick,
-                            onRecurringTypeClick = null,
+                            onRecurringTypeClick = onRecurringTypeClick,
                             modifier = Modifier.animateItem(),
                         )
                     }
@@ -158,19 +158,12 @@ fun SwipeableItem(
     onDelete: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = { dismissValue ->
-            when (dismissValue) {
-                SwipeToDismissBoxValue.StartToEnd -> false
-                SwipeToDismissBoxValue.EndToStart -> {
-                    onDelete()
-                    true
-                }
+    val dismissState = rememberSwipeToDismissBoxState()
 
-                SwipeToDismissBoxValue.Settled -> false
-            }
-        },
-    )
+    // Handle dismiss confirmation without deprecated confirmValueChange
+    if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
+        onDelete()
+    }
 
     SwipeToDismissBox(
         state = dismissState,

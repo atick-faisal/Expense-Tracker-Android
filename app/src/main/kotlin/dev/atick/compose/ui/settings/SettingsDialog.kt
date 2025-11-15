@@ -48,14 +48,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import dev.atick.compose.R
@@ -101,7 +101,7 @@ fun SettingsDialog(
     onChangeDynamicColorPreference: (useDynamicColor: Boolean) -> Unit,
     onChangeDarkThemeConfig: (darkThemeConfig: DarkThemeConfig) -> Unit,
 ) {
-    val configuration = LocalConfiguration.current
+    val containerSize = LocalWindowInfo.current.containerSize
 
     /**
      * usePlatformDefaultWidth = false is use as a temporary fix to allow
@@ -112,7 +112,7 @@ fun SettingsDialog(
      */
     AlertDialog(
         properties = DialogProperties(usePlatformDefaultWidth = false),
-        modifier = Modifier.widthIn(max = configuration.screenWidthDp.dp - 80.dp),
+        modifier = Modifier.widthIn(max = containerSize.width.dp - 80.dp),
         onDismissRequest = { onDismiss() },
         title = {
             Text(
@@ -180,19 +180,19 @@ private fun ColumnScope.SettingsPanel(
         )
     }
 
-//    SettingsDialogSectionTitle(text = stringResource(R.string.theme))
-//    Column(Modifier.selectableGroup()) {
-//        SettingsDialogThemeChooserRow(
-//            text = stringResource(R.string.brand_default),
-//            selected = settings.brand == ThemeBrand.DEFAULT,
-//            onClick = { onChangeThemeBrand(ThemeBrand.DEFAULT) },
-//        )
-//        SettingsDialogThemeChooserRow(
-//            text = stringResource(R.string.brand_android),
-//            selected = settings.brand == ThemeBrand.ANDROID,
-//            onClick = { onChangeThemeBrand(ThemeBrand.ANDROID) },
-//        )
-//    }
+    SettingsDialogSectionTitle(text = stringResource(R.string.theme))
+    Column(Modifier.selectableGroup()) {
+        SettingsDialogThemeChooserRow(
+            text = stringResource(R.string.brand_default),
+            selected = settings.brand == ThemeBrand.DEFAULT,
+            onClick = { onChangeThemeBrand(ThemeBrand.DEFAULT) },
+        )
+        SettingsDialogThemeChooserRow(
+            text = stringResource(R.string.brand_android),
+            selected = settings.brand == ThemeBrand.ANDROID,
+            onClick = { onChangeThemeBrand(ThemeBrand.ANDROID) },
+        )
+    }
 
     AnimatedVisibility(visible = settings.brand == ThemeBrand.DEFAULT && supportDynamicColor) {
         Column {
