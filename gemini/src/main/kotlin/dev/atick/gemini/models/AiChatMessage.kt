@@ -16,8 +16,8 @@
 
 package dev.atick.gemini.models
 
-import com.google.ai.client.generativeai.type.Content
-import com.google.ai.client.generativeai.type.content
+import com.google.firebase.ai.type.Content
+import com.google.firebase.ai.type.content
 
 /**
  * Data class representing a chat message.
@@ -34,7 +34,7 @@ data class AiChatMessage(
  * @return The converted [Content].
  */
 fun AiChatMessage.toGeminiContent(): Content {
-    return return content(
+    return content(
         role = if (sender == AiChatSender.USER) "user" else "model",
     ) { text(text) }
 }
