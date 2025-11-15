@@ -16,9 +16,9 @@
 
 package dev.atick.gemini.data
 
-import com.google.ai.client.generativeai.Chat
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.GoogleGenerativeAIException
+import com.google.firebase.ai.Chat
+import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.type.FirebaseAIException
 import dev.atick.core.di.IoDispatcher
 import dev.atick.gemini.di.ChatModel
 import dev.atick.gemini.di.ExpensesModel
@@ -93,7 +93,7 @@ class GeminiDataSourceImpl @Inject constructor(
         return withContext(ioDispatcher) {
             val response = try {
                 expensesModel.generateContent(aiSMS.getTextSMS()).text?.trim()
-            } catch (e: GoogleGenerativeAIException) {
+            } catch (e: FirebaseAIException) {
                 throw e.toGeminiException()
             } ?: throw IllegalStateException("Something went wrong with the expenses AI.")
             ExpenseParser.parseExpense(response)

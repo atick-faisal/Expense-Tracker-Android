@@ -37,6 +37,7 @@ secrets {
 dependencies {
     implementation(project(":core:android"))
 
-    // ... Gemini
-    implementation(libs.generativeai)
+    // ... Firebase AI
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.ai)
 }

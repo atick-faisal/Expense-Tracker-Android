@@ -16,16 +16,16 @@
 
 package dev.atick.gemini.data
 
-import com.google.ai.client.generativeai.type.GoogleGenerativeAIException
-import com.google.ai.client.generativeai.type.InvalidAPIKeyException
-import com.google.ai.client.generativeai.type.InvalidStateException
-import com.google.ai.client.generativeai.type.PromptBlockedException
-import com.google.ai.client.generativeai.type.QuotaExceededException
-import com.google.ai.client.generativeai.type.RequestTimeoutException
-import com.google.ai.client.generativeai.type.ResponseStoppedException
-import com.google.ai.client.generativeai.type.SerializationException
-import com.google.ai.client.generativeai.type.ServerException
-import com.google.ai.client.generativeai.type.UnsupportedUserLocationException
+import com.google.firebase.ai.type.FirebaseAIException
+import com.google.firebase.ai.type.InvalidAPIKeyException
+import com.google.firebase.ai.type.InvalidStateException
+import com.google.firebase.ai.type.PromptBlockedException
+import com.google.firebase.ai.type.QuotaExceededException
+import com.google.firebase.ai.type.RequestTimeoutException
+import com.google.firebase.ai.type.ResponseStoppedException
+import com.google.firebase.ai.type.SerializationException
+import com.google.firebase.ai.type.ServerException
+import com.google.firebase.ai.type.UnsupportedUserLocationException
 import kotlinx.coroutines.TimeoutCancellationException
 
 /**
@@ -124,7 +124,7 @@ sealed class GeminiException(message: String? = null, cause: Throwable? = null) 
  */
 fun Throwable.toGeminiException(): GeminiException {
     return when (this) {
-        is GoogleGenerativeAIException -> when (this) {
+        is FirebaseAIException -> when (this) {
             is SerializationException -> GeminiException.Serialization(message ?: "", cause)
             is ServerException -> GeminiException.Server(message ?: "", cause)
             is InvalidAPIKeyException -> GeminiException.InvalidAPIKey(message ?: "")
