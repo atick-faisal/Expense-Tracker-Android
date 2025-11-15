@@ -161,8 +161,10 @@ fun SwipeableItem(
     val dismissState = rememberSwipeToDismissBoxState()
 
     // Handle dismiss confirmation without deprecated confirmValueChange
-    if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
-        onDelete()
+    LaunchedEffect(dismissState.currentValue) {
+        if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
+            onDelete()
+        }
     }
 
     SwipeToDismissBox(
