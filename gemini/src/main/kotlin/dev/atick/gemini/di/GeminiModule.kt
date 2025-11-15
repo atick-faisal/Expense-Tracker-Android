@@ -16,18 +16,19 @@
 
 package dev.atick.gemini.di
 
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.BlockThreshold
-import com.google.ai.client.generativeai.type.FunctionType
-import com.google.ai.client.generativeai.type.HarmCategory
-import com.google.ai.client.generativeai.type.SafetySetting
-import com.google.ai.client.generativeai.type.Schema
-import com.google.ai.client.generativeai.type.generationConfig
+import com.google.firebase.Firebase
+import com.google.firebase.ai.GenerativeModel
+import com.google.firebase.ai.ai
+import com.google.firebase.ai.type.GenerativeBackend
+import com.google.firebase.ai.type.HarmBlockThreshold
+import com.google.firebase.ai.type.HarmCategory
+import com.google.firebase.ai.type.SafetySetting
+import com.google.firebase.ai.type.Schema
+import com.google.firebase.ai.type.generationConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.atick.gemini.BuildConfig
 import dev.atick.gemini.data.GeminiRateLimiter
 import dev.atick.gemini.data.GeminiRateLimiterImpl
 import dev.atick.gemini.models.AiCurrencyType
@@ -67,69 +68,74 @@ object GeminiModule {
     @Singleton
     @ExpensesModel
     fun provideGeminiClient(): GenerativeModel {
-        return GenerativeModel(
-            modelName = "gemini-2.0-flash",
-            apiKey = BuildConfig.GEMINI_API_KEY,
-            generationConfig = generationConfig {
-                temperature = 0.15f
-                topK = 32
-                topP = 1f
-                maxOutputTokens = 4096
-                responseMimeType = "application/json"
-                responseSchema = Schema(
-                    name = "expense",
-                    description = "Extracted expense information from message",
-                    type = FunctionType.OBJECT,
-                    properties = mapOf(
-                        "amount" to Schema.double(
-                            name = "amount",
-                            description = "The expense amount in the original currency",
+        return Firebase.ai(backend = GenerativeBackend.googleAI())
+            .generativeModel(
+                modelName = "gemini-2.5-flash-lite",
+                generationConfig = generationConfig {
+                    temperature = 0.15f
+                    topK = 32
+                    topP = 1f
+                    maxOutputTokens = 256
+                    responseMimeType = "application/json"
+                    responseSchema = Schema.obj(
+                        title = "expense",
+                        description = "Extracted expense information from message",
+                        properties = mapOf(
+                            "amount" to Schema.double(
+                                title = "amount",
+                                description = "The expense amount in the original currency",
+                                nullable = false,
+                            ),
+                            "currency" to Schema.enumeration(
+                                title = "currency",
+                                description = "The currency of the expense",
+                                values = AiCurrencyType.entries.map { it.name },
+                                nullable = false,
+                            ),
+                            "merchant" to Schema.string(
+                                title = "merchant",
+                                description = "Name of merchant of the expense",
+                                nullable = false,
+                            ),
+                            "category" to Schema.enumeration(
+                                title = "category",
+                                description = "The category of the expense",
+                                values = AiExpenseCategory.entries.map { it.name },
+                                nullable = false,
+                            ),
+                            "paymentStatus" to Schema.enumeration(
+                                title = "paymentStatus",
+                                description = "The payment status of the expense",
+                                values = AiPaymentStatus.entries.map { it.name },
+                                nullable = false,
+                            ),
+                            "recurringType" to Schema.enumeration(
+                                title = "recurringType",
+                                description = "The recurring nature of the expense",
+                                values = AiRecurringType.entries.map { it.name },
+                                nullable = false,
+                            ),
+                            "paymentDate" to Schema.string(
+                                title = "paymentDate",
+                                description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
+                                nullable = false,
+                            ),
                         ),
-                        "currency" to Schema.enum(
-                            name = "currency",
-                            description = "The currency of the expense",
-                            values = AiCurrencyType.entries.map { it.name },
-                        ),
-                        "merchant" to Schema.str(
-                            name = "merchant",
-                            description = "Name of merchant of the expense",
-                        ),
-                        "category" to Schema.enum(
-                            name = "category",
-                            description = "The category of the expense",
-                            values = AiExpenseCategory.entries.map { it.name },
-                        ),
-                        "paymentStatus" to Schema.enum(
-                            name = "paymentStatus",
-                            description = "The payment status of the expense",
-                            values = AiPaymentStatus.entries.map { it.name },
-                        ),
-                        "recurringType" to Schema.enum(
-                            name = "recurringType",
-                            description = "The recurring nature of the expense",
-                            values = AiRecurringType.entries.map { it.name },
-                        ),
-                        "paymentDate" to Schema.str(
-                            name = "paymentDate",
-                            description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
-                        ),
+                    )
+                },
+                safetySettings = listOf(
+                    SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(
+                        HarmCategory.SEXUALLY_EXPLICIT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE,
                     ),
-                    required = listOf(
-                        "amount",
-                        "currency",
-                        "category",
-                        "paymentStatus",
-                        "recurringType",
+                    SafetySetting(
+                        HarmCategory.DANGEROUS_CONTENT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE,
                     ),
-                )
-            },
-            safetySettings = listOf(
-                SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.MEDIUM_AND_ABOVE),
-            ),
-        )
+                ),
+            )
     }
 
     /**
@@ -141,22 +147,28 @@ object GeminiModule {
     @Singleton
     @ChatModel
     fun provideChatModel(): GenerativeModel {
-        return GenerativeModel(
-            modelName = "gemini-2.0-flash",
-            apiKey = BuildConfig.GEMINI_API_KEY,
-            generationConfig = generationConfig {
-                temperature = 0.15f
-                topK = 32
-                topP = 1f
-                maxOutputTokens = 4096
-            },
-            safetySettings = listOf(
-                SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.MEDIUM_AND_ABOVE),
-                SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.MEDIUM_AND_ABOVE),
-            ),
-        )
+        return Firebase.ai(backend = GenerativeBackend.googleAI())
+            .generativeModel(
+                modelName = "gemini-2.5-flash-lite",
+                generationConfig = generationConfig {
+                    temperature = 0.15f
+                    topK = 32
+                    topP = 1f
+                    maxOutputTokens = 256
+                },
+                safetySettings = listOf(
+                    SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.MEDIUM_AND_ABOVE),
+                    SafetySetting(
+                        HarmCategory.SEXUALLY_EXPLICIT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE,
+                    ),
+                    SafetySetting(
+                        HarmCategory.DANGEROUS_CONTENT,
+                        HarmBlockThreshold.MEDIUM_AND_ABOVE,
+                    ),
+                ),
+            )
     }
 
     /**
