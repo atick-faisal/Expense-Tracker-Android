@@ -157,7 +157,7 @@
     <string name="budget_exceed_notification_channel_name">Budget Notifications</string>
     <string name="budget_exceed_notification_channel_description">Notifications regarding budget events</string>
     <string name="budget_exceed_notification_title">Monthly Budget Exceeded</string>
-    <string name="budget_exceed_notification_content">Budget: %.2f, Spending: %.2f</string>
+    <string name="budget_exceed_notification_content">Budget: %1$.2f, Spending: %2$.2f</string>
     <string name="not_set">Not Set</string>
     <string name="budget_not_set">Budget Not Set</string>
     <string name="set_budget_to_track_expenses">Set budget to track expenses</string>

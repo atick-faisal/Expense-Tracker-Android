@@ -16,7 +16,6 @@
 
 package dev.atick.core.utils
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -24,6 +23,7 @@ import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 
 /**
  * Data class that represents information about a month.
@@ -59,7 +59,7 @@ fun getMonthInfoAt(monthOffset: Int = 0): MonthInfo {
     val startOfMonth = LocalDateTime(
         year = offsetDate.year,
         month = offsetDate.month,
-        dayOfMonth = 1,
+        day = 1,
         hour = 0,
         minute = 0,
         second = 0,
