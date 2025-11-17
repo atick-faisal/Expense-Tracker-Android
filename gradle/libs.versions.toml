@@ -3,7 +3,7 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.2.21"
-androidGradlePlugin = "8.13.0"
+androidGradlePlugin = "8.13.1"
 gmsPlugin = "4.4.4"
 ksp = "2.3.2"
 dokka = "2.1.0"
@@ -31,7 +31,7 @@ accompanistVersion = "0.37.3"
 lottieCompose = "6.7.1"
 
 # ... NETWORK ...
-okhttp = "5.3.0"
+okhttp = "5.3.1"
 retrofit = "3.0.0"
 coil = "2.7.0"
 
@@ -47,7 +47,7 @@ androidxCredentials = "1.5.0"
 identityGoogleId = "1.1.1"
 
 # ... FIREBASE ...
-firebaseBom = "34.5.0"
+firebaseBom = "34.6.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 # ... DAGGER-HILT ...
