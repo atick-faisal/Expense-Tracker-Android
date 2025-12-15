@@ -3,7 +3,7 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.2.21"
-androidGradlePlugin = "8.13.1"
+androidGradlePlugin = "8.13.2"
 gmsPlugin = "4.4.4"
 ksp = "2.3.3"
 dokka = "2.1.0"
@@ -47,7 +47,7 @@ androidxCredentials = "1.5.0"
 identityGoogleId = "1.1.1"
 
 # ... FIREBASE ...
-firebaseBom = "34.6.0"
+firebaseBom = "34.7.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 # ... DAGGER-HILT ...
@@ -56,10 +56,10 @@ daggerHiltExt = "1.3.0"
 
 # ... Open Source Licenses ...
 googleOss = "17.3.0"
-googleOssPlugin = "0.10.9"
+googleOssPlugin = "0.10.10"
 
 # ... Billing ...
-playBilling = "8.1.0"
+playBilling = "8.2.0"
 
 # ... Gemini ...
 generativeai = "0.9.0"
