@@ -2,10 +2,10 @@
 
 # ... PROJECT ...
 java = "21"
-kotlin = "2.2.21"
-androidGradlePlugin = "8.13.1"
+kotlin = "2.3.0"
+androidGradlePlugin = "8.13.2"
 gmsPlugin = "4.4.4"
-ksp = "2.3.3"
+ksp = "2.3.4"
 dokka = "2.1.0"
 dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
@@ -21,9 +21,9 @@ timber = "5.0.1"
 androidxNavigation = "2.9.6"
 androidxFragment = "1.8.9"
 androidxAppCompat = "1.7.1"
-androidxActivity = "1.12.1"
+androidxActivity = "1.12.2"
 androidxLifecycle = "2.10.0"
-androidxComposeBom = "2025.12.00"
+androidxComposeBom = "2025.12.01"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.2.0"
 androidxHiltNavigationCompose = "1.3.0"
@@ -47,7 +47,7 @@ androidxCredentials = "1.5.0"
 identityGoogleId = "1.1.1"
 
 # ... FIREBASE ...
-firebaseBom = "34.6.0"
+firebaseBom = "34.7.0"
 firebaseCrashlyticsPlugin = "3.0.6"
 
 # ... DAGGER-HILT ...
@@ -56,10 +56,10 @@ daggerHiltExt = "1.3.0"
 
 # ... Open Source Licenses ...
 googleOss = "17.3.0"
-googleOssPlugin = "0.10.9"
+googleOssPlugin = "0.10.10"
 
 # ... Billing ...
-playBilling = "8.1.0"
+playBilling = "8.3.0"
 
 # ... Gemini ...
 generativeai = "0.9.0"
@@ -68,7 +68,7 @@ generativeai = "0.9.0"
 workVersion = "2.11.0"
 
 # ... MPAndroidChart ...
-androidchartVersion = "3.1.0.31"
+androidchartVersion = "4.0"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
