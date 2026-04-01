@@ -16,7 +16,6 @@
 
 @file:Suppress("UnstableApiUsage")
 
-import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import java.io.FileInputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -71,16 +70,16 @@ android {
         }
         release {
             isMinifyEnabled = true
-            applicationVariants.all {
-                outputs.all {
-                    (this as BaseVariantOutputImpl).outputFileName =
-                        rootProject.name.replace(" ", "_") + "_" +
-                                (buildType.name + "_v") +
-                                (versionName + "_") +
-                                "${currentTime}.apk"
-                    println(outputFileName)
-                }
-            }
+//            applicationVariants.all {
+//                outputs.all {
+//                    (this as BaseVariantOutputImpl).outputFileName =
+//                        rootProject.name.replace(" ", "_") + "_" +
+//                                (buildType.name + "_v") +
+//                                (versionName + "_") +
+//                                "${currentTime}.apk"
+//                    println(outputFileName)
+//                }
+//            }
             signingConfig = if (keystorePropertiesFile.exists()) {
                 signingConfigs.getByName("release")
             } else {

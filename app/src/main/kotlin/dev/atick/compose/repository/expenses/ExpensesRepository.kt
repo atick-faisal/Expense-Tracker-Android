@@ -30,7 +30,7 @@ interface ExpensesRepository {
         /**
          * The duration for which the SMS should be synced.
          */
-        const val SYNC_SMS_DURATION = 30 * 24 * 60 * 60 * 1000L // 30 days
+        const val SYNC_SMS_DURATION = 365 * 24 * 60 * 60 * 1000L // 30 days
 
         /**
          * The list of bank names.
