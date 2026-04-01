@@ -70,7 +70,7 @@ object GeminiModule {
     fun provideGeminiClient(): GenerativeModel {
         return Firebase.ai(backend = GenerativeBackend.googleAI())
             .generativeModel(
-                modelName = "gemini-2.5-flash-lite",
+                modelName = "gemini-3.1-flash-lite-preview",
                 generationConfig = generationConfig {
                     temperature = 0.15f
                     topK = 32
@@ -149,7 +149,7 @@ object GeminiModule {
     fun provideChatModel(): GenerativeModel {
         return Firebase.ai(backend = GenerativeBackend.googleAI())
             .generativeModel(
-                modelName = "gemini-2.5-flash-lite",
+                modelName = "gemini-3.1-flash-lite-preview",
                 generationConfig = generationConfig {
                     temperature = 0.15f
                     topK = 32
