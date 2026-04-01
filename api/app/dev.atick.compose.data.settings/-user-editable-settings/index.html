@@ -18,7 +18,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -43,7 +42,7 @@
         </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
-                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":app/main">androidJvm</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":app/release">release</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
                 <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
@@ -54,9 +53,9 @@
                     </div>
                         <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
                             <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":app/main" data-filter=":app/main">
+                                <input type="checkbox" class="checkbox--input" id=":app/release" data-filter=":app/release">
                                 <span class="checkbox--icon"></span>
-                                androidJvm
+                                release
                             </label>
                         </li>
                 </ul>
@@ -90,32 +89,28 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="app::dev.atick.compose.data.settings/UserEditableSettings///PointingToDeclaration//1606452474">
+<div class="main-content" data-page-type="classlike" id="content" pageids="app::dev.atick.compose.data.settings/UserEditableSettings///PointingToDeclaration//-865142711">
   <div class="breadcrumbs"><a href="../../index.html">app</a><span class="delimiter">/</span><a href="../index.html">dev.atick.compose.data.settings</a><span class="delimiter">/</span><span class="current">UserEditableSettings</span></div>
   <div class="cover ">
     <h1 class="cover"><span>User</span><wbr><span>Editable</span><wbr><span><span>Settings</span></span></h1>
-    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">UserEditableSettings</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>Language.ENGLISH.code<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>brand<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a><span class="token operator"> = </span>ThemeBrand.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>useDynamicColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>darkThemeConfig<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a><span class="token operator"> = </span>DarkThemeConfig.FOLLOW_SYSTEM</span></span><span class="token punctuation">)</span></div><p class="paragraph">Data class representing editable user settings related to themes and appearance.</p></div>    </div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">UserEditableSettings</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>Language.ENGLISH.code<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>brand<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a><span class="token operator"> = </span>ThemeBrand.DEFAULT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>useDynamicColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>darkThemeConfig<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a><span class="token operator"> = </span>DarkThemeConfig.FOLLOW_SYSTEM</span></span><span class="token punctuation">)</span></div><p class="paragraph">Data class representing editable user settings related to themes and appearance.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="tableheader">Constructors</h2>
-        <div class="table"><a data-name="-831917004%2FConstructors%2F1606452474" anchor-label="UserEditableSettings" id="-831917004%2FConstructors%2F1606452474" data-filterable-set=":app/main"></a>
-          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":app/main" data-filterable-set=":app/main">
+        <div class="table"><a data-name="-831917004%2FConstructors%2F-865142711" anchor-label="UserEditableSettings" id="-831917004%2FConstructors%2F-865142711" data-filterable-set=":app/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":app/release" data-filterable-set=":app/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-user-editable-settings.html"><span>User</span><wbr><span>Editable</span><wbr><span><span>Settings</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-831917004%2FConstructors%2F1606452474"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-831917004%2FConstructors%2F-865142711"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>Language.ENGLISH.code<span class="token punctuation">, </span></span><span class="parameter ">brand<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a><span class="token operator"> = </span>ThemeBrand.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">useDynamicColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">darkThemeConfig<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a><span class="token operator"> = </span>DarkThemeConfig.FOLLOW_SYSTEM</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a <a href="index.html">UserEditableSettings</a> instance with optional parameters.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">language<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>Language.ENGLISH.code<span class="token punctuation">, </span></span><span class="parameter ">brand<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a><span class="token operator"> = </span>ThemeBrand.DEFAULT<span class="token punctuation">, </span></span><span class="parameter ">useDynamicColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">darkThemeConfig<span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a><span class="token operator"> = </span>DarkThemeConfig.FOLLOW_SYSTEM</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Creates a <a href="index.html">UserEditableSettings</a> instance with optional parameters.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -124,70 +119,62 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="27886918%2FProperties%2F1606452474" anchor-label="brand" id="27886918%2FProperties%2F1606452474" data-filterable-set=":app/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":app/main" data-filterable-set=":app/main">
+        <div class="table"><a data-name="27886918%2FProperties%2F-865142711" anchor-label="brand" id="27886918%2FProperties%2F-865142711" data-filterable-set=":app/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":app/release" data-filterable-set=":app/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="brand.html"><span><span>brand</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="27886918%2FProperties%2F1606452474"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="27886918%2FProperties%2F-865142711"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="brand.html">brand</a><span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a></div><div class="brief "><p class="paragraph">The selected brand for the theme.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="brand.html">brand</a><span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-theme-brand/index.html">ThemeBrand</a></div><div class="brief "><p class="paragraph">The selected brand for the theme.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="439849848%2FProperties%2F1606452474" anchor-label="darkThemeConfig" id="439849848%2FProperties%2F1606452474" data-filterable-set=":app/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":app/main" data-filterable-set=":app/main">
+<a data-name="439849848%2FProperties%2F-865142711" anchor-label="darkThemeConfig" id="439849848%2FProperties%2F-865142711" data-filterable-set=":app/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":app/release" data-filterable-set=":app/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="dark-theme-config.html"><span>dark</span><wbr><span>Theme</span><wbr><span><span>Config</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="439849848%2FProperties%2F1606452474"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="439849848%2FProperties%2F-865142711"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="dark-theme-config.html">darkThemeConfig</a><span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a></div><div class="brief "><p class="paragraph">Configuration for the dark theme.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="dark-theme-config.html">darkThemeConfig</a><span class="token operator">: </span><a href="../../../storage/preferences/dev.atick.storage.preferences.models/-dark-theme-config/index.html">DarkThemeConfig</a></div><div class="brief "><p class="paragraph">Configuration for the dark theme.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2099019317%2FProperties%2F1606452474" anchor-label="language" id="2099019317%2FProperties%2F1606452474" data-filterable-set=":app/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":app/main" data-filterable-set=":app/main">
+<a data-name="2099019317%2FProperties%2F-865142711" anchor-label="language" id="2099019317%2FProperties%2F-865142711" data-filterable-set=":app/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":app/release" data-filterable-set=":app/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="language.html"><span><span>language</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2099019317%2FProperties%2F1606452474"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2099019317%2FProperties%2F-865142711"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="language.html">language</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The preferred ui language.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="language.html">language</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The preferred ui language.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="836430786%2FProperties%2F1606452474" anchor-label="useDynamicColor" id="836430786%2FProperties%2F1606452474" data-filterable-set=":app/main"></a>
-          <div class="table-row table-row_content" data-filterable-current=":app/main" data-filterable-set=":app/main">
+<a data-name="836430786%2FProperties%2F-865142711" anchor-label="useDynamicColor" id="836430786%2FProperties%2F-865142711" data-filterable-set=":app/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":app/release" data-filterable-set=":app/release">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="use-dynamic-color.html"><span>use</span><wbr><span>Dynamic</span><wbr><span><span>Color</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="836430786%2FProperties%2F1606452474"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="836430786%2FProperties%2F-865142711"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":app/main" data-filterable-set=":app/main" data-active="" data-toggle=":app/main">androidJvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":app/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="use-dynamic-color.html">useDynamicColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Indicates whether dynamic colors are enabled.</p></div></div>                  </div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":app/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="use-dynamic-color.html">useDynamicColor</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Indicates whether dynamic colors are enabled.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -206,7 +193,7 @@
                     <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
                         Dokka
                     </a>
-                    <div>© 2025 Copyright</div>
+                    <div>© 2026 Copyright</div>
                 </div>
             </div>
         </div>
