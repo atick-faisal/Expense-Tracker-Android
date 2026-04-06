@@ -68,7 +68,7 @@ generativeai = "0.9.0"
 workVersion = "2.11.2"
 
 # ... MPAndroidChart ...
-androidchartVersion = "3.1.0.31"
+androidchartVersion = "5.0"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
