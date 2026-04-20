@@ -3,7 +3,7 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.3.20"
-androidGradlePlugin = "9.1.0"
+androidGradlePlugin = "9.1.1"
 gmsPlugin = "4.4.4"
 ksp = "2.3.6"
 dokka = "2.2.0"
@@ -14,7 +14,7 @@ secrets = "2.0.1"
 androidxCore = "1.18.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
-kotlinxSerializationJson = "1.10.0"
+kotlinxSerializationJson = "1.11.0"
 timber = "5.0.1"
 
 # ... CORE:UI ...
@@ -43,19 +43,19 @@ room = "2.8.4"
 
 # ... AUTH ...
 playServicesAuth = "21.5.1"
-androidxCredentials = "1.5.0"
+androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
 # ... FIREBASE ...
-firebaseBom = "34.11.0"
-firebaseCrashlyticsPlugin = "3.0.6"
+firebaseBom = "34.12.0"
+firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
 daggerHilt = "2.59.2"
 daggerHiltExt = "1.3.0"
 
 # ... Open Source Licenses ...
-googleOss = "17.4.0"
+googleOss = "17.5.0"
 googleOssPlugin = "0.11.0"
 
 # ... Billing ...
@@ -68,7 +68,7 @@ generativeai = "0.9.0"
 workVersion = "2.11.2"
 
 # ... MPAndroidChart ...
-androidchartVersion = "3.1.0.31"
+androidchartVersion = "5.2.1"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
