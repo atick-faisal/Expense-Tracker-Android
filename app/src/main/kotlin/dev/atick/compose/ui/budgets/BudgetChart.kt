@@ -30,14 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import info.appdev.charting.charts.LineChart
+import info.appdev.charting.components.AxisBase
+import info.appdev.charting.components.Legend
+import info.appdev.charting.components.XAxis
+import info.appdev.charting.data.EntryFloat
+import info.appdev.charting.data.LineData
+import info.appdev.charting.data.LineDataSet
+import info.appdev.charting.formatter.IAxisValueFormatter
 import dev.atick.compose.data.budgets.BudgetsScreenData
 import dev.atick.core.extensions.format
 import java.text.SimpleDateFormat
@@ -129,11 +129,11 @@ fun BudgetChart(
             update = { chart ->
                 // Prepare expense line data with enhanced visuals
                 val expenseEntries = data.cumulativeExpenses.map { expense ->
-                    Entry(expense.atTime.toFloat(), expense.amount.toFloat())
+                    EntryFloat(expense.atTime.toFloat(), expense.amount.toFloat())
                 }
 
                 val budgetEntries = data.cumulativeExpenses.map { expense ->
-                    Entry(expense.atTime.toFloat(), data.budget.amount?.toFloat() ?: 0f)
+                    EntryFloat(expense.atTime.toFloat(), data.budget.amount?.toFloat() ?: 0f)
                 }
 
                 // Enhanced expense line dataset
