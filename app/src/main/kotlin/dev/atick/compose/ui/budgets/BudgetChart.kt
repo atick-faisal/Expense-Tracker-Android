@@ -85,7 +85,7 @@ fun BudgetChart(
                     // Enhanced interaction
                     setTouchEnabled(true)
                     setScaleEnabled(true)
-                    setPinchZoom(true)
+                    isPinchZoom = true
                     isDoubleTapToZoomEnabled = false
 
                     // Enhanced X-Axis setup
@@ -97,7 +97,7 @@ fun BudgetChart(
                             }
                         }
                         labelRotationAngle = -45f
-                        setDrawGridLines(false)
+                        isDrawGridLines = false
                         textColor = colorScheme.onSurface.toArgb()
                         axisLineColor = colorScheme.outline.toArgb()
                         textSize = 10f
@@ -107,7 +107,7 @@ fun BudgetChart(
 
                     // Enhanced Y-Axis setup
                     axisLeft.apply {
-                        setDrawGridLines(true)
+                        isDrawGridLines = true
                         gridColor = colorScheme.outlineVariant.copy(alpha = 0.2f).toArgb()
                         textColor = colorScheme.onSurface.toArgb()
                         axisLineColor = colorScheme.outline.toArgb()
@@ -137,17 +137,17 @@ fun BudgetChart(
                 }
 
                 // Enhanced expense line dataset
-                val expenseDataSet = LineDataSet(expenseEntries, "Expenses").apply {
+                val expenseDataSet = LineDataSet<EntryFloat>(expenseEntries.toMutableList(), "Expenses").apply {
                     color = colorScheme.primary.toArgb()
                     lineWidth = 2.5f
-                    setDrawCircles(true)
-                    setDrawValues(false)
+                    isDrawCircles = true
+                    isDrawValues = false
                     circleRadius = 4f
-                    circleColors = listOf(colorScheme.primary.toArgb())
+                    circleColors = mutableListOf(colorScheme.primary.toArgb())
                     // mode = LineDataSet.Mode.CUBIC_BEZIER
 
                     // Enhanced gradient
-                    setDrawFilled(true)
+                    isDrawFilled = true
                     fillDrawable = GradientDrawable(
                         GradientDrawable.Orientation.TOP_BOTTOM,
                         intArrayOf(
@@ -157,31 +157,31 @@ fun BudgetChart(
                     )
 
                     // Improved highlighting
-                    setHighLightColor(colorScheme.primary.copy(alpha = 0.7f).toArgb())
+                    highLightColor = colorScheme.primary.copy(alpha = 0.7f).toArgb()
 
-                    setHighlightLineWidth(1.5f)
-                    setDrawHorizontalHighlightIndicator(false)
+                    highlightLineWidth = 1.5f
+                    isHorizontalHighlightIndicator = false
 
                     // Enhanced circles
-                    setDrawCircleHole(true)
+                    isDrawCircleHoleEnabled = true
                     circleHoleColor = colorScheme.surface.toArgb()
                     circleHoleRadius = 2f
                 }
 
                 // Enhanced budget line dataset
-                val budgetDataSet = LineDataSet(budgetEntries, "Budget Limit").apply {
+                val budgetDataSet = LineDataSet<EntryFloat>(budgetEntries.toMutableList(), "Budget Limit").apply {
                     color = colorScheme.error.copy(alpha = 0.8f).toArgb()
                     lineWidth = 2f
-                    setDrawCircles(false)
-                    setDrawValues(false)
+                    isDrawCircles = false
+                    isDrawValues = false
                     enableDashedLine(15f, 8f, 0f)
-                    setDrawFilled(false)
+                    isDrawFilled = false
                     valueTextColor = colorScheme.onSurface.toArgb()
 
                     // Enhanced highlighting
-                    setHighLightColor(colorScheme.error.copy(alpha = 0.7f).toArgb())
-                    setHighlightLineWidth(1.5f)
-                    setDrawHorizontalHighlightIndicator(false)
+                    highLightColor = colorScheme.error.copy(alpha = 0.7f).toArgb()
+                    highlightLineWidth = 1.5f
+                    isHorizontalHighlightIndicator = false
                 }
 
                 // Set the data with animation
