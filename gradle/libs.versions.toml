@@ -3,9 +3,9 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.3.21"
-androidGradlePlugin = "9.2.0"
+androidGradlePlugin = "9.2.1"
 gmsPlugin = "4.4.4"
-ksp = "2.3.7"
+ksp = "2.3.8"
 dokka = "2.2.0"
 dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
@@ -23,7 +23,7 @@ androidxFragment = "1.8.9"
 androidxAppCompat = "1.7.1"
 androidxActivity = "1.13.0"
 androidxLifecycle = "2.10.0"
-androidxComposeBom = "2026.04.01"
+androidxComposeBom = "2026.05.00"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.2.0"
 androidxHiltNavigationCompose = "1.3.0"
@@ -47,7 +47,7 @@ androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
 # ... FIREBASE ...
-firebaseBom = "34.12.0"
+firebaseBom = "34.13.0"
 firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
@@ -56,7 +56,7 @@ daggerHiltExt = "1.3.0"
 
 # ... Open Source Licenses ...
 googleOss = "17.5.1"
-googleOssPlugin = "0.11.0"
+googleOssPlugin = "0.12.0"
 
 # ... Billing ...
 playBilling = "8.3.0"
