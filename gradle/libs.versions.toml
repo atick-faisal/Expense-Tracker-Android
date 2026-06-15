@@ -11,7 +11,7 @@ dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
 
 # ... CORE:ANDROID ...
-androidxCore = "1.18.0"
+androidxCore = "1.19.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.11.0"
@@ -47,7 +47,7 @@ androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
 # ... FIREBASE ...
-firebaseBom = "34.14.0"
+firebaseBom = "34.14.1"
 firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
