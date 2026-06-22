@@ -4,14 +4,14 @@
 java = "21"
 kotlin = "2.3.21"
 androidGradlePlugin = "9.2.1"
-gmsPlugin = "4.4.4"
+gmsPlugin = "4.5.0"
 ksp = "2.3.9"
 dokka = "2.2.0"
 dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
 
 # ... CORE:ANDROID ...
-androidxCore = "1.18.0"
+androidxCore = "1.19.0"
 kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.11.0"
@@ -22,8 +22,8 @@ androidxNavigation = "2.9.8"
 androidxFragment = "1.8.9"
 androidxAppCompat = "1.7.1"
 androidxActivity = "1.13.0"
-androidxLifecycle = "2.10.0"
-androidxComposeBom = "2026.05.01"
+androidxLifecycle = "2.11.0"
+androidxComposeBom = "2026.06.00"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashscreen = "1.2.0"
 androidxHiltNavigationCompose = "1.3.0"
@@ -47,7 +47,7 @@ androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
 # ... FIREBASE ...
-firebaseBom = "34.14.0"
+firebaseBom = "34.15.0"
 firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
@@ -59,7 +59,7 @@ googleOss = "17.5.1"
 googleOssPlugin = "0.12.0"
 
 # ... Billing ...
-playBilling = "9.0.0"
+playBilling = "9.1.0"
 
 # ... Gemini ...
 generativeai = "0.9.0"
