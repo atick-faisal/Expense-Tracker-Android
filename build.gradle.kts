@@ -57,9 +57,3 @@ dokka {
         footerMessage.set("Made with ❤\uFE0F by Atick Faisal")
     }
 }
-
-allprojects {
-    configurations.configureEach {
-        resolutionStrategy.force(libs.kotlin.metadata.jvm)
-    }
-}
