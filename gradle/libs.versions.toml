@@ -3,9 +3,9 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.3.21"
-androidGradlePlugin = "9.2.1"
+androidGradlePlugin = "9.3.0"
 gmsPlugin = "4.5.0"
-ksp = "2.3.9"
+ksp = "2.3.10"
 dokka = "2.2.0"
 dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
@@ -47,16 +47,16 @@ androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
 # ... FIREBASE ...
-firebaseBom = "34.15.0"
+firebaseBom = "34.16.0"
 firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
-daggerHilt = "2.59.2"
+daggerHilt = "2.60.1"
 daggerHiltExt = "1.4.0"
 
 # ... Open Source Licenses ...
 googleOss = "17.5.1"
-googleOssPlugin = "0.12.0"
+googleOssPlugin = "0.13.0"
 
 # ... Billing ...
 playBilling = "9.1.0"
@@ -68,7 +68,7 @@ generativeai = "0.9.0"
 workVersion = "2.11.2"
 
 # ... MPAndroidChart ...
-androidchartVersion = "5.2.1"
+androidchartVersion = "5.2.3"
 
 # ... SDK-CONFIG ...
 minSdk = "24"
@@ -175,6 +175,7 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compi
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "daggerHiltExt" }
 androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "daggerHiltExt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 
 # ... BUILD-LOGIC ...
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
