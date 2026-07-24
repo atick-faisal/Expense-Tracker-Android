@@ -51,7 +51,7 @@ firebaseBom = "34.16.0"
 firebaseCrashlyticsPlugin = "3.0.7"
 
 # ... DAGGER-HILT ...
-daggerHilt = "2.59.2"
+daggerHilt = "2.60.1"
 daggerHiltExt = "1.4.0"
 
 # ... Open Source Licenses ...
@@ -175,6 +175,7 @@ dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compi
 androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "daggerHiltExt" }
 androidx-hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "daggerHiltExt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 
 # ... BUILD-LOGIC ...
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
