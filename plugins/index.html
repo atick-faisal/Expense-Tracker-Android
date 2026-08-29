@@ -1362,9 +1362,9 @@ easily accessible across all modules.</p>
 <p>Register it in <code>build-logic/convention/build.gradle.kts</code>:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">gradlePlugin</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">plugins</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="n">register</span><span class="p">(</span><span class="s">&quot;customPlugin&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">            </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dev.your.plugin.id&quot;</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">            </span><span class="n">implementationClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CustomConventionPlugin&quot;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="n">register</span><span class="p">(</span><span class="s">"customPlugin"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">            </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"dev.your.plugin.id"</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">            </span><span class="n">implementationClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"CustomConventionPlugin"</span>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="p">}</span>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">}</span>
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">}</span>
@@ -1373,7 +1373,7 @@ easily accessible across all modules.</p>
 <li>
 <p>Add it to <code>libs.versions.toml</code>:</p>
 <div class="language-toml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">[plugins]</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">custom-plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;dev.your.plugin.id&quot;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">custom-plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">"dev.your.plugin.id"</span><span class="w"> </span><span class="p">}</span>
 </span></code></pre></div>
 </li>
 </ol>
@@ -1381,8 +1381,8 @@ easily accessible across all modules.</p>
 <ol>
 <li>
 <p><strong>Accessing Version Catalog</strong>:</p>
-<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">libs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extensions</span><span class="p">.</span><span class="na">getByType</span><span class="o">&lt;</span><span class="n">VersionCatalogsExtension</span><span class="o">&gt;</span><span class="p">().</span><span class="na">named</span><span class="p">(</span><span class="s">&quot;libs&quot;</span><span class="p">)</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">libs</span><span class="p">.</span><span class="na">findVersion</span><span class="p">(</span><span class="s">&quot;your.version&quot;</span><span class="p">).</span><span class="na">get</span><span class="p">()</span>
+<div class="language-kotlin highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">libs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extensions</span><span class="p">.</span><span class="na">getByType</span><span class="o">&lt;</span><span class="n">VersionCatalogsExtension</span><span class="o">&gt;</span><span class="p">().</span><span class="na">named</span><span class="p">(</span><span class="s">"libs"</span><span class="p">)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">libs</span><span class="p">.</span><span class="na">findVersion</span><span class="p">(</span><span class="s">"your.version"</span><span class="p">).</span><span class="na">get</span><span class="p">()</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -1395,7 +1395,7 @@ easily accessible across all modules.</p>
 <li>
 <p><strong>Adding Dependencies</strong>:</p>
 <div class="language-kotlin highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="s">&quot;implementation&quot;</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">findLibrary</span><span class="p">(</span><span class="s">&quot;library.name&quot;</span><span class="p">).</span><span class="na">get</span><span class="p">())</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="s">"implementation"</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">findLibrary</span><span class="p">(</span><span class="s">"library.name"</span><span class="p">).</span><span class="na">get</span><span class="p">())</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
 </span></code></pre></div>
 </li>
