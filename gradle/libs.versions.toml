@@ -18,7 +18,7 @@ kotlinxSerializationJson = "1.11.0"
 timber = "5.0.1"
 
 # ... CORE:UI ...
-androidxNavigation = "2.9.8"
+androidxNavigation = "2.10.0"
 androidxFragment = "1.9.0"
 androidxAppCompat = "1.8.0"
 androidxActivity = "1.13.0"
@@ -42,7 +42,7 @@ androidxDataStore = "1.2.1"
 room = "2.8.4"
 
 # ... AUTH ...
-playServicesAuth = "21.6.0"
+playServicesAuth = "22.0.0"
 androidxCredentials = "1.6.0"
 identityGoogleId = "1.2.0"
 
