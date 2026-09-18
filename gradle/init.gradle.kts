@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-val ktlintVersion = "0.48.1"
+val ktlintVersion = "1.0.1"
 
 initscript {
     val spotlessVersion = "8.10.2"
@@ -35,10 +35,12 @@ rootProject {
             kotlin {
                 target("**/*.kt")
                 targetExclude("**/build/**/*.kt")
-                // FIXME: This no longer working after spotless updata
-                // ktlint(ktlintVersion).userData(mapOf("android" to "true"))
-                // Temp Fix
-                ktlint(ktlintVersion)
+                ktlint(ktlintVersion).editorConfigOverride(
+                    mapOf(
+                        "ktlint_code_style" to "intellij_idea",
+                        "ktlint_function_naming_ignore_when_annotated_with" to "Composable",
+                    ),
+                )
                 licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             }
             groovy {
