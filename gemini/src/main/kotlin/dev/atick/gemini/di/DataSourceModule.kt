@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {
-
     /**
      * Binds the [GeminiDataSourceImpl] implementation to the [GeminiDataSource] interface.
      *

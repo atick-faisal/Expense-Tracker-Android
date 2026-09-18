@@ -37,13 +37,14 @@ data class BudgetsScreenData(
      * The percentage of the budget used.
      */
     val percentageUsed: Double
-        get() = if (budget.amount == null) {
-            0.0
-        } else if (budget.amount == 0.0) {
-            100.0
-        } else {
-            (currentExpenses / budget.amount) * 100
-        }
+        get() =
+            if (budget.amount == null) {
+                0.0
+            } else if (budget.amount == 0.0) {
+                100.0
+            } else {
+                (currentExpenses / budget.amount) * 100
+            }
 
     /**
      * The remaining budget.
@@ -61,22 +62,24 @@ data class BudgetsScreenData(
      * The amount by which the budget is over.
      */
     val overBudgetAmount: Double
-        get() = if (isOverBudget && budget.amount != null) {
-            currentExpenses - budget.amount
-        } else {
-            0.0
-        }
+        get() =
+            if (isOverBudget && budget.amount != null) {
+                currentExpenses - budget.amount
+            } else {
+                0.0
+            }
 
     /**
      * The status of the budget.
      */
     val budgetStatus: BudgetStatus
-        get() = when {
-            isOverBudget -> BudgetStatus.EXCEEDED
-            percentageUsed >= 95 -> BudgetStatus.CRITICAL
-            percentageUsed >= 75 -> BudgetStatus.WARNING
-            else -> BudgetStatus.SAFE
-        }
+        get() =
+            when {
+                isOverBudget -> BudgetStatus.EXCEEDED
+                percentageUsed >= 95 -> BudgetStatus.CRITICAL
+                percentageUsed >= 75 -> BudgetStatus.WARNING
+                else -> BudgetStatus.SAFE
+            }
 }
 
 /**

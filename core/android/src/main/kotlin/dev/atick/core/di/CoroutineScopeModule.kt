@@ -40,7 +40,6 @@ annotation class ApplicationScope
 )
 @InstallIn(SingletonComponent::class)
 object CoroutineScopeModule {
-
     /**
      * Provides a coroutine scope for the application.
      *
@@ -49,8 +48,6 @@ object CoroutineScopeModule {
     @Provides
     @Singleton
     @ApplicationScope
-    fun provideCoroutineScope(
-        @IoDispatcher dispatcher: CoroutineDispatcher,
-    ): CoroutineScope =
+    fun provideCoroutineScope(@IoDispatcher dispatcher: CoroutineDispatcher): CoroutineScope =
         CoroutineScope(SupervisorJob() + dispatcher)
 }

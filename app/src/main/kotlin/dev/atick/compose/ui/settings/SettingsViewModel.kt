@@ -39,10 +39,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
+class SettingsViewModel
+@Inject
+constructor(
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
-
     private val _settingsUiState = MutableStateFlow(UiState(UserEditableSettings()))
     val settingsUiState: StateFlow<UiState<UserEditableSettings>>
         get() = _settingsUiState.asStateFlow()
@@ -74,7 +75,9 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun updateThemeBrand(themeBrand: ThemeBrand) {
-        _settingsUiState.updateWith(viewModelScope) { userDataRepository.setThemeBrand(themeBrand) }
+        _settingsUiState.updateWith(
+            viewModelScope,
+        ) { userDataRepository.setThemeBrand(themeBrand) }
     }
 
     fun updateDarkThemeConfig(darkThemeConfig: DarkThemeConfig) {

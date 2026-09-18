@@ -106,9 +106,7 @@ internal fun IntroRoute(
 }
 
 @Composable
-private fun OnboardingScreen(
-    onFinish: () -> Unit,
-) {
+private fun OnboardingScreen(onFinish: () -> Unit) {
     val pagerState = rememberPagerState { onboardingPages.size }
     val scope = rememberCoroutineScope()
 

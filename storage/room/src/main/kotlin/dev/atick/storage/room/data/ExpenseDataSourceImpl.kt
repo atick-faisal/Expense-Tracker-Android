@@ -33,11 +33,12 @@ import javax.inject.Inject
  * @property expenseDao The DAO for accessing expense data.
  * @property ioDispatcher The CoroutineDispatcher for IO operations.
  */
-class ExpenseDataSourceImpl @Inject constructor(
+class ExpenseDataSourceImpl
+@Inject
+constructor(
     private val expenseDao: ExpenseDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ExpenseDataSource {
-
     /**
      * Retrieves all expenses within a specified date range.
      *
@@ -45,10 +46,7 @@ class ExpenseDataSourceImpl @Inject constructor(
      * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
      * @return A Flow emitting a list of ExpenseEntity objects representing the expenses within the specified date range.
      */
-    override fun getAllExpenses(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<List<ExpenseEntity>> {
+    override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<ExpenseEntity>> {
         return expenseDao.getAllExpenses(startDate, endDate).flowOn(ioDispatcher)
     }
 
@@ -147,10 +145,7 @@ class ExpenseDataSourceImpl @Inject constructor(
      * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
      * @return A Flow emitting the total spending as a Double.
      */
-    override fun getTotalSpending(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double> {
+    override fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double> {
         return expenseDao.getTotalSpending(startDate, endDate).flowOn(ioDispatcher)
             .map { it ?: 0.0 }
     }

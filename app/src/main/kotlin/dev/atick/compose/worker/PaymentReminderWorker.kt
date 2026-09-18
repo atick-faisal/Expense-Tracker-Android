@@ -37,11 +37,12 @@ import java.util.concurrent.TimeUnit
  * @see CoroutineWorker
  */
 @HiltWorker
-class PaymentReminderWorker @AssistedInject constructor(
+class PaymentReminderWorker
+@AssistedInject
+constructor(
     @Assisted private val context: Context,
     @Assisted workerParams: WorkerParameters,
 ) : CoroutineWorker(context, workerParams) {
-
     /**
      * Executes the work to show a notification when the payment reminder is due.
      *
@@ -51,14 +52,17 @@ class PaymentReminderWorker @AssistedInject constructor(
         return try {
             Timber.d("PaymentReminderWorker: doWork()")
             val merchantName = inputData.getString(MERCHANT_NAME_KEY)!!
-            val nextPaymentDate = inputData.getLong(
-                key = NOTIFICATION_TIME_KEY,
-                defaultValue = System.currentTimeMillis() + 3 * 24 * 60 * 60 * 1000, // 3 days from now
-            )
-            val notification = context.paymentReminderNotification(
-                merchantName = merchantName,
-                nextPaymentDate = nextPaymentDate,
-            )
+            val nextPaymentDate =
+                inputData.getLong(
+                    key = NOTIFICATION_TIME_KEY,
+                    // 3 days from now
+                    defaultValue = System.currentTimeMillis() + 3 * 24 * 60 * 60 * 1000,
+                )
+            val notification =
+                context.paymentReminderNotification(
+                    merchantName = merchantName,
+                    nextPaymentDate = nextPaymentDate,
+                )
             context.showNotification(
                 notificationId = PAYMENT_REMINDER_NOTIFICATION_ID,
                 notification = notification,
@@ -84,12 +88,16 @@ class PaymentReminderWorker @AssistedInject constructor(
             nextPaymentDate: Long,
             reminderTime: Long,
         ): OneTimeWorkRequest {
-            val inputData = listOf(
-                MERCHANT_NAME_KEY to merchantName,
-                NOTIFICATION_TIME_KEY to nextPaymentDate,
-            )
+            val inputData =
+                listOf(
+                    MERCHANT_NAME_KEY to merchantName,
+                    NOTIFICATION_TIME_KEY to nextPaymentDate,
+                )
             return OneTimeWorkRequestBuilder<DelegatingWorker>()
-                .setInitialDelay(reminderTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                .setInitialDelay(
+                    reminderTime - System.currentTimeMillis(),
+                    TimeUnit.MILLISECONDS,
+                )
                 .setInputData(PaymentReminderWorker::class.delegatedData(inputData))
                 .build()
         }

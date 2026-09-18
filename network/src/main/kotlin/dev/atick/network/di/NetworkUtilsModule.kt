@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class NetworkUtilsModule {
-
     /**
      * Binds [NetworkUtilsImpl] to [NetworkUtils].
      *
@@ -39,7 +38,5 @@ abstract class NetworkUtilsModule {
      */
     @Binds
     @Singleton
-    abstract fun bindNetworkUtils(
-        networkUtilsImpl: NetworkUtilsImpl,
-    ): NetworkUtils
+    abstract fun bindNetworkUtils(networkUtilsImpl: NetworkUtilsImpl): NetworkUtils
 }

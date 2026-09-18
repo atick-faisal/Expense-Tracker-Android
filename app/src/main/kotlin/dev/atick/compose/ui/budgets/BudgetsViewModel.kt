@@ -34,7 +34,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class BudgetsViewModel @Inject constructor(
+class BudgetsViewModel
+@Inject
+constructor(
     private val budgetsRepository: BudgetsRepository,
 ) : ViewModel() {
     private val _budgetsUiState = MutableStateFlow(UiState(BudgetsScreenData()))
@@ -42,7 +44,9 @@ class BudgetsViewModel @Inject constructor(
 
     fun refreshBudgets(monthInfo: MonthInfo) {
         budgetsRepository.getCumulativeExpenses(monthInfo.startDate, monthInfo.endDate)
-            .combine(budgetsRepository.getBudgetForMonth(monthInfo.startDate)) { cumulativeExpenses, budget ->
+            .combine(
+                budgetsRepository.getBudgetForMonth(monthInfo.startDate),
+            ) { cumulativeExpenses, budget ->
                 BudgetsScreenData(
                     cumulativeExpenses = cumulativeExpenses,
                     budget = budget,

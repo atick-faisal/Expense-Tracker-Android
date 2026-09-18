@@ -24,7 +24,9 @@ import javax.inject.Inject
  *
  * @constructor Creates a [GeminiRateLimiterImpl] instance.
  */
-class GeminiRateLimiterImpl @Inject constructor() : GeminiRateLimiter {
+class GeminiRateLimiterImpl
+@Inject
+constructor() : GeminiRateLimiter {
     /**
      * List of request timestamps.
      */

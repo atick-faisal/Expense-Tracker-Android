@@ -78,9 +78,7 @@ internal fun BudgetsRoute(
 }
 
 @Composable
-private fun BudgetsScreen(
-    budgetsScreenData: BudgetsScreenData,
-) {
+private fun BudgetsScreen(budgetsScreenData: BudgetsScreenData) {
     val currencyFormatter = rememberCurrencyFormatter(UiCurrencyType.QAR)
 
     LazyColumn(
@@ -111,9 +109,7 @@ private fun BudgetsScreen(
 }
 
 @Composable
-fun BudgetNotSetCard(
-    modifier: Modifier = Modifier,
-) {
+fun BudgetNotSetCard(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(

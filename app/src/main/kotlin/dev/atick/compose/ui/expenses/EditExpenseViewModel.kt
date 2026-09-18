@@ -40,11 +40,12 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class EditExpenseViewModel @Inject constructor(
+class EditExpenseViewModel
+@Inject
+constructor(
     savedStateHandle: SavedStateHandle,
     private val expenseRepository: ExpensesRepository,
 ) : ViewModel() {
-
     private val _expenseUiState = MutableStateFlow(UiState(EditExpenseScreenData()))
     val expenseUiState = _expenseUiState.asStateFlow()
 

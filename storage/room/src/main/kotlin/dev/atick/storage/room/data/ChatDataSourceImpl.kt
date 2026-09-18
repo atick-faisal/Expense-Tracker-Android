@@ -26,10 +26,11 @@ import javax.inject.Inject
  *
  * @property chatDao The DAO for accessing chat data.
  */
-class ChatDataSourceImpl @Inject constructor(
+class ChatDataSourceImpl
+@Inject
+constructor(
     private val chatDao: ChatDao,
 ) : ChatDataSource {
-
     /**
      * Retrieves all chat messages.
      *

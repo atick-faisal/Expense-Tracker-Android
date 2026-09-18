@@ -38,7 +38,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ExpensesViewModel @Inject constructor(
+class ExpensesViewModel
+@Inject
+constructor(
     private val expensesRepository: ExpensesRepository,
 ) : ViewModel() {
     private val _expensesUiState = MutableStateFlow(UiState(ExpensesScreenData()))
@@ -61,13 +63,14 @@ class ExpensesViewModel @Inject constructor(
     }
 
     fun setRecurringType(merchant: String, recurringType: UiRecurringType) {
-        val newRecurringType = when (recurringType) {
-            UiRecurringType.ONETIME -> UiRecurringType.DAILY
-            UiRecurringType.DAILY -> UiRecurringType.WEEKLY
-            UiRecurringType.WEEKLY -> UiRecurringType.MONTHLY
-            UiRecurringType.MONTHLY -> UiRecurringType.YEARLY
-            UiRecurringType.YEARLY -> UiRecurringType.ONETIME
-        }
+        val newRecurringType =
+            when (recurringType) {
+                UiRecurringType.ONETIME -> UiRecurringType.DAILY
+                UiRecurringType.DAILY -> UiRecurringType.WEEKLY
+                UiRecurringType.WEEKLY -> UiRecurringType.MONTHLY
+                UiRecurringType.MONTHLY -> UiRecurringType.YEARLY
+                UiRecurringType.YEARLY -> UiRecurringType.ONETIME
+            }
 
         _expensesUiState.updateWith(viewModelScope) {
             expensesRepository.setRecurringType(merchant, newRecurringType)

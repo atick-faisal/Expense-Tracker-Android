@@ -87,11 +87,7 @@ object Reminders {
      * @param budgetAmount The budget amount.
      * @param currentAmount The current amount.
      */
-    fun showBudgetExceedWarning(
-        context: Context,
-        budgetAmount: Double,
-        currentAmount: Double,
-    ) {
+    fun showBudgetExceedWarning(context: Context, budgetAmount: Double, currentAmount: Double) {
         WorkManager.getInstance(context).apply {
             enqueueUniqueWork(
                 BUDGET_REMINDER_WORK_NAME,

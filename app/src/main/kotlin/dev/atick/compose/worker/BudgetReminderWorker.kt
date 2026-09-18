@@ -36,11 +36,12 @@ import timber.log.Timber
  * @see CoroutineWorker
  */
 @HiltWorker
-class BudgetReminderWorker @AssistedInject constructor(
+class BudgetReminderWorker
+@AssistedInject
+constructor(
     @Assisted private val context: Context,
     @Assisted workerParams: WorkerParameters,
 ) : CoroutineWorker(context, workerParams) {
-
     /**
      * Executes the work to show a notification when the budget amount is exceeded.
      *
@@ -54,10 +55,11 @@ class BudgetReminderWorker @AssistedInject constructor(
                 Timber.e("Budget amount or current amount not provided")
                 return Result.failure()
             }
-            val notification = context.budgetExceedNotification(
-                budgetAmount = budgetAmount,
-                currentAmount = currentAmount,
-            )
+            val notification =
+                context.budgetExceedNotification(
+                    budgetAmount = budgetAmount,
+                    currentAmount = currentAmount,
+                )
             context.showNotification(
                 notificationId = BUDGET_EXCEED_NOTIFICATION_ID,
                 notification = notification,
@@ -81,10 +83,11 @@ class BudgetReminderWorker @AssistedInject constructor(
             budgetAmount: Double,
             currentAmount: Double,
         ): OneTimeWorkRequest {
-            val inputData = listOf(
-                BUDGET_AMOUNT_KEY to budgetAmount,
-                CURRENT_AMOUNT_KEY to currentAmount,
-            )
+            val inputData =
+                listOf(
+                    BUDGET_AMOUNT_KEY to budgetAmount,
+                    CURRENT_AMOUNT_KEY to currentAmount,
+                )
             return OneTimeWorkRequestBuilder<DelegatingWorker>()
                 .setInputData(BudgetReminderWorker::class.delegatedData(inputData))
                 .build()

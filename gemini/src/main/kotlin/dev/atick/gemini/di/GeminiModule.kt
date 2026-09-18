@@ -58,7 +58,6 @@ annotation class ExpensesModel
 @Module
 @InstallIn(SingletonComponent::class)
 object GeminiModule {
-
     /**
      * Provides the [GenerativeModel] for the expenses model.
      *
@@ -71,59 +70,70 @@ object GeminiModule {
         return Firebase.ai(backend = GenerativeBackend.googleAI())
             .generativeModel(
                 modelName = "gemini-3.1-flash-lite-preview",
-                generationConfig = generationConfig {
+                generationConfig =
+                generationConfig {
                     temperature = 0.15f
                     topK = 32
                     topP = 1f
                     maxOutputTokens = 256
                     responseMimeType = "application/json"
-                    responseSchema = Schema.obj(
-                        title = "expense",
-                        description = "Extracted expense information from message",
-                        properties = mapOf(
-                            "amount" to Schema.double(
-                                title = "amount",
-                                description = "The expense amount in the original currency",
-                                nullable = false,
+                    responseSchema =
+                        Schema.obj(
+                            title = "expense",
+                            description = "Extracted expense information from message",
+                            properties =
+                            mapOf(
+                                "amount" to
+                                    Schema.double(
+                                        title = "amount",
+                                        description = "The expense amount in the original currency",
+                                        nullable = false,
+                                    ),
+                                "currency" to
+                                    Schema.enumeration(
+                                        title = "currency",
+                                        description = "The currency of the expense",
+                                        values = AiCurrencyType.entries.map { it.name },
+                                        nullable = false,
+                                    ),
+                                "merchant" to
+                                    Schema.string(
+                                        title = "merchant",
+                                        description = "Name of merchant of the expense",
+                                        nullable = false,
+                                    ),
+                                "category" to
+                                    Schema.enumeration(
+                                        title = "category",
+                                        description = "The category of the expense",
+                                        values = AiExpenseCategory.entries.map { it.name },
+                                        nullable = false,
+                                    ),
+                                "paymentStatus" to
+                                    Schema.enumeration(
+                                        title = "paymentStatus",
+                                        description = "The payment status of the expense",
+                                        values = AiPaymentStatus.entries.map { it.name },
+                                        nullable = false,
+                                    ),
+                                "recurringType" to
+                                    Schema.enumeration(
+                                        title = "recurringType",
+                                        description = "The recurring nature of the expense",
+                                        values = AiRecurringType.entries.map { it.name },
+                                        nullable = false,
+                                    ),
+                                "paymentDate" to
+                                    Schema.string(
+                                        title = "paymentDate",
+                                        description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
+                                        nullable = false,
+                                    ),
                             ),
-                            "currency" to Schema.enumeration(
-                                title = "currency",
-                                description = "The currency of the expense",
-                                values = AiCurrencyType.entries.map { it.name },
-                                nullable = false,
-                            ),
-                            "merchant" to Schema.string(
-                                title = "merchant",
-                                description = "Name of merchant of the expense",
-                                nullable = false,
-                            ),
-                            "category" to Schema.enumeration(
-                                title = "category",
-                                description = "The category of the expense",
-                                values = AiExpenseCategory.entries.map { it.name },
-                                nullable = false,
-                            ),
-                            "paymentStatus" to Schema.enumeration(
-                                title = "paymentStatus",
-                                description = "The payment status of the expense",
-                                values = AiPaymentStatus.entries.map { it.name },
-                                nullable = false,
-                            ),
-                            "recurringType" to Schema.enumeration(
-                                title = "recurringType",
-                                description = "The recurring nature of the expense",
-                                values = AiRecurringType.entries.map { it.name },
-                                nullable = false,
-                            ),
-                            "paymentDate" to Schema.string(
-                                title = "paymentDate",
-                                description = "The date when the payment was made (ISO format: yyyy-MM-ddTHH:mm:ss.SSSSSS)",
-                                nullable = false,
-                            ),
-                        ),
-                    )
+                        )
                 },
-                safetySettings = listOf(
+                safetySettings =
+                listOf(
                     SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.MEDIUM_AND_ABOVE),
                     SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.MEDIUM_AND_ABOVE),
                     SafetySetting(
@@ -150,13 +160,15 @@ object GeminiModule {
         return Firebase.ai(backend = GenerativeBackend.googleAI())
             .generativeModel(
                 modelName = "gemini-3.1-flash-lite-preview",
-                generationConfig = generationConfig {
+                generationConfig =
+                generationConfig {
                     temperature = 0.15f
                     topK = 32
                     topP = 1f
                     maxOutputTokens = 256
                 },
-                safetySettings = listOf(
+                safetySettings =
+                listOf(
                     SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.MEDIUM_AND_ABOVE),
                     SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.MEDIUM_AND_ABOVE),
                     SafetySetting(

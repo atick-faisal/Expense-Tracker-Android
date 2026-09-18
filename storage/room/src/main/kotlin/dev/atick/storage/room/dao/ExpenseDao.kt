@@ -208,8 +208,9 @@ interface ExpenseDao {
      * @param endDate The end date for the expenses to be retrieved.
      * @param n The number of top expenses to be retrieved.
      * @return A [Flow] of [ExpenseAnalysis] list representing the top expenses by category.
+     *
+     * TODO: Implement better currency handling
      */
-    // TODO: Implement better currency handling
     @Query(
         """
         SELECT 
@@ -242,8 +243,9 @@ interface ExpenseDao {
      * @param endDate The end date for the expenses to be retrieved.
      * @param n The number of top expenses to be retrieved.
      * @return A [Flow] of [ExpenseAnalysis] list representing the top expenses by merchant.
+     *
+     * TODO: Implement better currency handling
      */
-    // TODO: Implement better currency handling
     @Query(
         """
         SELECT 

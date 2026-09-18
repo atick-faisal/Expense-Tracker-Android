@@ -94,9 +94,7 @@ private val AnalysisToggleOptions = listOf(
 )
 
 @Composable
-private fun AnalysisScreen(
-    analysisScreenData: AnalysisScreenData,
-) {
+private fun AnalysisScreen(analysisScreenData: AnalysisScreenData) {
     // Show placeholder if there are no analyses
     if (analysisScreenData.categoryAnalyses.isEmpty() &&
         analysisScreenData.merchantAnalyses.isEmpty()
@@ -111,10 +109,7 @@ private fun AnalysisScreen(
 }
 
 @Composable
-private fun AnalysisList(
-    categoryAnalyses: List<UiAnalysis>,
-    merchantAnalyses: List<UiAnalysis>,
-) {
+private fun AnalysisList(categoryAnalyses: List<UiAnalysis>, merchantAnalyses: List<UiAnalysis>) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     // Show the analyses based on the selected index
@@ -181,10 +176,7 @@ private fun AnalysisList(
 }
 
 @Composable
-private fun ExpenseAnalysisCard(
-    analysis: UiAnalysis,
-    modifier: Modifier = Modifier,
-) {
+private fun ExpenseAnalysisCard(analysis: UiAnalysis, modifier: Modifier = Modifier) {
     val primaryColor = MaterialTheme.colorScheme.primary
     val surfaceVariantColor = MaterialTheme.colorScheme.surface
 
@@ -319,11 +311,7 @@ private fun ExpenseAnalysisCard(
 }
 
 @Composable
-private fun SectionHeader(
-    title: String,
-    icon: ImageVector,
-    modifier: Modifier = Modifier,
-) {
+private fun SectionHeader(title: String, icon: ImageVector, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()

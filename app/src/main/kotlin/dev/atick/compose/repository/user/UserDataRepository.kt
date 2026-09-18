@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.Flow
  * Interface defining methods to interact with user data and preferences.
  */
 interface UserDataRepository {
-
     /**
      * A [Flow] that emits [UserData] representing user-specific data.
      */

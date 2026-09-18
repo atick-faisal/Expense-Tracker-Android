@@ -32,9 +32,7 @@ data object Intro
  *
  * @param onShowSnackbar The callback to show a snackbar.
  */
-fun NavGraphBuilder.introScreen(
-    onShowSnackbar: suspend (String, String?) -> Boolean,
-) {
+fun NavGraphBuilder.introScreen(onShowSnackbar: suspend (String, String?) -> Boolean) {
     composable<Intro> {
         IntroRoute(
             onShowSnackbar = onShowSnackbar,

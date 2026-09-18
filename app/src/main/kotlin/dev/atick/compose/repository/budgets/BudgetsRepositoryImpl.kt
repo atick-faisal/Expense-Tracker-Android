@@ -32,11 +32,12 @@ import javax.inject.Inject
  * @param expenseDataSource The data source for expense data.
  * @param budgetDataSource The data source for budget data.
  */
-class BudgetsRepositoryImpl @Inject constructor(
+class BudgetsRepositoryImpl
+@Inject
+constructor(
     private val expenseDataSource: ExpenseDataSource,
     private val budgetDataSource: BudgetDataSource,
 ) : BudgetsRepository {
-
     /**
      * Gets the cumulative expenses.
      *
@@ -54,7 +55,6 @@ class BudgetsRepositoryImpl @Inject constructor(
                     UiCumulativeExpense(
                         amount = cumulativeExpense.amount,
                         atTime = cumulativeExpense.atTime,
-
                     )
                 }
             }

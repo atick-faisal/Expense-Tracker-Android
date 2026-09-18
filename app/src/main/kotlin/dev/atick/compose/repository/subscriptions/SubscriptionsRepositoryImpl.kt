@@ -34,11 +34,12 @@ import javax.inject.Inject
  * @param expenseDataSource The data source for expense data.
  * @param taskManager The task manager for scheduling tasks.
  */
-class SubscriptionsRepositoryImpl @Inject constructor(
+class SubscriptionsRepositoryImpl
+@Inject
+constructor(
     private val expenseDataSource: ExpenseDataSource,
     private val taskManager: TaskManager,
 ) : SubscriptionsRepository {
-
     /**
      * Gets the subscriptions.
      *

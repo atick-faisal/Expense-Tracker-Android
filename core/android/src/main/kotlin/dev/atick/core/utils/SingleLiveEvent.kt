@@ -28,7 +28,6 @@ package dev.atick.core.utils
  * @param content The content of the event.
  */
 open class SingleLiveEvent<out T>(private val content: T) {
-
     /**
      * Flag indicating whether the event has been handled.
      */

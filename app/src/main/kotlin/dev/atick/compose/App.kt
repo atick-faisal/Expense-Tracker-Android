@@ -29,7 +29,6 @@ import timber.log.Timber
  */
 @HiltAndroidApp
 class App : Application() {
-
     /**
      * Called when the application is first created.
      * Performs initialization tasks, such as setting up Timber logging in debug mode.

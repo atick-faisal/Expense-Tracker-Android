@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class PreferencesDataSourceModule {
-
     /**
      * Bind preferences datasource
      *

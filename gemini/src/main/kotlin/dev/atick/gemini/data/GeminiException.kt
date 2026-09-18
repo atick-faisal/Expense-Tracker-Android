@@ -124,18 +124,21 @@ sealed class GeminiException(message: String? = null, cause: Throwable? = null) 
  */
 fun Throwable.toGeminiException(): GeminiException {
     return when (this) {
-        is FirebaseAIException -> when (this) {
-            is SerializationException -> GeminiException.Serialization(message ?: "", cause)
-            is ServerException -> GeminiException.Server(message ?: "", cause)
-            is InvalidAPIKeyException -> GeminiException.InvalidAPIKey(message ?: "")
-            is PromptBlockedException -> GeminiException.PromptBlocked(message ?: "", cause)
-            is UnsupportedUserLocationException -> GeminiException.UnsupportedUserLocation(cause)
-            is InvalidStateException -> GeminiException.InvalidState(message ?: "", cause)
-            is ResponseStoppedException -> GeminiException.ResponseStopped(message ?: "", cause)
-            is RequestTimeoutException -> GeminiException.RequestTimeout(message ?: "", cause)
-            is QuotaExceededException -> GeminiException.QuotaExceeded(message ?: "", cause)
-            else -> GeminiException.Unknown(message ?: "Unknown error occurred", cause)
-        }
+        is FirebaseAIException ->
+            when (this) {
+                is SerializationException -> GeminiException.Serialization(message ?: "", cause)
+                is ServerException -> GeminiException.Server(message ?: "", cause)
+                is InvalidAPIKeyException -> GeminiException.InvalidAPIKey(message ?: "")
+                is PromptBlockedException -> GeminiException.PromptBlocked(message ?: "", cause)
+                is UnsupportedUserLocationException -> GeminiException.UnsupportedUserLocation(
+                    cause,
+                )
+                is InvalidStateException -> GeminiException.InvalidState(message ?: "", cause)
+                is ResponseStoppedException -> GeminiException.ResponseStopped(message ?: "", cause)
+                is RequestTimeoutException -> GeminiException.RequestTimeout(message ?: "", cause)
+                is QuotaExceededException -> GeminiException.QuotaExceeded(message ?: "", cause)
+                else -> GeminiException.Unknown(message ?: "Unknown error occurred", cause)
+            }
 
         is TimeoutCancellationException ->
             GeminiException.RequestTimeout("The request failed to complete in the allotted time.")

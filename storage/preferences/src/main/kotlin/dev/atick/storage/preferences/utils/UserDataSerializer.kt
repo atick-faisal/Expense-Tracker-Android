@@ -38,7 +38,6 @@ import java.io.OutputStream
  * Serializer implementation for serializing and deserializing [UserData] objects.
  */
 object UserDataSerializer : Serializer<UserData> {
-
     /**
      * The default value of [UserData] to be used when deserialization fails.
      */

@@ -28,8 +28,9 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "budgets")
 data class BudgetEntity(
+    // Timestamp of the start of the month
     @PrimaryKey
-    val month: Long, // Timestamp of the start of the month
+    val month: Long,
     val amount: Double,
     val description: String? = null,
 )

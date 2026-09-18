@@ -36,7 +36,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor(
+class ChatViewModel
+@Inject
+constructor(
     private val chatRepository: ChatRepository,
 ) : ViewModel() {
     private val _chatUiState = MutableStateFlow(UiState(ChatScreenData()))

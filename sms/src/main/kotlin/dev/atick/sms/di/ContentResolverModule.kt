@@ -31,7 +31,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ContentResolverModule {
-
     /**
      * Provides the [ContentResolver] dependency.
      *
@@ -40,9 +39,7 @@ object ContentResolverModule {
      */
     @Provides
     @Singleton
-    fun provideContentResolver(
-        @ApplicationContext context: Context,
-    ): ContentResolver {
+    fun provideContentResolver(@ApplicationContext context: Context): ContentResolver {
         return context.contentResolver
     }
 }

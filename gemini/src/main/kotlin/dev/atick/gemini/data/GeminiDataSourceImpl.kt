@@ -39,12 +39,13 @@ import javax.inject.Inject
  * @param expensesModel The expenses model to use.
  * @param ioDispatcher The [CoroutineDispatcher] to use for IO operations.
  */
-class GeminiDataSourceImpl @Inject constructor(
+class GeminiDataSourceImpl
+@Inject
+constructor(
     @ChatModel private val chatModel: GenerativeModel,
     @ExpensesModel private val expensesModel: GenerativeModel,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : GeminiDataSource {
-
     /**
      * The chat instance to use for the chat AI.
      */
@@ -91,11 +92,12 @@ class GeminiDataSourceImpl @Inject constructor(
      */
     override suspend fun getExpenseFromSMS(aiSMS: AiSMS): AiExpense {
         return withContext(ioDispatcher) {
-            val response = try {
-                expensesModel.generateContent(aiSMS.getTextSMS()).text?.trim()
-            } catch (e: FirebaseAIException) {
-                throw e.toGeminiException()
-            } ?: throw IllegalStateException("Something went wrong with the expenses AI.")
+            val response =
+                try {
+                    expensesModel.generateContent(aiSMS.getTextSMS()).text?.trim()
+                } catch (e: FirebaseAIException) {
+                    throw e.toGeminiException()
+                } ?: throw IllegalStateException("Something went wrong with the expenses AI.")
             ExpenseParser.parseExpense(response)
         }
     }

@@ -154,10 +154,7 @@ private fun ExpenseList(
 }
 
 @Composable
-fun SwipeableItem(
-    onDelete: () -> Unit,
-    content: @Composable () -> Unit,
-) {
+fun SwipeableItem(onDelete: () -> Unit, content: @Composable () -> Unit) {
     val dismissState = rememberSwipeToDismissBoxState()
 
     // Handle dismiss confirmation without deprecated confirmValueChange

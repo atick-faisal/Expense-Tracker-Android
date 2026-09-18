@@ -52,28 +52,32 @@ data class MonthInfo(
  * ```
  */
 fun getMonthInfoAt(monthOffset: Int = 0): MonthInfo {
-    val offsetDate = Clock.System.now()
-        .toLocalDateTime(TimeZone.currentSystemDefault())
-        .date.plus(monthOffset, DateTimeUnit.MONTH)
+    val offsetDate =
+        Clock.System.now()
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+            .date.plus(monthOffset, DateTimeUnit.MONTH)
 
-    val startOfMonth = LocalDateTime(
-        year = offsetDate.year,
-        month = offsetDate.month,
-        day = 1,
-        hour = 0,
-        minute = 0,
-        second = 0,
-        nanosecond = 0,
-    )
+    val startOfMonth =
+        LocalDateTime(
+            year = offsetDate.year,
+            month = offsetDate.month,
+            day = 1,
+            hour = 0,
+            minute = 0,
+            second = 0,
+            nanosecond = 0,
+        )
 
-    val startOfMonthMillis = startOfMonth
-        .toInstant(TimeZone.currentSystemDefault())
-        .toEpochMilliseconds()
+    val startOfMonthMillis =
+        startOfMonth
+            .toInstant(TimeZone.currentSystemDefault())
+            .toEpochMilliseconds()
 
-    val endOfMonthMillis = startOfMonth
-        .date.plus(1, DateTimeUnit.MONTH)
-        .atStartOfDayIn(TimeZone.currentSystemDefault())
-        .toEpochMilliseconds()
+    val endOfMonthMillis =
+        startOfMonth
+            .date.plus(1, DateTimeUnit.MONTH)
+            .atStartOfDayIn(TimeZone.currentSystemDefault())
+            .toEpochMilliseconds()
 
     return MonthInfo(
         monthName = startOfMonth.month.name,

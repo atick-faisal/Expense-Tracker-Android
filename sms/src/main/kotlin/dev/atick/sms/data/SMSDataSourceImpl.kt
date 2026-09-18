@@ -29,7 +29,9 @@ import javax.inject.Inject
 /**
  * Implementation of [SMSDataSource] that queries SMS messages from the device.
  */
-class SMSDataSourceImpl @Inject constructor(
+class SMSDataSourceImpl
+@Inject
+constructor(
     private val contentResolver: ContentResolver,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : SMSDataSource {
@@ -55,9 +57,10 @@ class SMSDataSourceImpl @Inject constructor(
 
         // Add sender names to selection
         if (senderNames.isNotEmpty()) {
-            val senderConditions = senderNames.map {
-                "${Telephony.Sms.ADDRESS} LIKE ?"
-            }.joinToString(" OR ")
+            val senderConditions =
+                senderNames.map {
+                    "${Telephony.Sms.ADDRESS} LIKE ?"
+                }.joinToString(" OR ")
 
             selection.add("($senderConditions)")
             selectionArgs.addAll(senderNames.map { "%$it%" })
@@ -66,9 +69,10 @@ class SMSDataSourceImpl @Inject constructor(
         // Add keywords to selection
         keywords?.let { keywordList ->
             if (keywordList.isNotEmpty()) {
-                val keywordConditions = keywordList.map {
-                    "${Telephony.Sms.BODY} LIKE ?"
-                }.joinToString(" OR ")
+                val keywordConditions =
+                    keywordList.map {
+                        "${Telephony.Sms.BODY} LIKE ?"
+                    }.joinToString(" OR ")
 
                 selection.add("($keywordConditions)")
                 selectionArgs.addAll(keywordList.map { "%$it%" })
@@ -78,9 +82,10 @@ class SMSDataSourceImpl @Inject constructor(
         // Add ignore words to selection
         ignoreWords?.let { words ->
             if (words.isNotEmpty()) {
-                val ignoreConditions = words.map {
-                    "${Telephony.Sms.BODY} NOT LIKE ?"
-                }.joinToString(" AND ")
+                val ignoreConditions =
+                    words.map {
+                        "${Telephony.Sms.BODY} NOT LIKE ?"
+                    }.joinToString(" AND ")
 
                 selection.add("($ignoreConditions)")
                 selectionArgs.addAll(words.map { "%$it%" })
@@ -114,25 +119,31 @@ class SMSDataSourceImpl @Inject constructor(
     ): List<SMSMessage> = withContext(ioDispatcher) {
         val smsList = mutableListOf<SMSMessage>()
 
-        val projection = arrayOf(
-            Telephony.Sms._ID,
-            Telephony.Sms.ADDRESS,
-            Telephony.Sms.BODY,
-            Telephony.Sms.DATE,
-            Telephony.Sms.TYPE,
-        )
+        val projection =
+            arrayOf(
+                Telephony.Sms._ID,
+                Telephony.Sms.ADDRESS,
+                Telephony.Sms.BODY,
+                Telephony.Sms.DATE,
+                Telephony.Sms.TYPE,
+            )
 
         contentResolver.query(
             Telephony.Sms.CONTENT_URI,
             projection,
             selection,
             selectionArgs,
-            "${Telephony.Sms.DATE} ASC", // get the oldest messages first
+            // get the oldest messages first
+            "${Telephony.Sms.DATE} ASC",
         )?.use { cursor ->
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow(Telephony.Sms._ID))
-                val address = cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.ADDRESS))
-                val body = cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.BODY))
+                val address = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Telephony.Sms.ADDRESS),
+                )
+                val body = cursor.getString(
+                    cursor.getColumnIndexOrThrow(Telephony.Sms.BODY),
+                )
                 val date = cursor.getLong(cursor.getColumnIndexOrThrow(Telephony.Sms.DATE))
                 val type = cursor.getInt(cursor.getColumnIndexOrThrow(Telephony.Sms.TYPE))
 

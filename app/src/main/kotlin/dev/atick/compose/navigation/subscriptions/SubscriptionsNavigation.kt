@@ -43,9 +43,7 @@ fun NavController.navigateToSubscriptions(navOptions: NavOptions? = null) {
  *
  * @param onShowSnackbar The callback to show a snackbar.
  */
-fun NavGraphBuilder.subscriptionsScreen(
-    onShowSnackbar: suspend (String, String?) -> Boolean,
-) {
+fun NavGraphBuilder.subscriptionsScreen(onShowSnackbar: suspend (String, String?) -> Boolean) {
     composable<Subscriptions> {
         SubscriptionsRoute(
             onShowSnackbar = onShowSnackbar,

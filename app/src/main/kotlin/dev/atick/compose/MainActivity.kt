@@ -48,15 +48,15 @@ import dev.atick.storage.preferences.models.UserData
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Main activity for the application.
- */
 // Switched to AppCompatActivity Temporarily
 // https://developer.android.com/guide/topics/resources/app-languages#androidx-impl
 // class MainActivity : ComponentActivity() {
+
+/**
+ * Main activity for the application.
+ */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     private val permissions = mutableListOf<String>()
 
     @Inject
@@ -92,11 +92,13 @@ class MainActivity : AppCompatActivity() {
             // than the configuration's dark theme value based on the user preference.
             DisposableEffect(darkTheme) {
                 enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
+                    statusBarStyle =
+                    SystemBarStyle.auto(
                         android.graphics.Color.TRANSPARENT,
                         android.graphics.Color.TRANSPARENT,
                     ) { darkTheme },
-                    navigationBarStyle = SystemBarStyle.auto(
+                    navigationBarStyle =
+                    SystemBarStyle.auto(
                         lightScrim,
                         darkScrim,
                     ) { darkTheme },
@@ -139,9 +141,7 @@ class MainActivity : AppCompatActivity() {
  * Returns `true` if the Android theme should be used, as a function of the [uiState].
  */
 @Composable
-private fun shouldUseAndroidTheme(
-    uiState: UiState<UserData>,
-): Boolean {
+private fun shouldUseAndroidTheme(uiState: UiState<UserData>): Boolean {
     if (uiState.loading || uiState.error.peekContent() != null) return false
 
     return when (uiState.data.themeBrand) {
@@ -154,9 +154,7 @@ private fun shouldUseAndroidTheme(
  * Returns `true` if the dynamic color is disabled, as a function of the [uiState].
  */
 @Composable
-private fun shouldDisableDynamicTheming(
-    uiState: UiState<UserData>,
-): Boolean {
+private fun shouldDisableDynamicTheming(uiState: UiState<UserData>): Boolean {
     return if (uiState.loading || uiState.error.peekContent() != null) {
         false
     } else {
@@ -169,9 +167,7 @@ private fun shouldDisableDynamicTheming(
  * current system context.
  */
 @Composable
-private fun shouldUseDarkTheme(
-    uiState: UiState<UserData>,
-): Boolean {
+private fun shouldUseDarkTheme(uiState: UiState<UserData>): Boolean {
     return if (uiState.loading || uiState.error.peekContent() != null) {
         isSystemInDarkTheme()
     } else {

@@ -49,23 +49,22 @@ private const val WORKER_CLASS_NAME = "RouterWorkerDelegateClassName"
  */
 internal fun KClass<out CoroutineWorker>.delegatedData(
     inputData: List<Pair<String, Any>> = emptyList(),
-) =
-    Data.Builder()
-        .putString(WORKER_CLASS_NAME, qualifiedName)
-        .apply {
-            inputData.forEach { (key, value) ->
-                when (value) {
-                    is String -> putString(key, value)
-                    is Int -> putInt(key, value)
-                    is Long -> putLong(key, value)
-                    is Boolean -> putBoolean(key, value)
-                    is Float -> putFloat(key, value)
-                    is Double -> putDouble(key, value)
-                    else -> throw IllegalArgumentException("Unsupported type: ${value::class}")
-                }
+) = Data.Builder()
+    .putString(WORKER_CLASS_NAME, qualifiedName)
+    .apply {
+        inputData.forEach { (key, value) ->
+            when (value) {
+                is String -> putString(key, value)
+                is Int -> putInt(key, value)
+                is Long -> putLong(key, value)
+                is Boolean -> putBoolean(key, value)
+                is Float -> putFloat(key, value)
+                is Double -> putDouble(key, value)
+                else -> throw IllegalArgumentException("Unsupported type: ${value::class}")
             }
         }
-        .build()
+    }
+    .build()
 
 /**
  * A worker that delegates sync to another [CoroutineWorker] constructed with a [HiltWorkerFactory].
@@ -80,7 +79,6 @@ class DelegatingWorker(
     appContext: Context,
     workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
-
     /**
      * The class name of the worker to delegate to
      */
@@ -100,12 +98,10 @@ class DelegatingWorker(
     /**
      * Retrieves the foreground info from the delegate worker
      */
-    override suspend fun getForegroundInfo(): ForegroundInfo =
-        delegateWorker.getForegroundInfo()
+    override suspend fun getForegroundInfo(): ForegroundInfo = delegateWorker.getForegroundInfo()
 
     /**
      * Delegates the work to the delegate worker
      */
-    override suspend fun doWork(): Result =
-        delegateWorker.doWork()
+    override suspend fun doWork(): Result = delegateWorker.doWork()
 }

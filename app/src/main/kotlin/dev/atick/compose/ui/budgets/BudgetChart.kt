@@ -45,10 +45,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun BudgetChart(
-    data: BudgetsScreenData,
-    modifier: Modifier = Modifier,
-) {
+fun BudgetChart(data: BudgetsScreenData, modifier: Modifier = Modifier) {
     val dateFormatter = remember { SimpleDateFormat("MMM dd", Locale.getDefault()) }
     val colorScheme = MaterialTheme.colorScheme
 
@@ -137,7 +134,10 @@ fun BudgetChart(
                 }
 
                 // Enhanced expense line dataset
-                val expenseDataSet = LineDataSet<EntryFloat>(expenseEntries.toMutableList(), "Expenses").apply {
+                val expenseDataSet = LineDataSet<EntryFloat>(
+                    expenseEntries.toMutableList(),
+                    "Expenses",
+                ).apply {
                     color = colorScheme.primary.toArgb()
                     lineWidth = 2.5f
                     isDrawCircles = true
@@ -169,7 +169,10 @@ fun BudgetChart(
                 }
 
                 // Enhanced budget line dataset
-                val budgetDataSet = LineDataSet<EntryFloat>(budgetEntries.toMutableList(), "Budget Limit").apply {
+                val budgetDataSet = LineDataSet<EntryFloat>(
+                    budgetEntries.toMutableList(),
+                    "Budget Limit",
+                ).apply {
                     color = colorScheme.error.copy(alpha = 0.8f).toArgb()
                     lineWidth = 2f
                     isDrawCircles = false

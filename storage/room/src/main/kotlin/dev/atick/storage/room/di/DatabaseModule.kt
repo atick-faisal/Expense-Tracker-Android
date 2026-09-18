@@ -34,7 +34,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
     private const val EXPENSE_DATABASE_NAME = "dev.atick.expense.room"
     private const val BUDGET_DATABASE_NAME = "dev.atick.budget.room"
     private const val CHAT_DATABASE_NAME = "dev.atick.chat.room"
@@ -47,9 +46,7 @@ object DatabaseModule {
      */
     @Singleton
     @Provides
-    fun provideExpenseDatabase(
-        @ApplicationContext appContext: Context,
-    ): ExpenseDatabase {
+    fun provideExpenseDatabase(@ApplicationContext appContext: Context): ExpenseDatabase {
         return Room.databaseBuilder(
             appContext,
             ExpenseDatabase::class.java,
@@ -65,9 +62,7 @@ object DatabaseModule {
      */
     @Singleton
     @Provides
-    fun provideBudgetDatabase(
-        @ApplicationContext appContext: Context,
-    ): BudgetDatabase {
+    fun provideBudgetDatabase(@ApplicationContext appContext: Context): BudgetDatabase {
         return Room.databaseBuilder(
             appContext,
             BudgetDatabase::class.java,
@@ -83,9 +78,7 @@ object DatabaseModule {
      */
     @Singleton
     @Provides
-    fun provideChatDatabase(
-        @ApplicationContext appContext: Context,
-    ): ChatDatabase {
+    fun provideChatDatabase(@ApplicationContext appContext: Context): ChatDatabase {
         return Room.databaseBuilder(
             appContext,
             ChatDatabase::class.java,

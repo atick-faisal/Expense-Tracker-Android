@@ -34,11 +34,12 @@ import javax.inject.Inject
  * @property datastore The DataStore instance to manage user preferences data.
  * @property ioDispatcher The CoroutineDispatcher for performing I/O operations.
  */
-class UserPreferencesDataSourceImpl @Inject constructor(
+class UserPreferencesDataSourceImpl
+@Inject
+constructor(
     private val datastore: DataStore<UserData>,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : UserPreferencesDataSource {
-
     /**
      * A [Flow] that emits [UserData] representing user-specific data.
      */

@@ -38,16 +38,18 @@ import javax.inject.Inject
  * @param userDataRepository The repository providing access to user data.
  */
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class MainActivityViewModel
+@Inject
+constructor(
     userDataRepository: UserDataRepository,
 ) : ViewModel() {
-
     /**
      * Represents the state of the UI for user data.
      */
-    val uiState: StateFlow<UiState<UserData>> = userDataRepository.userData
-        .onEach { userData -> Timber.d("User data: $userData") }
-        .map { userData -> UiState(userData) }
-        .catch { e -> UiState(UserData(), error = OneTimeEvent(e)) }
-        .stateInDelayed(UiState(UserData(), loading = true), viewModelScope)
+    val uiState: StateFlow<UiState<UserData>> =
+        userDataRepository.userData
+            .onEach { userData -> Timber.d("User data: $userData") }
+            .map { userData -> UiState(userData) }
+            .catch { e -> UiState(UserData(), error = OneTimeEvent(e)) }
+            .stateInDelayed(UiState(UserData(), loading = true), viewModelScope)
 }

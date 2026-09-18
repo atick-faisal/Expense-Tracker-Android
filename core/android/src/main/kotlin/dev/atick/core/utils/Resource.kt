@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+
 /**
  * A sealed class that represents the result of a resource operation.
  *
@@ -77,17 +78,18 @@ inline fun <ResultType, RequestType> networkBoundResource(
 ): Flow<Resource<ResultType>> = flow {
     val data = query().first()
 
-    val flow = if (shouldFetch(data)) {
-        emit(Resource.Loading(data))
-        try {
-            saveFetchedResult(fetch())
+    val flow =
+        if (shouldFetch(data)) {
+            emit(Resource.Loading(data))
+            try {
+                saveFetchedResult(fetch())
+                query().map { Resource.Success(it) }
+            } catch (throwable: Throwable) {
+                query().map { Resource.Error(it, throwable) }
+            }
+        } else {
             query().map { Resource.Success(it) }
-        } catch (throwable: Throwable) {
-            query().map { Resource.Error(it, throwable) }
         }
-    } else {
-        query().map { Resource.Success(it) }
-    }
 
     emitAll(flow)
 }

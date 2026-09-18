@@ -54,9 +54,10 @@ private const val MAIN_DEFAULT_INTENT_REQUEST_CODE = 0
  * Constraints for sync work
  */
 val SyncConstraints
-    get() = Constraints.Builder()
-        .setRequiredNetworkType(NetworkType.CONNECTED)
-        .build()
+    get() =
+        Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
 
 /**
  * Foreground information for sync on lower API levels when sync workers are being
@@ -161,10 +162,7 @@ fun Context.cancellationReminderNotification(
  * @param currentAmount The current amount.
  * @return The notification for the budget exceed.
  */
-fun Context.budgetExceedNotification(
-    budgetAmount: Double,
-    currentAmount: Double,
-): Notification {
+fun Context.budgetExceedNotification(budgetAmount: Double, currentAmount: Double): Notification {
     createNotificationChannel(
         channelId = BUDGET_EXCEED_NOTIFICATION_CHANNEL_ID,
         channelName = R.string.budget_exceed_notification_channel_name,
@@ -175,7 +173,8 @@ fun Context.budgetExceedNotification(
     return createNotification(
         channelId = BUDGET_EXCEED_NOTIFICATION_CHANNEL_ID,
         title = getString(R.string.budget_exceed_notification_title),
-        content = getString(
+        content =
+        getString(
             R.string.budget_exceed_notification_content,
             budgetAmount,
             currentAmount,
@@ -192,8 +191,12 @@ fun Context.budgetExceedNotification(
  * @return The default intent for the notification.
  */
 private fun getDefaultIntent(context: Context) = PendingIntent.getActivity(
-    /* context = */ context,
-    /* requestCode = */ MAIN_DEFAULT_INTENT_REQUEST_CODE,
-    /* intent = */ Intent(context, MainActivity::class.java),
-    /* flags = */ PendingIntent.FLAG_IMMUTABLE,
+    // context =
+    context,
+    // requestCode =
+    MAIN_DEFAULT_INTENT_REQUEST_CODE,
+    // intent =
+    Intent(context, MainActivity::class.java),
+    // flags =
+    PendingIntent.FLAG_IMMUTABLE,
 )

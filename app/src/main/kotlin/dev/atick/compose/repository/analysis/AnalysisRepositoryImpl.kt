@@ -28,10 +28,11 @@ import javax.inject.Inject
  *
  * @param analysisDataSource The data source for analysis data.
  */
-class AnalysisRepositoryImpl @Inject constructor(
+class AnalysisRepositoryImpl
+@Inject
+constructor(
     private val analysisDataSource: AnalysisDataSource,
 ) : AnalysisRepository {
-
     /**
      * Gets the category analyses.
      *
@@ -73,10 +74,7 @@ class AnalysisRepositoryImpl @Inject constructor(
      * @param endDate The end date of the analysis.
      * @return A [Flow] of [Double] representing the total spending.
      */
-    override fun getTotalSpending(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double> {
+    override fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double> {
         return analysisDataSource.getTotalSpending(startDate, endDate)
     }
 }

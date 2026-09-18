@@ -26,7 +26,8 @@ import dev.atick.core.utils.getMonthInfoAt
  * @param navigateBack The event to navigate back.
  */
 data class EditBudgetScreenData(
-    val month: Long = getMonthInfoAt(0).startDate, // The timestamp of the start date of the month
+    // The timestamp of the start date of the month
+    val month: Long = getMonthInfoAt(0).startDate,
     val amount: Double? = null,
     val navigateBack: OneTimeEvent<Boolean> = OneTimeEvent(false),
 )

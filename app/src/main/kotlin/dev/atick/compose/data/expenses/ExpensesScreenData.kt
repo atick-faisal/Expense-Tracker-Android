@@ -73,7 +73,9 @@ enum class UiCurrencyType {
 /**
  * UI payment status.
  */
-enum class UiPaymentStatus(@StringRes val value: Int) {
+enum class UiPaymentStatus(
+    @StringRes val value: Int,
+) {
     PENDING(R.string.payment_status_pending),
     PAID(R.string.payment_status_paid),
     OVERDUE(R.string.payment_status_overdue),
@@ -83,7 +85,9 @@ enum class UiPaymentStatus(@StringRes val value: Int) {
 /**
  * UI recurring type.
  */
-enum class UiRecurringType(@StringRes val value: Int) {
+enum class UiRecurringType(
+    @StringRes val value: Int,
+) {
     ONETIME(R.string.recurring_type_onetime),
     DAILY(R.string.recurring_type_daily),
     WEEKLY(R.string.recurring_type_weekly),
@@ -94,7 +98,9 @@ enum class UiRecurringType(@StringRes val value: Int) {
 /**
  * UI category type.
  */
-enum class UiCategoryType(@StringRes val value: Int) {
+enum class UiCategoryType(
+    @StringRes val value: Int,
+) {
     FOOD(R.string.category_food),
     ESSENTIAL(R.string.category_essential),
     LIFESTYLE(R.string.category_lifestyle),
