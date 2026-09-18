@@ -48,7 +48,11 @@ data class UserEditableSettings(
  * @property title The string resource id for the language title.
  * @property icon The icon for the language.
  */
-enum class Language(val code: String, @StringRes val title: Int, val icon: ImageVector) {
+enum class Language(
+    val code: String,
+    @StringRes val title: Int,
+    val icon: ImageVector,
+) {
     ENGLISH("en", R.string.en, Icons.Default.Language),
     ARABIC("ar", R.string.ar, Icons.Default.Translate),
 }

@@ -82,10 +82,7 @@ fun RowScope.JetpackNavigationBarItem(
  * [NavigationBarItem]s.
  */
 @Composable
-fun JetpackNavigationBar(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
+fun JetpackNavigationBar(modifier: Modifier = Modifier, content: @Composable RowScope.() -> Unit) {
     NavigationBar(
         modifier = modifier,
         contentColor = JetpackNavigationDefaults.navigationContentColor(),

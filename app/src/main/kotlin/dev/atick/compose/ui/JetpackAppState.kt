@@ -82,8 +82,9 @@ class JetpackAppState(
     networkUtils: NetworkUtils,
 ) {
     val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
+        @Composable get() =
+            navController
+                .currentBackStackEntryAsState().value?.destination
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() {
@@ -97,24 +98,29 @@ class JetpackAppState(
         }
 
     val shouldShowBottomBar: Boolean
-        @Composable get() = (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact) &&
-            (currentTopLevelDestination != null)
+        @Composable get() =
+            (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact) &&
+                (currentTopLevelDestination != null)
 
     val shouldShowNavRail: Boolean
-        @Composable get() = (windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact) &&
-            (currentTopLevelDestination != null)
+        @Composable get() =
+            (windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact) &&
+                (currentTopLevelDestination != null)
 
     val shouldShowMonthSelector: Boolean
-        @Composable get() = (currentTopLevelDestination != null) &&
-            currentTopLevelDestination != TopLevelDestination.SUBSCRIPTIONS
+        @Composable get() =
+            (currentTopLevelDestination != null) &&
+                currentTopLevelDestination != TopLevelDestination.SUBSCRIPTIONS
 
     val shouldShowFab: Boolean
-        @Composable get() = currentTopLevelDestination == TopLevelDestination.EXPENSES ||
-            currentTopLevelDestination == TopLevelDestination.BUDGETS
+        @Composable get() =
+            currentTopLevelDestination == TopLevelDestination.EXPENSES ||
+                currentTopLevelDestination == TopLevelDestination.BUDGETS
 
-    val isOffline = networkUtils.currentState
-        .map { it != NetworkState.CONNECTED }
-        .stateInDelayed(false, coroutineScope)
+    val isOffline =
+        networkUtils.currentState
+            .map { it != NetworkState.CONNECTED }
+            .stateInDelayed(false, coroutineScope)
 
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
@@ -131,27 +137,31 @@ class JetpackAppState(
     }
 
     fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {
-        val topLevelNavOptions = navOptions {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
+        val topLevelNavOptions =
+            navOptions {
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = true
+                }
+                launchSingleTop = true
+                restoreState = true
             }
-            launchSingleTop = true
-            restoreState = true
-        }
 
         when (topLevelDestination) {
-            TopLevelDestination.EXPENSES -> navController.navigateToExpensesNavGraph(
-                topLevelNavOptions,
-            )
+            TopLevelDestination.EXPENSES ->
+                navController.navigateToExpensesNavGraph(
+                    topLevelNavOptions,
+                )
 
             TopLevelDestination.ANALYSIS -> navController.navigateToAnalysis(topLevelNavOptions)
-            TopLevelDestination.BUDGETS -> navController.navigateToBudgetsNavGraph(
-                topLevelNavOptions,
-            )
+            TopLevelDestination.BUDGETS ->
+                navController.navigateToBudgetsNavGraph(
+                    topLevelNavOptions,
+                )
 
-            TopLevelDestination.SUBSCRIPTIONS -> navController.navigateToSubscriptions(
-                topLevelNavOptions,
-            )
+            TopLevelDestination.SUBSCRIPTIONS ->
+                navController.navigateToSubscriptions(
+                    topLevelNavOptions,
+                )
 
             TopLevelDestination.CHAT -> navController.navigateToChat(topLevelNavOptions)
         }

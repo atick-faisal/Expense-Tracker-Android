@@ -30,10 +30,11 @@ import javax.inject.Inject
  *
  * @property userPreferencesDataSource The data source for user preferences.
  */
-class UserDataRepositoryImpl @Inject constructor(
+class UserDataRepositoryImpl
+@Inject
+constructor(
     private val userPreferencesDataSource: UserPreferencesDataSource,
 ) : UserDataRepository {
-
     /**
      * A [Flow] that emits [UserData] representing user-specific data.
      */

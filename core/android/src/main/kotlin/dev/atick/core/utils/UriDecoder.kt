@@ -24,7 +24,9 @@ import javax.inject.Inject
  *
  * @constructor Creates a [UriDecoder] instance.
  */
-class UriDecoder @Inject constructor() : StringDecoder {
+class UriDecoder
+@Inject
+constructor() : StringDecoder {
     /**
      * Decodes an encoded string using Android's Uri.decode method.
      *

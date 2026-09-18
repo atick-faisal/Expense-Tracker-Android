@@ -46,10 +46,11 @@ fun <T> T.format(nDecimal: Int = 2): String where T : Number, T : Comparable<T> 
         this.toDouble().isNaN() -> "NaN"
         this.toDouble().isInfinite() -> if (this.toDouble() > 0) "∞" else "-∞"
         else -> {
-            val symbols = DecimalFormatSymbols(Locale.getDefault()).apply {
-                // Ensure consistent decimal separator
-                decimalSeparator = '.'
-            }
+            val symbols =
+                DecimalFormatSymbols(Locale.getDefault()).apply {
+                    // Ensure consistent decimal separator
+                    decimalSeparator = '.'
+                }
 
             DecimalFormat("#,##0.#").apply {
                 decimalFormatSymbols = symbols
@@ -71,8 +72,9 @@ fun <T> T.format(nDecimal: Int = 2): String where T : Number, T : Comparable<T> 
  * 1640995200000L.asFormattedDateTime() -> "December 31, 2021 at 11:59 PM"
  */
 fun Long.asFormattedDateTime(): String {
-    val dateTime = Instant.fromEpochMilliseconds(this)
-        .toLocalDateTime(TimeZone.currentSystemDefault())
+    val dateTime =
+        Instant.fromEpochMilliseconds(this)
+            .toLocalDateTime(TimeZone.currentSystemDefault())
     val amPm = if (dateTime.hour < 12) "AM" else "PM"
     val hour = if (dateTime.hour % 12 == 0) 12 else dateTime.hour % 12
 

@@ -35,12 +35,13 @@ import javax.inject.Inject
  * @property ioDispatcher The CoroutineDispatcher for IO operations.
  * @property coroutineScope The CoroutineScope for application-wide coroutines.
  */
-class AnalysisDataSourceImpl @Inject constructor(
+class AnalysisDataSourceImpl
+@Inject
+constructor(
     private val expenseDao: ExpenseDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @ApplicationScope private val coroutineScope: CoroutineScope,
 ) : AnalysisDataSource {
-
     /**
      * Retrieves category analyses for expenses within a specified date range.
      *
@@ -106,10 +107,7 @@ class AnalysisDataSourceImpl @Inject constructor(
      * @param endDate The end date of the range (inclusive) in milliseconds since epoch.
      * @return A Flow emitting the total spending as a Double.
      */
-    override fun getTotalSpending(
-        startDate: Long,
-        endDate: Long,
-    ): Flow<Double> {
+    override fun getTotalSpending(startDate: Long, endDate: Long): Flow<Double> {
         return expenseDao.getTotalSpending(startDate, endDate)
             .map { it ?: 0.0 }
             .flowOn(ioDispatcher)

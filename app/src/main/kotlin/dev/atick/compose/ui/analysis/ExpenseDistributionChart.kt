@@ -50,10 +50,7 @@ import androidx.compose.ui.unit.dp
 import dev.atick.compose.data.analysis.UiAnalysis
 
 @Composable
-fun ExpenseDistributionChart(
-    analyses: List<UiAnalysis>,
-    modifier: Modifier = Modifier,
-) {
+fun ExpenseDistributionChart(analyses: List<UiAnalysis>, modifier: Modifier = Modifier) {
     var animationPlayed by remember { mutableStateOf(false) }
     val animatedProgress by animateFloatAsState(
         targetValue = if (animationPlayed) 1f else 0f,

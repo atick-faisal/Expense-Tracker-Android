@@ -36,7 +36,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {
-
     /**
      * Binds the [ChatDataSourceImpl] implementation to the [ChatDataSource] interface.
      *
@@ -45,9 +44,7 @@ abstract class DataSourceModule {
      */
     @Binds
     @Singleton
-    abstract fun bindChatDataSource(
-        chatDataSourceImpl: ChatDataSourceImpl,
-    ): ChatDataSource
+    abstract fun bindChatDataSource(chatDataSourceImpl: ChatDataSourceImpl): ChatDataSource
 
     /**
      * Binds the [ExpenseDataSourceImpl] implementation to the [ExpenseDataSource] interface.
@@ -81,7 +78,5 @@ abstract class DataSourceModule {
      */
     @Binds
     @Singleton
-    abstract fun bindBudgetDataSource(
-        budgetDataSourceImpl: BudgetDataSourceImpl,
-    ): BudgetDataSource
+    abstract fun bindBudgetDataSource(budgetDataSourceImpl: BudgetDataSourceImpl): BudgetDataSource
 }

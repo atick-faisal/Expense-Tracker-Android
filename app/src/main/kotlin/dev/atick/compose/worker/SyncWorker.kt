@@ -45,13 +45,14 @@ import timber.log.Timber
  * @see CoroutineWorker
  */
 @HiltWorker
-class SyncWorker @AssistedInject constructor(
+class SyncWorker
+@AssistedInject
+constructor(
     @Assisted private val context: Context,
     @Assisted workerParams: WorkerParameters,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val expensesRepository: ExpensesRepository,
 ) : CoroutineWorker(context, workerParams) {
-
     /**
      * Provides the foreground information for the worker.
      * @return The foreground information.
@@ -85,7 +86,8 @@ class SyncWorker @AssistedInject constructor(
                     .collect { progress ->
                         Timber.d("SyncWorker: Progress: $progress")
                         setForeground(
-                            foregroundInfo = getForegroundInfo(
+                            foregroundInfo =
+                            getForegroundInfo(
                                 total = progress.total,
                                 current = progress.current,
                             ),

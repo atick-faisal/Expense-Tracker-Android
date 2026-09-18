@@ -31,7 +31,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ConnectivityManagerModule {
-
     /**
      * Provides [ConnectivityManager].
      *
@@ -40,9 +39,7 @@ object ConnectivityManagerModule {
      */
     @Provides
     @Singleton
-    fun provideConnectivityManager(
-        @ApplicationContext context: Context,
-    ): ConnectivityManager {
+    fun provideConnectivityManager(@ApplicationContext context: Context): ConnectivityManager {
         return context.getSystemService(
             Context.CONNECTIVITY_SERVICE,
         ) as ConnectivityManager

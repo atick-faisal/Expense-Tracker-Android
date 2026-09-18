@@ -39,7 +39,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DatastoreModule {
-
     private const val DATA_STORE_FILE_NAME = "user_preferences.json"
 
     /**

@@ -44,14 +44,15 @@ import javax.inject.Inject
  * @param chatDataSource The data source for chat data.
  * @param geminiDataSource The data source for Gemini chat data.
  */
-class ChatRepositoryImpl @Inject constructor(
+class ChatRepositoryImpl
+@Inject
+constructor(
     private val expenseDataSource: ExpenseDataSource,
     private val analysisDataSource: AnalysisDataSource,
     private val budgetDataSource: BudgetDataSource,
     private val chatDataSource: ChatDataSource,
     private val geminiDataSource: GeminiDataSource,
 ) : ChatRepository {
-
     /**
      * Gets all the messages.
      *
@@ -68,16 +69,20 @@ class ChatRepositoryImpl @Inject constructor(
      * @param historyDepth The depth of the chat history to fetch.
      * @return A [Result] indicating the success or failure of the operation.
      */
-    override suspend fun initializeChat(monthInfo: MonthInfo, historyDepth: Int): Result<Unit> {
+    override suspend fun initializeChat(
+        monthInfo: MonthInfo,
+        historyDepth: Int,
+    ): Result<Unit> {
         return suspendRunCatching {
             val chatHistory = chatDataSource.getRecentMessages(historyDepth)
             val chatContext = createChatContext(monthInfo)
-            val aiChatHistory = chatHistory.map { chat ->
-                AiChatMessage(
-                    text = chat.text,
-                    sender = if (chat.isFromUser) AiChatSender.USER else AiChatSender.MODEL,
-                )
-            }
+            val aiChatHistory =
+                chatHistory.map { chat ->
+                    AiChatMessage(
+                        text = chat.text,
+                        sender = if (chat.isFromUser) AiChatSender.USER else AiChatSender.MODEL,
+                    )
+                }
             geminiDataSource.initializeChat(aiChatHistory, chatContext)
         }
     }
@@ -111,37 +116,38 @@ class ChatRepositoryImpl @Inject constructor(
         val startDate = monthInfo.startDate
         val endDate = monthInfo.endDate
 
-        val results = coroutineScope {
-            val totalSpending =
-                async { analysisDataSource.getTotalSpending(startDate, endDate).first() }
-            val categoryAnalysis =
-                async {
-                    analysisDataSource.getCategoryAnalyses(
-                        startDate = startDate,
-                        endDate = endDate,
-                        topN = ChatRepository.N_TOP_CATEGORY_TO_LOAD,
-                    ).first()
-                }
-            val merchantAnalysis =
-                async {
-                    analysisDataSource.getMerchantAnalyses(
-                        startDate = startDate,
-                        endDate = endDate,
-                        topN = ChatRepository.N_TOP_MERCHANT_TO_LOAD,
-                    ).first()
-                }
-            val budget = async { budgetDataSource.getBudgetForMonth(startDate).first() }
-            val subscriptions = async { expenseDataSource.getRecurringExpenses().first() }
+        val results =
+            coroutineScope {
+                val totalSpending =
+                    async { analysisDataSource.getTotalSpending(startDate, endDate).first() }
+                val categoryAnalysis =
+                    async {
+                        analysisDataSource.getCategoryAnalyses(
+                            startDate = startDate,
+                            endDate = endDate,
+                            topN = ChatRepository.N_TOP_CATEGORY_TO_LOAD,
+                        ).first()
+                    }
+                val merchantAnalysis =
+                    async {
+                        analysisDataSource.getMerchantAnalyses(
+                            startDate = startDate,
+                            endDate = endDate,
+                            topN = ChatRepository.N_TOP_MERCHANT_TO_LOAD,
+                        ).first()
+                    }
+                val budget = async { budgetDataSource.getBudgetForMonth(startDate).first() }
+                val subscriptions = async { expenseDataSource.getRecurringExpenses().first() }
 
-            // Required to infer the types of the results.
-            Quintuple(
-                totalSpending.await(),
-                categoryAnalysis.await(),
-                merchantAnalysis.await(),
-                budget.await(),
-                subscriptions.await(),
-            )
-        }
+                // Required to infer the types of the results.
+                Quintuple(
+                    totalSpending.await(),
+                    categoryAnalysis.await(),
+                    merchantAnalysis.await(),
+                    budget.await(),
+                    subscriptions.await(),
+                )
+            }
 
         val (totalSpending, categoryAnalysis, merchantAnalysis, budget, subscriptions) = results
 

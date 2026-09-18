@@ -111,13 +111,14 @@ fun Context.createNotificationChannel(
     @Options importance: Int,
 ) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val channel = NotificationChannel(
-            channelId,
-            getString(channelName),
-            importance,
-        ).apply {
-            description = getString(channelDescription)
-        }
+        val channel =
+            NotificationChannel(
+                channelId,
+                getString(channelName),
+                importance,
+            ).apply {
+                description = getString(channelDescription)
+            }
         val notificationManager: NotificationManager? =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
 
@@ -223,10 +224,7 @@ fun Context.createProgressNotification(
  * @param notification The notification object to be shown.
  */
 @SuppressLint("MissingPermission")
-fun Context.showNotification(
-    notificationId: Int,
-    notification: Notification,
-) {
+fun Context.showNotification(notificationId: Int, notification: Notification) {
     if (hasPermission(Manifest.permission.POST_NOTIFICATIONS)) {
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId, notification)
@@ -254,14 +252,15 @@ fun Context.cancelNotification(notificationId: Int) {
  */
 @Throws(IllegalAccessException::class)
 fun Context.getTmpFileUri(appId: String): Uri {
-    val tmpFile = File.createTempFile(
-        "tmp_image_file",
-        ".png",
-        cacheDir,
-    ).apply {
-        createNewFile()
-        deleteOnExit()
-    }
+    val tmpFile =
+        File.createTempFile(
+            "tmp_image_file",
+            ".png",
+            cacheDir,
+        ).apply {
+            createNewFile()
+            deleteOnExit()
+        }
 
     return FileProvider.getUriForFile(
         applicationContext,

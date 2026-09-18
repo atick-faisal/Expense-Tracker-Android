@@ -96,9 +96,7 @@ abstract class RepositoryModule {
      */
     @Binds
     @Singleton
-    abstract fun bindChatRepository(
-        chatRepositoryImpl: ChatRepositoryImpl,
-    ): ChatRepository
+    abstract fun bindChatRepository(chatRepositoryImpl: ChatRepositoryImpl): ChatRepository
 
     /**
      * Binds the [ExpensesRepositoryImpl] implementation to the [ExpensesRepository] interface.

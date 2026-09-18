@@ -63,14 +63,15 @@ fun List<ChatEntity>.asUiMessages(): List<UiMessage> {
 /**
  * The list of demo questions.
  */
-val demoQuestions = listOf<Int>(
-    R.string.demo_question_1,
-    R.string.demo_question_2,
-    R.string.demo_question_3,
-    R.string.demo_question_4,
-    R.string.demo_question_5,
-    R.string.demo_question_6,
-    R.string.demo_question_7,
-    R.string.demo_question_8,
-    R.string.demo_question_9,
-)
+val demoQuestions =
+    listOf<Int>(
+        R.string.demo_question_1,
+        R.string.demo_question_2,
+        R.string.demo_question_3,
+        R.string.demo_question_4,
+        R.string.demo_question_5,
+        R.string.demo_question_6,
+        R.string.demo_question_7,
+        R.string.demo_question_8,
+        R.string.demo_question_9,
+    )

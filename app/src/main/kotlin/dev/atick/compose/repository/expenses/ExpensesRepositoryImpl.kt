@@ -54,7 +54,9 @@ import kotlin.math.max
  * @param budgetDataSource The data source for budget data.
  * @param taskManager The task manager for syncing and notifications.
  */
-class ExpensesRepositoryImpl @Inject constructor(
+class ExpensesRepositoryImpl
+@Inject
+constructor(
     private val geminiDataSource: GeminiDataSource,
     private val geminiRateLimiter: GeminiRateLimiter,
     private val smsDataSource: SMSDataSource,
@@ -75,7 +77,10 @@ class ExpensesRepositoryImpl @Inject constructor(
      * @param endDate The end date of the expenses.
      * @return A [Flow] of [List] of [UiExpense] representing the expenses.
      */
-    override fun getAllExpenses(startDate: Long, endDate: Long): Flow<List<UiExpense>> {
+    override fun getAllExpenses(
+        startDate: Long,
+        endDate: Long,
+    ): Flow<List<UiExpense>> {
         return expenseDataSource.getAllExpenses(startDate, endDate)
             .map { expenses -> expenses.toUiExpenses() }
     }
@@ -145,40 +150,43 @@ class ExpensesRepositoryImpl @Inject constructor(
      * @return A [Flow] of [SyncProgress] representing the progress of the sync.
      */
     @RequiresPermission(android.Manifest.permission.READ_SMS)
-    override fun syncExpensesFromSms() = flow<SyncProgress> {
-        val lastExpenseTime = expenseDataSource.getLastExpenseTime()
-        val startDate = max(
-            lastExpenseTime,
-            System.currentTimeMillis() - ExpensesRepository.SYNC_SMS_DURATION,
-        ) + 1000L // Add 1 second to avoid duplicate SMSes
+    override fun syncExpensesFromSms() =
+        flow<SyncProgress> {
+            val lastExpenseTime = expenseDataSource.getLastExpenseTime()
+            val startDate =
+                max(
+                    lastExpenseTime,
+                    System.currentTimeMillis() - ExpensesRepository.SYNC_SMS_DURATION,
+                ) + 1000L // Add 1 second to avoid duplicate SMSes
 
-        val smsList = smsDataSource.querySMS(
-            senderNames = ExpensesRepository.BANK_NAMES,
-            keywords = ExpensesRepository.KEYWORDS,
-            ignoreWords = ExpensesRepository.IGNORE_WORDS,
-            startDate = startDate,
-            endDate = System.currentTimeMillis(),
-        )
+            val smsList =
+                smsDataSource.querySMS(
+                    senderNames = ExpensesRepository.BANK_NAMES,
+                    keywords = ExpensesRepository.KEYWORDS,
+                    ignoreWords = ExpensesRepository.IGNORE_WORDS,
+                    startDate = startDate,
+                    endDate = System.currentTimeMillis(),
+                )
 
-        val totalSms = smsList.size
+            val totalSms = smsList.size
 
-        Timber.d("Found $totalSms SMSes")
+            Timber.d("Found $totalSms SMSes")
 
-        for ((i, sms) in smsList.withIndex()) {
-            Timber.d("SMS $i$: $sms")
+            for ((i, sms) in smsList.withIndex()) {
+                Timber.d("SMS $i$: $sms")
 
-            processSms(sms)
-            checkBudgetExceeded()
+                processSms(sms)
+                checkBudgetExceeded()
 
-            emit(
-                SyncProgress(
-                    total = totalSms,
-                    current = i + 1,
-                    message = "Syncing expenses... $i / $totalSms",
-                ),
-            )
+                emit(
+                    SyncProgress(
+                        total = totalSms,
+                        current = i + 1,
+                        message = "Syncing expenses... $i / $totalSms",
+                    ),
+                )
+            }
         }
-    }
 
     /**
      * Sets the recurring type for the merchant.
@@ -193,13 +201,14 @@ class ExpensesRepositoryImpl @Inject constructor(
     ): Result<Unit> {
         return suspendRunCatching {
             val lastPaymentDate = expenseDataSource.getLastPaymentDate(merchant)
-            val nextPaymentDate = when (recurringType) {
-                UiRecurringType.ONETIME -> Long.MAX_VALUE
-                UiRecurringType.DAILY -> lastPaymentDate + ExpensesRepository.RECURRING_DAILY
-                UiRecurringType.WEEKLY -> lastPaymentDate + ExpensesRepository.RECURRING_WEEKLY
-                UiRecurringType.MONTHLY -> lastPaymentDate + ExpensesRepository.RECURRING_MONTHLY
-                UiRecurringType.YEARLY -> lastPaymentDate + ExpensesRepository.RECURRING_YEARLY
-            }
+            val nextPaymentDate =
+                when (recurringType) {
+                    UiRecurringType.ONETIME -> Long.MAX_VALUE
+                    UiRecurringType.DAILY -> lastPaymentDate + ExpensesRepository.RECURRING_DAILY
+                    UiRecurringType.WEEKLY -> lastPaymentDate + ExpensesRepository.RECURRING_WEEKLY
+                    UiRecurringType.MONTHLY -> lastPaymentDate + ExpensesRepository.RECURRING_MONTHLY
+                    UiRecurringType.YEARLY -> lastPaymentDate + ExpensesRepository.RECURRING_YEARLY
+                }
 
             expenseDataSource.setRecurringPayment(
                 merchant,
@@ -230,13 +239,14 @@ class ExpensesRepositoryImpl @Inject constructor(
 
         while (!isSuccess && retryAttempts < GeminiRateLimiter.MAX_RETRIES) {
             try {
-                val expense = geminiDataSource.getExpenseFromSMS(
-                    AiSMS(
-                        address = sms.address,
-                        body = sms.body,
-                        date = sms.date,
-                    ),
-                )
+                val expense =
+                    geminiDataSource.getExpenseFromSMS(
+                        AiSMS(
+                            address = sms.address,
+                            body = sms.body,
+                            date = sms.date,
+                        ),
+                    )
 
                 Timber.d("Expense: $expense")
 
@@ -244,7 +254,8 @@ class ExpensesRepositoryImpl @Inject constructor(
                     ExpenseEntity(
                         amount = expense.amount,
                         currency = expense.currency.name,
-                        paymentDate = sms.date, // Use original SMS date
+                        // Use original SMS date
+                        paymentDate = sms.date,
                         merchant = expense.merchant,
                         category = expense.category.name,
                         paymentStatus = expense.paymentStatus.name,
@@ -293,18 +304,20 @@ class ExpensesRepositoryImpl @Inject constructor(
     private suspend fun checkBudgetExceeded() {
         val monthInfo = getMonthInfoAt(0)
 
-        val budgetAmount = budgetDataSource.getBudgetForMonth(monthInfo.startDate)
-            .firstOrNull()?.amount
+        val budgetAmount =
+            budgetDataSource.getBudgetForMonth(monthInfo.startDate)
+                .firstOrNull()?.amount
 
         if (budgetAmount == null) {
             Timber.w("Budget not set for month: ${monthInfo.startDate}")
             return
         }
 
-        val totalSpending = expenseDataSource.getTotalSpending(
-            startDate = monthInfo.startDate,
-            endDate = monthInfo.endDate,
-        ).firstOrNull() ?: 0.0
+        val totalSpending =
+            expenseDataSource.getTotalSpending(
+                startDate = monthInfo.startDate,
+                endDate = monthInfo.endDate,
+            ).firstOrNull() ?: 0.0
 
         if (totalSpending > budgetAmount) {
             Timber.w("Budget exceeded! Total spending: $totalSpending")

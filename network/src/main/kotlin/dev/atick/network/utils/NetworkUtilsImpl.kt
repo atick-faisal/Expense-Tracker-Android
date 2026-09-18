@@ -31,63 +31,66 @@ import javax.inject.Inject
  *
  * @param connectivityManager [ConnectivityManager].
  */
-class NetworkUtilsImpl @Inject constructor(
+class NetworkUtilsImpl
+@Inject
+constructor(
     private val connectivityManager: ConnectivityManager,
 ) : NetworkUtils {
-
     /**
      * Current network state as [Flow].
      */
     override val currentState: Flow<NetworkState>
-        get() = callbackFlow {
-            val callback = object : ConnectivityManager.NetworkCallback() {
-                override fun onAvailable(network: Network) {
-                    super.onAvailable(network)
-                    trySend(NetworkState.CONNECTED)
-                    Timber.i("NETWORK CONNECTED")
-                }
+        get() =
+            callbackFlow {
+                val callback =
+                    object : ConnectivityManager.NetworkCallback() {
+                        override fun onAvailable(network: Network) {
+                            super.onAvailable(network)
+                            trySend(NetworkState.CONNECTED)
+                            Timber.i("NETWORK CONNECTED")
+                        }
 
-                override fun onLosing(network: Network, maxMsToLive: Int) {
-                    super.onLosing(network, maxMsToLive)
-                    Timber.i("LOSING NETWORK CONNECTION ... ")
-                }
+                        override fun onLosing(network: Network, maxMsToLive: Int) {
+                            super.onLosing(network, maxMsToLive)
+                            Timber.i("LOSING NETWORK CONNECTION ... ")
+                        }
 
-                override fun onLost(network: Network) {
-                    super.onLost(network)
-                    trySend(NetworkState.LOST)
-                    Timber.i("NETWORK CONNECTION LOST")
-                }
+                        override fun onLost(network: Network) {
+                            super.onLost(network)
+                            trySend(NetworkState.LOST)
+                            Timber.i("NETWORK CONNECTION LOST")
+                        }
 
-                override fun onUnavailable() {
-                    super.onUnavailable()
-                    trySend(NetworkState.UNAVAILABLE)
-                    Timber.i("NETWORK UNAVAILABLE")
-                }
+                        override fun onUnavailable() {
+                            super.onUnavailable()
+                            trySend(NetworkState.UNAVAILABLE)
+                            Timber.i("NETWORK UNAVAILABLE")
+                        }
 
-                override fun onCapabilitiesChanged(
-                    network: Network,
-                    networkCapabilities: NetworkCapabilities,
-                ) {
-                    super.onCapabilitiesChanged(network, networkCapabilities)
-                    Timber.i("NETWORK TYPE CHANGED")
-                }
+                        override fun onCapabilitiesChanged(
+                            network: Network,
+                            networkCapabilities: NetworkCapabilities,
+                        ) {
+                            super.onCapabilitiesChanged(network, networkCapabilities)
+                            Timber.i("NETWORK TYPE CHANGED")
+                        }
 
-                override fun onLinkPropertiesChanged(
-                    network: Network,
-                    linkProperties: LinkProperties,
-                ) {
-                    super.onLinkPropertiesChanged(network, linkProperties)
-                    Timber.i("LINK PROPERTIES CHANGED")
-                }
+                        override fun onLinkPropertiesChanged(
+                            network: Network,
+                            linkProperties: LinkProperties,
+                        ) {
+                            super.onLinkPropertiesChanged(network, linkProperties)
+                            Timber.i("LINK PROPERTIES CHANGED")
+                        }
 
-                override fun onBlockedStatusChanged(network: Network, blocked: Boolean) {
-                    Timber.i("BLOCKED STATUS CHANGED")
+                        override fun onBlockedStatusChanged(network: Network, blocked: Boolean) {
+                            Timber.i("BLOCKED STATUS CHANGED")
+                        }
+                    }
+                connectivityManager.registerDefaultNetworkCallback(callback)
+
+                awaitClose {
+                    connectivityManager.unregisterNetworkCallback(callback)
                 }
             }
-            connectivityManager.registerDefaultNetworkCallback(callback)
-
-            awaitClose {
-                connectivityManager.unregisterNetworkCallback(callback)
-            }
-        }
 }

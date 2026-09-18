@@ -35,7 +35,6 @@ import javax.inject.Singleton
 )
 @InstallIn(SingletonComponent::class)
 object DaoModule {
-
     /**
      * Get the expense data access.
      *

@@ -37,7 +37,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class EditBudgetViewModel @Inject constructor(
+class EditBudgetViewModel
+@Inject
+constructor(
     private val budgetsRepository: BudgetsRepository,
 ) : ViewModel() {
     private val _editBudgetUiState = MutableStateFlow(UiState(EditBudgetScreenData()))
@@ -62,12 +64,13 @@ class EditBudgetViewModel @Inject constructor(
 
     fun saveBudget(monthInfo: MonthInfo) {
         _editBudgetUiState.updateWith(viewModelScope) {
-            val result = budgetsRepository.insertOrUpdateBudget(
-                UiBudget(
-                    month = monthInfo.startDate,
-                    amount = editBudgetUiState.value.data.amount,
-                ),
-            )
+            val result =
+                budgetsRepository.insertOrUpdateBudget(
+                    UiBudget(
+                        month = monthInfo.startDate,
+                        amount = editBudgetUiState.value.data.amount,
+                    ),
+                )
             result.onSuccess {
                 _editBudgetUiState.updateState { copy(navigateBack = OneTimeEvent(true)) }
             }

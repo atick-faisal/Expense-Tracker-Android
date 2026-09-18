@@ -50,10 +50,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
-fun JetpackLoadingWheel(
-    contentDesc: String,
-    modifier: Modifier = Modifier,
-) {
+fun JetpackLoadingWheel(contentDesc: String, modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition(label = "wheel transition")
 
     // Specifies the float animation for slowly drawing out the lines on entering
@@ -130,10 +127,7 @@ fun JetpackLoadingWheel(
 }
 
 @Composable
-fun JetpackOverlayLoadingWheel(
-    contentDesc: String,
-    modifier: Modifier = Modifier,
-) {
+fun JetpackOverlayLoadingWheel(contentDesc: String, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(60.dp),
         shadowElevation = 8.dp,

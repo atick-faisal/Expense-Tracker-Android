@@ -31,11 +31,12 @@ import javax.inject.Inject
  * @property budgetDao The DAO for accessing budget data.
  * @property ioDispatcher The CoroutineDispatcher for IO operations.
  */
-class BudgetDataSourceImpl @Inject constructor(
+class BudgetDataSourceImpl
+@Inject
+constructor(
     private val budgetDao: BudgetDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BudgetDataSource {
-
     /**
      * Retrieves the budget for a specific month.
      *

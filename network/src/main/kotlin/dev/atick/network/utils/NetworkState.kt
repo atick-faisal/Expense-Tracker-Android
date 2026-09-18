@@ -24,7 +24,9 @@ import dev.atick.network.R
  *
  * @param description [StringRes] description.
  */
-enum class NetworkState(@StringRes val description: Int) {
+enum class NetworkState(
+    @StringRes val description: Int,
+) {
     /**
      * Network is connected.
      */

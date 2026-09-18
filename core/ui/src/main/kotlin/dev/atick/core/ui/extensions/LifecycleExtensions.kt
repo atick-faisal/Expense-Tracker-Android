@@ -31,10 +31,7 @@ import kotlinx.coroutines.launch
  *
  * @param action The action to be executed when the value is changed.
  */
-inline fun <T> LifecycleOwner.observe(
-    liveData: LiveData<T>,
-    crossinline action: (T) -> Unit,
-) {
+inline fun <T> LifecycleOwner.observe(liveData: LiveData<T>, crossinline action: (T) -> Unit) {
     liveData.observe(this) { value ->
         value?.let { action(value) }
     }

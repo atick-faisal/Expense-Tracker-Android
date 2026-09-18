@@ -27,7 +27,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class IntroViewModel @Inject constructor(
+class IntroViewModel
+@Inject
+constructor(
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
     private val _introUiState = MutableStateFlow(UiState(Unit))

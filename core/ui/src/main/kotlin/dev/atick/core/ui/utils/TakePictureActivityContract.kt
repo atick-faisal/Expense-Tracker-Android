@@ -28,7 +28,6 @@ import androidx.annotation.CallSuper
  * Contract for taking picture.
  */
 class TakePictureActivityContract : ActivityResultContract<Uri, Pair<Boolean, Uri>>() {
-
     private lateinit var imageUri: Uri
 
     /**

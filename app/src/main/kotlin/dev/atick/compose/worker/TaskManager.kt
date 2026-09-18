@@ -41,11 +41,7 @@ interface TaskManager {
      * @param nextPaymentDate The next payment date.
      * @param reminderTime The reminder time.
      */
-    fun schedulePaymentReminder(
-        merchantName: String,
-        nextPaymentDate: Long,
-        reminderTime: Long,
-    )
+    fun schedulePaymentReminder(merchantName: String, nextPaymentDate: Long, reminderTime: Long)
 
     /**
      * Schedules a cancellation reminder for the specified merchant.
@@ -66,8 +62,5 @@ interface TaskManager {
      * @param budgetAmount The budget amount.
      * @param currentAmount The current amount.
      */
-    fun showBudgetExceedWarning(
-        budgetAmount: Double,
-        currentAmount: Double,
-    )
+    fun showBudgetExceedWarning(budgetAmount: Double, currentAmount: Double)
 }

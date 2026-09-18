@@ -31,7 +31,9 @@ import javax.inject.Inject
 /**
  * [TaskManager] backed by [WorkInfo] from [WorkManager]
  */
-class TaskManagerImpl @Inject constructor(
+class TaskManagerImpl
+@Inject
+constructor(
     @ApplicationContext private val context: Context,
 ) : TaskManager {
     /**
@@ -62,7 +64,9 @@ class TaskManagerImpl @Inject constructor(
         nextPaymentDate: Long,
         reminderTime: Long,
     ) {
-        Timber.d("Schedule payment reminder for $merchantName on $nextPaymentDate at $reminderTime")
+        Timber.d(
+            "Schedule payment reminder for $merchantName on $nextPaymentDate at $reminderTime",
+        )
         Reminders.schedulePaymentReminder(
             context = context,
             merchantName = merchantName,
@@ -83,7 +87,9 @@ class TaskManagerImpl @Inject constructor(
         nextPaymentDate: Long,
         reminderTime: Long,
     ) {
-        Timber.d("Schedule cancellation reminder for $merchantName on $nextPaymentDate at $reminderTime")
+        Timber.d(
+            "Schedule cancellation reminder for $merchantName on $nextPaymentDate at $reminderTime",
+        )
         Reminders.scheduleCancellationReminder(
             context = context,
             merchantName = merchantName,
@@ -98,10 +104,7 @@ class TaskManagerImpl @Inject constructor(
      * @param budgetAmount The budget amount.
      * @param currentAmount The current amount.
      */
-    override fun showBudgetExceedWarning(
-        budgetAmount: Double,
-        currentAmount: Double,
-    ) {
+    override fun showBudgetExceedWarning(budgetAmount: Double, currentAmount: Double) {
         Timber.d("Show budget exceed warning for $budgetAmount with $currentAmount")
         Reminders.showBudgetExceedWarning(
             context = context,

@@ -69,9 +69,7 @@ fun NavGraphBuilder.budgetsScreen(
  *
  * @param nestedNavGraphs The nested navigation graphs.
  */
-fun NavGraphBuilder.budgetsNavGraph(
-    nestedNavGraphs: NavGraphBuilder.() -> Unit,
-) {
+fun NavGraphBuilder.budgetsNavGraph(nestedNavGraphs: NavGraphBuilder.() -> Unit) {
     navigation<BudgetsNavGraph>(startDestination = Budgets) {
         nestedNavGraphs()
     }

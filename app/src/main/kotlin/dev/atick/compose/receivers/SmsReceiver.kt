@@ -31,12 +31,16 @@ import javax.inject.Inject
  * A broadcast receiver that listens for incoming SMS messages.
  */
 @AndroidEntryPoint
-class SmsReceiver @Inject constructor() : BroadcastReceiver() {
-
+class SmsReceiver
+@Inject
+constructor() : BroadcastReceiver() {
     @Inject
     lateinit var taskManager: TaskManager
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             val bundle = intent.extras
             if (bundle != null) {

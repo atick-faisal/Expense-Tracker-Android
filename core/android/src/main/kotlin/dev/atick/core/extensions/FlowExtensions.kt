@@ -29,10 +29,7 @@ import kotlinx.coroutines.flow.stateIn
  * @param scope The [CoroutineScope] to be used for the [StateFlow]
  * @return A [StateFlow] that represents the last value emitted by the [Flow]
  * */
-fun <T> Flow<T>.stateInDelayed(
-    initialValue: T,
-    scope: CoroutineScope,
-): StateFlow<T> {
+fun <T> Flow<T>.stateInDelayed(initialValue: T, scope: CoroutineScope): StateFlow<T> {
     return this.stateIn(
         scope = scope,
         initialValue = initialValue,

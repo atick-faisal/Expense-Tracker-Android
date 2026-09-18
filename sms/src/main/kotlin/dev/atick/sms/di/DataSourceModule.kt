@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {
-
     /**
      * Binds the [SMSDataSourceImpl] implementation to the [SMSDataSource] interface.
      *
@@ -39,7 +38,5 @@ abstract class DataSourceModule {
      */
     @Binds
     @Singleton
-    abstract fun bindSMSDataSource(
-        smsDataSourceImpl: SMSDataSourceImpl,
-    ): SMSDataSource
+    abstract fun bindSMSDataSource(smsDataSourceImpl: SMSDataSourceImpl): SMSDataSource
 }

@@ -34,7 +34,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class AnalysisViewModel @Inject constructor(
+class AnalysisViewModel
+@Inject
+constructor(
     private val analysisRepository: AnalysisRepository,
 ) : ViewModel() {
     private val _analysisUiState = MutableStateFlow(UiState(AnalysisScreenData()))
