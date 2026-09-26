@@ -3,7 +3,7 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.4.20"
-androidGradlePlugin = "9.4.0"
+androidGradlePlugin = "9.4.1"
 gmsPlugin = "4.5.0"
 ksp = "2.3.12"
 dokka = "2.2.0"
@@ -11,15 +11,15 @@ dokkaMermaid = "0.6.0"
 secrets = "2.0.1"
 
 # ... CORE:ANDROID ...
-androidxCore = "1.19.0"
+androidxCore = "1.19.1"
 kotlinxCoroutines = "1.11.0"
 kotlinxDatetime = "0.8.0-0.6.x-compat"
 kotlinxSerializationJson = "1.11.0"
 timber = "5.0.1"
 
 # ... CORE:UI ...
-androidxNavigation = "2.10.1"
-androidxFragment = "1.9.0"
+androidxNavigation = "2.10.2"
+androidxFragment = "1.9.1"
 androidxAppCompat = "1.8.0"
 androidxActivity = "1.13.0"
 androidxLifecycle = "2.11.0"
@@ -65,7 +65,7 @@ playBilling = "9.1.0"
 generativeai = "0.9.0"
 
 # ... WORK_MANAGER ...
-workVersion = "2.11.2"
+workVersion = "2.12.0"
 
 # ... MPAndroidChart ...
 androidchartVersion = "5.3.1"
