@@ -3,7 +3,7 @@
 # ... PROJECT ...
 java = "21"
 kotlin = "2.4.21"
-androidGradlePlugin = "9.4.1"
+androidGradlePlugin = "9.5.0"
 gmsPlugin = "4.5.0"
 ksp = "2.3.12"
 dokka = "2.2.0"
@@ -55,7 +55,7 @@ daggerHilt = "2.60.1"
 daggerHiltExt = "1.4.0"
 
 # ... Open Source Licenses ...
-googleOss = "17.5.2"
+googleOss = "17.5.3"
 googleOssPlugin = "0.13.0"
 
 # ... Billing ...
